@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://umxdc1nk56g1"]
+
+[ext_resource type="Texture2D" uid="uid://doxoc5hvcc5y8" path="res://Sprites/Placeholder/512x256Trees.png" id="1_od1gd"]
+
+[node name="TreesTexture" type="TextureRect"]
+texture = ExtResource("1_od1gd")
+stretch_mode = 1

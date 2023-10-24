@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb541y6133q8o"]
+
+[ext_resource type="Texture2D" uid="uid://brk7ph7hu6aa2" path="res://Sprites/Squares/128x128-Graybox.png" id="1_3s81x"]
+
+[node name="GroundTexture" type="TextureRect"]
+texture = ExtResource("1_3s81x")
+stretch_mode = 1
