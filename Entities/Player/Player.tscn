@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bj2450c708xsx"]
+[gd_scene load_steps=6 format=3 uid="uid://bj2450c708xsx"]
 
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_p727u"]
 [ext_resource type="Texture2D" uid="uid://b0h3v5r3o5arf" path="res://icon.svg" id="2_yiw4i"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_4agde"]
+[ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/Grid/GridUI.tscn" id="4_kpi86"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nfwq5"]
 radius = 32.0
@@ -16,9 +17,12 @@ z_index = 1
 shape = SubResource("CapsuleShape2D_nfwq5")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
+z_index = 1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_yiw4i")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_4agde")]
 offset_top = -56.0
 offset_bottom = -24.0
+
+[node name="GridUI" parent="." instance=ExtResource("4_kpi86")]
