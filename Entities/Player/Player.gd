@@ -2,6 +2,10 @@ extends CharacterBody2D
 
 signal signal_share_player_position(player_position)
 
+# Grid visible
+@export var show_build_grid : bool = true
+@onready var grid_ui : Sprite2D = $GridUI
+
 # Health
 @onready var health_ui_progress_bar : ProgressBar = $Healthbar
 
@@ -14,6 +18,8 @@ var motion : Vector2 = Vector2.ZERO # Equaliant to Vector2(0,0)
 func _ready():
 	# This signal tells a global script/object called Main that the player node exists
 	Main.emit_signal("signal_add_player", self)
+	# Show build grid
+	grid_ui.visible = show_build_grid
 
 # Called every frame
 func _physics_process(delta):
