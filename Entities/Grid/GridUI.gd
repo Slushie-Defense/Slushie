@@ -1,5 +1,8 @@
 extends Sprite2D
 
+# Signals
+signal signal_build_state(current_state)
+
 # Cells
 var initial_cell_size : float = 128.0
 var cell_size : float = initial_cell_size
@@ -41,7 +44,7 @@ func _ready():
 	self_modulate.a = grid_transparency
 	
 	# Highlight square state color
-	update_build_state_ui()
+	update_build_state()
 	
 	# Collision detector
 	var collsion_shape_size = int(cell_size) - collision_shape_padding * 2
@@ -59,20 +62,23 @@ func _update_position(set_position):
 	# Set HIGHLIGHT SQUARE position
 	highlight_square_sprite.global_position = GameGrid.snap_coordinate_to_grid_top_left_corner(set_position)
 
-func update_build_state_ui():
+func update_build_state():
 	# Highlight square state color
 	highlight_square_sprite.self_modulate = color_build_open if build_current_state == build_state.OPEN else color_build_blocked
 	# Set transparency
 	highlight_square_sprite.self_modulate.a = highlight_transparency
+	# Build state
+	emit_signal("signal_build_state")
+	
 
 func _on_area_2d_body_entered(body):
 	if not body == Main.player_node:
 		nodes_in_build_area_list.push_back(body)
 		build_current_state = build_state.BLOCKED
-		update_build_state_ui()
+		update_build_state()
 
 func _on_area_2d_body_exited(body):
 	nodes_in_build_area_list.erase(body)
 	if nodes_in_build_area_list.size() == 0:
 		build_current_state = build_state.OPEN
-	update_build_state_ui()
+	update_build_state()

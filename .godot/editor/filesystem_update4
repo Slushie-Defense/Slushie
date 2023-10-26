@@ -1,7 +1,2 @@
-res://Entities/Grid/GridUI.tscn
-res://Entities/Grid/GridUI.gd
-res://Autoload/GameGrid.gd
-res://Levels/Level1.tscn
-res://Entities/Player/Player.tscn
-res://Entities/Camera/Camera.tscn
-res://Entities/Player/Player.gd
+res://Entities/Structures/Structure.tscn
+res://Entities/Structures/Structure.gd
