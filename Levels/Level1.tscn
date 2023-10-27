@@ -13,6 +13,7 @@
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 2432.0
 offset_bottom = 1024.0
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera" parent="." instance=ExtResource("1_0xhkv")]
 zoom = Vector2(0.6, 0.6)
@@ -38,6 +39,7 @@ offset_left = -192.0
 offset_top = -192.0
 offset_right = 2432.0
 offset_bottom = 64.0
+metadata/_edit_use_anchors_ = true
 
 [node name="TreesTexture" parent="TreesTexture" instance=ExtResource("7_jvtud")]
 layout_mode = 0
@@ -45,13 +47,20 @@ offset_top = 1152.0
 offset_right = 2624.0
 offset_bottom = 1408.0
 flip_v = true
+metadata/_edit_use_anchors_ = true
 
 [node name="TreesTexture2" parent="TreesTexture" instance=ExtResource("7_jvtud")]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00914634
+anchor_top = -0.15625
+anchor_right = -0.00914634
+anchor_bottom = -0.15625
 offset_top = 1280.0
 offset_right = 1128.0
 offset_bottom = 1536.0
 rotation = -1.5708
+metadata/_edit_use_anchors_ = true
 
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource("8_wktlm")

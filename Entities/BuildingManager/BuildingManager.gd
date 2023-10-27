@@ -1,5 +1,9 @@
 extends Sprite2D
 
+# Scenes
+var structure_scene = load("res://Entities/Structures/Structure.tscn")
+var structure_position : Vector2 = Vector2.ZERO
+
 # Cells
 var initial_cell_size : float = 128.0
 var cell_size : float = initial_cell_size
@@ -14,6 +18,11 @@ var highlight_transparency : float = 0.3
 # UI Colors
 var color_build_open : Color = Color("#00D39B")
 var color_build_blocked : Color = Color("#FF0000")
+
+# UI Sound
+@onready var audio_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
+var audio_ui_denied = load("res://Audio/UserInterface/AudioErrorSignal.wav")
+var audio_ui_accept = load("res://Audio/UserInterface/AudioDropSignal.wav")
 
 # Build state
 enum build_state { OPEN, BLOCKED }
@@ -41,7 +50,7 @@ func _ready():
 	self_modulate.a = grid_transparency
 	
 	# Highlight square state color
-	update_build_state_ui()
+	_update_build_state()
 	
 	# Collision detector
 	var collsion_shape_size = int(cell_size) - collision_shape_padding * 2
@@ -57,22 +66,36 @@ func _update_position(set_position):
 	var offset_grid_to_center_player = Vector2(set_position.x + game_grid_cell_size_halved, set_position.y + game_grid_cell_size_halved)
 	global_position = GameGrid.snap_coordinate_to_grid_top_left_corner(offset_grid_to_center_player)
 	# Set HIGHLIGHT SQUARE position
-	highlight_square_sprite.global_position = GameGrid.snap_coordinate_to_grid_top_left_corner(set_position)
+	structure_position = GameGrid.snap_coordinate_to_grid_top_left_corner(set_position)
+	highlight_square_sprite.global_position = structure_position
 
-func update_build_state_ui():
+func _update_build_state():
 	# Highlight square state color
 	highlight_square_sprite.self_modulate = color_build_open if build_current_state == build_state.OPEN else color_build_blocked
 	# Set transparency
 	highlight_square_sprite.self_modulate.a = highlight_transparency
 
+func add_structure():
+	if build_current_state == build_state.OPEN:
+		audio_player.stream = audio_ui_accept
+		# Build structure
+		var structure_node = structure_scene.instantiate()
+		var structure_offset = Vector2(game_grid_cell_size_halved, game_grid_cell_size_halved)
+		structure_node.global_position = structure_position + structure_offset
+		get_tree().get_root().add_child(structure_node)
+	else:
+		audio_player.stream = audio_ui_denied
+	# UI Play sound	
+	audio_player.play()
+
 func _on_area_2d_body_entered(body):
 	if not body == Main.player_node:
 		nodes_in_build_area_list.push_back(body)
 		build_current_state = build_state.BLOCKED
-		update_build_state_ui()
+		_update_build_state()
 
 func _on_area_2d_body_exited(body):
 	nodes_in_build_area_list.erase(body)
 	if nodes_in_build_area_list.size() == 0:
 		build_current_state = build_state.OPEN
-	update_build_state_ui()
+	_update_build_state()
