@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_p727u"]
 [ext_resource type="Texture2D" uid="uid://b0h3v5r3o5arf" path="res://icon.svg" id="2_yiw4i"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_4agde"]
-[ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/Grid/GridUI.tscn" id="4_kpi86"]
+[ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/BuildingManager/BuildingManager.tscn" id="4_rd020"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nfwq5"]
 radius = 32.0
@@ -25,4 +25,4 @@ texture = ExtResource("2_yiw4i")
 offset_top = -56.0
 offset_bottom = -24.0
 
-[node name="GridUI" parent="." instance=ExtResource("4_kpi86")]
+[node name="BuildingManager" parent="." instance=ExtResource("4_rd020")]

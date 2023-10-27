@@ -1,2 +1,11 @@
+res://Levels/Level1.tscn
+res://Entities/Grid/GridUI.tscn
+res://Entities/Player/Player.tscn
+res://Entities/Camera/Camera.tscn
 res://Entities/Structures/Structure.tscn
 res://Entities/Structures/Structure.gd
+res://Entities/Grid/GridUI.gd
+res://Entities/BuildingManager/GridUI.tscn
+res://Entities/BuildingManager/BuildingManager.tscn
+res://Entities/BuildingManager/BuildingManager.gd
+res://Entities/Player/Player.gd

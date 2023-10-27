@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 signal signal_share_player_position(player_position)
 
+# Building Manager
+@onready var building_manager : Sprite2D = $BuildingManager
+
 # Grid visible
 @export var show_build_grid : bool = true
 @onready var grid_ui : Sprite2D = $GridUI
@@ -19,7 +22,7 @@ func _ready():
 	# This signal tells a global script/object called Main that the player node exists
 	Main.emit_signal("signal_add_player", self)
 	# Show build grid
-	grid_ui.visible = show_build_grid
+	building_manager.visible = show_build_grid
 
 # Called every frame
 func _physics_process(delta):
@@ -35,6 +38,12 @@ func _physics_process(delta):
 	move_and_slide()
 	# This signal tells any object listening where the player is currently located
 	emit_signal("signal_share_player_position", global_position)
+	# Add building
+	building_structure()
+
+func building_structure():
+	if Input.is_action_just_released("ui_accept"):
+		building_manager.add_structure()
 
 func get_input_axis():
 	var axis = Vector2.ZERO
