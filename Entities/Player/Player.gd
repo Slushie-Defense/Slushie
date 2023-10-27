@@ -7,7 +7,6 @@ signal signal_share_player_position(player_position)
 
 # Grid visible
 @export var show_build_grid : bool = true
-@onready var grid_ui : Sprite2D = $GridUI
 
 # Health
 @onready var health_ui_progress_bar : ProgressBar = $Healthbar
