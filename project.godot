@@ -30,6 +30,18 @@ window/stretch/scale=0.75
 
 project/assembly_name="Slushie-defense"
 
+[layer_names]
+
+2d_physics/layer_1="walls"
+3d_physics/layer_1="player"
+2d_physics/layer_2="player"
+3d_physics/layer_2="structures"
+2d_physics/layer_3="player_structures"
+3d_physics/layer_3="enemies"
+2d_physics/layer_4="enemies"
+3d_physics/layer_4="coins"
+2d_physics/layer_5="coins"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

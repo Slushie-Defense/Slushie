@@ -17,6 +17,7 @@ texture = ExtResource("3_ogc13")
 centered = false
 
 [node name="Area2D" type="Area2D" parent="HighlightSquare"]
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HighlightSquare/Area2D"]
 shape = SubResource("RectangleShape2D_y2m26")

@@ -1,9 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ds15dcep7fhyn"]
+[gd_scene load_steps=5 format=3 uid="uid://ds15dcep7fhyn"]
 
 [ext_resource type="Texture2D" uid="uid://dj4usx0levw84" path="res://Sprites/Squares/128x128Construction.png" id="1_5wevt"]
 [ext_resource type="Script" path="res://Entities/Structures/Structure.gd" id="1_pfun1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7144t"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7lbip"]
 size = Vector2(128, 128)
 
 [node name="Structure" type="Node2D"]
@@ -13,9 +16,18 @@ script = ExtResource("1_pfun1")
 texture = ExtResource("1_5wevt")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_7144t")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_7lbip")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

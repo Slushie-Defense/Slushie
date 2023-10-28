@@ -58,8 +58,8 @@ func _ready():
 	area_2d_collision_shape.shape.size = Vector2(collsion_shape_size, collsion_shape_size)
 	area_2d.position = Vector2(collision_shape_padding + half_collision_shape_size, collision_shape_padding + half_collision_shape_size) # Offset the collision shape
 
-func _on_player_add(pass_player):
-	pass_player.signal_share_player_position.connect(_update_position)
+func _on_player_add(player):
+	player.signal_share_player_position.connect(_update_position)
 
 func _update_position(set_position):
 	# Set GRID position
@@ -89,10 +89,9 @@ func add_structure():
 	audio_player.play()
 
 func _on_area_2d_body_entered(body):
-	if not body == Main.player_node:
-		nodes_in_build_area_list.push_back(body)
-		build_current_state = build_state.BLOCKED
-		_update_build_state()
+	nodes_in_build_area_list.push_back(body)
+	build_current_state = build_state.BLOCKED
+	_update_build_state()
 
 func _on_area_2d_body_exited(body):
 	nodes_in_build_area_list.erase(body)
