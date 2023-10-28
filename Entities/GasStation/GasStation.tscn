@@ -8,6 +8,7 @@
 size = Vector2(256, 512)
 
 [node name="StaticBody2D" type="StaticBody2D"]
+collision_mask = 0
 script = ExtResource("1_rd6ha")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

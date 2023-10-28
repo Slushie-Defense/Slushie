@@ -23,6 +23,7 @@ position = Vector2(772, 565)
 motion_mode = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(0, 0, 3584, 0, 3584, 1024, 0, 1024, 0, 64, 64, 64, 64, 960, 3520, 960, 3520, 64, 0, 64)

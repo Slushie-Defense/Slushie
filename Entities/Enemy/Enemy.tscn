@@ -13,6 +13,8 @@ height = 64.0
 radius = 128.0
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_ff1tq")
 
@@ -26,6 +28,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_wdrna")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_hdjo8")
