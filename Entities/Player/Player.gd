@@ -38,11 +38,7 @@ func _physics_process(delta):
 	# This signal tells any object listening where the player is currently located
 	emit_signal("signal_share_player_position", global_position)
 	# Add building
-	building_structure()
-
-func building_structure():
-	if Input.is_action_just_released("ui_accept"):
-		building_manager.add_structure()
+	building_manager_create_structure()
 
 func get_input_axis():
 	var axis = Vector2.ZERO
@@ -63,3 +59,7 @@ func apply_movement(acceleration):
 
 func is_attackable():
 	pass # Let's the enemy ai to know to chase and attack it
+
+func building_manager_create_structure():
+	if Input.is_action_just_released("ui_accept"):
+		building_manager.add_structure()

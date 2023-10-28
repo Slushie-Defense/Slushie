@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=9 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
@@ -6,63 +6,120 @@
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
 [ext_resource type="PackedScene" uid="uid://umxdc1nk56g1" path="res://Entities/Environment/TreesTexture.tscn" id="7_jvtud"]
+[ext_resource type="PackedScene" uid="uid://ceyqusnxxk6xr" path="res://Entities/Coin/Coin.tscn" id="8_dinf3"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager.gd" id="8_wktlm"]
 
 [node name="Level1" type="Node2D"]
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
-offset_right = 2432.0
-offset_bottom = 1024.0
+offset_right = 0.0
+offset_bottom = 0.0
 metadata/_edit_use_anchors_ = true
+
+[node name="Container" parent="GroundTexture" index="0"]
+layout_mode = 0
+offset_right = 4096.0
+offset_bottom = 1024.0
 
 [node name="Camera" parent="." instance=ExtResource("1_0xhkv")]
 zoom = Vector2(0.6, 0.6)
 
 [node name="Player" parent="." instance=ExtResource("1_46qfd")]
-position = Vector2(772, 565)
+position = Vector2(1408, 512)
 motion_mode = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(0, 0, 3584, 0, 3584, 1024, 0, 1024, 0, 64, 64, 64, 64, 960, 3520, 960, 3520, 64, 0, 64)
+polygon = PackedVector2Array(-64, -64, 5632, -64, 5632, 1088, -64, 1088, -64, 0, 0, 0, 0, 1024, 5568, 1024, 5568, 0, 0, 0, -64, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
 color = Color(1, 0, 1, 0.117647)
 script = ExtResource("4_4bbal")
 
 [node name="GasStation" parent="." instance=ExtResource("5_0xu7d")]
-position = Vector2(320, 512)
+position = Vector2(448, 512)
+
+[node name="TreesTexture2" parent="." instance=ExtResource("7_jvtud")]
+anchors_preset = -1
+anchor_left = 0.0243902
+anchor_top = 0.5
+anchor_right = 0.0243902
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 1044.0
+offset_right = 2496.0
+offset_bottom = 1300.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" parent="TreesTexture2" index="0"]
+offset_right = 4224.0
+offset_bottom = 256.0
+
+[node name="TreesTexture3" parent="." instance=ExtResource("7_jvtud")]
+anchors_preset = -1
+anchor_left = -0.0243902
+anchor_top = 0.84375
+anchor_right = 0.0868902
+anchor_bottom = 0.84375
+offset_left = -256.0
+offset_top = 1273.75
+offset_right = 872.0
+offset_bottom = 1529.75
+rotation = -1.5708
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" parent="TreesTexture3" index="0"]
+offset_left = 8.0
+offset_right = 1486.0
+offset_bottom = 256.0
 
 [node name="TreesTexture" parent="." instance=ExtResource("7_jvtud")]
 offset_left = -192.0
-offset_top = -192.0
+offset_top = -256.0
 offset_right = 2432.0
-offset_bottom = 64.0
 metadata/_edit_use_anchors_ = true
 
-[node name="TreesTexture" parent="TreesTexture" instance=ExtResource("7_jvtud")]
-layout_mode = 0
-offset_top = 1152.0
-offset_right = 2624.0
-offset_bottom = 1408.0
-flip_v = true
-metadata/_edit_use_anchors_ = true
-
-[node name="TreesTexture2" parent="TreesTexture" instance=ExtResource("7_jvtud")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.00914634
-anchor_top = -0.15625
-anchor_right = -0.00914634
-anchor_bottom = -0.15625
-offset_top = 1280.0
-offset_right = 1128.0
-offset_bottom = 1536.0
-rotation = -1.5708
-metadata/_edit_use_anchors_ = true
+[node name="PanelContainer" parent="TreesTexture" index="0"]
+offset_right = 4288.0
+offset_bottom = 256.0
 
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource("8_wktlm")
 spawn_timer = 1.0
+
+[node name="Coin" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(1984, 640)
+
+[node name="Coin4" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(1984, 768)
+
+[node name="Coin5" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(1984, 256)
+
+[node name="Coin6" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(2112, 256)
+
+[node name="Coin7" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(2112, 384)
+
+[node name="Coin8" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(2112, 640)
+
+[node name="Coin9" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(2112, 512)
+
+[node name="Coin10" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(2112, 768)
+
+[node name="Coin2" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(1984, 512)
+
+[node name="Coin3" parent="." instance=ExtResource("8_dinf3")]
+position = Vector2(1984, 384)
+
+[editable path="GroundTexture"]
+[editable path="TreesTexture2"]
+[editable path="TreesTexture3"]
+[editable path="TreesTexture"]

@@ -1,7 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://umxdc1nk56g1"]
+[gd_scene load_steps=3 format=3 uid="uid://umxdc1nk56g1"]
 
 [ext_resource type="Texture2D" uid="uid://doxoc5hvcc5y8" path="res://Sprites/Placeholder/512x256Trees.png" id="1_od1gd"]
 
-[node name="TreesTexture" type="TextureRect"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mrqao"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mrqao")
+
+[node name="TreesTexture" type="TextureRect" parent="PanelContainer"]
+layout_mode = 2
 texture = ExtResource("1_od1gd")
 stretch_mode = 1
