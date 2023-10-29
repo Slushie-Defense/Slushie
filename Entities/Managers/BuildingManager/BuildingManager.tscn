@@ -1,19 +1,19 @@
 [gd_scene load_steps=6 format=3 uid="uid://cjvvi1wm1eukc"]
 
-[ext_resource type="Texture2D" uid="uid://cn1prcajk40h5" path="res://Sprites/Squares/512x512GridFeathered.png" id="1_1ic24"]
-[ext_resource type="Script" path="res://Entities/BuildingManager/BuildingManager.gd" id="2_iwa8w"]
-[ext_resource type="Texture2D" uid="uid://nytttjt5wdst" path="res://Sprites/Squares/128x128-White.png" id="3_ogc13"]
-[ext_resource type="AudioStream" uid="uid://b0v1gammmkxdu" path="res://Audio/UserInterface/AudioErrorSignal.wav" id="4_v57ai"]
+[ext_resource type="Texture2D" uid="uid://cn1prcajk40h5" path="res://Sprites/Squares/512x512GridFeathered.png" id="1_icr37"]
+[ext_resource type="Script" path="res://Entities/Managers/BuildingManager/BuildingManager.gd" id="2_666x6"]
+[ext_resource type="Texture2D" uid="uid://nytttjt5wdst" path="res://Sprites/Squares/128x128-White.png" id="3_2vysi"]
+[ext_resource type="AudioStream" uid="uid://b0v1gammmkxdu" path="res://Audio/UserInterface/AudioErrorSignal.wav" id="4_jft5a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2m26"]
 size = Vector2(128, 128)
 
 [node name="BuildingManager" type="Sprite2D"]
-texture = ExtResource("1_1ic24")
-script = ExtResource("2_iwa8w")
+texture = ExtResource("1_icr37")
+script = ExtResource("2_666x6")
 
 [node name="HighlightSquare" type="Sprite2D" parent="."]
-texture = ExtResource("3_ogc13")
+texture = ExtResource("3_2vysi")
 centered = false
 
 [node name="Area2D" type="Area2D" parent="HighlightSquare"]
@@ -23,7 +23,7 @@ collision_mask = 13
 shape = SubResource("RectangleShape2D_y2m26")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_v57ai")
+stream = ExtResource("4_jft5a")
 
 [connection signal="body_entered" from="HighlightSquare/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="HighlightSquare/Area2D" to="." method="_on_area_2d_body_exited"]
