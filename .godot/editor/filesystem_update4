@@ -1,16 +1,2 @@
-res://Entities/Classes/Attack.gd
-res://Entities/Camera/Camera.gd
-res://Entities/Managers/BuildingManager/BuildingManager.gd
-res://Entities/Enemy/Enemy.gd
-res://Entities/GasStation/GasStation.gd
-res://Entities/Health/HealthBar.gd
-res://Entities/Player/Player.gd
-res://Autoload/Main.gd
-res://Entities/Structures/Structure.gd
-res://Entities/Managers/WaveManager.gd
-res://Entities/Coin/Coin.gd
-res://Autoload/GameGrid.gd
 res://Levels/Level1.tscn
-res://Entities/Managers/WaveManager/Wave.gd
-res://Entities/Managers/WaveManager/EnemySpawnInfo.gd
 res://Entities/Managers/WaveManager/WaveManager.gd
