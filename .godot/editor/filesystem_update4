@@ -1,2 +1,3 @@
 res://Levels/Level1.tscn
 res://Entities/Managers/WaveManager/WaveManager.gd
+res://Entities/Camera/Camera.gd

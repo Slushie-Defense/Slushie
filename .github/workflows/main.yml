@@ -36,6 +36,16 @@ jobs:
         with:
             name: godot-export
             path: ${{ steps.export.outputs.archive_directory }}
+      - name: Deploy - Itch.io 
+        if: github.ref == 'refs/heads/main'
+        uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+            butlerApiKey: ${{ secrets.BUTLER_CREDENTIALS }}
+            gameData: ${{steps.export.outputs.archive_directory }}
+            itchUsername: carlos-michael
+            itchGameId: infinite-slushie
+            buildChannel: html5
+            buildNumber: ${{ github.run_number }}
         # This release action has worked well for me. However, you can most likely use any release action of your choosing.
         # https://github.com/ncipollo/release-action
         # artifacts: ${{ steps.export.outputs.archive_directory }}/*

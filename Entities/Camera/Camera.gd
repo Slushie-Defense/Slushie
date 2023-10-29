@@ -12,4 +12,6 @@ func _on_player_add(pass_player):
 	pass_player.signal_share_player_position.connect(_update_position)
 
 func _update_position(set_position):
-	offset = set_position
+	offset.x = set_position.x
+	if (offset.y <= 0):
+		offset.y = set_position.y
