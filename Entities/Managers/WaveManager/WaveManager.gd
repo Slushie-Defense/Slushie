@@ -23,7 +23,7 @@ var spawn_index: int = 0
 # 			spawn enemy.type at enemy.position
 
 # variable to store all alive enemyes in current wave
-var alive_enemies: Array[PackedScene] = []
+var alive_enemies : Array = []
 
 # TODO: test this function because I'm not sure how to fight?
 # function that checks alive enemies and returns true if all enemies are destroyed
@@ -57,8 +57,6 @@ func _spawn_wave(wave: Wave):
 			await get_tree().create_timer(enemy_info.repeat_time).timeout
 	spawning = false			
 	print("all enemies in this wave have been spawned")
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
