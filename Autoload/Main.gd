@@ -4,6 +4,7 @@ signal signal_add_player(player_node) # How we find the player
 signal signal_update_coin_count(count)
 
 var coins : int = 0
+var enemy_count : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

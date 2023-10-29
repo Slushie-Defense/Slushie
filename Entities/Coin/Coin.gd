@@ -1,7 +1,8 @@
 extends Node2D
 
 # Value
-@export var coin_value : int = 100
+@export_range(0, 1000, 100) var coin_value : int = 100
+
 # Detection
 @onready var area_2d : Area2D = $Area2D
 # Timer
@@ -36,7 +37,7 @@ func _physics_process(delta):
 	var direction = initial_position.direction_to(player_position)
 	var distance_to_player = initial_position.distance_to(player_position)
 	
-	#Use the interpolate() function to adjust the speed based on your curve
+	# Use the interpolate() function to adjust the speed based on your curve
 	var time_left_normalized : float = 1.0 - (timer.time_left * timer_ratio)
 	var line_ratio = acceleration_curve.sample(time_left_normalized)
 	

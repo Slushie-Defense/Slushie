@@ -5,9 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_2jk0x"]
 [ext_resource type="Texture2D" uid="uid://cqq1ir1pgg75q" path="res://Sprites/Circles/128x128-DottedCircle.png" id="3_jff1g"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6nnc"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_o6l61"]
 radius = 32.0
-height = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hdjo8"]
 radius = 128.0
@@ -20,7 +19,7 @@ script = ExtResource("1_ff1tq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
-shape = SubResource("CapsuleShape2D_d6nnc")
+shape = SubResource("CircleShape2D_o6l61")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 self_modulate = Color(1, 0, 0, 1)

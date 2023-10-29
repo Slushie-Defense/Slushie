@@ -3,11 +3,10 @@
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_p727u"]
 [ext_resource type="Texture2D" uid="uid://b0h3v5r3o5arf" path="res://icon.svg" id="2_yiw4i"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_4agde"]
-[ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/BuildingManager/BuildingManager.tscn" id="4_rd020"]
+[ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/Managers/BuildingManager/BuildingManager.tscn" id="4_rd020"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nfwq5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_wef8m"]
 radius = 32.0
-height = 64.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -15,7 +14,7 @@ script = ExtResource("1_p727u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
-shape = SubResource("CapsuleShape2D_nfwq5")
+shape = SubResource("CircleShape2D_wef8m")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 z_index = 1
