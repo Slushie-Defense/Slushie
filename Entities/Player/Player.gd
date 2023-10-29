@@ -9,7 +9,7 @@ signal signal_share_player_position(player_position)
 @export var show_build_grid : bool = true
 
 # Health
-@onready var health_ui_progress_bar : ProgressBar = $Healthbar
+@onready var health : ProgressBar = $Healthbar
 
 # Physics
 const MAX_SPEED : float = 500
@@ -18,6 +18,9 @@ var motion : Vector2 = Vector2.ZERO # Equaliant to Vector2(0,0)
 
 # Initialize
 func _ready():
+	# Set player health
+	health.set_max_health(1000)
+	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
 	# This signal tells a global script/object called Main that the player node exists
 	Main.emit_signal("signal_add_player", self)
 	# Show build grid
@@ -57,9 +60,12 @@ func apply_movement(acceleration):
 	if motion.length() > MAX_SPEED:
 		motion = motion.normalized() * MAX_SPEED
 
-func is_attackable():
-	pass # Let's the enemy ai to know to chase and attack it
+func attack(attack : Attack):
+	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
 
 func building_manager_create_structure():
 	if Input.is_action_just_released("ui_accept"):
 		building_manager.add_structure()
+
+func _event_health_is_zero():
+	print("Player died!")

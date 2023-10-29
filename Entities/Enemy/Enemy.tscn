@@ -26,18 +26,31 @@ self_modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_wdrna")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Vision" type="Area2D" parent="."]
+collision_layer = 8
 collision_mask = 15
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
 shape = SubResource("CircleShape2D_hdjo8")
 
-[node name="VisionCircle" type="Sprite2D" parent="Area2D"]
+[node name="VisionCircle" type="Sprite2D" parent="Vision"]
 texture = ExtResource("3_jff1g")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_2jk0x")]
 offset_top = -56.0
 offset_bottom = -24.0
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[node name="AttackRangeRayCast" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="AttackDelayTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]
+[connection signal="area_exited" from="Vision" to="." method="_on_vision_area_exited"]
+[connection signal="body_entered" from="Vision" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Vision" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="AttackDelayTimer" to="." method="_on_attack_delay_timer_timeout"]

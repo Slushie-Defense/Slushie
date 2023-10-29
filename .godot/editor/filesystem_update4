@@ -1,7 +1,9 @@
-res://Levels/Level1.tscn
 res://Entities/Managers/BuildingManager/BuildingManager.tscn
-res://Entities/Coin/Coin.tscn
+res://Entities/Structures/Structure.tscn
+res://Levels/Level1.tscn
 res://Entities/Player/Player.tscn
 res://Entities/Enemy/Enemy.tscn
-res://Entities/Health/HealthBar.tscn
-res://Entities/Coin/Coin.gd
+res://Entities/GasStation/GasStation.tscn
+res://Entities/Enemy/Enemy.gd
+res://Entities/GasStation/GasStation.gd
+res://Entities/Structures/Structure.gd

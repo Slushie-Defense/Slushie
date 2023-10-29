@@ -7,16 +7,17 @@ var timer = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# every 5 seconds, spawn an enemy_scene
-	
+	spawn_enemy()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	timer += delta
-	if (timer >= spawn_timer):
-		spawn_enemy()
-		timer = 0.0
+	#timer += delta
+	#if (timer >= spawn_timer):
+	#	spawn_enemy()
+	#	timer = 0.0
+	pass
 
 func spawn_enemy():
 	var enemy = enemy_scene.instantiate()

@@ -1,8 +1,33 @@
 extends ProgressBar
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+# Signals
+signal signal_custom_health_is_zero
 
-func _on_value_changed(value):
-	pass # Replace with function body.
+# Variables
+var max_health : float = 100.0
+var current_health : float = 100.0
+
+# Color Gradient
+var health_color_gradient = load("res://Entities/Health/HealthColorGradient.tres")
+
+func _ready():
+	modulate = health_color_gradient.sample(1.0)
+
+func set_max_health(new_value):
+	max_health = new_value
+	current_health = max_health
+	update_progress_bar()
+
+func add_or_subtract_health_by_value(new_value):
+	current_health = clamp(current_health + new_value, 0.0, max_health) # Add
+	update_progress_bar()
+
+func update_progress_bar():
+	# Update the value
+	var weight = (current_health / max_health)
+	value = int(weight * 100.0) # Update progress bar
+	# Let the parent know it died
+	if value <= 0:
+		emit_signal("signal_custom_health_is_zero")
+	# Change the color
+	modulate = health_color_gradient.sample(weight)
