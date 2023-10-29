@@ -12,4 +12,9 @@ func _on_player_add(pass_player):
 	pass_player.signal_share_player_position.connect(_update_position)
 
 func _update_position(set_position):
-	offset = set_position
+	# Camera limits
+	var offset_max : int = 128
+	var level_y_center : int = 512
+	var limit_position = set_position
+	limit_position.y = clamp(set_position.y, level_y_center - offset_max, level_y_center + offset_max)
+	offset = limit_position
