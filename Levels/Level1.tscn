@@ -1,15 +1,60 @@
-[gd_scene load_steps=9 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=16 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/WaveManager.gd" id="7_d2dej"]
 [ext_resource type="PackedScene" uid="uid://umxdc1nk56g1" path="res://Entities/Environment/TreesTexture.tscn" id="7_jvtud"]
 [ext_resource type="PackedScene" uid="uid://ceyqusnxxk6xr" path="res://Entities/Coin/Coin.tscn" id="8_dinf3"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager.gd" id="8_wktlm"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/EnemySpawnInfo.gd" id="8_qjyoi"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="9_cbk5y"]
+
+[sub_resource type="Resource" id="Resource_3kl6t"]
+script = ExtResource("8_qjyoi")
+type = "Basic"
+time = 5.0
+spawn_point_name = "Middle"
+position = Vector2(2000, 600)
+repeat_time = 1.2
+number_to_spawn = 5
+
+[sub_resource type="Resource" id="Resource_6v4iu"]
+script = ExtResource("8_qjyoi")
+type = "Basic"
+time = 1.2
+spawn_point_name = "Middle Lane"
+position = Vector2(4000, 800)
+repeat_time = 1.3
+number_to_spawn = 5
+
+[sub_resource type="Resource" id="Resource_upjrm"]
+script = ExtResource("9_cbk5y")
+name = "Wave 1"
+description = "The description"
+enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_3kl6t"), SubResource("Resource_6v4iu")])
+
+[sub_resource type="Resource" id="Resource_vam17"]
+script = ExtResource("8_qjyoi")
+type = "Basic"
+time = 0.0
+spawn_point_name = "Middle Lane"
+position = Vector2(2000, -200)
+repeat_time = 0.2
+number_to_spawn = 100
+
+[sub_resource type="Resource" id="Resource_s6tv6"]
+script = ExtResource("9_cbk5y")
+name = "Wave 2"
+description = "Waviest wave"
+enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_vam17")])
 
 [node name="Level1" type="Node2D"]
+
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("7_d2dej")
+waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm"), SubResource("Resource_s6tv6")])
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 0.0
@@ -84,10 +129,6 @@ metadata/_edit_use_anchors_ = true
 [node name="PanelContainer" parent="TreesTexture" index="0"]
 offset_right = 4288.0
 offset_bottom = 256.0
-
-[node name="WaveManager" type="Node" parent="."]
-script = ExtResource("8_wktlm")
-spawn_timer = 1.0
 
 [node name="Coin" parent="." instance=ExtResource("8_dinf3")]
 position = Vector2(1984, 640)
