@@ -4,6 +4,13 @@ var enemy_scene = load("res://Entities/Enemy/Enemy.tscn")
 @export var spawn_timer: float
 
 var timer = 0.0
+
+# array of waves
+# each wave is an array of enemies (represented by EnemySpawnInfo)
+# each enemy has a type, position, and time to spawn
+@export var waves: Array[Wave]
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# every 5 seconds, spawn an enemy_scene
@@ -13,10 +20,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#timer += delta
-	#if (timer >= spawn_timer):
-	#	spawn_enemy()
-	#	timer = 0.0
+	timer += delta
+	if (timer >= spawn_timer):
+		spawn_enemy()
+		timer = 0.0
 	pass
 
 func spawn_enemy():
