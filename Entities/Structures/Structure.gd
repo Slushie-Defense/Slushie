@@ -37,9 +37,9 @@ func _event_health_is_zero():
 	print("Struture died!")
 	call_deferred("queue_free")
 
-func _on_area_2d_body_entered(body):
+func _on_body_entered(body):
 	nodes_in_build_area_list.push_back(body)
 
-func _on_area_2d_body_exited(body):
+func _on_body_exited(body):
 	nodes_in_build_area_list.erase(body)
 	_initialize_building_construction()

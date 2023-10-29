@@ -84,20 +84,6 @@ func _ai_process():
 			if attack_timer.is_stopped():
 				attack_timer.start()
 
-func _on_area_2d_body_entered(body):
-	if body.has_method("attack"):
-		ai_chase_node_list.push_back(body)
-
-func _on_area_2d_body_exited(body):
-	ai_chase_node_list.erase(body)
-	
-func _on_vision_area_entered(area):
-	if area.has_method("attack"):
-		ai_chase_node_list.push_back(area)
-
-func _on_vision_area_exited(area):
-	ai_chase_node_list.erase(area)
-
 func _event_health_is_zero():
 	print("Enemy died!")
 
@@ -125,3 +111,18 @@ func _on_attack_delay_timer_timeout():
 				var attack = Attack.new()
 				attack.damage = attack_damage
 				first_collision_result.attack(attack)
+
+
+func _on_vision_body_entered(body):
+	if body.has_method("attack"):
+		ai_chase_node_list.push_back(body)
+
+func _on_vision_body_exited(body):
+	ai_chase_node_list.erase(body)
+
+func _on_vision_area_entered(area):
+	if area.has_method("attack"):
+		ai_chase_node_list.push_back(area)
+
+func _on_vision_area_exited(area):
+	ai_chase_node_list.erase(area)
