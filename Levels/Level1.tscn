@@ -70,7 +70,7 @@ offset_bottom = 1024.0
 zoom = Vector2(0.6, 0.6)
 
 [node name="Player" parent="." instance=ExtResource("1_46qfd")]
-position = Vector2(1408, 512)
+position = Vector2(1024, 512)
 motion_mode = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
