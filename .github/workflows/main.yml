@@ -35,6 +35,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
             name: godot-export
+            path: ${{ steps.export.outputs.archive_directory }}
         # This release action has worked well for me. However, you can most likely use any release action of your choosing.
         # https://github.com/ncipollo/release-action
         # artifacts: ${{ steps.export.outputs.archive_directory }}/*
