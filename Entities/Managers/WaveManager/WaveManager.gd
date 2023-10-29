@@ -12,11 +12,11 @@ var timer = 0.0
 # current spawn index
 var spawn_index: int = 0
 
-# spawn waves algorithm
+# spawn waves algorithm:
 # for each wave in waves
 # 	display wave.description and wave.name
-# 	for each enemy in wave.enemies
-# 		wait enemy.time
+# 	for each enemy info in wave.enemies
+# 		wait enemy info.time
 # 		spawn enemy.type at enemy.position
 # 		for each repeat in enemy.number_to_spawn
 # 			wait enemy.repeat_time
@@ -24,6 +24,8 @@ var spawn_index: int = 0
 
 # variable to store all alive enemyes in current wave
 var alive_enemies: Array[PackedScene] = []
+
+# TODO: test this function because I'm not sure how to fight?
 # function that checks alive enemies and returns true if all enemies are destroyed
 func is_wave_complete():
 	if (spawning):
