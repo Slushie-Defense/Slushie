@@ -8,3 +8,5 @@ res://Entities/GasStation/GasStation.tscn
 res://Entities/GasStation/GasStation.gd
 res://Entities/Managers/BuildingManager/BuildingManager.gd
 res://Entities/Camera/Camera.gd
+res://Entities/Player/Player.gd
+res://Entities/Player/Player.tscn
