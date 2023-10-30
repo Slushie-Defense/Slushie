@@ -1,9 +1,12 @@
+res://Sprites/Circles
+res://UserInterface/Panels
+res://UserInterface
+res://UserInterface/Coins
 /Users/carlosmichael/Documents/projects/freshwater/Slushie
 res://Entities/Managers/WaveManager
 res://Entities/Health
 res://Audio/Coins
 res://Entities/Coin
-res://Sprites/Circles
 res://Audio/UserInterface
 res://Entities/Structures
 res://Sprites/Squares

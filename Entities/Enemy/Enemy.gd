@@ -108,7 +108,6 @@ func _on_attack_delay_timer_timeout():
 				attack.damage = attack_damage
 				first_collision_result.attack(attack)
 
-
 func _on_vision_body_entered(body):
 	if body.has_method("attack"):
 		ai_chase_node_list.push_back(body)

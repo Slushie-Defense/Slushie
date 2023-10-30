@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb1dvqwxyrpgu"]
+
+[ext_resource type="Script" path="res://UserInterface/Coins/CoinCounterUI.gd" id="1_mkfw7"]
+[ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="1_w3mxy"]
+[ext_resource type="Texture2D" uid="uid://dpt0tifft75jw" path="res://Sprites/Circles/32x32WhiteCircle.png" id="2_pl464"]
+
+[node name="CoinsUserInterface" type="Node2D"]
+script = ExtResource("1_mkfw7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("1_w3mxy")
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_pl464")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Coins"

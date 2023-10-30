@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://crp0o88uid1pe"]
+
+[ext_resource type="StyleBox" uid="uid://dbcdgkjyuwta4" path="res://UserInterface/Panels/PanelRoundedCorner.tres" id="1_wfeub"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdmgp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.227451, 0.219608, 0.329412, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[resource]
+Panel/styles/panel = ExtResource("1_wfeub")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_pdmgp")

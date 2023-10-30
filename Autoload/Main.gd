@@ -16,4 +16,3 @@ func _on_signal_add_player(pass_player_node):
 
 func _update_coin_count(count):
 	coins = clamp(coins + count, 0, 999999999)
-	print("Total Coins: " + str(coins))

@@ -9,3 +9,8 @@ res://Entities/GasStation/GasStation.gd
 res://Entities/Enemy/Enemy.gd
 res://Entities/Player/Player.tscn
 res://Entities/Player/Player.gd
+res://UserInterface/MainUserInterfaceTheme.tres
+res://UserInterface/Coins/CoinCounterUI.tscn
+res://UserInterface/Coins/CoinCounterUI.gd
+res://Autoload/Main.gd
+res://Entities/Camera/Camera.tscn
