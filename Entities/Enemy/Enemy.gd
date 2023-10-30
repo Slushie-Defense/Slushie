@@ -102,10 +102,6 @@ func _on_attack_delay_timer_timeout():
 		var first_collision_result = attack_range_raycast.get_collider()
 		if first_collision_result != null:
 			# If it hits something it can attack
-			# Structures 2D Collision detection is a child of the structure
-			if first_collision_result.get_parent().has_method("attack"):
-				first_collision_result = first_collision_result.get_parent()
-			# Players 2D Collsion detection is the 
 			if first_collision_result.has_method("attack"):
 				# Create an attack class and pass it through
 				var attack = Attack.new()
