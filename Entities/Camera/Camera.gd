@@ -1,6 +1,7 @@
 extends Camera2D
 
 @onready var user_interface : Node2D = $UserInterfaceParent
+@onready var coins_user_interface : Node2D = $UserInterfaceParent/CoinsUserInterface
 
 var camera_width = 1280
 var camera_height = 720
@@ -30,3 +31,4 @@ func _update_position(set_position):
 	
 	# Position User Interface
 	user_interface.position = Vector2(offset.x - (camera_width * 0.5), offset.y - (camera_height * 0.5))
+	coins_user_interface._update_fps_count()
