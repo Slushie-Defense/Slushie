@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://d05a21782kpoa"]
+[gd_scene load_steps=3 format=3 uid="uid://d05a21782kpoa"]
 
 [ext_resource type="Script" path="res://Entities/Camera/Camera.gd" id="1_5preo"]
+[ext_resource type="PackedScene" uid="uid://bb1dvqwxyrpgu" path="res://UserInterface/Coins/CoinCounterUI.tscn" id="2_6loqe"]
 
 [node name="Camera" type="Camera2D"]
 script = ExtResource("1_5preo")
+
+[node name="UserInterfaceParent" type="Node2D" parent="."]
+
+[node name="CoinsUserInterface" parent="UserInterfaceParent" instance=ExtResource("2_6loqe")]

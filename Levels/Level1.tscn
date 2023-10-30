@@ -64,27 +64,27 @@ metadata/_edit_use_anchors_ = true
 [node name="Container" parent="GroundTexture" index="0"]
 layout_mode = 0
 offset_right = 4096.0
-offset_bottom = 1024.0
+offset_bottom = 1152.0
 
 [node name="Camera" parent="." instance=ExtResource("1_0xhkv")]
 zoom = Vector2(0.6, 0.6)
 
 [node name="Player" parent="." instance=ExtResource("1_46qfd")]
-position = Vector2(1408, 512)
+position = Vector2(1400, 576)
 motion_mode = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-64, -64, 5632, -64, 5632, 1088, -64, 1088, -64, 0, 0, 0, 0, 1024, 5568, 1024, 5568, 0, 0, 0, -64, 0)
+polygon = PackedVector2Array(-64, -64, 5632, -64, 5632, 1216, -64, 1216, -64, 0, 0, 0, 0, 1152, 5568, 1152, 5568, 0, 0, 0, -64, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
 color = Color(1, 0, 1, 0.117647)
 script = ExtResource("4_4bbal")
 
 [node name="GasStation" parent="." instance=ExtResource("5_0xu7d")]
-position = Vector2(448, 512)
+position = Vector2(440, 576)
 
 [node name="TreesTexture2" parent="." instance=ExtResource("7_jvtud")]
 anchors_preset = -1
@@ -99,8 +99,9 @@ offset_bottom = 1300.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" parent="TreesTexture2" index="0"]
+offset_top = 108.0
 offset_right = 4224.0
-offset_bottom = 256.0
+offset_bottom = 364.0
 
 [node name="TreesTexture3" parent="." instance=ExtResource("7_jvtud")]
 anchors_preset = -1

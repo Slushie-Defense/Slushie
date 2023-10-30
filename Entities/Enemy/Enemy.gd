@@ -102,16 +102,11 @@ func _on_attack_delay_timer_timeout():
 		var first_collision_result = attack_range_raycast.get_collider()
 		if first_collision_result != null:
 			# If it hits something it can attack
-			# Structures 2D Collision detection is a child of the structure
-			if first_collision_result.get_parent().has_method("attack"):
-				first_collision_result = first_collision_result.get_parent()
-			# Players 2D Collsion detection is the 
 			if first_collision_result.has_method("attack"):
 				# Create an attack class and pass it through
 				var attack = Attack.new()
 				attack.damage = attack_damage
 				first_collision_result.attack(attack)
-
 
 func _on_vision_body_entered(body):
 	if body.has_method("attack"):
@@ -119,10 +114,3 @@ func _on_vision_body_entered(body):
 
 func _on_vision_body_exited(body):
 	ai_chase_node_list.erase(body)
-
-func _on_vision_area_entered(area):
-	if area.has_method("attack"):
-		ai_chase_node_list.push_back(area)
-
-func _on_vision_area_exited(area):
-	ai_chase_node_list.erase(area)

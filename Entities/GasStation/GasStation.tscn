@@ -4,23 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://b83jqnilk1odw" path="res://Sprites/Placeholder/GasStationRoofPlaceholder.png" id="1_n22cx"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="2_kpqkr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmhig"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7d4t"]
 size = Vector2(256, 512)
 
-[node name="GasStation" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kmhig"]
+
+[node name="GasStation" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_e2gd2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_kmhig")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_l7d4t")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_kmhig")
 
 [node name="Sprite2DRoof" type="Sprite2D" parent="."]
 rotation = -1.5708

@@ -29,7 +29,6 @@ texture = ExtResource("2_wdrna")
 [node name="Vision" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 15
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vision"]
 shape = SubResource("CircleShape2D_hdjo8")
@@ -49,8 +48,6 @@ collision_mask = 6
 [node name="AttackDelayTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="area_entered" from="Vision" to="." method="_on_vision_area_entered"]
-[connection signal="area_exited" from="Vision" to="." method="_on_vision_area_exited"]
 [connection signal="body_entered" from="Vision" to="." method="_on_vision_body_entered"]
 [connection signal="body_exited" from="Vision" to="." method="_on_vision_body_exited"]
 [connection signal="timeout" from="AttackDelayTimer" to="." method="_on_attack_delay_timer_timeout"]

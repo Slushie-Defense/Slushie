@@ -23,7 +23,7 @@ var spawn_index: int = 0
 # 			spawn enemy.type at enemy.position
 
 # variable to store all alive enemyes in current wave
-var alive_enemies: Array[PackedScene] = []
+var alive_enemies : Array = []
 
 # TODO: test this function because I'm not sure how to fight?
 # function that checks alive enemies and returns true if all enemies are destroyed
