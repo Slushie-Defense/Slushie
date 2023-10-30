@@ -1,8 +1,8 @@
-extends Area2D
+extends StaticBody2D
 
 @onready var health : ProgressBar = $Healthbar
-@onready var collision_shape_2d : CollisionShape2D = $StaticBody2D/CollisionShape2D
-@onready var area_collision_shape_2d : CollisionShape2D = $CollisionShape2D
+@onready var collision_shape_2d : CollisionShape2D = $CollisionShape2D
+@onready var area_collision_shape_2d : CollisionShape2D = $Area2D/CollisionShape2D
 
 func _ready():
 	health.set_max_health(1000)

@@ -119,10 +119,3 @@ func _on_vision_body_entered(body):
 
 func _on_vision_body_exited(body):
 	ai_chase_node_list.erase(body)
-
-func _on_vision_area_entered(area):
-	if area.has_method("attack"):
-		ai_chase_node_list.push_back(area)
-
-func _on_vision_area_exited(area):
-	ai_chase_node_list.erase(area)

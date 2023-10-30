@@ -68,4 +68,5 @@ func building_manager_create_structure():
 		building_manager.add_structure()
 
 func _event_health_is_zero():
+	call_deferred("queue_free")
 	print("Player died!")
