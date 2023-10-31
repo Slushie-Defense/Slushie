@@ -36,16 +36,14 @@ func is_wave_complete():
 		if enemy != null || !enemy.is_queued_for_deletion():
 			return false
 
-	print("wave complete no more enemies")
+	Main.emit_signal("signal_wave_event", "Wave complete!")
 	return true
 
 var spawning = false
 
 func _spawn_wave(wave: Wave):
 	spawning = true;
-	print("spawning" + str(wave.name))
-	print(wave.name)
-	print(wave.description)
+	Main.emit_signal("signal_wave_event", str(wave.name) + ": " + str(wave.description))
 	for enemy_info in wave.enemies:
 		await get_tree().create_timer(enemy_info.time).timeout
 		for i in range(enemy_info.number_to_spawn):
@@ -55,10 +53,8 @@ func _spawn_wave(wave: Wave):
 			add_child(enemy_instance)
 			alive_enemies.append(enemy_instance)
 			await get_tree().create_timer(enemy_info.repeat_time).timeout
-	spawning = false			
-	print("all enemies in this wave have been spawned")
-
-
+	spawning = false
+	Main.emit_signal("signal_wave_event", str(wave.name) + ": Over")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -73,7 +69,7 @@ func _process(delta):
 		spawn_index += 1
 		if (spawn_index >= waves.size()):
 			spawn_index = 0
-			print("All waves complete!")
+			Main.emit_signal("signal_wave_event", "All waves complete!")
 		else:
 			_spawn_wave(waves[spawn_index])
 	pass
