@@ -1,8 +1,11 @@
-Label
 CanvasLayer
-Node2D
+AnimationPlayer
+Label
 PanelContainer
+Panel
 MarginContainer
+CenterContainer
+Node2D
 HBoxContainer
 Container
 VSeparator

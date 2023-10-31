@@ -1,7 +1,8 @@
 extends Camera2D
 
 @onready var user_interface : Node2D = $UserInterfaceParent
-@onready var coins_user_interface : Node2D = $UserInterfaceParent/CoinsUserInterface
+@onready var coins_user_interface : Control = $UserInterfaceParent/CanvasLayer/CoinsUserInterface
+@onready var wave_event_user_interface : Control = $UserInterfaceParent/CanvasLayer/WaveEvent
 
 var camera_width = 1280
 var camera_height = 720
@@ -11,6 +12,9 @@ var follow_position = Vector2.ZERO
 func _ready():
 	camera_width = get_viewport_rect().size.x
 	camera_height = get_viewport_rect().size.y	
+	# Wave event
+	wave_event_user_interface.center_container.size.y = camera_height * 0.5
+	wave_event_user_interface.center_container.size.x = camera_width
 	# Main recieves a signal that the player node exists
 	# When the signal arrives it connects the player node custom "update position" signal to the camera
 	# Now the camera knows where the player is

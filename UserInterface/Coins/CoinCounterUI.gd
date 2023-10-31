@@ -1,7 +1,7 @@
-extends Node2D
+extends Control
 
-@onready var coin_counter : Label = $CanvasLayer/Control/PanelContainer/MarginContainer/BoxContainer/Label
-@onready var fps_counter : Label = $CanvasLayer/Control/PanelContainer/MarginContainer/BoxContainer/FPSLabel
+@onready var coin_counter : Label = $PanelContainer/MarginContainer/BoxContainer/Label
+@onready var fps_counter : Label = $PanelContainer/MarginContainer/BoxContainer/FPSLabel
 
 func _ready():
 	Main.signal_update_coin_count.connect(_update_coin_count)
