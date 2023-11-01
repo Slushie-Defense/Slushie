@@ -1,5 +1,9 @@
-CanvasLayer
+Timer
+CollisionShape2D
+Area2D
 AnimationPlayer
+Sprite2D
+CanvasLayer
 Label
 PanelContainer
 Panel
@@ -12,10 +16,6 @@ VSeparator
 TextureRect
 Control
 Node
-CollisionShape2D
-Area2D
-Timer
 RayCast2D
 AudioStreamPlayer2D
-Sprite2D
 StaticBody2D

@@ -24,7 +24,7 @@ var ai_chase_node = null
 @onready var attack_range_raycast : RayCast2D = $AttackRangeRayCast
 @onready var attack_timer : Timer = $AttackDelayTimer
 var attack_speed : float = 1.0 # In seconds
-var attack_range : float = 96.0 # In pixels
+var attack_range : float = 64.0 # In pixels
 var attack_damage : float = 100.0
 
 # Initialize
