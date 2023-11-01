@@ -1,27 +1,50 @@
 extends Node2D
 
-@onready var explosion_sprite : Sprite2D = $Sprite2D
-@onready var collision_detection : Area2D = $Area2D
-@onready var collsion_shape : CollisionShape2D = $Area2D/CollisionShape2D
-@onready var damage_delay_timer : Timer
+# Sprites
+@onready var sprite_rescaling_parent : Node2D = $SpriteRescaler
+var explosion_sprite_initial_size : float = 128.0
 
-var damage_fallout_curve : Curve = load("res://Entities/Explosion/DamageFallout.tres")
-var explosion_radius : float = 64.0
+# Collision Detection
+@onready var collision_detection : ShapeCast2D = $ShapeCast2D
 
-var nodes_in_area_list : Array = []
-var damage_at_center : float = 50
+# Damage
+var damage_fallout_curve : Curve = load("res://Entities/Explosion/DamageFallout.tres") # Change if you want more than 8 nodes to register
+@export var damage_at_epicenter : float = 500
+@export var explosion_radius : float = 96.0
+@export var max_number_nodes_that_can_be_detected : int = 8
 
-func _on_area_2d_body_entered(body):
-	nodes_in_area_list.push_back(body)
+func _ready():
+	# Sprite scale
+	var explosion_diameter : float = explosion_radius * 2
+	var sprite_scale = explosion_diameter / explosion_sprite_initial_size
+	sprite_rescaling_parent.scale = Vector2(sprite_scale, sprite_scale)
+	
+	# Collision detection
+	collision_detection.max_results = max_number_nodes_that_can_be_detected
+	collision_detection.shape.radius = explosion_radius
+	collision_detection.enabled = false
 
-func _on_timer_timeout():
-	print(nodes_in_area_list)
-	# Chase nodes
-	if nodes_in_area_list.size() > 0:
-		# Chase the nearest node
-		for child in nodes_in_area_list:
-			if child.has_method("attack"):
-				var distance_from_center : float = global_position.distance_to(child.global_position)
-				var attack = Attack.new()
-				attack.damage = damage_at_center * damage_fallout_curve.sample(distance_from_center / explosion_radius)
-				child.attack(attack)
+func _deal_damage():
+	print("AOE went off!")
+	collision_detection.enabled = true
+	collision_detection.force_shapecast_update()
+	if not collision_detection.is_colliding():
+		return # Early exit
+	
+	# Collision check
+	var number_of_collisions : int = collision_detection.get_collision_count()
+	print("Number of collisions: " + str(number_of_collisions))
+	for i in range(0, number_of_collisions):
+		var child = collision_detection.get_collider(i) # Get the object
+		# Change the collision mask if this is supposed to do friendly fire
+		if child.has_method("attack"): # Check if it has attack
+			var distance_from_center : float = global_position.distance_to(child.global_position)
+			var attack = Attack.new()
+			attack.damage = damage_at_epicenter * damage_fallout_curve.sample(distance_from_center / explosion_radius)
+			child.attack(attack)
+	
+	# Turn off collision detection after use
+	collision_detection.call_deferred("queue_free") # Remove from scene
+
+func _on_delay_damage_timer_timeout():
+	_deal_damage()

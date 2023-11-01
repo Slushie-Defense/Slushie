@@ -18,6 +18,9 @@ var player_position : Vector2 = Vector2.ZERO
 func _ready():
 	set_physics_process(false) # Stop processing any cycles
 	timer_ratio = 1.0 / timer.wait_time
+	call_deferred("_update_initial_position")
+
+func _update_initial_position():
 	# Store initial position to interpolate from
 	initial_position = global_position
 
