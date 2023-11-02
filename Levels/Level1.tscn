@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=17 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
@@ -7,9 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/WaveManager.gd" id="7_d2dej"]
 [ext_resource type="PackedScene" uid="uid://umxdc1nk56g1" path="res://Entities/Environment/TreesTexture.tscn" id="7_jvtud"]
-[ext_resource type="PackedScene" uid="uid://ceyqusnxxk6xr" path="res://Entities/Coin/Coin.tscn" id="8_dinf3"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/EnemySpawnInfo.gd" id="8_qjyoi"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="9_cbk5y"]
+[ext_resource type="PackedScene" uid="uid://m85u2pije2ka" path="res://Entities/Coin/CoinSpawner.tscn" id="11_cched"]
+[ext_resource type="PackedScene" uid="uid://cvd6ncbpwvyh4" path="res://Entities/Explosion/ExplosionAOE.tscn" id="11_nnng1"]
 
 [sub_resource type="Resource" id="Resource_3kl6t"]
 script = ExtResource("8_qjyoi")
@@ -131,35 +132,11 @@ metadata/_edit_use_anchors_ = true
 offset_right = 4288.0
 offset_bottom = 256.0
 
-[node name="Coin" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(1984, 640)
+[node name="ExplosionAOE" parent="." instance=ExtResource("11_nnng1")]
+position = Vector2(1331, 578)
 
-[node name="Coin4" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(1984, 768)
-
-[node name="Coin5" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(1984, 256)
-
-[node name="Coin6" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(2112, 256)
-
-[node name="Coin7" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(2112, 384)
-
-[node name="Coin8" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(2112, 640)
-
-[node name="Coin9" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(2112, 512)
-
-[node name="Coin10" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(2112, 768)
-
-[node name="Coin2" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(1984, 512)
-
-[node name="Coin3" parent="." instance=ExtResource("8_dinf3")]
-position = Vector2(1984, 384)
+[node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
+position = Vector2(1856, 64)
 
 [editable path="GroundTexture"]
 [editable path="TreesTexture2"]

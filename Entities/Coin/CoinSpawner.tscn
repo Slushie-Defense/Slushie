@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://m85u2pije2ka"]
+
+[ext_resource type="Script" path="res://Entities/Coin/CoinSpawner.gd" id="1_uvnqu"]
+[ext_resource type="Texture2D" uid="uid://dpt0tifft75jw" path="res://Sprites/Circles/32x32WhiteCircle.png" id="2_dsm62"]
+
+[node name="CoinSpawner" type="Node2D"]
+script = ExtResource("1_uvnqu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 0, 1)
+texture = ExtResource("2_dsm62")
