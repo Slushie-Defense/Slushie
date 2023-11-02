@@ -13,8 +13,4 @@ autoplay = true
 [node name="ShotDelayTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="ReloadDelayTimer" type="Timer" parent="."]
-one_shot = true
-
 [connection signal="timeout" from="ShotDelayTimer" to="." method="_on_shot_delay_timer_timeout"]
-[connection signal="timeout" from="ReloadDelayTimer" to="." method="_on_reload_delay_timer_timeout"]

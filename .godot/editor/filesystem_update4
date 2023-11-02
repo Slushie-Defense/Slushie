@@ -1,10 +1,6 @@
-res://Entities/Explosion/ExplosionAOE.tscn
+res://Entities/Enemy/Enemy.tscn
 res://Entities/Managers/WaveManager/WaveManager.gd
 res://UserInterface/MainUserInterfaceTheme.tres
-res://Entities/Classes/Weapon.gd
-res://Entities/Weapons/RaycastWeapon.tscn
-res://Entities/Weapons/WeaponBase.gd
-res://Entities/Enemy/Enemy.tscn
 res://Entities/Structures/Structure.tscn
 res://Entities/Health/HealthBar.tscn
 res://UserInterface/Wave/WaveCount.tscn
@@ -12,5 +8,9 @@ res://UserInterface/Coins/CoinCounterUI.tscn
 res://Entities/Player/Player.tscn
 res://Levels/Level1.tscn
 res://Entities/Camera/Camera.tscn
+res://Entities/Explosion/ExplosionAOE.tscn
 res://Entities/Coin/CoinSpawner.tscn
 res://Entities/Coin/Coin.tscn
+res://Entities/Weapons/RaycastWeapon.tscn
+res://Entities/Classes/Attack.gd
+res://Entities/Weapons/WeaponBase.gd
