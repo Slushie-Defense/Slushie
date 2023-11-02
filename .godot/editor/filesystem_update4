@@ -14,3 +14,4 @@ res://Entities/Coin/Coin.tscn
 res://Entities/Weapons/RaycastWeapon.tscn
 res://Entities/Classes/Attack.gd
 res://Entities/Weapons/WeaponBase.gd
+res://Entities/Weapons/WeaponBase.tscn

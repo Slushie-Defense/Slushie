@@ -7,7 +7,7 @@ var delay_between_shots : float = 0.2
 var reload_time : float = 2.0
 
 var shots_before_reload : int = 5
-var shot_counter : int = 1
+var shot_counter : int = 1 # Start at 1
 
 # Does nothing at the moment
 var damage : int = 0
@@ -35,11 +35,3 @@ func _on_shot_delay_timer_timeout():
 		sound_player.play()
 		shot_delay_timer.wait_time = delay_between_shots
 		shot_delay_timer.start()
-
-func _on_reload_delay_timer_timeout():
-	print("Reloaded!")
-	shot_counter = 0 # Reset
-	shot_delay_timer.start()
-
-
-
