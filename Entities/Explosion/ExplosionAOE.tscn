@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvd6ncbpwvyh4"]
+[gd_scene load_steps=8 format=3 uid="uid://cvd6ncbpwvyh4"]
 
 [ext_resource type="Script" path="res://AOEDamage.gd" id="1_s4qyr"]
 [ext_resource type="Texture2D" uid="uid://6ltlajpoas2x" path="res://Sprites/Circles/128x128Circle.png" id="2_nrqih"]
+[ext_resource type="AudioStream" uid="uid://bhf53asa5h8dl" path="res://Entities/Explosion/Explosion.wav" id="3_yq8l2"]
 
 [sub_resource type="Animation" id="Animation_q58wr"]
 resource_name = "Explosion"
@@ -90,5 +91,9 @@ collision_mask = 8
 wait_time = 0.15
 one_shot = true
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_yq8l2")
+autoplay = true
 
 [connection signal="timeout" from="DelayDamageTimer" to="." method="_on_delay_damage_timer_timeout"]
