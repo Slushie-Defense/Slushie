@@ -1,7 +1,8 @@
-AudioStreamPlayer2D
-Sprite2D
-Node2D
 Timer
+AudioStreamPlayer2D
+Node2D
+RayCast2D
+Sprite2D
 ShapeCast2D
 CollisionShape2D
 Area2D
@@ -18,5 +19,4 @@ VSeparator
 TextureRect
 Control
 Node
-RayCast2D
 StaticBody2D
