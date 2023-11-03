@@ -9,7 +9,7 @@ extends Node2D
 var sound_shoot = load("res://Entities/Weapons/Sounds/Splat.wav")
 var sound_reload = load("res://Entities/Weapons/Sounds/Reload.wav")
 
-var delay_between_shots : float = 0.2
+var delay_between_shots : float = 0.5
 var reload_time : float = 2.0
 
 var shots_before_reload : int = 5
@@ -69,6 +69,7 @@ func fire_weapon():
 	fire_ray_cast()
 
 func fire_ray_cast():
+	print("Raycast fired")
 	raycast_2d.target_position = attack_target_position
 	raycast_2d.force_raycast_update()
 	# See what it hit
@@ -76,9 +77,15 @@ func fire_ray_cast():
 	if first_collision_result != null:
 		# If it hits something it can attack
 		if first_collision_result.has_method("attack"):
-			print(first_collision_result)
 			# Create an attack class and pass it through
 			var attack = Attack.new()
 			attack.damage = attack_damage
 			first_collision_result.attack(attack)
-			
+	# Line 2D
+	var global_position_of_hit : Vector2 = raycast_2d.get_collision_point()
+	var relative_position_of_hit : Vector2 = attack_target_position if first_collision_result == null else global_position_of_hit - global_position 
+	line_2d.points = [Vector2.ZERO, relative_position_of_hit]
+	get_tree().create_timer(0.1).timeout.connect(clear_line_2d)
+
+func clear_line_2d():
+	line_2d.points = [Vector2.ZERO, Vector2.ZERO]
