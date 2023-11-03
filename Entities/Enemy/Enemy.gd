@@ -13,6 +13,7 @@ var ai_direction : Vector2 = Vector2(-1, 0) # Defaults to left
 var ai_chase_node_list : Array = []
 var ai_attack_node_list : Array = []
 var ai_chase_node = null
+@export var ai_default_direction : Vector2 = Vector2(-1, 0)
 
 # How far the enemy can see
 @export var vision_radius : int = 256
@@ -63,7 +64,7 @@ func apply_movement(acceleration):
 		
 func _ai_process():
 	# Direction priority
-	ai_direction = Vector2(-1, 0) # Default goes left
+	ai_direction = ai_default_direction # Default goes left
 	
 	# Chase nodes
 	if ai_chase_node_list.size() > 0:
@@ -83,9 +84,6 @@ func _ai_process():
 			# Try to attack if available
 			if attack_timer.is_stopped():
 				attack_timer.start()
-
-func _event_health_is_zero():
-	print("Enemy died!")
 
 func set_attack_speed(value):
 	attack_timer.wait_time = value
@@ -114,3 +112,10 @@ func _on_vision_body_entered(body):
 
 func _on_vision_body_exited(body):
 	ai_chase_node_list.erase(body)
+
+func attack(attack : Attack):
+	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
+	
+func _event_health_is_zero():
+	call_deferred("queue_free")
+	print("Enemy died!")

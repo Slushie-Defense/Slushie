@@ -8,3 +8,4 @@ res://UserInterface/Coins/CoinCounterUI.tscn
 res://Entities/Player/Player.tscn
 res://Entities/Weapons/WeaponBase.tscn
 res://Entities/Weapons/WeaponBase.gd
+res://Entities/Enemy/Enemy.gd
