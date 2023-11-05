@@ -27,11 +27,11 @@ var angle_range : float = 30.0  # Angle range in degrees
 # Targeting
 var attack_range : float = 0.0
 var attack_target_position : Vector2 = Vector2(0, 512)
-var attack_damage : int = 10
+var attack_damage : int = 15
 
 # Explosions
-@export var explode_at_target : bool = false
-var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
+#@export var explode_at_target : bool = false
+#var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 
 func _ready():
 	shot_delay_timer.wait_time = delay_between_shots
@@ -39,10 +39,10 @@ func _ready():
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= shots_before_reload:
-		print("Reload")
+		#print("Reload")
 		reload_weapon()
 	else:
-		print("Fire! " +str(shot_counter))
+		#print("Fire! " +str(shot_counter))
 		fire_weapon()
 
 func _play_reload_sound():
@@ -60,18 +60,22 @@ func reload_weapon():
 
 func fire_weapon():
 	# Fire weapon
-	shot_counter += 1
 	shot_delay_timer.wait_time = delay_between_shots
 	shot_delay_timer.start()
-	# Play sound
-	sound_player.stream = sound_shoot
-	sound_player.play()
 	# Sweep the area
-	find_target_position()
+	var found_target = find_target_position()
+	# If nothing is found. Do not fire, just check again next shot
+	if not found_target:
+		return
 	# Fire the shot
 	fire_ray_cast()
 	# Draw the line
 	draw_line2d(raycast_2d)
+	# Play sound
+	sound_player.stream = sound_shoot
+	sound_player.play()
+	# Count shot
+	shot_counter += 1
 
 func find_target_position():
 	if autotarget_enemy:
@@ -84,6 +88,8 @@ func find_target_position():
 				# If it hits something it can attack
 				if first_collision_result.has_method("attack"):
 					attack_target_position = first_collision_result.global_position - global_position
+					return true
+	return false
 
 func fire_ray_cast():
 	raycast_2d.target_position = attack_target_position

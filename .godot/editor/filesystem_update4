@@ -8,3 +8,5 @@ res://UserInterface/Wave/WaveCount.tscn
 res://UserInterface/Coins/CoinCounterUI.tscn
 res://Entities/Player/Player.tscn
 res://Entities/Weapons/WeaponBase.gd
+res://Entities/Structures/Structure.gd
+res://Entities/Managers/BuildingManager/BuildingManager.gd

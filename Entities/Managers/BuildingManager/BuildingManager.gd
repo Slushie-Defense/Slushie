@@ -82,7 +82,7 @@ func add_structure():
 		var structure_node = structure_scene.instantiate()
 		var structure_offset = Vector2(game_grid_cell_size_halved, game_grid_cell_size_halved)
 		structure_node.global_position = structure_position + structure_offset
-		get_tree().get_root().add_child(structure_node)
+		get_tree().get_root().add_child(structure_node) # Add to the main scene
 	else:
 		audio_player.stream = audio_ui_denied
 	# UI Play sound	
