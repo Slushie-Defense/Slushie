@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 @onready var health : ProgressBar = $Healthbar
-
 @onready var area_2d_collision_shape_2d : CollisionShape2D = $Area2D/CollisionShape2D
 @onready var static_body_2d_collision_shape_2d : CollisionShape2D = $CollisionShape2D
 

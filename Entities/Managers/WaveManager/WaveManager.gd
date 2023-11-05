@@ -50,7 +50,7 @@ func _spawn_wave(wave: Wave):
 			var enemy_instance = enemy_scene.instantiate()
 			enemy_instance.position = enemy_info.position
 			print("spawning "+ enemy_info.type + "at " + str(enemy_info.position))
-			add_child(enemy_instance)
+			get_tree().get_root().add_child(enemy_instance)
 			alive_enemies.append(enemy_instance)
 			await get_tree().create_timer(enemy_info.repeat_time).timeout
 	spawning = false
