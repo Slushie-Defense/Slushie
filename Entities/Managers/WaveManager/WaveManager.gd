@@ -33,7 +33,7 @@ func is_wave_complete():
 	if alive_enemies.size() == 0:
 		return false
 	for enemy in alive_enemies:
-		if enemy != null || !enemy.is_queued_for_deletion():
+		if enemy != null:
 			return false
 
 	Main.emit_signal("signal_wave_event", "Wave complete!")
