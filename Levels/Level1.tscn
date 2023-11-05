@@ -41,7 +41,7 @@ script = ExtResource("8_qjyoi")
 type = "Basic"
 time = 0.0
 spawn_point_name = "Middle Lane"
-position = Vector2(2000, -200)
+position = Vector2(2000, 2200)
 repeat_time = 0.2
 number_to_spawn = 100
 
