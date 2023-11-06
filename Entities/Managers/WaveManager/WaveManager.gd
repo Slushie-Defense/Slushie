@@ -35,7 +35,7 @@ func is_wave_complete():
 	for enemy in alive_enemies:
 		if enemy != null:
 			return false
-
+	
 	Main.emit_signal("signal_wave_event", "Wave complete!")
 	return true
 
@@ -61,7 +61,6 @@ func _ready():
 	# every 5 seconds, spawn an enemy_scene
 	_spawn_wave(waves[0])
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

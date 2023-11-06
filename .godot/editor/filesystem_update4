@@ -7,3 +7,5 @@ res://Levels/Level1.tscn
 res://Entities/Projectile/ProjectileCurve.tres
 res://Entities/Projectile/Projectile.gd
 res://Entities/Coin/CoinSpawner.tscn
+res://Entities/Enemy/Enemy.tscn
+res://Entities/Enemy/Enemy.gd
