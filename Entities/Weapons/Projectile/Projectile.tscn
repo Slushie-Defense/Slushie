@@ -3,9 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://dpt0tifft75jw" path="res://Sprites/Circles/32x32WhiteCircle.png" id="1_8cn71"]
 [ext_resource type="Script" path="res://Entities/Weapons/Projectile/Projectile.gd" id="1_14ww3"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Projectile" type="Node2D"]
 script = ExtResource("1_14ww3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.980392, 0.960784, 0.67451, 0.87451)
 texture = ExtResource("1_8cn71")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
