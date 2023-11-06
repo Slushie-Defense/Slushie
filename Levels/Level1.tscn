@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=16 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/EnemySpawnInfo.gd" id="8_qjyoi"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="9_cbk5y"]
 [ext_resource type="PackedScene" uid="uid://m85u2pije2ka" path="res://Entities/Coin/CoinSpawner.tscn" id="11_cched"]
-[ext_resource type="PackedScene" uid="uid://cvd6ncbpwvyh4" path="res://Entities/Explosion/ExplosionAOE.tscn" id="11_nnng1"]
 
 [sub_resource type="Resource" id="Resource_3kl6t"]
 script = ExtResource("8_qjyoi")
@@ -131,9 +130,6 @@ metadata/_edit_use_anchors_ = true
 [node name="PanelContainer" parent="TreesTexture" index="0"]
 offset_right = 4288.0
 offset_bottom = 256.0
-
-[node name="ExplosionAOE" parent="." instance=ExtResource("11_nnng1")]
-position = Vector2(1331, 578)
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
 position = Vector2(1856, 64)
