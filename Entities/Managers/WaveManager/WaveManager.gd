@@ -1,6 +1,5 @@
-extends Node
+extends Node2D
 
-var enemy_scene = load("res://Entities/Enemy/Enemy.tscn")
 @export var spawn_timer: float
 
 var timer = 0.0
@@ -25,56 +24,84 @@ var spawn_index: int = 0
 # variable to store all alive enemyes in current wave
 var alive_enemies : Array = []
 
-# TODO: test this function because I'm not sure how to fight?
 # function that checks alive enemies and returns true if all enemies are destroyed
 func is_wave_complete():
-	if (spawning):
-		return false
 	if alive_enemies.size() == 0:
-		return false
+		return true
 	for enemy in alive_enemies:
-		if enemy != null:
-			return false
+		if enemy == null:
+			pass
+		if enemy.is_queued_for_deletion():
+			return false;
+		return false
 
 	Main.emit_signal("signal_wave_event", "Wave complete!")
+	print("wave complete")
+	alive_enemies.clear()
 	return true
 
 var spawning = false
 
-func _spawn_wave(wave: Wave):
-	spawning = true;
-	Main.emit_signal("signal_wave_event", str(wave.name) + ": " + str(wave.description))
+func _spawn_enemy(enemy_info: EnemySpawnInfo):
+	# get enemies from enemy_info
+	# if the array size is 1, then spawn that enemy
+	# if the array size is greater than 1, then spawn a random enemy from the array
+	var enemy_instance : Node2D# = enemy_scene.instantiate()
+	if (enemy_info.enemies.size() == 0):
+		print("no enemies to spawn")
+		return
+	if (enemy_info.enemies.size() == 1):
+		enemy_instance = (enemy_info.enemies[0]).instantiate()
+	else:
+		var random_index = randi() % enemy_info.enemies.size()
+		enemy_instance = enemy_info.enemies[random_index].instantiate()
+
+	enemy_instance.position = enemy_info.portals[0].position
+	print("spawning "+ enemy_info.type + "at " + str(enemy_info.portals[0].position))
+	get_tree().get_root().add_child(enemy_instance)
+	alive_enemies.append(enemy_instance)
+	await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn)).timeout
+
+
+var current_group_id = 0
+
+func _spawn_enemy_info_group(wave: Wave):
+	spawning = true
+	Main.emit_signal("signal_wave_event", str(wave.name) + ": new group spawning")
+
+
 	for enemy_info in wave.enemies:
-		await get_tree().create_timer(enemy_info.time).timeout
 		for i in range(enemy_info.number_to_spawn):
-			var enemy_instance = enemy_scene.instantiate()
-			enemy_instance.position = enemy_info.position
-			print("spawning "+ enemy_info.type + "at " + str(enemy_info.position))
-			get_tree().get_root().add_child(enemy_instance)
-			alive_enemies.append(enemy_instance)
-			await get_tree().create_timer(enemy_info.repeat_time).timeout
+			_spawn_enemy(enemy_info)
+
 	spawning = false
-	Main.emit_signal("signal_wave_event", str(wave.name) + ": Over")
+	Main.emit_signal("signal_wave_event", str(wave.name) + ": Spawned all enemies in this group")
+
+func spawn_wave(wave_number: int):
+	var current_wave = waves[wave_number]
+	Main.emit_signal("signal_wave_event", str(current_wave.name) + ": new wave spawning")
+	for enemy_info in current_wave.enemies:
+		_spawn_enemy_info_group(current_wave)
+
+	wave_number += 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# every 5 seconds, spawn an enemy_scene
-	_spawn_wave(waves[0])
+	spawn_wave(0)
+	# set the total number of enemies to spawn
+
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (is_wave_complete()):
-		spawn_index += 1
-		if (spawn_index >= waves.size()):
-			spawn_index = 0
-			Main.emit_signal("signal_wave_event", "All waves complete!")
-		else:
-			_spawn_wave(waves[spawn_index])
+	if (!spawning):
+		if (is_wave_complete()):
+			spawn_index += 1
+			if (spawn_index >= waves.size()):
+				spawn_index = 0
+				Main.emit_signal("signal_wave_event", "All waves complete!")
+			else:
+				spawn_wave(spawn_index)
 	pass
-
-func spawn_enemy():
-	var enemy = enemy_scene.instantiate()
-	enemy.position = Vector2(2000, 500)
-	add_child(enemy)
