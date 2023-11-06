@@ -1,6 +1,9 @@
-res://Levels/Level1.tscn
+res://Entities/Weapons/Projectile/Projectile.tscn
 res://Entities/Managers/WaveManager/WaveManager.gd
 res://UserInterface/MainUserInterfaceTheme.tres
-res://Entities/Weapons/Projectile/Projectile.tscn
 res://Entities/Weapons/Projectile/Projectile.gd
-res://Entities/Coin/Coin.tscn
+res://Entities/Projectile/Projectile.tscn
+res://Levels/Level1.tscn
+res://Entities/Projectile/ProjectileCurve.tres
+res://Entities/Projectile/Projectile.gd
+res://Entities/Coin/CoinSpawner.tscn
