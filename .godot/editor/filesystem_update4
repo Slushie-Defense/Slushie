@@ -19,3 +19,4 @@ res://Entities/Managers/WaveManager/WaveManager.gd
 res://Levels/Level1.tscn
 res://UserInterface/MainUserInterfaceTheme.tres
 res://Entities/Managers/WaveManager/Portal.gd
+res://Entities/Managers/WaveManager/DefaultGroup.tres

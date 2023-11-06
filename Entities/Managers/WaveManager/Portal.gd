@@ -1,7 +1,6 @@
 # • A wave can only spawn from a single spawn point    
 # • Waves occur in serial for a given wave manager
     # cm - yes, it for loops through all the waves, once one is done it moves to the next. 
-        # cm to refactor to allow for downtime between waves
 #     ◦ Contrary to expectation, I thought we'd be able to spawn a wave amongst various portals for some lane variety.
         # cm to create portal class / object that can be used to spawn enemies
 #     ◦ Perhaps I"m just missing something, is there a way to at least have two EnemySpawnInfo groups spawning in parallel for one wave?
