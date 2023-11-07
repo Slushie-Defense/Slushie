@@ -2,10 +2,12 @@ extends Node2D
 
 @onready var sound_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
-
 @onready var line_2d : Line2D = $Line2D
 
+enum structure_type { INSTANT, PROJECTILE, SIEGE, FENCE }
+@export var structure = structure_type.INSTANT
 
+var projectile_scene = load("res://Entities/Projectile/Projectile.tscn")
 var sound_shoot = load("res://Entities/Weapons/Sounds/Splat.wav")
 var sound_reload = load("res://Entities/Weapons/Sounds/Reload.wav")
 
@@ -26,16 +28,14 @@ var angle_range : float = 30.0  # Angle range in degrees
 
 # Targeting
 var attack_range : float = 0.0
-var attack_target_position : Vector2 = Vector2(0, 512)
+var relative_target_position : Vector2 = Vector2(0, 512)
 var attack_damage : int = 15
 
-# Explosions
-#@export var explode_at_target : bool = false
-#var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
-
 func _ready():
-	shot_delay_timer.wait_time = delay_between_shots
-	shot_delay_timer.start()
+	# Start firing if it is not a fence
+	if not structure == structure_type.FENCE:
+		shot_delay_timer.wait_time = delay_between_shots
+		shot_delay_timer.start()
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= shots_before_reload:
@@ -67,10 +67,17 @@ func fire_weapon():
 	# If nothing is found. Do not fire, just check again next shot
 	if not found_target:
 		return
+	# Fire AOE Projectile
+	if structure == structure_type.SIEGE:
+		fire_projectile_explosion()
 	# Fire the shot
-	fire_ray_cast()
+	if structure == structure_type.INSTANT:
+		fire_instant_hit()
+	# Fire bullet
+	if structure == structure_type.PROJECTILE:
+		fire_projectile_bullet()
 	# Draw the line
-	draw_line2d(raycast_2d)
+	#draw_line2d(raycast_2d)
 	# Play sound
 	sound_player.stream = sound_shoot
 	sound_player.play()
@@ -87,12 +94,28 @@ func find_target_position():
 			if first_collision_result != null:
 				# If it hits something it can attack
 				if first_collision_result.has_method("attack"):
-					attack_target_position = first_collision_result.global_position - global_position
+					relative_target_position = first_collision_result.global_position - global_position
 					return true
 	return false
 
-func fire_ray_cast():
-	raycast_2d.target_position = attack_target_position
+func create_projectile(arch_and_explode : bool = true):
+	var projectile = projectile_scene.instantiate()
+	get_tree().get_root().add_child(projectile)
+	projectile.global_position = global_position
+	projectile.arch_and_explode = arch_and_explode
+	projectile.set_target_global_position(global_position + relative_target_position)
+	return projectile
+	
+func fire_projectile_explosion():
+	var projectile = create_projectile()
+	projectile.attack_damage = 100.0
+
+func fire_projectile_bullet():
+	var projectile = create_projectile(false)
+	projectile.attack_damage = 20.0
+
+func fire_instant_hit():
+	raycast_2d.target_position = relative_target_position
 	raycast_2d.force_raycast_update()
 	# See what it hit
 	var first_collision_result = raycast_2d.get_collider()
@@ -107,7 +130,7 @@ func fire_ray_cast():
 func draw_line2d(passed_raycast):
 	# Line 2D
 	var global_position_of_hit : Vector2 = passed_raycast.get_collision_point()
-	var relative_position_of_hit : Vector2 = global_position_of_hit - global_position if passed_raycast.is_colliding() else attack_target_position 
+	var relative_position_of_hit : Vector2 = global_position_of_hit - global_position if passed_raycast.is_colliding() else relative_target_position 
 	line_2d.points = [Vector2.ZERO, relative_position_of_hit]
 	get_tree().create_timer(0.1).timeout.connect(clear_line_2d)
 

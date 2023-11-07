@@ -1,8 +1,10 @@
 Node2D
 ShapeCast2D
+CollisionShape2D
 Line2D
-RayCast2D
 Timer
+Sprite2D
+RayCast2D
 AudioStreamPlayer2D
 Sprite2D
 CollisionShape2D

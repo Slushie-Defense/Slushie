@@ -28,6 +28,10 @@ var attack_speed : float = 1.0 # In seconds
 var attack_range : float = 64.0 # In pixels
 var attack_damage : float = 100.0
 
+# Coins
+var coin_value : int = 100
+var coin_scene = load("res://Entities/Coin/Coin.tscn")
+
 # Initialize
 func _ready():
 	# Set health
@@ -117,6 +121,15 @@ func attack(attack : Attack):
 	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
 	
 func _event_health_is_zero():
+	# Spawn coin where it dies
+	_spawn_coin() 
+	# Destroy enemy
 	call_deferred("queue_free")
 	Main.emit_signal("enemy_died", "Enemy died!")
 	print("Enemy died!")
+
+func _spawn_coin():
+	# Spawn coin
+	var coin = coin_scene.instantiate()
+	get_tree().get_root().add_child(coin)
+	coin.global_position = global_position
