@@ -3,3 +3,5 @@ res://Entities/Managers/WaveManager/WaveManager.gd
 res://UserInterface/MainUserInterfaceTheme.tres
 res://Entities/Managers/WaveManager/DefaultGroup.tres
 res://Entities/Managers/WaveManager/EnemySpawnInfo.gd
+res://Entities/Enemy/Enemy.gd
+res://Autoload/Main.gd

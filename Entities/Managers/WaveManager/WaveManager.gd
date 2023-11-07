@@ -8,38 +8,22 @@ var timer = 0.0
 # each wave is an array of enemies (represented by EnemySpawnInfo)
 # each enemy has a type, position, and time to spawn
 @export var waves: Array[Wave]
-# current spawn index
-var spawn_index: int = -1
 
-# spawn waves algorithm:
-# for each wave in waves
-# 	display wave.description and wave.name
-# 	for each enemy info in wave.enemies
-# 		wait enemy info.time
-# 		spawn enemy.type at enemy.position
-# 		for each repeat in enemy.number_to_spawn
-# 			wait enemy.repeat_time
-# 			spawn enemy.type at enemy.position
-
-# variable to store all alive enemyes in current wave
-
-# function that checks alive enemies and returns true if all enemies are destroyed
 var spawning = false
 
-
-
+# since the spawned enemies will be childed to the object, we can use get_child_count to check the status of the enemies in the wave
 func check_wave_complete():
 	if (get_child_count() == 0):
 		Main.emit_signal("signal_wave_event", "Wave complete!")
 		print("WAVE COMPLETED")
 		return true
-
 	else:
 		return false
 
+# gets the enemy scene from the enemy type, instantiates it, and childs it to $WaveManager
 func _add_enemy(enemy_info:EnemySpawnInfo):
 	# get enemies from enemy_info
-	var enemy_instance : Node2D# = enemy_scene.instantiate()
+	var enemy_instance : Node2D
 	if (enemy_info.enemies.size() == 0):
 		print("no enemies to spawn")
 		return
@@ -70,13 +54,14 @@ func _add_enemy(enemy_info:EnemySpawnInfo):
 	#print("spawning "+ enemy_info.type + "at " + str(enemy_instance.position))
 	add_child(enemy_instance)
 
+# spawn the enemy with a delay (coroutine)
 func _spawn_enemy(enemy_info: EnemySpawnInfo):
 	for i in range(enemy_info.number_to_spawn_at_once):
 		_add_enemy(enemy_info)
 	await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn)).timeout
 
 
-
+# spawns a wave, which syncronously loops through the groups
 func spawn_wave(wave_number: int):
 	spawning = true
 	var current_wave = waves[wave_number]
@@ -89,6 +74,7 @@ func spawn_wave(wave_number: int):
 	spawning = false
 	Main.emit_signal("signal_wave_event", str(current_wave.name) + ": wave completed spawning")
 
+# spawns a group of enemies within a wave
 func _spawn_group(enemy_info: EnemySpawnInfo):
 	Main.emit_signal("signal_wave_event", str(enemy_info.type) + ": new group spawning")
 	for i in range(enemy_info.number_to_spawn + 1):
