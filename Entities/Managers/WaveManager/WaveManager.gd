@@ -26,24 +26,18 @@ var spawn_index: int = -1
 # function that checks alive enemies and returns true if all enemies are destroyed
 var spawning = false
 
-var current_number_of_enemies_dead = 0
-var required_wave_total_number_of_enemies = 0
 
-func enemy_died():
-	current_number_of_enemies_dead+=1
-	print("hello my function is being called")
 
 func check_wave_complete():
-	if (current_number_of_enemies_dead >= required_wave_total_number_of_enemies):
+	if (get_child_count() == 0):
 		Main.emit_signal("signal_wave_event", "Wave complete!")
-		current_number_of_enemies_dead = 0
 		print("WAVE COMPLETED")
 		return true
+
 	else:
 		return false
 
-
-func _spawn_enemy(enemy_info: EnemySpawnInfo):
+func _add_enemy(enemy_info:EnemySpawnInfo):
 	# get enemies from enemy_info
 	var enemy_instance : Node2D# = enemy_scene.instantiate()
 	if (enemy_info.enemies.size() == 0):
@@ -69,9 +63,16 @@ func _spawn_enemy(enemy_info: EnemySpawnInfo):
 	# if the portals array size is greater than 1, spawn at a random position on the portals from the array
 		var random_index = randi() % enemy_info.portals.size()
 		enemy_instance.position = enemy_info.portals[random_index].position
-	
-	print("spawning "+ enemy_info.type + "at " + str(enemy_instance.position))
-	get_tree().get_root().add_child(enemy_instance)
+		
+	# add variance to the position
+	enemy_instance.position.x += randi() % 100 - 50
+
+	#print("spawning "+ enemy_info.type + "at " + str(enemy_instance.position))
+	add_child(enemy_instance)
+
+func _spawn_enemy(enemy_info: EnemySpawnInfo):
+	for i in range(enemy_info.number_to_spawn_at_once):
+		_add_enemy(enemy_info)
 	await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn)).timeout
 
 
@@ -80,10 +81,6 @@ func spawn_wave(wave_number: int):
 	spawning = true
 	var current_wave = waves[wave_number]
 	Main.emit_signal("signal_wave_event", str(current_wave.name) + ": new wave spawning")
-
-	# set required_wave_total_number_of_enemies by adding up all the enemies in the wave
-	for enemy_info in current_wave.enemies:
-		required_wave_total_number_of_enemies += enemy_info.number_to_spawn
 
 	# spawn the groups sequentially
 	for enemy_info in current_wave.enemies:
@@ -102,7 +99,6 @@ var current_wave_index = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	spawn_wave(current_wave_index)
-	Main.connect("enemy_died", enemy_died)
 
 
 func _process(delta):
