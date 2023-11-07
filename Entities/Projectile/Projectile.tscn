@@ -6,6 +6,7 @@
 [node name="Projectile" type="Node2D"]
 position = Vector2(640, 360)
 script = ExtResource("1_salub")
+is_arch_shot = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.980392, 0.960784, 0.67451, 0.87451)

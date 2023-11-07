@@ -1,7 +1,11 @@
 extends Node2D
 
-var speed : float = 400.0  # Adjust the speed as needed
+var linear_speed : float = 400.0  # Adjust the speed as needed
+var curve_speed : float = 0.0
 var target_position : Vector2 = Vector2.ZERO
+@export var is_arch_shot : bool = false
+
+var calculated_speed : float = linear_speed
 
 # Trajectory
 var parabolic_curve : Curve = load("res://Entities/Projectile/ProjectileCurve.tres")
@@ -14,7 +18,7 @@ var initial_position : Vector2 = Vector2.ZERO
 var initial_distance : float = 1.0 # Gets overridden
 
 func _ready():
-	set_target_global_position(Vector2(global_position.x - 32, global_position.y + 400))
+	set_target_global_position(Vector2(global_position.x + 320, global_position.y + 0))
 	call_deferred("add_line_2d")
 
 func add_line_2d():
@@ -35,7 +39,7 @@ func _physics_process(delta):
 	var z_height = parabolic_curve.sample(distance_ratio)
 	
 	# Move the projectile directly towards the target position
-	linear_position += direction * speed * delta
+	linear_position += direction * calculated_speed * delta
 	# Curve the projectile in the air towards target position
 	curve_position = Vector2(linear_position.x, linear_position.y - (z_height * parabolic_curve_max_height))
 	
@@ -49,10 +53,14 @@ func _physics_process(delta):
 
 func set_target_global_position(new_target_position: Vector2):
 	target_position = new_target_position
-	# Setup
+	# Initial position
 	linear_position = global_position
 	initial_position = global_position
 	initial_distance = initial_position.distance_to(target_position)
+	# Calculate curve speed if relevant
+	curve_speed = initial_distance / 2.0
+	calculated_speed = curve_speed if is_arch_shot else linear_speed
+	parabolic_curve_max_height = 400.0 if is_arch_shot else 0.0
 
 func _reached_target():
 	queue_free()  # Destroy the projectile, for example
