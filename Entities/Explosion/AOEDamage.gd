@@ -9,9 +9,9 @@ var explosion_sprite_initial_size : float = 128.0
 
 # Damage
 var damage_fallout_curve : Curve = load("res://Entities/Explosion/DamageFallout.tres") # Change if you want more than 8 nodes to register
-@export var damage_at_epicenter : float = 500
-@export var explosion_radius : float = 96.0
-@export var max_number_nodes_that_can_be_detected : int = 8
+var attack_damage : float = 100.0 # Max damage at Epicenter
+var explosion_radius : float = 96.0
+var max_number_nodes_that_can_be_detected : int = 8
 
 func _ready():
 	# Sprite scale
@@ -40,7 +40,7 @@ func _deal_damage():
 		if child.has_method("attack"): # Check if it has attack
 			var distance_from_center : float = global_position.distance_to(child.global_position)
 			var attack = Attack.new()
-			attack.damage = damage_at_epicenter * damage_fallout_curve.sample(distance_from_center / explosion_radius)
+			attack.damage = attack_damage * damage_fallout_curve.sample(distance_from_center / explosion_radius)
 			child.attack(attack)
 	
 	# Turn off collision detection after use
