@@ -3,6 +3,7 @@ extends Node
 signal signal_add_player(player_node) # How we find the player
 signal signal_update_coin_count(count)
 signal signal_wave_event(event_string)
+signal signal_enemy_died(enemy_node)
 
 # Coin count
 var coins : int = 0

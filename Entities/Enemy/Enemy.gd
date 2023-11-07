@@ -118,4 +118,5 @@ func attack(attack : Attack):
 	
 func _event_health_is_zero():
 	call_deferred("queue_free")
+	Main.emit_signal("enemy_died", "Enemy died!")
 	print("Enemy died!")
