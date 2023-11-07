@@ -5,3 +5,8 @@ res://Entities/Projectile/Projectile.tscn
 res://Entities/Coin/CoinSpawner.tscn
 res://Entities/Enemy/Enemy.tscn
 res://Entities/Projectile/Projectile.gd
+res://Entities/Coin/Coin.tscn
+res://Entities/Weapons/WeaponBase.gd
+res://Entities/Weapons/WeaponBase.tscn
+res://Entities/Explosion/ExplosionAOE.tscn
+res://Entities/Explosion/AOEDamage.gd

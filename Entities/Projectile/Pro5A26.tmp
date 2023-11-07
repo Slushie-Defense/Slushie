@@ -4,15 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://dpt0tifft75jw" path="res://Sprites/Circles/32x32WhiteCircle.png" id="2_t616o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36btw"]
-radius = 12.0
+radius = 16.0
 
 [node name="Projectile" type="Node2D"]
 position = Vector2(640, 360)
 script = ExtResource("1_salub")
+arch_and_explode = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.980392, 0.960784, 0.67451, 0.545098)
-scale = Vector2(0.75, 0.75)
+self_modulate = Color(0.980392, 0.960784, 0.67451, 0.87451)
 texture = ExtResource("2_t616o")
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
