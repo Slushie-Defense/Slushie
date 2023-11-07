@@ -1,9 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=19 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
+[ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Managers/WaveManager/Portal.tscn" id="1_76lsd"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Portal.gd" id="2_mqamu"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
+[ext_resource type="Resource" uid="uid://bp0e2xmwm7eaq" path="res://Entities/Managers/WaveManager/DefaultGroup.tres" id="4_aqkxg"]
+[ext_resource type="PackedScene" uid="uid://digh6puar70w0" path="res://Entities/Enemy/Enemy.tscn" id="4_e3ocv"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/WaveManager.gd" id="7_d2dej"]
 [ext_resource type="PackedScene" uid="uid://umxdc1nk56g1" path="res://Entities/Environment/TreesTexture.tscn" id="7_jvtud"]
@@ -11,50 +15,54 @@
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="9_cbk5y"]
 [ext_resource type="PackedScene" uid="uid://m85u2pije2ka" path="res://Entities/Coin/CoinSpawner.tscn" id="11_cched"]
 
-[sub_resource type="Resource" id="Resource_3kl6t"]
+[sub_resource type="Resource" id="Resource_my8wf"]
 script = ExtResource("8_qjyoi")
+enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
 type = "Basic"
-time = 5.0
-spawn_point_name = "Middle"
-position = Vector2(2000, 600)
-repeat_time = 1.2
-number_to_spawn = 5
-
-[sub_resource type="Resource" id="Resource_6v4iu"]
-script = ExtResource("8_qjyoi")
-type = "Basic"
-time = 1.2
-spawn_point_name = "Middle Lane"
-position = Vector2(4000, 800)
-repeat_time = 1.3
-number_to_spawn = 5
+portals = Array[ExtResource("2_mqamu")]([Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(2048, 768),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("2_mqamu"),"portal_name":"Bot Lane")
+])
+number_to_spawn_at_once = 1
+total_time = 3.0
+number_to_spawn = 1
 
 [sub_resource type="Resource" id="Resource_upjrm"]
 script = ExtResource("9_cbk5y")
 name = "Wave 1"
 description = "The description"
-enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_3kl6t"), SubResource("Resource_6v4iu")])
+enemies = Array[ExtResource("8_qjyoi")]([ExtResource("4_aqkxg"), SubResource("Resource_my8wf")])
 
-[sub_resource type="Resource" id="Resource_vam17"]
+[sub_resource type="Resource" id="Resource_e4hq0"]
 script = ExtResource("8_qjyoi")
+enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
 type = "Basic"
-time = 0.0
-spawn_point_name = "Middle Lane"
-position = Vector2(2000, 2200)
-repeat_time = 0.2
-number_to_spawn = 100
+portals = Array[ExtResource("2_mqamu")]([Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(2048, 768),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("2_mqamu"),"portal_name":"Bot Lane")
+])
+number_to_spawn_at_once = 1
+total_time = 2.0
+number_to_spawn = 3
 
-[sub_resource type="Resource" id="Resource_s6tv6"]
+[sub_resource type="Resource" id="Resource_rsmkp"]
 script = ExtResource("9_cbk5y")
 name = "Wave 2"
-description = "Waviest wave"
-enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_vam17")])
+description = "Wavy wave"
+enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_e4hq0")])
 
 [node name="Level1" type="Node2D"]
 
-[node name="WaveManager" type="Node" parent="."]
+[node name="TopLanePortal" parent="." instance=ExtResource("1_76lsd")]
+position = Vector2(2048, 384)
+script = ExtResource("2_mqamu")
+portal_name = "Top Lane"
+
+[node name="BotLanePortal" parent="." instance=ExtResource("1_76lsd")]
+position = Vector2(2048, 768)
+script = ExtResource("2_mqamu")
+portal_name = "Bot Lane"
+
+[node name="WaveManager" type="Node2D" parent="."]
+position = Vector2(-1, 0)
 script = ExtResource("7_d2dej")
-waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm"), SubResource("Resource_s6tv6")])
+waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm"), SubResource("Resource_rsmkp")])
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 0.0

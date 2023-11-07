@@ -125,6 +125,7 @@ func _event_health_is_zero():
 	_spawn_coin() 
 	# Destroy enemy
 	call_deferred("queue_free")
+	Main.emit_signal("enemy_died", "Enemy died!")
 	print("Enemy died!")
 
 func _spawn_coin():
