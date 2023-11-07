@@ -31,13 +31,11 @@ var attack_range : float = 0.0
 var relative_target_position : Vector2 = Vector2(0, 512)
 var attack_damage : int = 15
 
-# Explosions
-#@export var explode_at_target : bool = false
-#var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
-
 func _ready():
-	shot_delay_timer.wait_time = delay_between_shots
-	shot_delay_timer.start()
+	# Start firing if it is not a fence
+	if not structure == structure_type.FENCE:
+		shot_delay_timer.wait_time = delay_between_shots
+		shot_delay_timer.start()
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= shots_before_reload:
