@@ -1,4 +1,5 @@
-res://Entities/Managers/WaveManager/
+res://Entities/Projectile
+res://Sprites/Circles
 res://Entities/Weapons/Sounds
 res://Entities/Weapons
 res://Entities/Explosion

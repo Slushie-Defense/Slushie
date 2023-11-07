@@ -1,4 +1,3 @@
-Node2D
 ShapeCast2D
 CollisionShape2D
 Line2D
@@ -6,8 +5,7 @@ Timer
 Sprite2D
 RayCast2D
 AudioStreamPlayer2D
-Sprite2D
-CollisionShape2D
+Node2D
 Area2D
 AnimationPlayer
 CanvasLayer
