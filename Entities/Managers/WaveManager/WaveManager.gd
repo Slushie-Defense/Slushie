@@ -1,9 +1,5 @@
 extends Node2D
 
-@export var spawn_timer: float
-
-var timer = 0.0
-
 # array of waves
 # each wave is an array of enemies (represented by EnemySpawnInfo)
 # each enemy has a type, position, and time to spawn
