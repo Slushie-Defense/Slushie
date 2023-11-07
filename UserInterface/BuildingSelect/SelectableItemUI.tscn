@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3fcdc4k5bn4i"]
+
+[ext_resource type="Script" path="res://UserInterface/BuildingSelect/SelectableItemUI.gd" id="1_42uts"]
+[ext_resource type="Texture2D" uid="uid://dng28sn3p8f8g" path="res://Sprites/UserInterface/Items/Coins.png" id="1_r7f2y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vnooe"]
+bg_color = Color(0.556863, 0.560784, 0.588235, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.556863, 0.560784, 0.588235, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 0
+script = ExtResource("1_42uts")
+
+[node name="SelectPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vnooe")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="SelectPanel"]
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="ItemUI" type="TextureRect" parent="SelectPanel/ReferenceRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_r7f2y")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 2
