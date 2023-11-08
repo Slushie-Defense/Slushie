@@ -1,7 +1,6 @@
 extends Camera2D
 
 @onready var user_interface : Node2D = $UserInterfaceParent
-@onready var coins_user_interface : Control = $UserInterfaceParent/CanvasLayer/CoinsUserInterface
 @onready var wave_event_user_interface : Control = $UserInterfaceParent/CanvasLayer/WaveEvent
 
 var camera_width = 1280
@@ -35,4 +34,3 @@ func _update_position(set_position):
 	
 	# Position User Interface
 	user_interface.position = Vector2(offset.x - (camera_width * 0.5), offset.y - (camera_height * 0.5))
-	coins_user_interface._update_fps_count()
