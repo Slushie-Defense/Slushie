@@ -1,3 +1,0 @@
-Curve
-Theme
-Gradient
