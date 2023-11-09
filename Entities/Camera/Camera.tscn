@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d05a21782kpoa"]
+[gd_scene load_steps=5 format=3 uid="uid://d05a21782kpoa"]
 
 [ext_resource type="Script" path="res://Entities/Camera/Camera.gd" id="1_5preo"]
-[ext_resource type="PackedScene" uid="uid://bb1dvqwxyrpgu" path="res://UserInterface/Coins/CoinCounterUI.tscn" id="2_6loqe"]
+[ext_resource type="PackedScene" uid="uid://bb1dvqwxyrpgu" path="res://UserInterface/Coins/FPSCounter.tscn" id="2_6loqe"]
 [ext_resource type="PackedScene" uid="uid://chax58s57d85u" path="res://UserInterface/Wave/WaveCount.tscn" id="3_b4vnn"]
+[ext_resource type="PackedScene" uid="uid://d0ltdactna7rd" path="res://UserInterface/BuildingSelect/BuildingSelectPanelUI.tscn" id="3_qjdnk"]
 
 [node name="Camera" type="Camera2D"]
 script = ExtResource("1_5preo")
@@ -11,6 +12,12 @@ script = ExtResource("1_5preo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UserInterfaceParent"]
 
-[node name="CoinsUserInterface" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("2_6loqe")]
-
 [node name="WaveEvent" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("3_b4vnn")]
+
+[node name="BuildingSelectUI" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("3_qjdnk")]
+
+[node name="FPSCounter" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("2_6loqe")]
+offset_left = 8.0
+offset_top = 668.0
+offset_right = 8.0
+offset_bottom = 668.0
