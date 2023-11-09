@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb1dvqwxyrpgu"]
+
+[ext_resource type="Script" path="res://UserInterface/Coins/FPSCounter.gd" id="1_bo67m"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_bo67m")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="FPSLabel" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+text = "FPS"
