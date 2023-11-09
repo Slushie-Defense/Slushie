@@ -1,9 +1,5 @@
 extends Node2D
 
-@export var spawn_timer: float
-
-var timer = 0.0
-
 # array of waves
 # each wave is an array of enemies (represented by EnemySpawnInfo)
 # each enemy has a type, position, and time to spawn
@@ -22,8 +18,8 @@ func check_wave_complete():
 
 # gets the enemy scene from the enemy type, instantiates it, and childs it to $WaveManager
 func _add_enemy(enemy_info:EnemySpawnInfo):
-	# get enemies from enemy_info
 	var enemy_instance : Node2D
+	# get enemies from enemy_info
 	if (enemy_info.enemies.size() == 0):
 		print("no enemies to spawn")
 		return
@@ -36,7 +32,6 @@ func _add_enemy(enemy_info:EnemySpawnInfo):
 		enemy_instance = enemy_info.enemies[random_index].instantiate()
 
 
-	# set the position of the enemy
 	if (enemy_info.portals.size() == 0):
 		print("no portals to spawn at")
 		return
