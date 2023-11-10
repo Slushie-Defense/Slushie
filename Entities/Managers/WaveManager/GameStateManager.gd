@@ -12,7 +12,7 @@ var previous_state = null
 func _ready():
 	transition_to_state(GameState.PREP)
 	#WaveManager is a node that is a child of this node
-	current_wave_manager = get_node("WaveManager") as WaveManager
+	#current_wave_manager = get_node("WaveManager") as WaveManager
 
 func transition_to_state(state: GameState):
 	previous_state = current_state
