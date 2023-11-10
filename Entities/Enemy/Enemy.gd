@@ -16,7 +16,7 @@ var ai_chase_node = null
 @export var ai_default_direction : Vector2 = Vector2(-1, 0)
 
 # How far the enemy can see
-@export var vision_radius : int = 256
+@export var vision_radius : int = 160
 @export var show_vision_radius : bool = true
 @onready var vision_collider : CollisionShape2D = $Vision/CollisionShape2D
 @onready var vision_sprite : Sprite2D = $Vision/VisionCircle

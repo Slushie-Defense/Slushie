@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d05a21782kpoa"]
 
 [ext_resource type="Script" path="res://Entities/Camera/Camera.gd" id="1_5preo"]
-[ext_resource type="PackedScene" uid="uid://bb1dvqwxyrpgu" path="res://UserInterface/Coins/FPSCounter.tscn" id="2_6loqe"]
+[ext_resource type="PackedScene" uid="uid://bb1dvqwxyrpgu" path="res://UserInterface/FPSCounter/FPSCounter.tscn" id="2_6loqe"]
 [ext_resource type="PackedScene" uid="uid://chax58s57d85u" path="res://UserInterface/Wave/WaveCount.tscn" id="3_b4vnn"]
 [ext_resource type="PackedScene" uid="uid://d0ltdactna7rd" path="res://UserInterface/BuildingSelect/BuildingSelectPanelUI.tscn" id="3_qjdnk"]
 
