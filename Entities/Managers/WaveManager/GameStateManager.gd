@@ -1,6 +1,6 @@
 extends Node2D
 
-var current_wave_manager : WaveManager = null
+@export var current_wave_manager : WaveManager = null
 
 #@export var pauseable_node : Node2D = null
 
@@ -28,11 +28,10 @@ func transition_to_state(state: GameState):
 			game_over_state()
 
 func pause_game():
-	#get_tree().paused = true
-	unpause_game()
+	get_tree().paused = true
 
 func unpause_game():
-	#get_tree().paused = false
+	get_tree().paused = false
 	transition_to_state(previous_state)
 
 func prep_state():

@@ -20,7 +20,7 @@ func check_wave_complete():
 		return false
 
 # gets the enemy scene from the enemy type, instantiates it, and childs it to $WaveManager
-func _add_enemy(enemy_info:EnemySpawnInfo):
+func _add_enemy(enemy_info : EnemySpawnInfo):
 	var enemy_instance : Node2D
 	# get enemies from enemy_info
 	if (enemy_info.enemies.size() == 0):
