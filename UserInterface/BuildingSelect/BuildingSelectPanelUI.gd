@@ -11,15 +11,25 @@ var image_coins = load("res://UserInterface/BuildingSelect/Items/Coins.png")
 # HBox Container
 @onready var hboxcontainer : VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer
 
-# Items
+# Resources
 var coins : Panel
-var fence : Panel
-var landmine : Panel
-var instant_hit : Panel
-var aoe_hit : Panel
-var bullet_hit : Panel
+
+# Descriptions
 var stats : PanelContainer
 
+# Items
+var fence : TextureRect
+var landmine : TextureRect
+var laser_structure : TextureRect
+var siege_structure : TextureRect
+var projectile_structure : TextureRect
+
+# Item list
+var item_dictionary : Dictionary = {}
+var item_names : Array = []
+var active_item : int = 0
+
+# Scenes
 var item_scene = load("res://UserInterface/BuildingSelect/SelectableItemUI.tscn")
 var coin_item_scene = load("res://UserInterface/BuildingSelect/CoinItemUI.tscn")
 var stats_scene = load("res://UserInterface/BuildingSelect/StatsItemUI.tscn")
@@ -29,22 +39,32 @@ func _ready():
 	call_deferred("create_user_interface")
 
 func create_user_interface():
+	# Create coin resource
 	coins = add_item(coin_item_scene, image_coins)
-	fence = add_item(item_scene, image_fence)
-	landmine = add_item(item_scene, image_landmine)
-	instant_hit = add_item(item_scene, image_instant_structure)
-	aoe_hit = add_item(item_scene, image_aoe_structure)
-	bullet_hit = add_item(item_scene, image_bullet_structure)
-	stats = add_stats()
-	# Connect coins
-	call_deferred("connect_coins")
+	call_deferred("connect_coins") # Connect coins
 	
-func add_item(set_scene, item_texture):
+	# Create items
+	fence = add_item(item_scene, image_fence, "fence")
+	landmine = add_item(item_scene, image_landmine, "landmine")
+	laser_structure = add_item(item_scene, image_instant_structure, "laser")
+	siege_structure = add_item(item_scene, image_aoe_structure, "seige")
+	projectile_structure = add_item(item_scene, image_bullet_structure, "projectile")
+	
+	# Add stats
+	stats = add_stats()
+	
+	# Set first item as active
+	_update_active_states()
+	
+func add_item(set_scene, item_texture, dictionary_name : String = ""):
 	var item = set_scene.instantiate()
 	hboxcontainer.add_child(item)
 	item.set_image_texture(item_texture)
 	var random = RandomNumberGenerator.new()
 	item.set_label_value(random.randi_range(0, 19) * 100)
+	if not dictionary_name == "":
+		item_dictionary[dictionary_name] = item
+		item_names.push_back(dictionary_name)
 	return item
 
 func add_stats():
@@ -58,3 +78,20 @@ func connect_coins():
 
 func _update_coin_count(count):
 	coins.set_label_value(Main.coins)
+
+func _input(event):
+	if event.is_action_pressed("ui_text_caret_page_up"):
+		# Change to next active item
+		active_item = (active_item + 1) % (item_names.size())
+		print("Active: " + str(item_names[active_item]))
+		# Update active state
+		_update_active_states()
+		
+func _update_active_states():
+	# Deactivate all items
+	for child_name in item_dictionary:
+		item_dictionary[child_name].set_active_state(false)
+	# Activate current
+	var current_item_name = item_names[active_item]
+	item_dictionary[current_item_name].set_active_state(true)
+	
