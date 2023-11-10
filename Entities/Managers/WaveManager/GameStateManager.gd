@@ -29,10 +29,12 @@ func transition_to_state(state: GameState):
 
 func pause_game():
 	get_tree().paused = true
+	pass
 
 func unpause_game():
 	get_tree().paused = false
 	transition_to_state(previous_state)
+	pass
 
 func prep_state():
 	# Code for initializing prep state goes here
@@ -46,6 +48,7 @@ func start_wave():
 func game_over_state():
 	# Code for game over state goes here
 	pass
+
 
 func _process(delta):
 	match current_state:
