@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=20 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
 [ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Managers/WaveManager/Portal.tscn" id="1_76lsd"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/GameStateManager.gd" id="1_g46yp"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Portal.gd" id="2_mqamu"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
@@ -49,6 +50,14 @@ enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_e4hq0")])
 
 [node name="Level1" type="Node2D"]
 
+[node name="GameStateManager" type="Node2D" parent="."]
+script = ExtResource("1_g46yp")
+
+[node name="WaveManager" type="Node2D" parent="GameStateManager"]
+position = Vector2(-1, 0)
+script = ExtResource("7_d2dej")
+waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm"), SubResource("Resource_rsmkp")])
+
 [node name="TopLanePortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(2048, 384)
 script = ExtResource("2_mqamu")
@@ -58,11 +67,6 @@ portal_name = "Top Lane"
 position = Vector2(2048, 768)
 script = ExtResource("2_mqamu")
 portal_name = "Bot Lane"
-
-[node name="WaveManager" type="Node2D" parent="."]
-position = Vector2(-1, 0)
-script = ExtResource("7_d2dej")
-waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm"), SubResource("Resource_rsmkp")])
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 0.0

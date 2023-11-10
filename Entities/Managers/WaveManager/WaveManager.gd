@@ -1,3 +1,4 @@
+class_name WaveManager
 extends Node2D
 
 # array of waves
@@ -9,9 +10,11 @@ var spawning = false
 
 # since the spawned enemies will be childed to the object, we can use get_child_count to check the status of the enemies in the wave
 func check_wave_complete():
+	if (spawning):
+		return false
 	if (get_child_count() == 0):
 		Main.emit_signal("signal_wave_event", "Wave complete!")
-		print("WAVE COMPLETED")
+		current_wave_index+=1
 		return true
 	else:
 		return false
@@ -78,13 +81,11 @@ func _spawn_group(enemy_info: EnemySpawnInfo):
 
 var current_wave_index = 0
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func spawn_next_wave():
 	spawn_wave(current_wave_index)
 
 
 func _process(delta):
 	if (spawning):
 		return
-	if (check_wave_complete()):
-		current_wave_index += 1
-		spawn_wave(current_wave_index) 
+
