@@ -50,13 +50,15 @@ enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_e4hq0")])
 
 [node name="Level1" type="Node2D"]
 
-[node name="GameStateManager" type="Node2D" parent="."]
-script = ExtResource("1_g46yp")
-
-[node name="WaveManager" type="Node2D" parent="GameStateManager"]
+[node name="WaveManager" type="Node2D" parent="."]
 position = Vector2(-1, 0)
 script = ExtResource("7_d2dej")
 waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm"), SubResource("Resource_rsmkp")])
+
+[node name="GameStateManager" type="Node2D" parent="." node_paths=PackedStringArray("current_wave_manager")]
+process_mode = 3
+script = ExtResource("1_g46yp")
+current_wave_manager = NodePath("../WaveManager")
 
 [node name="TopLanePortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(2048, 384)
