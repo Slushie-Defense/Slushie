@@ -56,7 +56,6 @@ func _add_weapon_base():
 		return
 	# Create the weapon base
 	weapon_base = weapon_base_scene.instantiate()
-	add_child(weapon_base)
 	# Setup weapon base
 	match building_type:
 		"seige":
@@ -69,8 +68,13 @@ func _add_weapon_base():
 			weapon_base.structure = weapon_base.structure_type.PROJECTILE
 			structure_sprite.self_modulate = Color("#00D39B")
 		"landmine":
+			set_collision_layer_value(3, false) # Turn off the collision layer so that enemies can walk through it and do not attack it
 			weapon_base.structure = weapon_base.structure_type.LANDMINE
 			structure_sprite.self_modulate = Color("#FF0000")
+	# Add to structure
+	add_child(weapon_base)
+	# Connect to weapon destroyed
+	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
 
 func _set_building_type(item_name):
 	building_type = item_name
