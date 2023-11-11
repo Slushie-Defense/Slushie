@@ -7,6 +7,7 @@ extends StaticBody2D
 
 # Building construction
 var is_building_constructed : bool = false
+var is_weapon_assigned : bool = false
 var weapon_base_scene = load("res://Entities/Weapons/WeaponBase.tscn")
 var weapon_base : Node2D = null
 var building_type : String = ""
@@ -24,7 +25,7 @@ func _ready():
 	area_2d_collision_shape_2d.shape.size = collision_shape_size
 	static_body_2d_collision_shape_2d.shape.size = collision_shape_size
 	# If the area is clear create the building
-	_initialize_building_construction()
+	call_deferred("_initialize_building_construction")
 
 func _initialize_building_construction():
 	if not is_building_constructed:
@@ -51,7 +52,7 @@ func _on_area_2d_body_exited(body):
 
 func _add_weapon_base():
 	# Do not add weapon base if it is a fence or landmine
-	if building_type == "fence" or building_type == "landmine":
+	if building_type == "fence":
 		return
 	# Create the weapon base
 	weapon_base = weapon_base_scene.instantiate()
@@ -67,6 +68,9 @@ func _add_weapon_base():
 		"projectile":
 			weapon_base.structure = weapon_base.structure_type.PROJECTILE
 			structure_sprite.self_modulate = Color("#00D39B")
+		"landmine":
+			weapon_base.structure = weapon_base.structure_type.LANDMINE
+			structure_sprite.self_modulate = Color("#FF0000")
 
 func _set_building_type(item_name):
 	building_type = item_name
