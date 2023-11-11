@@ -51,35 +51,39 @@ func _on_area_2d_body_exited(body):
 	_initialize_building_construction()
 
 func _convert_to_structure_type():
-	# Do not add weapon base if it is a fence or landmine
-	if building_type == "fence":
-		health.set_max_health(UnitData.FENCE.health) # Default is fence
-		return
-	# Create the weapon base
-	weapon_base = weapon_base_scene.instantiate()
-	# Setup weapon base
+	# Create weapon base if it is not a fence
+	if not building_type == "fence":
+		# Create the weapon base
+		weapon_base = weapon_base_scene.instantiate()
+		# Connect to weapon destroyed
+		weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
+	
+	# Setup structure
 	match building_type:
+		"fence":
+			health.set_max_health(UnitData.FENCE.health) # Default is fence
 		"seige":
 			health.set_max_health(UnitData.SIEGE.health)
-			weapon_base.structure = weapon_base.structure_type.SIEGE
+			weapon_base.structure = UnitData.structure_list.SIEGE
 			structure_sprite.self_modulate = Color("#FFD500")
 		"instant":
 			health.set_max_health(UnitData.INSTANT.health)
-			weapon_base.structure = weapon_base.structure_type.INSTANT
+			weapon_base.structure = UnitData.structure_list.INSTANT
 			structure_sprite.self_modulate = Color("#EE00FF")
 		"projectile":
 			health.set_max_health(UnitData.PROJECTILE.health)
-			weapon_base.structure = weapon_base.structure_type.PROJECTILE
+			weapon_base.structure = UnitData.structure_list.PROJECTILE
 			structure_sprite.self_modulate = Color("#00D39B")
 		"landmine":
-			health.set_max_health(UnitData.LANDMINE.health)
 			set_collision_layer_value(3, false) # Turn off the collision layer so that enemies can walk through it and do not attack it
-			weapon_base.structure = weapon_base.structure_type.LANDMINE
+			
+			health.set_max_health(UnitData.LANDMINE.health)
+			weapon_base.structure = UnitData.structure_list.LANDMINE
 			structure_sprite.self_modulate = Color("#FF0000")
-	# Add to structure
-	add_child(weapon_base)
-	# Connect to weapon destroyed
-	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
+
+	if not building_type == "fence":
+		# Add to structure
+		add_child(weapon_base)
 
 func _set_building_type(item_name):
 	building_type = item_name

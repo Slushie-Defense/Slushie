@@ -1,6 +1,7 @@
 extends Node
 class_name StructureData
 
+var type
 var cost : int = 100
 var health : int = 300
 

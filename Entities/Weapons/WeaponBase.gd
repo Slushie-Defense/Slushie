@@ -6,8 +6,8 @@ signal signal_weapon_destroyed()
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
 @onready var line_2d : Line2D = $Line2D
 
-enum structure_type { INSTANT, PROJECTILE, SIEGE, LANDMINE }
-@export var structure = structure_type.INSTANT
+var structure_type = UnitData.structure_list
+var structure = structure_type.INSTANT
 
 # Explosion at target
 var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
