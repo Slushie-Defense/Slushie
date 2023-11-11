@@ -82,9 +82,16 @@ func _update_coin_count(count):
 	coins.set_label_value(Main.coins)
 
 func _input(event):
+	var update : bool = false
 	if event.is_action_pressed("ui_text_caret_page_up"):
 		# Change to next active item
+		active_item = (active_item - 1) % (item_names.size())
+		update = true
+	if event.is_action_pressed("ui_text_caret_page_down"):
+		# Change to next active item
 		active_item = (active_item + 1) % (item_names.size())
+		update = true
+	if update:
 		# Update everyone on the change
 		_update_seleted_item()
 		# Update active state

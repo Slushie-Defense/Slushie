@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var health : ProgressBar = $Healthbar
 @onready var area_2d_collision_shape_2d : CollisionShape2D = $Area2D/CollisionShape2D
 @onready var static_body_2d_collision_shape_2d : CollisionShape2D = $CollisionShape2D
+@onready var structure_sprite : Sprite2D = $StructureSprite
 
 # Building construction
 var is_building_constructed : bool = false
@@ -59,10 +60,13 @@ func _add_weapon_base():
 	match building_type:
 		"seige":
 			weapon_base.structure = weapon_base.structure_type.SIEGE
+			structure_sprite.self_modulate = Color("#FFD500")
 		"instant":
 			weapon_base.structure = weapon_base.structure_type.INSTANT
+			structure_sprite.self_modulate = Color("#EE00FF")
 		"projectile":
 			weapon_base.structure = weapon_base.structure_type.PROJECTILE
+			structure_sprite.self_modulate = Color("#00D39B")
 
 func _set_building_type(item_name):
 	building_type = item_name

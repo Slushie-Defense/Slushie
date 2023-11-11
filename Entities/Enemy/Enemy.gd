@@ -34,6 +34,8 @@ var coin_scene = load("res://Entities/Coin/Coin.tscn")
 
 # Initialize
 func _ready():
+	# Behavior after the Gas Station is destroyed
+	Main.signal_gas_station_destroyed.connect(_gas_station_destroyed)
 	# Set health
 	health.set_max_health(100)
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
@@ -132,3 +134,6 @@ func _spawn_coin():
 	var coin = coin_scene.instantiate()
 	get_tree().get_root().add_child(coin)
 	coin.global_position = global_position
+
+func _gas_station_destroyed():
+	ai_default_direction = Vector2(0, 0)

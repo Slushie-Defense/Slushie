@@ -37,10 +37,8 @@ func _ready():
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= shots_before_reload:
-		#print("Reload")
 		reload_weapon()
 	else:
-		#print("Fire! " +str(shot_counter))
 		fire_weapon()
 
 func _play_reload_sound():
