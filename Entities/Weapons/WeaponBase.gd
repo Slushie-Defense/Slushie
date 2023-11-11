@@ -29,7 +29,6 @@ var angle_range : float = 30.0  # Angle range in degrees
 # Targeting
 var attack_range : float = 0.0
 var relative_target_position : Vector2 = Vector2(0, 512)
-var attack_damage : int = 15
 
 func _ready():
 	# Start firing immediately
@@ -67,17 +66,15 @@ func fire_weapon():
 	if not found_target:
 		return
 	# Fire AOE Projectile
-	if structure == structure_type.SIEGE:
-		#print("Firing SEIGE")
-		fire_projectile_explosion()
-	# Fire the shot
-	if structure == structure_type.INSTANT:
-		#print("Firing INSTANT")
-		fire_instant_hit()
-	# Fire bullet
-	if structure == structure_type.PROJECTILE:
-		#print("Firing PROJECTILE")
-		fire_projectile_bullet()
+	match structure:
+		structure_type.SIEGE:
+			fire_projectile_explosion()
+		# Fire the shot
+		structure_type.INSTANT:
+			fire_instant_hit()
+		# Fire bullet
+		structure_type.PROJECTILE:
+			fire_projectile_bullet()
 	# Play sound
 	sound_player.stream = sound_shoot
 	sound_player.play()
@@ -124,10 +121,10 @@ func fire_instant_hit():
 		if first_collision_result.has_method("attack"):
 			# Create an attack class and pass it through
 			var attack = Attack.new()
-			attack.damage = attack_damage
+			attack.damage = 15.0
 			first_collision_result.attack(attack)
 			# Draw the line
-			#draw_line2d(raycast_2d)
+			draw_line2d(raycast_2d)
 
 func draw_line2d(passed_raycast):
 	# Line 2D

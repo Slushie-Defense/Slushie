@@ -1,11 +1,11 @@
 extends Node2D
 
 # Damage
-var attack_damage = 50.0
+var attack_damage = 50.0 # This can be edited
 
 # Stats
-var linear_speed : float = 400.0  # Adjust the speed as needed
-var curve_speed : float = 0.0
+var linear_speed : float = 400.0  # Let's not edit this
+var curve_speed : float = 0.0  # Let's not edit this
 var calculated_speed : float = linear_speed
 var target_position : Vector2 = Vector2.ZERO
 
@@ -13,7 +13,7 @@ var target_position : Vector2 = Vector2.ZERO
 var parabolic_curve : Curve = load("res://Entities/Projectile/ProjectileCurve.tres")
 var linear_position : Vector2 = Vector2.ZERO
 var curve_position : Vector2 = Vector2.ZERO
-var parabolic_curve_max_height : float = 400.0
+var parabolic_curve_max_height : float = 400.0 # Let's not edit this
 @export var arch_and_explode : bool = true
 
 # Position
