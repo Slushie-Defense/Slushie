@@ -17,7 +17,7 @@ var nodes_in_build_area_list : Array = []
 
 func _ready():
 	# Health
-	health.set_max_health(300)
+	health.set_max_health(UnitData.FENCE.health) # Default is fence
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
 	# Create the collision mask and player detection
 	var padding = 8
@@ -34,7 +34,7 @@ func _initialize_building_construction():
 		modulate.a = 1.0 if nodes_in_build_area_list.size() == 0 else 0.4
 		is_building_constructed = true
 		# Add weapon
-		call_deferred("_add_weapon_base")
+		call_deferred("_convert_to_structure_type")
 
 func attack(attack : Attack):
 	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
@@ -50,24 +50,29 @@ func _on_area_2d_body_exited(body):
 	nodes_in_build_area_list.erase(body)
 	_initialize_building_construction()
 
-func _add_weapon_base():
+func _convert_to_structure_type():
 	# Do not add weapon base if it is a fence or landmine
 	if building_type == "fence":
+		health.set_max_health(UnitData.FENCE.health) # Default is fence
 		return
 	# Create the weapon base
 	weapon_base = weapon_base_scene.instantiate()
 	# Setup weapon base
 	match building_type:
 		"seige":
+			health.set_max_health(UnitData.SIEGE.health)
 			weapon_base.structure = weapon_base.structure_type.SIEGE
 			structure_sprite.self_modulate = Color("#FFD500")
 		"instant":
+			health.set_max_health(UnitData.INSTANT.health)
 			weapon_base.structure = weapon_base.structure_type.INSTANT
 			structure_sprite.self_modulate = Color("#EE00FF")
 		"projectile":
+			health.set_max_health(UnitData.PROJECTILE.health)
 			weapon_base.structure = weapon_base.structure_type.PROJECTILE
 			structure_sprite.self_modulate = Color("#00D39B")
 		"landmine":
+			health.set_max_health(UnitData.LANDMINE.health)
 			set_collision_layer_value(3, false) # Turn off the collision layer so that enemies can walk through it and do not attack it
 			weapon_base.structure = weapon_base.structure_type.LANDMINE
 			structure_sprite.self_modulate = Color("#FF0000")

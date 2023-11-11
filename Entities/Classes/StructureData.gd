@@ -1,5 +1,8 @@
 extends Node
-class_name WeaponData
+class_name StructureData
+
+var cost : int = 100
+var health : int = 300
 
 var attack_damage : int = 100
 

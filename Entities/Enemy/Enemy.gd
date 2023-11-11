@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var health : ProgressBar = $Healthbar
 
 # Physics
-@export var MAX_SPEED : float = 100
+var MAX_SPEED : float = 100
 var ACCELERATION : float = 2000
 var motion : Vector2 = Vector2.ZERO # Equaliant to Vector2(0,0)
 
@@ -13,11 +13,11 @@ var ai_direction : Vector2 = Vector2(-1, 0) # Defaults to left
 var ai_chase_node_list : Array = []
 var ai_attack_node_list : Array = []
 var ai_chase_node = null
-@export var ai_default_direction : Vector2 = Vector2(-1, 0)
+var ai_default_direction : Vector2 = Vector2(-1, 0)
 
 # How far the enemy can see
-@export var vision_radius : int = 160
-@export var show_vision_radius : bool = true
+var vision_radius : int = 160
+var show_vision_radius : bool = true
 @onready var vision_collider : CollisionShape2D = $Vision/CollisionShape2D
 @onready var vision_sprite : Sprite2D = $Vision/VisionCircle
 
@@ -25,8 +25,8 @@ var ai_chase_node = null
 @onready var attack_range_raycast : RayCast2D = $AttackRangeRayCast
 @onready var attack_timer : Timer = $AttackDelayTimer
 var attack_speed : float = 1.0 # In seconds
-var attack_range : float = 64.0 # In pixels
-var attack_damage : float = 100.0
+var attack_range : int = 64 # In pixels
+var attack_damage : int = 100
 
 # Coins
 var coin_value : int = 100

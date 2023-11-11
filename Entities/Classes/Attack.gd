@@ -1,4 +1,4 @@
 extends Node
 class_name Attack
 
-var damage : int = 0
+var damage : int = 10

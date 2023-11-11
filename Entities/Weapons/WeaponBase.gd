@@ -18,7 +18,7 @@ var sound_shoot = load("res://Entities/Weapons/Sounds/Splat.wav")
 var sound_reload = load("res://Entities/Weapons/Sounds/Reload.wav")
 
 # Default weapon data stats
-var weapon_data : WeaponData = WeaponData.new() # Replace with specific structure
+var weapon_data : StructureData = StructureData.new() # Replace with specific structure
 
 # Track shot count
 var shot_counter : int = 1 # Start at 1 to remove glitch shot
