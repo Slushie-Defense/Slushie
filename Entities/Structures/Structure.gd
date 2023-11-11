@@ -10,7 +10,7 @@ var is_building_constructed : bool = false
 var is_weapon_assigned : bool = false
 var weapon_base_scene = load("res://Entities/Weapons/WeaponBase.tscn")
 var weapon_base : Node2D = null
-var building_type : String = ""
+var structure_class = UnitData.structure_list.FENCE
 
 # Objects in build area
 var nodes_in_build_area_list : Array = []
@@ -51,39 +51,35 @@ func _on_area_2d_body_exited(body):
 	_initialize_building_construction()
 
 func _convert_to_structure_type():
-	# Create weapon base if it is not a fence
-	if not building_type == "fence":
-		# Create the weapon base
-		weapon_base = weapon_base_scene.instantiate()
-		# Connect to weapon destroyed
-		weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
+	var structure_type = UnitData.structure_list
+	# Set health
+	health.set_max_health(structure_class.health)
+	
+	# If its a fence, do not create a weapon base
+	if structure_class.type == structure_type.FENCE:
+		return # Early exit
+		
+	# Create the weapon base
+	weapon_base = weapon_base_scene.instantiate()
+	# Connect to weapon destroyed
+	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
+	# Set weapon type
+	weapon_base.weapon_data = structure_class
 	
 	# Setup structure
-	match building_type:
-		"fence":
-			health.set_max_health(UnitData.FENCE.health) # Default is fence
-		"seige":
-			health.set_max_health(UnitData.SIEGE.health)
-			weapon_base.structure = UnitData.structure_list.SIEGE
+	match structure_class.type:
+		structure_type.SIEGE:
 			structure_sprite.self_modulate = Color("#FFD500")
-		"instant":
-			health.set_max_health(UnitData.INSTANT.health)
-			weapon_base.structure = UnitData.structure_list.INSTANT
+		structure_type.INSTANT:
 			structure_sprite.self_modulate = Color("#EE00FF")
-		"projectile":
-			health.set_max_health(UnitData.PROJECTILE.health)
-			weapon_base.structure = UnitData.structure_list.PROJECTILE
+		structure_type.PROJECTILE:
 			structure_sprite.self_modulate = Color("#00D39B")
-		"landmine":
+		structure_type.LANDMINE:
 			set_collision_layer_value(3, false) # Turn off the collision layer so that enemies can walk through it and do not attack it
-			
-			health.set_max_health(UnitData.LANDMINE.health)
-			weapon_base.structure = UnitData.structure_list.LANDMINE
 			structure_sprite.self_modulate = Color("#FF0000")
 
-	if not building_type == "fence":
-		# Add to structure
-		add_child(weapon_base)
+	# Add to structure
+	add_child(weapon_base)
 
-func _set_building_type(item_name):
-	building_type = item_name
+func _set_structure_class(item_name):
+	structure_class = item_name

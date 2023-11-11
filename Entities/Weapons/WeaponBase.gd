@@ -6,9 +6,6 @@ signal signal_weapon_destroyed()
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
 @onready var line_2d : Line2D = $Line2D
 
-var structure_type = UnitData.structure_list
-var structure = structure_type.INSTANT
-
 # Explosion at target
 var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 
@@ -18,6 +15,7 @@ var sound_shoot = load("res://Entities/Weapons/Sounds/Splat.wav")
 var sound_reload = load("res://Entities/Weapons/Sounds/Reload.wav")
 
 # Default weapon data stats
+var structure_type = UnitData.structure_list
 var weapon_data : StructureData = StructureData.new() # Replace with specific structure
 
 # Track shot count
@@ -41,23 +39,13 @@ func _ready():
 	shot_delay_timer.start()
 
 func _setup_weapon():
-	match structure:
+	match weapon_data.type:
 		structure_type.LANDMINE:
 			# Change visible area to a circle
 			shapecast_2d.position = Vector2(0, 0)
 			var expand_margin : int = 32
 			shapecast_2d.shape.radius = 64 + expand_margin * 0.5
 			shapecast_2d.shape.height = 128 + expand_margin
-			# Weapon data
-			weapon_data = UnitData.LANDMINE
-		# Siege structure
-		structure_type.SIEGE:
-			weapon_data = UnitData.SIEGE
-		# Instant hit stucture
-		structure_type.INSTANT:
-			weapon_data = UnitData.INSTANT
-		structure_type.PROJECTILE:
-			weapon_data = UnitData.PROJECTILE
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= weapon_data.shots_before_reload:
@@ -89,7 +77,7 @@ func fire_weapon():
 	if not found_target:
 		return
 	# Fire AOE Projectile
-	match structure:
+	match weapon_data.type:
 		structure_type.SIEGE:
 			fire_projectile_explosion()
 		# Fire the shot
@@ -132,17 +120,14 @@ func create_projectile(arch_and_explode : bool = true):
 func fire_projectile_explosion():
 	var projectile = create_projectile()
 	projectile.attack_damage = weapon_data.attack_damage
-	#print("Siege damage: " + str(weapon_data.attack_damage))
 
 func fire_projectile_bullet():
 	var projectile = create_projectile(false)
 	projectile.attack_damage = weapon_data.attack_damage
-	#print("Projectile damage: " + str(weapon_data.attack_damage))
 
 func fire_landmine_explosion():
 	var mine_delay : float = weapon_data.delay_before_explode
 	get_tree().create_timer(mine_delay).timeout.connect(_create_landmine_explosion)
-	#print("Landmine damage: " + str(weapon_data.attack_damage))
 
 func fire_instant_hit():
 	raycast_2d.target_position = relative_target_position
@@ -156,7 +141,6 @@ func fire_instant_hit():
 			var attack = Attack.new()
 			attack.damage = weapon_data.attack_damage
 			first_collision_result.attack(attack)
-			#print("Instant damage: " + str(weapon_data.attack_damage))
 			# Draw the line
 			draw_line2d(raycast_2d)
 

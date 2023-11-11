@@ -27,7 +27,7 @@ var audio_ui_accept = load("res://Audio/UserInterface/AudioDropSignal.wav")
 # Build state
 enum build_state { OPEN, BLOCKED }
 var build_current_state = build_state.OPEN
-var selected_item_name : String = ""
+var selected_item_type = UnitData.FENCE
 
 # Objects in build area
 var nodes_in_build_area_list : Array = []
@@ -39,7 +39,7 @@ var collision_shape_padding : int = 4
 
 func _ready():
 	Main.signal_add_player.connect(_on_player_add)
-	Main.signal_selected_item_update.connect(_update_active_item)
+	Main.signal_selected_item_update.connect(_update_active_item_type)
 	
 	# Rescale cell size
 	cell_scale = initial_cell_size / GameGrid.cell_size
@@ -86,7 +86,7 @@ func add_structure():
 		structure_node.global_position = structure_position + structure_offset
 		get_tree().get_root().add_child(structure_node) # Add to the main scene
 		# Set building type
-		structure_node._set_building_type(selected_item_name)
+		structure_node._set_structure_class(selected_item_type)
 	else:
 		audio_player.stream = audio_ui_denied
 	# UI Play sound	
@@ -103,6 +103,5 @@ func _on_area_2d_body_exited(body):
 		build_current_state = build_state.OPEN
 	_update_build_state()
 
-func _update_active_item(active_item_name):
-	selected_item_name = active_item_name
-	print(selected_item_name)
+func _update_active_item_type(active_item_type):
+	selected_item_type = active_item_type

@@ -3,7 +3,7 @@ extends Node
 signal signal_add_player(player_node) # How we find the player
 signal signal_update_coin_count(count)
 signal signal_wave_event(event_string)
-signal signal_selected_item_update(item_name)
+signal signal_selected_item_update(item_type)
 signal signal_gas_station_destroyed()
 
 # Coin count

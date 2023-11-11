@@ -20,7 +20,7 @@ var stats : PanelContainer
 # Items
 var fence : TextureRect
 var landmine : TextureRect
-var laser_structure : TextureRect
+var instant_structure : TextureRect
 var siege_structure : TextureRect
 var projectile_structure : TextureRect
 
@@ -42,31 +42,38 @@ func _ready():
 
 func _create_user_interface():
 	# Create coin resource
-	coins = _add_item(coin_item_scene, image_coins)
+	coins = _add_coin(coin_item_scene, image_coins)
 	call_deferred("_connect_coins") # Connect coins
 	
 	# Create items
-	fence = _add_item(item_scene, image_fence, "fence")
-	landmine = _add_item(item_scene, image_landmine, "landmine")
-	laser_structure = _add_item(item_scene, image_instant_structure, "instant")
-	siege_structure = _add_item(item_scene, image_aoe_structure, "seige")
-	projectile_structure = _add_item(item_scene, image_bullet_structure, "projectile")
+	fence = _add_item(item_scene, image_fence, UnitData.FENCE)
+	landmine = _add_item(item_scene, image_landmine, UnitData.LANDMINE)
+	instant_structure = _add_item(item_scene, image_instant_structure, UnitData.INSTANT)
+	siege_structure = _add_item(item_scene, image_aoe_structure, UnitData.SIEGE)
+	projectile_structure = _add_item(item_scene, image_bullet_structure, UnitData.PROJECTILE)
 	
 	# Add stats
 	stats = _add_stats()
 	
 	# Set first item as active
 	_update_active_states()
-	
-func _add_item(set_scene, item_texture, dictionary_name : String = ""):
+
+func _add_coin(set_scene, item_texture):
 	var item = set_scene.instantiate()
 	hboxcontainer.add_child(item)
 	item.set_image_texture(item_texture)
-	var random = RandomNumberGenerator.new()
-	item.set_label_value(random.randi_range(1, 19) * 100)
-	if not dictionary_name == "":
-		item_dictionary[dictionary_name] = item
-		item_names.push_back(dictionary_name)
+	return item
+
+func _add_item(set_scene, item_texture, unit_data):
+	var item = set_scene.instantiate()
+	hboxcontainer.add_child(item)
+	item.set_image_texture(item_texture)
+	# Set the value
+	item.set_label_value(unit_data.cost)
+	# Add to the list of items
+	item_dictionary[unit_data.unit_name] = item
+	item_names.push_back(unit_data.unit_name)
+	# Store it
 	return item
 
 func _add_stats():
@@ -106,5 +113,22 @@ func _update_active_states():
 	item_dictionary[current_item_name].set_active_state(true)
 
 func _update_seleted_item():
+	# Get active item name
 	active_item_name = item_names[active_item]
-	Main.emit_signal("signal_selected_item_update", active_item_name)
+	
+	# Convert to ENUM
+	var active_item_type = UnitData.FENCE
+	# Setup structure
+	match active_item_name:
+		"FENCE":
+			active_item_type = UnitData.FENCE
+		"SIEGE":
+			active_item_type = UnitData.SIEGE
+		"INSTANT":
+			active_item_type = UnitData.INSTANT
+		"PROJECTILE":
+			active_item_type = UnitData.PROJECTILE
+		"LANDMINE":
+			active_item_type = UnitData.LANDMINE
+	
+	Main.emit_signal("signal_selected_item_update", active_item_type)

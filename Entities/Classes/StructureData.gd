@@ -1,6 +1,7 @@
 extends Node
 class_name StructureData
 
+var unit_name : String = "FENCE"
 var type
 var cost : int = 100
 var health : int = 300
