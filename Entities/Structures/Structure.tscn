@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ds15dcep7fhyn"]
+[gd_scene load_steps=6 format=3 uid="uid://ds15dcep7fhyn"]
 
 [ext_resource type="Texture2D" uid="uid://dj4usx0levw84" path="res://Sprites/Squares/128x128Construction.png" id="1_5wevt"]
 [ext_resource type="Script" path="res://Entities/Structures/Structure.gd" id="1_pfun1"]
-[ext_resource type="PackedScene" uid="uid://vlnpbl6b074r" path="res://Entities/Weapons/WeaponBase.tscn" id="2_kcknr"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_7ms35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lbip"]
@@ -18,8 +17,6 @@ script = ExtResource("1_pfun1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7lbip")
-
-[node name="WeaponBase" parent="." instance=ExtResource("2_kcknr")]
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

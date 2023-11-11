@@ -4,7 +4,7 @@ extends Node2D
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
 @onready var line_2d : Line2D = $Line2D
 
-enum structure_type { INSTANT, PROJECTILE, SIEGE, FENCE }
+enum structure_type { INSTANT, PROJECTILE, SIEGE }
 @export var structure = structure_type.INSTANT
 
 var projectile_scene = load("res://Entities/Projectile/Projectile.tscn")
@@ -32,10 +32,9 @@ var relative_target_position : Vector2 = Vector2(0, 512)
 var attack_damage : int = 15
 
 func _ready():
-	# Start firing if it is not a fence
-	if not structure == structure_type.FENCE:
-		shot_delay_timer.wait_time = delay_between_shots
-		shot_delay_timer.start()
+	# Start firing immediately
+	shot_delay_timer.wait_time = delay_between_shots
+	shot_delay_timer.start()
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= shots_before_reload:
@@ -69,15 +68,16 @@ func fire_weapon():
 		return
 	# Fire AOE Projectile
 	if structure == structure_type.SIEGE:
+		#print("Firing SEIGE")
 		fire_projectile_explosion()
 	# Fire the shot
 	if structure == structure_type.INSTANT:
+		#print("Firing INSTANT")
 		fire_instant_hit()
 	# Fire bullet
 	if structure == structure_type.PROJECTILE:
+		#print("Firing PROJECTILE")
 		fire_projectile_bullet()
-	# Draw the line
-	#draw_line2d(raycast_2d)
 	# Play sound
 	sound_player.stream = sound_shoot
 	sound_player.play()
@@ -126,6 +126,8 @@ func fire_instant_hit():
 			var attack = Attack.new()
 			attack.damage = attack_damage
 			first_collision_result.attack(attack)
+			# Draw the line
+			#draw_line2d(raycast_2d)
 
 func draw_line2d(passed_raycast):
 	# Line 2D

@@ -28,6 +28,7 @@ var projectile_structure : TextureRect
 var item_dictionary : Dictionary = {}
 var item_names : Array = []
 var active_item : int = 0
+var active_item_name : String = ""
 
 # Scenes
 var item_scene = load("res://UserInterface/BuildingSelect/SelectableItemUI.tscn")
@@ -36,43 +37,44 @@ var stats_scene = load("res://UserInterface/BuildingSelect/StatsItemUI.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	call_deferred("create_user_interface")
+	call_deferred("_create_user_interface")
+	call_deferred("_update_seleted_item")
 
-func create_user_interface():
+func _create_user_interface():
 	# Create coin resource
-	coins = add_item(coin_item_scene, image_coins)
-	call_deferred("connect_coins") # Connect coins
+	coins = _add_item(coin_item_scene, image_coins)
+	call_deferred("_connect_coins") # Connect coins
 	
 	# Create items
-	fence = add_item(item_scene, image_fence, "fence")
-	landmine = add_item(item_scene, image_landmine, "landmine")
-	laser_structure = add_item(item_scene, image_instant_structure, "laser")
-	siege_structure = add_item(item_scene, image_aoe_structure, "seige")
-	projectile_structure = add_item(item_scene, image_bullet_structure, "projectile")
+	fence = _add_item(item_scene, image_fence, "fence")
+	landmine = _add_item(item_scene, image_landmine, "landmine")
+	laser_structure = _add_item(item_scene, image_instant_structure, "instant")
+	siege_structure = _add_item(item_scene, image_aoe_structure, "seige")
+	projectile_structure = _add_item(item_scene, image_bullet_structure, "projectile")
 	
 	# Add stats
-	stats = add_stats()
+	stats = _add_stats()
 	
 	# Set first item as active
 	_update_active_states()
 	
-func add_item(set_scene, item_texture, dictionary_name : String = ""):
+func _add_item(set_scene, item_texture, dictionary_name : String = ""):
 	var item = set_scene.instantiate()
 	hboxcontainer.add_child(item)
 	item.set_image_texture(item_texture)
 	var random = RandomNumberGenerator.new()
-	item.set_label_value(random.randi_range(0, 19) * 100)
+	item.set_label_value(random.randi_range(1, 19) * 100)
 	if not dictionary_name == "":
 		item_dictionary[dictionary_name] = item
 		item_names.push_back(dictionary_name)
 	return item
 
-func add_stats():
+func _add_stats():
 	var item = stats_scene.instantiate()
 	hboxcontainer.add_child(item)
 	return item
 
-func connect_coins():
+func _connect_coins():
 	Main.signal_update_coin_count.connect(_update_coin_count)
 	_update_coin_count(0)
 
@@ -83,7 +85,8 @@ func _input(event):
 	if event.is_action_pressed("ui_text_caret_page_up"):
 		# Change to next active item
 		active_item = (active_item + 1) % (item_names.size())
-		print("Active: " + str(item_names[active_item]))
+		# Update everyone on the change
+		_update_seleted_item()
 		# Update active state
 		_update_active_states()
 		
@@ -94,4 +97,7 @@ func _update_active_states():
 	# Activate current
 	var current_item_name = item_names[active_item]
 	item_dictionary[current_item_name].set_active_state(true)
-	
+
+func _update_seleted_item():
+	active_item_name = item_names[active_item]
+	Main.emit_signal("signal_selected_item_update", active_item_name)

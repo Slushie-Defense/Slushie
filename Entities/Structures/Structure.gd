@@ -6,6 +6,9 @@ extends StaticBody2D
 
 # Building construction
 var is_building_constructed : bool = false
+var weapon_base_scene = load("res://Entities/Weapons/WeaponBase.tscn")
+var weapon_base : Node2D = null
+var building_type : String = ""
 
 # Objects in build area
 var nodes_in_build_area_list : Array = []
@@ -28,6 +31,8 @@ func _initialize_building_construction():
 		static_body_2d_collision_shape_2d.disabled = nodes_in_build_area_list.size() > 0
 		modulate.a = 1.0 if nodes_in_build_area_list.size() == 0 else 0.4
 		is_building_constructed = true
+		# Add weapon
+		call_deferred("_add_weapon_base")
 
 func attack(attack : Attack):
 	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
@@ -42,3 +47,22 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	nodes_in_build_area_list.erase(body)
 	_initialize_building_construction()
+
+func _add_weapon_base():
+	# Do not add weapon base if it is a fence or landmine
+	if building_type == "fence" or building_type == "landmine":
+		return
+	# Create the weapon base
+	weapon_base = weapon_base_scene.instantiate()
+	add_child(weapon_base)
+	# Setup weapon base
+	match building_type:
+		"seige":
+			weapon_base.structure = weapon_base.structure_type.SIEGE
+		"instant":
+			weapon_base.structure = weapon_base.structure_type.INSTANT
+		"projectile":
+			weapon_base.structure = weapon_base.structure_type.PROJECTILE
+
+func _set_building_type(item_name):
+	building_type = item_name
