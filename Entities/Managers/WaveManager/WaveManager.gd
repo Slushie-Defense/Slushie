@@ -84,7 +84,6 @@ var current_wave_index = 0
 func spawn_next_wave():
 	spawn_wave(current_wave_index)
 
-
 func _process(delta):
 	if (spawning):
 		return

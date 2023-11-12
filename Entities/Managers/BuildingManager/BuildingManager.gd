@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 # Scenes
 var structure_scene = load("res://Entities/Structures/Structure.tscn")

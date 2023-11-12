@@ -35,6 +35,15 @@ project/assembly_name="Slushie-defense"
 
 [layer_names]
 
+2d_render/layer_1="Background"
+2d_render/layer_2="Coins"
+2d_render/layer_3="Grid"
+2d_render/layer_4="Structures"
+2d_render/layer_5="Projectiles"
+2d_render/layer_6="Player"
+2d_render/layer_7="Enemies"
+2d_render/layer_8="VFXs"
+2d_render/layer_9="UserInterface"
 2d_physics/layer_1="walls"
 3d_physics/layer_1="player"
 2d_physics/layer_2="player"

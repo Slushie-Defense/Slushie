@@ -4,7 +4,10 @@ signal signal_weapon_destroyed()
 
 @onready var sound_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
-@onready var line_2d : Line2D = $Line2D
+@onready var weapon_attack_line2d : Line2D = $WeaponAttackLine
+
+# Show collision shape
+@onready var weapon_range_indicator : Line2D = $WeaponRangeIndicator
 
 # Explosion at target
 var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
@@ -26,26 +29,33 @@ var shot_counter : int = 1 # Start at 1 to remove glitch shot
 
 # Enemy targeting
 @onready var shapecast_2d : ShapeCast2D = $ShapeCast2D
-@export var autotarget_enemy : bool = true
+var autotarget_enemy : bool = true
 
 # Targeting
 var relative_target_position : Vector2 = Vector2(0, 512)
 
 func _ready():
-	# If landmine, set it up
-	_setup_weapon()
 	# Start firing immediately
 	shot_delay_timer.wait_time = weapon_data.delay_between_shots
 	shot_delay_timer.start()
+	# Show weapon range indicator
+	_update_weapon_range()
 
-func _setup_weapon():
-	match weapon_data.type:
-		structure_type.LANDMINE:
-			# Change visible area to a circle
-			shapecast_2d.position = Vector2(0, 0)
-			var expand_margin : int = 32
-			shapecast_2d.shape.radius = 64 + expand_margin * 0.5
-			shapecast_2d.shape.height = 128 + expand_margin
+func _update_weapon_range():
+	var offset = (weapon_data.attack_range * 0.5) - weapon_data.attack_radius
+	var weapon_offset = Vector2(offset, 0)
+	# Default settings
+	shapecast_2d.shape = CapsuleShape2D.new()
+	# Weapon range Shapecast2D
+	shapecast_2d.shape.radius = weapon_data.attack_radius
+	shapecast_2d.shape.height = weapon_data.attack_range
+	shapecast_2d.position = weapon_offset
+	# Weapon range indictator
+	var one_pixel_offset : int = 1 # Add one pixel to the x-axis so that the Landmine remains visible
+	weapon_range_indicator.default_color = Color("#FFD500")
+	weapon_range_indicator.default_color.a = 0.3
+	weapon_range_indicator.width = weapon_data.attack_radius * 2
+	weapon_range_indicator.points = [Vector2(0, 0), Vector2(weapon_data.attack_range - weapon_data.attack_radius - weapon_data.attack_radius + one_pixel_offset,0)]
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= weapon_data.shots_before_reload:
@@ -148,11 +158,11 @@ func draw_line2d(passed_raycast):
 	# Line 2D
 	var global_position_of_hit : Vector2 = passed_raycast.get_collision_point()
 	var relative_position_of_hit : Vector2 = global_position_of_hit - global_position if passed_raycast.is_colliding() else relative_target_position 
-	line_2d.points = [Vector2.ZERO, relative_position_of_hit]
-	get_tree().create_timer(0.1).timeout.connect(clear_line_2d)
+	weapon_attack_line2d.points = [Vector2.ZERO, relative_position_of_hit]
+	get_tree().create_timer(0.1).timeout.connect(clear_weapon_attack_line2d)
 
-func clear_line_2d():
-	line_2d.points = [Vector2.ZERO, Vector2.ZERO]
+func clear_weapon_attack_line2d():
+	weapon_attack_line2d.points = [Vector2.ZERO, Vector2.ZERO]
 
 func _create_landmine_explosion():
 	var explosion = explosion_scene.instantiate()
@@ -164,3 +174,6 @@ func _create_landmine_explosion():
 
 func _self_destruct():
 	emit_signal("signal_weapon_destroyed")
+
+func weapon_range_indicator_visible(set_visibility):
+	weapon_range_indicator.visible = set_visibility

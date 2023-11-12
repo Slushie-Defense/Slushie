@@ -10,6 +10,7 @@ size = Vector2(256, 512)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmhig"]
 
 [node name="GasStation" type="StaticBody2D"]
+visibility_layer = 8
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_e2gd2")

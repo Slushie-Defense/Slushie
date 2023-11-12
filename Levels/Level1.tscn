@@ -76,7 +76,6 @@ offset_bottom = 0.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Container" parent="GroundTexture" index="0"]
-layout_mode = 0
 offset_right = 4096.0
 offset_bottom = 1152.0
 

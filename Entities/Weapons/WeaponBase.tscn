@@ -3,21 +3,39 @@
 [ext_resource type="Script" path="res://Entities/Weapons/WeaponBase.gd" id="1_81enj"]
 [ext_resource type="AudioStream" uid="uid://ba12ewaccblp5" path="res://Entities/Weapons/Sounds/Splat.wav" id="2_uksl7"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pyci0"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ng037"]
 radius = 96.0
 height = 512.0
 
 [node name="WeaponBase" type="Node2D"]
+visibility_layer = 4
+z_index = -2
 script = ExtResource("1_81enj")
+
+[node name="WeaponRangeIndicator" type="Line2D" parent="."]
+points = PackedVector2Array(-32, 0, 288, 0)
+width = 192.0
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 position = Vector2(128, 0)
 rotation = -1.5708
 enabled = false
-shape = SubResource("CapsuleShape2D_pyci0")
+shape = SubResource("CapsuleShape2D_ng037")
 target_position = Vector2(0, 0)
 max_results = 1
 collision_mask = 8
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 8
+
+[node name="WeaponAttackLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 8.0
+default_color = Color(0.960784, 0.458824, 1, 1)
+joint_mode = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_uksl7")
@@ -25,15 +43,5 @@ autoplay = true
 
 [node name="ShotDelayTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
-collision_mask = 8
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 0)
-width = 8.0
-default_color = Color(0.960784, 0.458824, 1, 1)
-joint_mode = 2
 
 [connection signal="timeout" from="ShotDelayTimer" to="." method="_on_shot_delay_timer_timeout"]
