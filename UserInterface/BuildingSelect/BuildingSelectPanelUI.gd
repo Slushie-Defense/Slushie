@@ -48,9 +48,9 @@ func _create_user_interface():
 	# Create items
 	fence = _add_item(item_scene, image_fence, UnitData.FENCE)
 	landmine = _add_item(item_scene, image_landmine, UnitData.LANDMINE)
+	projectile_structure = _add_item(item_scene, image_bullet_structure, UnitData.PROJECTILE)
 	instant_structure = _add_item(item_scene, image_instant_structure, UnitData.INSTANT)
 	siege_structure = _add_item(item_scene, image_aoe_structure, UnitData.SIEGE)
-	projectile_structure = _add_item(item_scene, image_bullet_structure, UnitData.PROJECTILE)
 	
 	# Add stats
 	stats = _add_stats()

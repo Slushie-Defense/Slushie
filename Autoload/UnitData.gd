@@ -29,20 +29,25 @@ func _ready():
 	FENCE.attack_damage = 0.0
 	FENCE.type = structure_list.FENCE
 	FENCE.unit_name = "FENCE"
+	FENCE.cost = 200
 	# Setup LANDMINE
 	LANDMINE.attack_damage = 100.0
 	LANDMINE.delay_before_explode = 0.5
 	LANDMINE.type = structure_list.LANDMINE
 	LANDMINE.unit_name = "LANDMINE"
+	LANDMINE.cost = 500
 	# Setup SIEGE
 	SIEGE.attack_damage = 100.0
 	SIEGE.type = structure_list.SIEGE
 	SIEGE.unit_name = "SIEGE"
+	SIEGE.cost = 3000
 	# Setup INSTANT hit
 	INSTANT.attack_damage = 15.0
 	INSTANT.type = structure_list.INSTANT
 	INSTANT.unit_name = "INSTANT"
+	INSTANT.cost = 2000
 	# Setup PROJECTILE hit
 	PROJECTILE.attack_damage = 20.0
 	PROJECTILE.type = structure_list.PROJECTILE
 	PROJECTILE.unit_name = "PROJECTILE"
+	PROJECTILE.cost = 1500

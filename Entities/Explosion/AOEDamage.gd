@@ -25,7 +25,7 @@ func _ready():
 	collision_detection.enabled = false
 
 func _deal_damage():
-	print("AOE went off!")
+	#print("AOE went off!")
 	collision_detection.enabled = true
 	collision_detection.force_shapecast_update()
 	if not collision_detection.is_colliding():
@@ -33,7 +33,7 @@ func _deal_damage():
 	
 	# Collision check
 	var number_of_collisions : int = collision_detection.get_collision_count()
-	print("Number of collisions: " + str(number_of_collisions))
+	#print("Number of collisions: " + str(number_of_collisions))
 	for i in range(0, number_of_collisions):
 		var child = collision_detection.get_collider(i) # Get the object
 		# Change the collision mask if this is supposed to do friendly fire
