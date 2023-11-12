@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal signal_share_player_position(player_position)
 
 # Building Manager
-@onready var building_manager : Sprite2D = $BuildingManager
+@onready var building_manager : Node2D = $BuildingManager
 
 # Grid visible
 @export var show_build_grid : bool = true
@@ -70,3 +70,6 @@ func building_manager_create_structure():
 func _event_health_is_zero():
 	call_deferred("queue_free")
 	print("Player died!")
+
+func _is_player():
+	pass

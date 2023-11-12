@@ -10,6 +10,7 @@ border_color = Color(0, 0, 0, 1)
 bg_color = Color(1, 1, 1, 1)
 
 [node name="Healthbar" type="ProgressBar"]
+visibility_layer = 256
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 24.0

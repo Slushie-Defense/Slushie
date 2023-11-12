@@ -8,6 +8,7 @@
 radius = 128.0
 
 [node name="Coin" type="Node2D"]
+visibility_layer = 2
 z_index = 2
 script = ExtResource("1_ov43b")
 

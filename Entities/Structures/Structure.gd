@@ -44,9 +44,17 @@ func _event_health_is_zero():
 	call_deferred("queue_free")
 
 func _on_area_2d_body_entered(body):
+	if body.has_method("_is_player"):
+		if is_weapon_assigned:
+			weapon_base.weapon_range_indicator_visible(true)
+			return
 	nodes_in_build_area_list.push_back(body)
 
 func _on_area_2d_body_exited(body):
+	if body.has_method("_is_player"):
+		if is_weapon_assigned:
+			weapon_base.weapon_range_indicator_visible(false)
+			return
 	nodes_in_build_area_list.erase(body)
 	_initialize_building_construction()
 
@@ -58,6 +66,9 @@ func _convert_to_structure_type():
 	# If its a fence, do not create a weapon base
 	if structure_class.type == structure_type.FENCE:
 		return # Early exit
+	
+	# Note if a weapon base has been attached
+	is_weapon_assigned = not structure_class.type == structure_type.FENCE
 		
 	# Create the weapon base
 	weapon_base = weapon_base_scene.instantiate()
