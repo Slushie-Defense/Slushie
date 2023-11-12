@@ -2,8 +2,11 @@ extends Node
 
 signal signal_add_player(player_node) # How we find the player
 signal signal_update_coin_count(count)
+signal signal_purchase_failed()
 signal signal_wave_event(event_string)
-signal signal_enemy_died(enemy_node)
+signal signal_selected_item_update(item_type)
+signal signal_gas_station_destroyed()
+
 
 # Coin count
 var coins : int = 0
@@ -27,5 +30,12 @@ func _on_signal_add_player(pass_player_node):
 	pass
 
 func _update_coin_count(count):
-	coins = clamp(coins + count, 0, 999999999)
+	coins = clamp(coins + count, 0, 9999999999)
 
+func _try_to_buy(cost):
+	var can_purchase : bool = Main.coins - cost >= 0
+	if can_purchase:
+		emit_signal("signal_update_coin_count", -cost)
+	else:
+		emit_signal("signal_purchase_failed")
+	return can_purchase

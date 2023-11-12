@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var health : ProgressBar = $Healthbar
 
 # Physics
-@export var MAX_SPEED : float = 100
+var MAX_SPEED : float = 100
 var ACCELERATION : float = 2000
 var motion : Vector2 = Vector2.ZERO # Equaliant to Vector2(0,0)
 
@@ -13,11 +13,11 @@ var ai_direction : Vector2 = Vector2(-1, 0) # Defaults to left
 var ai_chase_node_list : Array = []
 var ai_attack_node_list : Array = []
 var ai_chase_node = null
-@export var ai_default_direction : Vector2 = Vector2(-1, 0)
+var ai_default_direction : Vector2 = Vector2(-1, 0)
 
 # How far the enemy can see
-@export var vision_radius : int = 160
-@export var show_vision_radius : bool = true
+var vision_radius : int = 160
+var show_vision_radius : bool = true
 @onready var vision_collider : CollisionShape2D = $Vision/CollisionShape2D
 @onready var vision_sprite : Sprite2D = $Vision/VisionCircle
 
@@ -25,8 +25,8 @@ var ai_chase_node = null
 @onready var attack_range_raycast : RayCast2D = $AttackRangeRayCast
 @onready var attack_timer : Timer = $AttackDelayTimer
 var attack_speed : float = 1.0 # In seconds
-var attack_range : float = 64.0 # In pixels
-var attack_damage : float = 100.0
+var attack_range : int = 64 # In pixels
+var attack_damage : int = 100
 
 # Coins
 var coin_value : int = 100
@@ -34,6 +34,8 @@ var coin_scene = load("res://Entities/Coin/Coin.tscn")
 
 # Initialize
 func _ready():
+	# Behavior after the Gas Station is destroyed
+	Main.signal_gas_station_destroyed.connect(_gas_station_destroyed)
 	# Set health
 	health.set_max_health(100)
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
@@ -125,7 +127,6 @@ func _event_health_is_zero():
 	_spawn_coin() 
 	# Destroy enemy
 	call_deferred("queue_free")
-	Main.emit_signal("enemy_died", "Enemy died!")
 	print("Enemy died!")
 
 func _spawn_coin():
@@ -133,3 +134,6 @@ func _spawn_coin():
 	var coin = coin_scene.instantiate()
 	get_tree().get_root().add_child(coin)
 	coin.global_position = global_position
+
+func _gas_station_destroyed():
+	ai_default_direction = Vector2(0, 0)

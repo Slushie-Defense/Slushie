@@ -1,11 +1,11 @@
 extends Node2D
 
 # Damage
-var attack_damage = 50.0
+var attack_damage = 50.0 # This can be edited
 
 # Stats
-var linear_speed : float = 400.0  # Adjust the speed as needed
-var curve_speed : float = 0.0
+var linear_speed : float = 400.0  # Let's not edit this
+var curve_speed : float = 0.0  # Let's not edit this
 var calculated_speed : float = linear_speed
 var target_position : Vector2 = Vector2.ZERO
 
@@ -13,7 +13,7 @@ var target_position : Vector2 = Vector2.ZERO
 var parabolic_curve : Curve = load("res://Entities/Projectile/ProjectileCurve.tres")
 var linear_position : Vector2 = Vector2.ZERO
 var curve_position : Vector2 = Vector2.ZERO
-var parabolic_curve_max_height : float = 400.0
+var parabolic_curve_max_height : float = 400.0 # Let's not edit this
 @export var arch_and_explode : bool = true
 
 # Position
@@ -32,7 +32,6 @@ func _ready():
 	#call_deferred("_test")
 
 func _physics_process(delta):
-	#return
 	# Calculate the direction from the Coin to the player
 	var direction = initial_position.direction_to(target_position)
 	var distance_to_target = global_position.distance_to(target_position)
@@ -55,15 +54,16 @@ func _physics_process(delta):
 	if not arch_and_explode:
 		# Check for collision ahead
 		shapecast2d.target_position = direction * calculated_speed * delta
-		var collision_result = shapecast2d.get_collider(0) # Get first collision. Only looks for one.
-		if not collision_result == null:
-			if collision_result.has_method("attack"):
-				# Create an attack class and pass it through
-				var attack = Attack.new()
-				attack.damage = attack_damage
-				collision_result.attack(attack)
-				# Has reached target
-				_reached_target()
+		if shapecast2d.is_colliding():
+			var collision_result = shapecast2d.get_collider(0) # Get first collision. Only looks for one.
+			if not collision_result == null:
+				if collision_result.has_method("attack"):
+					# Create an attack class and pass it through
+					var attack = Attack.new()
+					attack.damage = attack_damage
+					collision_result.attack(attack)
+					# Has reached target
+					_reached_target()
 	
 	# Update position
 	global_position = curve_position

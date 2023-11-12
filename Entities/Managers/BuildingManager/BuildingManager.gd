@@ -12,7 +12,7 @@ var game_grid_cell_size_halved : float = GameGrid.cell_size * 0.5
 
 # UI Transparency
 @onready var highlight_square_sprite : Sprite2D = $HighlightSquare
-var grid_transparency : float = 0.8
+var grid_transparency : float = 0.0
 var highlight_transparency : float = 0.3
 
 # UI Colors
@@ -27,6 +27,7 @@ var audio_ui_accept = load("res://Audio/UserInterface/AudioDropSignal.wav")
 # Build state
 enum build_state { OPEN, BLOCKED }
 var build_current_state = build_state.OPEN
+var selected_item_type = UnitData.FENCE
 
 # Objects in build area
 var nodes_in_build_area_list : Array = []
@@ -38,6 +39,7 @@ var collision_shape_padding : int = 4
 
 func _ready():
 	Main.signal_add_player.connect(_on_player_add)
+	Main.signal_selected_item_update.connect(_update_active_item_type)
 	
 	# Rescale cell size
 	cell_scale = initial_cell_size / GameGrid.cell_size
@@ -76,13 +78,22 @@ func _update_build_state():
 	highlight_square_sprite.self_modulate.a = highlight_transparency
 
 func add_structure():
+	var success : bool = false
 	if build_current_state == build_state.OPEN:
+		# Try to buy. If successful continue.
+		if Main._try_to_buy(selected_item_type.cost):
+			success = true
+			audio_player.stream = audio_ui_accept
+			# Build structure
+			var structure_node = structure_scene.instantiate()
+			var structure_offset = Vector2(game_grid_cell_size_halved, game_grid_cell_size_halved)
+			structure_node.global_position = structure_position + structure_offset
+			get_tree().get_root().add_child(structure_node) # Add to the main scene
+			# Set building type
+			structure_node._set_structure_class(selected_item_type)
+
+	if success:
 		audio_player.stream = audio_ui_accept
-		# Build structure
-		var structure_node = structure_scene.instantiate()
-		var structure_offset = Vector2(game_grid_cell_size_halved, game_grid_cell_size_halved)
-		structure_node.global_position = structure_position + structure_offset
-		get_tree().get_root().add_child(structure_node) # Add to the main scene
 	else:
 		audio_player.stream = audio_ui_denied
 	# UI Play sound	
@@ -98,3 +109,6 @@ func _on_area_2d_body_exited(body):
 	if nodes_in_build_area_list.size() == 0:
 		build_current_state = build_state.OPEN
 	_update_build_state()
+
+func _update_active_item_type(active_item_type):
+	selected_item_type = active_item_type

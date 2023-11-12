@@ -20,7 +20,7 @@ var stats : PanelContainer
 # Items
 var fence : TextureRect
 var landmine : TextureRect
-var laser_structure : TextureRect
+var instant_structure : TextureRect
 var siege_structure : TextureRect
 var projectile_structure : TextureRect
 
@@ -28,6 +28,7 @@ var projectile_structure : TextureRect
 var item_dictionary : Dictionary = {}
 var item_names : Array = []
 var active_item : int = 0
+var active_item_name : String = ""
 
 # Scenes
 var item_scene = load("res://UserInterface/BuildingSelect/SelectableItemUI.tscn")
@@ -36,43 +37,51 @@ var stats_scene = load("res://UserInterface/BuildingSelect/StatsItemUI.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	call_deferred("create_user_interface")
+	call_deferred("_create_user_interface")
+	call_deferred("_update_seleted_item")
 
-func create_user_interface():
+func _create_user_interface():
 	# Create coin resource
-	coins = add_item(coin_item_scene, image_coins)
-	call_deferred("connect_coins") # Connect coins
+	coins = _add_coin(coin_item_scene, image_coins)
+	call_deferred("_connect_coins") # Connect coins
 	
 	# Create items
-	fence = add_item(item_scene, image_fence, "fence")
-	landmine = add_item(item_scene, image_landmine, "landmine")
-	laser_structure = add_item(item_scene, image_instant_structure, "laser")
-	siege_structure = add_item(item_scene, image_aoe_structure, "seige")
-	projectile_structure = add_item(item_scene, image_bullet_structure, "projectile")
+	fence = _add_item(item_scene, image_fence, UnitData.FENCE)
+	landmine = _add_item(item_scene, image_landmine, UnitData.LANDMINE)
+	projectile_structure = _add_item(item_scene, image_bullet_structure, UnitData.PROJECTILE)
+	instant_structure = _add_item(item_scene, image_instant_structure, UnitData.INSTANT)
+	siege_structure = _add_item(item_scene, image_aoe_structure, UnitData.SIEGE)
 	
 	# Add stats
-	stats = add_stats()
+	stats = _add_stats()
 	
 	# Set first item as active
 	_update_active_states()
-	
-func add_item(set_scene, item_texture, dictionary_name : String = ""):
+
+func _add_coin(set_scene, item_texture):
 	var item = set_scene.instantiate()
 	hboxcontainer.add_child(item)
 	item.set_image_texture(item_texture)
-	var random = RandomNumberGenerator.new()
-	item.set_label_value(random.randi_range(0, 19) * 100)
-	if not dictionary_name == "":
-		item_dictionary[dictionary_name] = item
-		item_names.push_back(dictionary_name)
 	return item
 
-func add_stats():
+func _add_item(set_scene, item_texture, unit_data):
+	var item = set_scene.instantiate()
+	hboxcontainer.add_child(item)
+	item.set_image_texture(item_texture)
+	# Set the value
+	item.set_label_value(unit_data.cost)
+	# Add to the list of items
+	item_dictionary[unit_data.unit_name] = item
+	item_names.push_back(unit_data.unit_name)
+	# Store it
+	return item
+
+func _add_stats():
 	var item = stats_scene.instantiate()
 	hboxcontainer.add_child(item)
 	return item
 
-func connect_coins():
+func _connect_coins():
 	Main.signal_update_coin_count.connect(_update_coin_count)
 	_update_coin_count(0)
 
@@ -80,10 +89,18 @@ func _update_coin_count(count):
 	coins.set_label_value(Main.coins)
 
 func _input(event):
+	var update : bool = false
 	if event.is_action_pressed("ui_text_caret_page_up"):
 		# Change to next active item
+		active_item = (active_item - 1) % (item_names.size())
+		update = true
+	if event.is_action_pressed("ui_text_caret_page_down"):
+		# Change to next active item
 		active_item = (active_item + 1) % (item_names.size())
-		print("Active: " + str(item_names[active_item]))
+		update = true
+	if update:
+		# Update everyone on the change
+		_update_seleted_item()
 		# Update active state
 		_update_active_states()
 		
@@ -94,4 +111,24 @@ func _update_active_states():
 	# Activate current
 	var current_item_name = item_names[active_item]
 	item_dictionary[current_item_name].set_active_state(true)
+
+func _update_seleted_item():
+	# Get active item name
+	active_item_name = item_names[active_item]
 	
+	# Convert to ENUM
+	var active_item_type = UnitData.FENCE
+	# Setup structure
+	match active_item_name:
+		"FENCE":
+			active_item_type = UnitData.FENCE
+		"SIEGE":
+			active_item_type = UnitData.SIEGE
+		"INSTANT":
+			active_item_type = UnitData.INSTANT
+		"PROJECTILE":
+			active_item_type = UnitData.PROJECTILE
+		"LANDMINE":
+			active_item_type = UnitData.LANDMINE
+	
+	Main.emit_signal("signal_selected_item_update", active_item_type)

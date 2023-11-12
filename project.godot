@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Main="*res://Autoload/Main.gd"
 GameGrid="*res://Autoload/GameGrid.gd"
+UnitData="*res://Autoload/UnitData.gd"
 
 [display]
 
