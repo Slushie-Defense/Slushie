@@ -40,11 +40,11 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 		return
 	# if the portals array size is 1, spawn at that position
 	if (enemy_info.portals.size() == 1):
-		enemy_instance.position = enemy_info.portals[0].position
+		enemy_instance.position = enemy_info.portals[0]
 	else:
 	# if the portals array size is greater than 1, spawn at a random position on the portals from the array
 		var random_index = randi() % enemy_info.portals.size()
-		enemy_instance.position = enemy_info.portals[random_index].position
+		enemy_instance.position = enemy_info.portals[random_index]
 		
 	# add variance to the position
 	enemy_instance.position.x += randi() % 100 - 50
