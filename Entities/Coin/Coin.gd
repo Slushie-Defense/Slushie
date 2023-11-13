@@ -5,13 +5,16 @@ extends Node2D
 
 # Detection
 @onready var area_2d : Area2D = $Area2D
+
 # Timer
 @onready var timer : Timer = $Timer
 var timer_ratio : float = 1.0 # Gets overridden
+
 # Move the coin
 var acceleration_curve : Curve = preload("res://Entities/Coin/CoinAccelerationCurve.tres")
 var initial_position : Vector2 = Vector2.ZERO
 var player_position : Vector2 = Vector2.ZERO
+
 # Audio
 @onready var sound_effect : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
@@ -19,6 +22,10 @@ func _ready():
 	set_physics_process(false) # Stop processing any cycles
 	timer_ratio = 1.0 / timer.wait_time
 	call_deferred("_update_initial_position")
+
+func _instant_pickup():
+	if Main._player_alive(): # Go straight to the player
+		_on_area_2d_body_entered(Main.player_node)
 
 func _update_initial_position():
 	# Store initial position to interpolate from

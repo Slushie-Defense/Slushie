@@ -5,8 +5,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tq6m"]
 
 [node name="Control" type="Control"]
-z_index = -4096
-z_as_relative = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 128.0

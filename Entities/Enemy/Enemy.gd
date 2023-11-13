@@ -134,6 +134,8 @@ func _spawn_coin():
 	var coin = coin_scene.instantiate()
 	get_tree().get_root().add_child(coin)
 	coin.global_position = global_position
+	# Send the money straight to the player
+	# coin._instant_pickup()
 
 func _gas_station_destroyed():
 	ai_default_direction = Vector2(0, 0)

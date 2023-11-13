@@ -1,7 +1,10 @@
 extends Node2D
 
+# Sprite
+@onready var sprite_2d : Sprite2D = $Sprite2D
+
 # Damage
-var attack_damage = 50.0 # This can be edited
+var attack_damage = 50.0 # his is modified in UnitData
 
 # Stats
 var linear_speed : float = 400.0  # Let's not edit this
@@ -16,6 +19,9 @@ var curve_position : Vector2 = Vector2.ZERO
 var parabolic_curve_max_height : float = 400.0 # Let's not edit this
 @export var arch_and_explode : bool = true
 
+# Rotation
+var previous_position : Vector2 = Vector2.ZERO
+
 # Position
 var initial_position : Vector2 = Vector2.ZERO
 var initial_distance : float = 1.0 # Gets overridden
@@ -26,11 +32,6 @@ var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 # Hit at target
 @onready var shapecast2d : ShapeCast2D = $ShapeCast2D
 
-func _ready():
-	pass
-	#set_target_global_position(Vector2(global_position.x + 320, global_position.y + 0))
-	#call_deferred("_test")
-
 func _physics_process(delta):
 	# Calculate the direction from the Coin to the player
 	var direction = initial_position.direction_to(target_position)
@@ -40,6 +41,8 @@ func _physics_process(delta):
 	var distance_ratio = linear_position.distance_to(target_position) / initial_distance
 	var z_height = parabolic_curve.sample(distance_ratio)
 	
+	# Earlier position
+	previous_position = Vector2(linear_position.x, linear_position.y - (z_height * parabolic_curve_max_height))
 	# Move the projectile directly towards the target position
 	linear_position += direction * calculated_speed * delta
 	# Curve the projectile in the air towards target position
@@ -67,6 +70,10 @@ func _physics_process(delta):
 	
 	# Update position
 	global_position = curve_position
+	# Calculate rotation
+	var sprite_rotation = previous_position.angle_to(curve_position)
+	print(sprite_rotation)
+	sprite_2d.rotation = sprite_rotation
 
 func set_target_global_position(new_target_position: Vector2):
 	target_position = new_target_position
@@ -94,15 +101,3 @@ func _create_explosion():
 	explosion.attack_damage = attack_damage
 	get_tree().get_root().add_child(explosion)
 	explosion.global_position = target_position
-
-func _test():
-	var line2d = Line2D.new()
-	line2d.set_width(3)
-	line2d.default_color = Color(1, 1, 0)  # Yellow color
-	get_tree().get_root().add_child(line2d)
-	line2d.points = [initial_position, target_position]
-	# Create enemy for testing
-	var enemy_scene = load("res://Entities/Enemy/Enemy.tscn")
-	var enemy = enemy_scene.instantiate()
-	get_tree().get_root().add_child(enemy)
-	enemy.global_position = global_position + Vector2(128.0, 0)

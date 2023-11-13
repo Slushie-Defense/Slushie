@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://l17w6lgp7i77"]
 
 [ext_resource type="Script" path="res://Entities/Projectile/Projectile.gd" id="1_salub"]
-[ext_resource type="Texture2D" uid="uid://dpt0tifft75jw" path="res://Sprites/Circles/32x32WhiteCircle.png" id="2_t616o"]
+[ext_resource type="Texture2D" uid="uid://cae4ulejvrfte" path="res://Sprites/Projectiles/48x48Projectile.png" id="2_hu7ga"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36btw"]
 radius = 12.0
@@ -13,8 +13,7 @@ script = ExtResource("1_salub")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.980392, 0.960784, 0.67451, 0.545098)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_t616o")
+texture = ExtResource("2_hu7ga")
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 enabled = false

@@ -65,6 +65,7 @@ func _convert_to_structure_type():
 	
 	# If its a fence, do not create a weapon base
 	if structure_class.type == structure_type.FENCE:
+		structure_sprite.texture = load("res://Sprites/Structures/128x192Fence.png")
 		return # Early exit
 	
 	# Note if a weapon base has been attached
@@ -87,7 +88,7 @@ func _convert_to_structure_type():
 			structure_sprite.self_modulate = Color("#00D39B")
 		structure_type.LANDMINE:
 			set_collision_layer_value(3, false) # Turn off the collision layer so that enemies can walk through it and do not attack it
-			structure_sprite.self_modulate = Color("#FF0000")
+			structure_sprite.texture = load("res://Sprites/Structures/128x192Landmine.png")
 
 	# Add to structure
 	add_child(weapon_base)
