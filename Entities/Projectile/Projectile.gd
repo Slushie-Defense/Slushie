@@ -19,9 +19,6 @@ var curve_position : Vector2 = Vector2.ZERO
 var parabolic_curve_max_height : float = 400.0 # Let's not edit this
 @export var arch_and_explode : bool = true
 
-# Rotation
-var previous_position : Vector2 = Vector2.ZERO
-
 # Position
 var initial_position : Vector2 = Vector2.ZERO
 var initial_distance : float = 1.0 # Gets overridden
@@ -34,19 +31,21 @@ var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 
 func _physics_process(delta):
 	# Calculate the direction from the Coin to the player
-	var direction = initial_position.direction_to(target_position)
+	var direction_to_target = initial_position.direction_to(target_position)
 	var distance_to_target = global_position.distance_to(target_position)
 	
 	# Arch
 	var distance_ratio = linear_position.distance_to(target_position) / initial_distance
 	var z_height = parabolic_curve.sample(distance_ratio)
 	
-	# Earlier position
-	previous_position = Vector2(linear_position.x, linear_position.y - (z_height * parabolic_curve_max_height))
 	# Move the projectile directly towards the target position
-	linear_position += direction * calculated_speed * delta
+	linear_position += direction_to_target * calculated_speed * delta
 	# Curve the projectile in the air towards target position
 	curve_position = Vector2(linear_position.x, linear_position.y - (z_height * parabolic_curve_max_height))
+	
+	#var normalized_direction = previous_curve_position.direction_to(curve_position) * 32
+	#var sprite_rotation = Vector2.ZERO.angle_to(normalized_direction)
+	#sprite_2d.rotation = sprite_rotation
 	
 	# Check if the projectile has reached the target
 	if initial_position.distance_to(linear_position) > initial_distance:
@@ -56,7 +55,7 @@ func _physics_process(delta):
 	# If it's projectile that doesn't arch
 	if not arch_and_explode:
 		# Check for collision ahead
-		shapecast2d.target_position = direction * calculated_speed * delta
+		shapecast2d.target_position = direction_to_target * calculated_speed * delta
 		if shapecast2d.is_colliding():
 			var collision_result = shapecast2d.get_collider(0) # Get first collision. Only looks for one.
 			if not collision_result == null:
@@ -70,10 +69,7 @@ func _physics_process(delta):
 	
 	# Update position
 	global_position = curve_position
-	# Calculate rotation
-	var sprite_rotation = previous_position.angle_to(curve_position)
-	print(sprite_rotation)
-	sprite_2d.rotation = sprite_rotation
+
 
 func set_target_global_position(new_target_position: Vector2):
 	target_position = new_target_position
