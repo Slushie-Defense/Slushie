@@ -42,10 +42,9 @@ func _physics_process(delta):
 	linear_position += direction_to_target * calculated_speed * delta
 	# Curve the projectile in the air towards target position
 	curve_position = Vector2(linear_position.x, linear_position.y - (z_height * parabolic_curve_max_height))
-	
-	#var normalized_direction = previous_curve_position.direction_to(curve_position) * 32
-	#var sprite_rotation = Vector2.ZERO.angle_to(normalized_direction)
-	#sprite_2d.rotation = sprite_rotation
+		
+	var sprite_rotation = global_position.angle_to_point(curve_position)
+	sprite_2d.rotation = sprite_rotation
 	
 	# Check if the projectile has reached the target
 	if initial_position.distance_to(linear_position) > initial_distance:
