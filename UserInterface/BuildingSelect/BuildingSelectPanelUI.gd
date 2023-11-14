@@ -1,12 +1,12 @@
 extends Control
 
 # Images
-var image_fence = load("res://UserInterface/BuildingSelect/Items/Fence.png")
-var image_landmine = load("res://UserInterface/BuildingSelect/Items/Landmine.png")
-var image_instant_structure = load("res://UserInterface/BuildingSelect/Items/Instant.png")
-var image_aoe_structure = load("res://UserInterface/BuildingSelect/Items/AOE.png")
-var image_bullet_structure = load("res://UserInterface/BuildingSelect/Items/Bullet.png")
-var image_coins = load("res://UserInterface/BuildingSelect/Items/Coins.png")
+var image_fence = load("res://Sprites/ItemsUI/Items/Fence.png")
+var image_landmine = load("res://Sprites/ItemsUI/Items/Landmine.png")
+var image_instant_structure = load("res://Sprites/ItemsUI/Items/Instant.png")
+var image_aoe_structure = load("res://Sprites/ItemsUI/Items/AOE.png")
+var image_bullet_structure = load("res://Sprites/ItemsUI/Items/Bullet.png")
+var image_coins = load("res://Sprites/ItemsUI/Items/Coins.png")
 
 # HBox Container
 @onready var hboxcontainer : VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer

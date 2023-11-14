@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4m146ua73kcv"
-path="res://.godot/imported/Fence.png-dc67c3d1dee9fbdc5a8fc91d85a920d8.ctex"
+uid="uid://cssmwd0thw12u"
+path="res://.godot/imported/Landmine.png-8f75d2bb2f8c3696b0ff0cde463801f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UserInterface/BuildingSelect/Items/Fence.png"
-dest_files=["res://.godot/imported/Fence.png-dc67c3d1dee9fbdc5a8fc91d85a920d8.ctex"]
+source_file="res://Sprites/ItemsUI/Items/Landmine.png"
+dest_files=["res://.godot/imported/Landmine.png-8f75d2bb2f8c3696b0ff0cde463801f6.ctex"]
 
 [params]
 

@@ -13,7 +13,7 @@ var player_node : CharacterBody2D = null
 # Coin count
 var coin_scene = load("res://Entities/Coin/Coin.tscn")
 var coins : int = 0
-var coin_reward : float = 10.0
+var coin_reward : float = 99.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,16 +38,20 @@ func _on_signal_add_player(pass_player_node):
 func _update_coin_count(count):
 	coins = clamp(coins + count, 0, 9999999999)
 
+func _player_alive():
+	return not player_node == null
+
 func _reward_with_coins():
-	if not player_node == null:
+	if _player_alive():
 		var angle_increment = 360.0 / coin_reward
 		for i in range(0, coin_reward):
 			var coins = coin_scene.instantiate()
 			player_node.add_child(coins)
 			# Spawn the coins around the player
-			var distance_from_player : int = 96
+			var distance_from_player : int = 320
 			var angle = i * angle_increment
 			coins.global_position = player_node.global_position + Vector2(distance_from_player, 0).rotated(deg_to_rad(angle))
+			coins._instant_pickup()
 
 func _try_to_buy(cost):
 	var can_purchase : bool = Main.coins - cost >= 0

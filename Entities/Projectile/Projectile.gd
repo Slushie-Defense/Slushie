@@ -1,7 +1,10 @@
 extends Node2D
 
+# Sprite
+@onready var sprite_2d : Sprite2D = $Sprite2D
+
 # Damage
-var attack_damage = 50.0 # This can be edited
+var attack_damage = 50.0 # his is modified in UnitData
 
 # Stats
 var linear_speed : float = 400.0  # Let's not edit this
@@ -26,14 +29,9 @@ var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 # Hit at target
 @onready var shapecast2d : ShapeCast2D = $ShapeCast2D
 
-func _ready():
-	pass
-	#set_target_global_position(Vector2(global_position.x + 320, global_position.y + 0))
-	#call_deferred("_test")
-
 func _physics_process(delta):
 	# Calculate the direction from the Coin to the player
-	var direction = initial_position.direction_to(target_position)
+	var direction_to_target = initial_position.direction_to(target_position)
 	var distance_to_target = global_position.distance_to(target_position)
 	
 	# Arch
@@ -41,9 +39,12 @@ func _physics_process(delta):
 	var z_height = parabolic_curve.sample(distance_ratio)
 	
 	# Move the projectile directly towards the target position
-	linear_position += direction * calculated_speed * delta
+	linear_position += direction_to_target * calculated_speed * delta
 	# Curve the projectile in the air towards target position
 	curve_position = Vector2(linear_position.x, linear_position.y - (z_height * parabolic_curve_max_height))
+		
+	var sprite_rotation = global_position.angle_to_point(curve_position)
+	sprite_2d.rotation = sprite_rotation
 	
 	# Check if the projectile has reached the target
 	if initial_position.distance_to(linear_position) > initial_distance:
@@ -53,7 +54,7 @@ func _physics_process(delta):
 	# If it's projectile that doesn't arch
 	if not arch_and_explode:
 		# Check for collision ahead
-		shapecast2d.target_position = direction * calculated_speed * delta
+		shapecast2d.target_position = direction_to_target * calculated_speed * delta
 		if shapecast2d.is_colliding():
 			var collision_result = shapecast2d.get_collider(0) # Get first collision. Only looks for one.
 			if not collision_result == null:
@@ -67,6 +68,7 @@ func _physics_process(delta):
 	
 	# Update position
 	global_position = curve_position
+
 
 func set_target_global_position(new_target_position: Vector2):
 	target_position = new_target_position
@@ -94,15 +96,3 @@ func _create_explosion():
 	explosion.attack_damage = attack_damage
 	get_tree().get_root().add_child(explosion)
 	explosion.global_position = target_position
-
-func _test():
-	var line2d = Line2D.new()
-	line2d.set_width(3)
-	line2d.default_color = Color(1, 1, 0)  # Yellow color
-	get_tree().get_root().add_child(line2d)
-	line2d.points = [initial_position, target_position]
-	# Create enemy for testing
-	var enemy_scene = load("res://Entities/Enemy/Enemy.tscn")
-	var enemy = enemy_scene.instantiate()
-	get_tree().get_root().add_child(enemy)
-	enemy.global_position = global_position + Vector2(128.0, 0)

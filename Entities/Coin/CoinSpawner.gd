@@ -19,4 +19,3 @@ func _spawn_coins():
 			var coin = coin_scene.instantiate()
 			get_tree().get_root().add_child(coin)
 			coin.global_position = global_position + Vector2(x1 * coin_gap, y1 * coin_gap)
-			#coin.initial_position = coin.global_position

@@ -24,7 +24,7 @@ func _on_player_add(pass_player):
 
 func _update_position(set_position):
 	# Camera limits
-	var offset_y_max : int = 128
+	var offset_y_max : int = 192
 	var level_y_center : int = 576
 	var offset_x_min : int = 1024
 	var limit_position = set_position

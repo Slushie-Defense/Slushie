@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6tsrj77meurr"
-path="res://.godot/imported/AOE.png-a3ce61cb35a0e8f38139dd7597d94ce8.ctex"
+uid="uid://4m146ua73kcv"
+path="res://.godot/imported/Fence.png-2c3af7ce2690501a7a78ec316a9e5618.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UserInterface/BuildingSelect/Items/AOE.png"
-dest_files=["res://.godot/imported/AOE.png-a3ce61cb35a0e8f38139dd7597d94ce8.ctex"]
+source_file="res://Sprites/ItemsUI/Items/Fence.png"
+dest_files=["res://.godot/imported/Fence.png-2c3af7ce2690501a7a78ec316a9e5618.ctex"]
 
 [params]
 

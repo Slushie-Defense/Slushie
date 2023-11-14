@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dng28sn3p8f8g"
-path="res://.godot/imported/Coins.png-1d487c714e9d929c605d2397bb510556.ctex"
+uid="uid://cae4ulejvrfte"
+path="res://.godot/imported/48x48Projectile.png-ac08bb5f913458dd9afe8db358a3f1c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UserInterface/BuildingSelect/Items/Coins.png"
-dest_files=["res://.godot/imported/Coins.png-1d487c714e9d929c605d2397bb510556.ctex"]
+source_file="res://Sprites/Projectiles/48x48Projectile.png"
+dest_files=["res://.godot/imported/48x48Projectile.png-ac08bb5f913458dd9afe8db358a3f1c1.ctex"]
 
 [params]
 

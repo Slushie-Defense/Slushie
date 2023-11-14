@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cssmwd0thw12u"
-path="res://.godot/imported/Landmine.png-5595a2c1fde9ca138eff4f7c93235505.ctex"
+uid="uid://no5ggmpopwwf"
+path="res://.godot/imported/Bullet.png-12a697dde5f8549a6e70ffd6e29f4c67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UserInterface/BuildingSelect/Items/Landmine.png"
-dest_files=["res://.godot/imported/Landmine.png-5595a2c1fde9ca138eff4f7c93235505.ctex"]
+source_file="res://Sprites/ItemsUI/Items/Bullet.png"
+dest_files=["res://.godot/imported/Bullet.png-12a697dde5f8549a6e70ffd6e29f4c67.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cyxom521fg36v"]
 
 [ext_resource type="Script" path="res://UserInterface/BuildingSelect/CoinItemUI.gd" id="1_y0vtp"]
-[ext_resource type="Texture2D" uid="uid://dng28sn3p8f8g" path="res://UserInterface/BuildingSelect/Items/Coins.png" id="2_q503f"]
+[ext_resource type="Texture2D" uid="uid://dng28sn3p8f8g" path="res://Sprites/ItemsUI/Items/Coins.png" id="2_q503f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2yrl"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 1)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bj2450c708xsx"]
 
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_p727u"]
-[ext_resource type="Texture2D" uid="uid://b0h3v5r3o5arf" path="res://icon.svg" id="2_yiw4i"]
+[ext_resource type="Texture2D" uid="uid://csx6ewfjqwdd" path="res://Sprites/Characters/Player.png" id="2_j7jkh"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_4agde"]
 [ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/Managers/BuildingManager/BuildingManager.tscn" id="4_rd020"]
 
@@ -19,8 +19,9 @@ shape = SubResource("CircleShape2D_wef8m")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 z_index = 1
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_yiw4i")
+position = Vector2(0, -40)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_j7jkh")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_4agde")]
 offset_top = -56.0
