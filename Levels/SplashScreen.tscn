@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://da7cisyixrj1k"]
+
+[ext_resource type="Script" path="res://Levels/SplashScreen.gd" id="1_1is0b"]
+[ext_resource type="Texture2D" uid="uid://sis4goh1hj2k" path="res://UserInterface/Logo/SlushTillDawnHalfSize.png" id="2_ivnk0"]
+[ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="3_dayab"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1is0b")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1280, 592)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("2_ivnk0")
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 0
+offset_top = 544.0
+offset_right = 1280.0
+offset_bottom = 658.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Start" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dayab")
+text = "Start"
+
+[node name="Credits" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_dayab")
+text = "Credits"
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 2
+offset_left = 1200.0
+offset_top = 32.0
+offset_right = 1248.0
+offset_bottom = 73.0
+theme = ExtResource("3_dayab")
+text = "X"
+icon_alignment = 1
+
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
