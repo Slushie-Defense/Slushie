@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://by0auqtq2081q"]
+
+[ext_resource type="Script" path="res://Levels/Credits/Credits.gd" id="1_feahg"]
+[ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="2_lr0v4"]
+[ext_resource type="FontFile" uid="uid://vhjqvhs8uj3e" path="res://Fonts/Grandstander/Grandstander-Medium.ttf" id="3_rjdal"]
+[ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="4_vupxa"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_feahg")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Credits" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.827451, 0.607843, 1)
+theme_override_fonts/font = ExtResource("2_lr0v4")
+theme_override_font_sizes/font_size = 64
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+dragger_visibility = 2
+
+[node name="Names" type="Label" parent="CenterContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_lr0v4")
+theme_override_font_sizes/font_size = 32
+text = "Bart
+Bokhum
+CM
+Jason
+Lyndon
+Paul
+Susanche
+Sushi
+Jason"
+
+[node name="Titles" type="Label" parent="CenterContainer/VBoxContainer/HSplitContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.827451, 0.607843, 1)
+theme_override_fonts/font = ExtResource("3_rjdal")
+theme_override_font_sizes/font_size = 32
+text = "Writer
+Weapons Designer
+Developer
+Project Manager
+Creative Director
+UX/UI Designer
+Art Director
+Character Designer
+Music Composer"
+horizontal_alignment = 2
+
+[node name="GoBack" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_vupxa")
+text = "Go Back"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/GoBack" to="." method="_on_go_back_pressed"]
