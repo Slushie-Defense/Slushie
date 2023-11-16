@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cjvvi1wm1eukc"]
 
 [ext_resource type="Script" path="res://Entities/Managers/BuildingManager/BuildingManager.gd" id="2_666x6"]
-[ext_resource type="Texture2D" uid="uid://nytttjt5wdst" path="res://Sprites/Squares/128x128-White.png" id="3_2vysi"]
+[ext_resource type="Texture2D" uid="uid://d3gd0bi7h7swb" path="res://Sprites/Squares/128x128-Build.png" id="2_k5jon"]
 [ext_resource type="AudioStream" uid="uid://b0v1gammmkxdu" path="res://Audio/UserInterface/AudioErrorSignal.wav" id="4_jft5a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2m26"]
@@ -11,7 +11,7 @@ size = Vector2(128, 128)
 script = ExtResource("2_666x6")
 
 [node name="HighlightSquare" type="Sprite2D" parent="."]
-texture = ExtResource("3_2vysi")
+texture = ExtResource("2_k5jon")
 centered = false
 
 [node name="Area2D" type="Area2D" parent="HighlightSquare"]

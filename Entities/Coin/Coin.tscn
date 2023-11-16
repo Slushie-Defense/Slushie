@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ceyqusnxxk6xr"]
 
-[ext_resource type="Texture2D" uid="uid://dpt0tifft75jw" path="res://Sprites/Circles/32x32WhiteCircle.png" id="1_lamey"]
 [ext_resource type="Script" path="res://Entities/Coin/Coin.gd" id="1_ov43b"]
+[ext_resource type="Texture2D" uid="uid://fyv11w0s8xj5" path="res://Sprites/Coins/Coins32x32.png" id="2_x6wvt"]
 [ext_resource type="AudioStream" uid="uid://iau0l6g4fxt2" path="res://Audio/Coins/AudioCoinPickup.wav" id="3_bhioi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n7chb"]
@@ -13,8 +13,7 @@ z_index = 2
 script = ExtResource("1_ov43b")
 
 [node name="CoinSprite" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 0, 1)
-texture = ExtResource("1_lamey")
+texture = ExtResource("2_x6wvt")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 16

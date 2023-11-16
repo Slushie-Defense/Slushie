@@ -2,10 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://btxxor88etgw4" path="res://Sprites/ItemsUI/Default.png" id="1_10e5a"]
 [ext_resource type="Script" path="res://UserInterface/BuildingSelect/SelectableItemUI.gd" id="1_42uts"]
-[ext_resource type="Texture2D" uid="uid://dng28sn3p8f8g" path="res://UserInterface/BuildingSelect/Items/Coins.png" id="1_r7f2y"]
-
-[sub_resource type="SystemFont" id="SystemFont_jxmbm"]
-font_weight = 700
+[ext_resource type="Texture2D" uid="uid://dng28sn3p8f8g" path="res://Sprites/ItemsUI/Items/Coins.png" id="1_r7f2y"]
+[ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="4_h61aq"]
 
 [node name="Item" type="TextureRect"]
 custom_minimum_size = Vector2(104, 64)
@@ -26,11 +24,11 @@ layout_mode = 2
 texture = ExtResource("1_r7f2y")
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 24)
+custom_minimum_size = Vector2(40, 22)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_jxmbm")
+theme_override_fonts/font = ExtResource("4_h61aq")
 text = "100"
 horizontal_alignment = 1
-vertical_alignment = 1
+vertical_alignment = 2
