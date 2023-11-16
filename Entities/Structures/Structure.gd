@@ -81,11 +81,11 @@ func _convert_to_structure_type():
 	# Setup structure
 	match structure_class.type:
 		structure_type.SIEGE:
-			structure_sprite.self_modulate = Color("#FFD500")
+			structure_sprite.texture = load("res://Sprites/Structures/128x192Siege.png")
 		structure_type.INSTANT:
-			structure_sprite.self_modulate = Color("#EE00FF")
+			structure_sprite.texture = load("res://Sprites/Structures/128x192Instant.png")
 		structure_type.PROJECTILE:
-			structure_sprite.self_modulate = Color("#00D39B")
+			structure_sprite.texture = load("res://Sprites/Structures/128x192Projectile.png")
 		structure_type.LANDMINE:
 			set_collision_layer_value(3, false) # Turn off the collision layer so that enemies can walk through it and do not attack it
 			structure_sprite.texture = load("res://Sprites/Structures/128x192Landmine.png")

@@ -13,10 +13,10 @@ var game_grid_cell_size_halved : float = GameGrid.cell_size * 0.5
 # UI Transparency
 @onready var highlight_square_sprite : Sprite2D = $HighlightSquare
 var grid_transparency : float = 0.0
-var highlight_transparency : float = 0.3
+var highlight_transparency : float = 0.2
 
 # UI Colors
-var color_build_open : Color = Color("#00D39B")
+var color_build_open : Color = Color("#ffffff")
 var color_build_blocked : Color = Color("#FF0000")
 
 # UI Sound

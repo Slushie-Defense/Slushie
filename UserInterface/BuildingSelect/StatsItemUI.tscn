@@ -1,4 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dttneabkvhwd3"]
+[gd_scene load_steps=5 format=3 uid="uid://dttneabkvhwd3"]
+
+[ext_resource type="Script" path="res://UserInterface/BuildingSelect/StatsItemUI.gd" id="1_k5yu3"]
+[ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="2_7e83r"]
+[ext_resource type="FontFile" uid="uid://vhjqvhs8uj3e" path="res://Fonts/Grandstander/Grandstander-Medium.ttf" id="3_biewq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5ycn"]
 bg_color = Color(0.12549, 0.12549, 0.12549, 1)
@@ -7,14 +11,12 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="SystemFont" id="SystemFont_ynubg"]
-font_weight = 700
-
 [node name="PanelContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(104, 104)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_o5ycn")
+script = ExtResource("1_k5yu3")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -27,18 +29,13 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_ynubg")
+theme_override_colors/font_color = Color(1, 0.835294, 0, 1)
+theme_override_fonts/font = ExtResource("2_7e83r")
 theme_override_font_sizes/font_size = 14
-text = "Turret stats:"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Stats" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_biewq")
 theme_override_font_sizes/font_size = 14
-text = "Damage 10"
-
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Range 3"

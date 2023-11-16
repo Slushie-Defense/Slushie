@@ -7,7 +7,7 @@
 script = ExtResource("2_n41u0")
 enemies = Array[PackedScene]([ExtResource("1_hcu2e")])
 type = "Basic"
-portals = Array[Vector2]([Vector2(2048, 768), Vector2(2048, 364)])
+portals = [Vector2(2048, 768), Vector2(2048, 364)]
 number_to_spawn_at_once = 2
 total_time = 1.0
 number_to_spawn = 3

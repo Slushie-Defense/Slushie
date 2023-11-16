@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://digh6puar70w0"]
 
 [ext_resource type="Script" path="res://Entities/Enemy/Enemy.gd" id="1_ff1tq"]
-[ext_resource type="Texture2D" uid="uid://b0h3v5r3o5arf" path="res://icon.svg" id="2_wdrna"]
+[ext_resource type="Texture2D" uid="uid://br56ctgvvdblx" path="res://Sprites/Characters/EnemyBasic.png" id="2_m7w64"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_2jk0x"]
 [ext_resource type="Texture2D" uid="uid://cqq1ir1pgg75q" path="res://Sprites/Circles/128x128-DottedCircle.png" id="3_jff1g"]
 
@@ -23,9 +23,7 @@ z_index = 1
 shape = SubResource("CircleShape2D_o6l61")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
-self_modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_wdrna")
+texture = ExtResource("2_m7w64")
 
 [node name="Vision" type="Area2D" parent="."]
 collision_layer = 8

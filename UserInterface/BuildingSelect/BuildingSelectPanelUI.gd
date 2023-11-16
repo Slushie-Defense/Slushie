@@ -131,4 +131,15 @@ func _update_seleted_item():
 		"LANDMINE":
 			active_item_type = UnitData.LANDMINE
 	
+	# Set name
+	stats._set_title(active_item_type.unit_name)
+	# Get damage
+	var damage : String = str(active_item_type.attack_damage)
+	# Set damage
+	var health : String = str(active_item_type.health)
+	# Set range
+	var range : String = str(active_item_type.attack_range / GameGrid.cell_size)
+	# Update 
+	stats._set_stats("Damage: " + damage + "\nHealth: " + health + "\nRange: " + range)
+	
 	Main.emit_signal("signal_selected_item_update", active_item_type)

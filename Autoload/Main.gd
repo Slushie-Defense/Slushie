@@ -20,8 +20,6 @@ func _ready():
 	signal_add_player.connect(_on_signal_add_player)
 	signal_update_coin_count.connect(_update_coin_count)
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	# Reward with some coins
-	get_tree().create_timer(1.0).timeout.connect(_reward_with_coins)
 
 func _input(event):
 	if event.is_action_pressed("ui_text_clear_carets_and_selection"):
@@ -34,6 +32,8 @@ func _pause_game_toggle():
 
 func _on_signal_add_player(pass_player_node):
 	player_node = pass_player_node
+	# Reward with some coins
+	get_tree().create_timer(1.0).timeout.connect(_reward_with_coins)
 
 func _update_coin_count(count):
 	coins = clamp(coins + count, 0, 9999999999)

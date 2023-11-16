@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://UserInterface/BuildingSelect/CoinItemUI.gd" id="1_y0vtp"]
 [ext_resource type="Texture2D" uid="uid://dng28sn3p8f8g" path="res://Sprites/ItemsUI/Items/Coins.png" id="2_q503f"]
+[ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="3_538qt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2yrl"]
 bg_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
@@ -17,9 +18,6 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-
-[sub_resource type="SystemFont" id="SystemFont_mkrhm"]
-font_weight = 700
 
 [sub_resource type="Animation" id="Animation_pr4bq"]
 resource_name = "PurchaseFailed"
@@ -172,8 +170,8 @@ custom_minimum_size = Vector2(104, 0)
 layout_mode = 2
 offset_right = 40.0
 offset_bottom = 32.0
-theme_override_colors/font_color = Color(0.67451, 0.603922, 0.133333, 1)
-theme_override_fonts/font = SubResource("SystemFont_mkrhm")
+theme_override_colors/font_color = Color(1, 0.937255, 0.54902, 1)
+theme_override_fonts/font = ExtResource("3_538qt")
 theme_override_font_sizes/font_size = 24
 text = "100"
 horizontal_alignment = 1
