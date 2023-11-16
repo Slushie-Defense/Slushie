@@ -29,6 +29,9 @@ var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 # Hit at target
 @onready var shapecast2d : ShapeCast2D = $ShapeCast2D
 
+func _ready():
+	sprite_2d.self_modulate = Color("#EE00FF")
+
 func _physics_process(delta):
 	# Calculate the direction from the Coin to the player
 	var direction_to_target = initial_position.direction_to(target_position)
@@ -45,6 +48,8 @@ func _physics_process(delta):
 		
 	var sprite_rotation = global_position.angle_to_point(curve_position)
 	sprite_2d.rotation = sprite_rotation
+	sprite_2d.scale = Vector2(randf_range(0.6, 0.9), randf_range(0.6, 0.9))
+	#sprite_2d.flip_v = randi_range(0,1)
 	
 	# Check if the projectile has reached the target
 	if initial_position.distance_to(linear_position) > initial_distance:
@@ -68,7 +73,6 @@ func _physics_process(delta):
 	
 	# Update position
 	global_position = curve_position
-
 
 func set_target_global_position(new_target_position: Vector2):
 	target_position = new_target_position
