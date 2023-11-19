@@ -5,9 +5,6 @@
 
 [node name="CoinSpawner" type="Node2D"]
 script = ExtResource("1_uvnqu")
-number_of_coins_horizontally = 8
-number_of_coins_vertically = 8
-coin_gap = 64
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 0, 1)

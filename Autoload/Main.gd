@@ -11,9 +11,9 @@ signal signal_gas_station_destroyed()
 var player_node : CharacterBody2D = null
 
 # Coin count
-var coin_scene = load("res://Entities/Coin/Coin.tscn")
+var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
 var coins : int = 0
-var coin_reward : float = 99.0
+var coin_reward : int = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,15 +43,12 @@ func _player_alive():
 
 func _reward_with_coins():
 	if _player_alive():
-		var angle_increment = 360.0 / coin_reward
-		for i in range(0, coin_reward):
-			var coins = coin_scene.instantiate()
-			player_node.add_child(coins)
-			# Spawn the coins around the player
-			var distance_from_player : int = 320
-			var angle = i * angle_increment
-			coins.global_position = player_node.global_position + Vector2(distance_from_player, 0).rotated(deg_to_rad(angle))
-			coins._instant_pickup()
+		var coins = coin_spawner_scene.instantiate()
+		coins.number_of_coins = coin_reward
+		get_tree().get_root().add_child(coins)
+		coins.randomize_postion = true
+		coins.instant_pickup = true
+		coins.global_position = player_node.global_position
 
 func _try_to_buy(cost):
 	var can_purchase : bool = Main.coins - cost >= 0

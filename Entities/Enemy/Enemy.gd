@@ -26,7 +26,7 @@ var show_vision_radius : bool = true
 @onready var attack_timer : Timer = $AttackDelayTimer
 
 # Coins
-var coin_scene = load("res://Entities/Coin/Coin.tscn")
+var coin_spawner = load("res://Entities/Coin/CoinSpawner.tscn")
 
 # Initialize
 func _ready():
@@ -130,15 +130,11 @@ func _event_health_is_zero():
 
 func _spawn_coin():
 	# Spawn coin
-	var number_of_coins = ceil(enemy_data.coin_drop_value / 100.0)
-	var angle_increment = 360.0 / number_of_coins
-	for i in range(0, number_of_coins):
-		var coin = coin_scene.instantiate()
-		get_tree().get_root().add_child(coin)
-		# Spawn the coins around the player
-		var distance_from_death : int = 0 if i == 0 else 48
-		var angle = i * angle_increment
-		coin.global_position = global_position + Vector2(distance_from_death, 0).rotated(deg_to_rad(angle))
+	var coins = coin_spawner.instantiate()
+	coins.number_of_coins = ceil(enemy_data.coin_drop_value / 100.0)
+	coins.randomize_postion = true
+	get_tree().get_root().add_child(coins)
+	coins.global_position = global_position
 
 func _gas_station_destroyed():
 	ai_default_direction = Vector2(0, 0)
