@@ -22,7 +22,7 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _input(event):
-	if event.is_action_pressed("ui_text_clear_carets_and_selection"):
+	if event.is_action_pressed("PauseButton"):
 		_pause_game_toggle()
 
 func _pause_game_toggle():

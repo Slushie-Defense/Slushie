@@ -1,11 +1,15 @@
 extends Node
 class_name EnemyData
 
+var unit_name : String = "Grunt"
 var health : int = 100
 
-var attack_speed : float = 1.0 # In seconds
+var coin_drop_value : float = 100.0
+
+var attack_speed : float = 1.0 # Delay between attacks
 var attack_range : int = 64 # In pixels
 var attack_damage : int = 100
 
-var max_movement_speed : float = 2000
+var acceleration : float = 2000
+var max_speed : float = 100
 var vision_radius : int = 160

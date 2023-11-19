@@ -37,6 +37,7 @@ visible = false
 texture = ExtResource("3_jff1g")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_2jk0x")]
+visible = false
 offset_top = -56.0
 offset_bottom = -24.0
 

@@ -52,8 +52,8 @@ func _update_weapon_range():
 	shapecast_2d.position = weapon_offset
 	# Weapon range indictator
 	var one_pixel_offset : int = 1 # Add one pixel to the x-axis so that the Landmine remains visible
-	weapon_range_indicator.default_color = Color("#FFD500")
-	weapon_range_indicator.default_color.a = 0.3
+	#weapon_range_indicator.default_color = Color("#FFD500")
+	weapon_range_indicator.default_color.a = 0.08
 	weapon_range_indicator.width = weapon_data.attack_radius * 2
 	weapon_range_indicator.points = [Vector2(0, 0), Vector2(weapon_data.attack_range - weapon_data.attack_radius - weapon_data.attack_radius + one_pixel_offset,0)]
 

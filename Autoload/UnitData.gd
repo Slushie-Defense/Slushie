@@ -10,7 +10,8 @@ var INSTANT : StructureData = StructureData.new()
 var SIEGE : StructureData = StructureData.new()
 var PROJECTILE : StructureData = StructureData.new()
 
-# Enemies
+# Enemy types
+enum enemy_list { TANK, FLOATER, GRUNT, SPITTER }
 
 func _ready():
 	# Setup FENCE

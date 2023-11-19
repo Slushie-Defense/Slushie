@@ -29,12 +29,10 @@ func transition_to_state(state: GameState):
 
 func pause_game():
 	get_tree().paused = true
-	pass
 
 func unpause_game():
 	get_tree().paused = false
 	transition_to_state(previous_state)
-	pass
 
 func prep_state():
 	# Code for initializing prep state goes here
@@ -43,32 +41,24 @@ func prep_state():
 func start_wave():
 	# Code for starting a wave goes here
 	current_wave_manager.spawn_next_wave() 
-	pass
 
 func game_over_state():
 	# Code for game over state goes here
 	pass
 
-
 func _process(delta):
 	match current_state:
 		GameState.PAUSED:
-			# un pause
-			if Input.is_key_pressed(KEY_P):
-				unpause_game()
+			pass
 		GameState.PREP:
-			if Input.is_action_just_pressed("ui_text_indent"):
+			if Input.is_action_just_pressed("StartButton"):
 				transition_to_state(GameState.WAVE)
-			elif Input.is_key_pressed(KEY_P):
-				transition_to_state(GameState.PAUSED)
 		GameState.WAVE:
 			#Here you would have your logic to check for wave completion or player death to transition to PREP or GAMEOVER respectively
 			if current_wave_manager.check_wave_complete(): # Placeholder for your wave completion condition
 				transition_to_state(GameState.PREP)
 			#elif current_wave_manager.is_player_dead(): # Placeholder for your game over condition
 			#    transition_to_state(GameState.GAMEOVER)
-			elif Input.is_key_pressed(KEY_P):
-				transition_to_state(GameState.PAUSED)
 		GameState.GAMEOVER:
 			pass
 		# vibes
