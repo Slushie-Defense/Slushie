@@ -4,14 +4,17 @@ extends Node2D
 @export var coin_gap : int = 64
 @export var instant_pickup : bool = false
 @export var randomize_postion : bool = false
+@export var hide : bool = false
 
 var coin_scene = load("res://Entities/Coin/Coin.tscn")
 @onready var coin_sprite : Sprite2D = $Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	coin_sprite.visible = false
+	if hide:
+		return
 	coin_sprite.call_deferred("queue_free")
+	coin_sprite.visible = false
 	call_deferred("_spawn_coins")
 
 func _spawn_coins():

@@ -13,7 +13,7 @@ var player_node : CharacterBody2D = null
 # Coin count
 var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
 var coins : int = 0
-var coin_reward : int = 100
+var coin_reward : int = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

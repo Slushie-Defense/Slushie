@@ -87,4 +87,3 @@ func spawn_next_wave():
 func _process(delta):
 	if (spawning):
 		return
-

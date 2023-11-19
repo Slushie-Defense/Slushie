@@ -146,6 +146,7 @@ offset_bottom = 256.0
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
 position = Vector2(2560, 576)
 number_of_coins = 64
+hide = true
 
 [editable path="GroundTexture"]
 [editable path="TreesTexture2"]
