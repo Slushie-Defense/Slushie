@@ -11,14 +11,24 @@ var SIEGE : StructureData = StructureData.new()
 var PROJECTILE : StructureData = StructureData.new()
 
 # Enemy types
-enum enemy_list { TANK, FLOATER, GRUNT, SPITTER }
+enum enemy_list { BASIC, TANK, FLOATER, GRUNT, SPITTER }
 
+# Enemies
+var BASIC : EnemyData = EnemyData.new()
+var GRUNT : EnemyData = EnemyData.new()
+var TANK : EnemyData = EnemyData.new()
+var SPITTER : EnemyData = EnemyData.new()
+var FLOATER : EnemyData = EnemyData.new()
+
+			
 func _ready():
+	# STRUCTURES
 	# Setup FENCE
 	FENCE.attack_damage = 0.0
 	FENCE.type = structure_list.FENCE
 	FENCE.unit_name = "FENCE"
 	FENCE.cost = 200
+	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
 	# Setup LANDMINE
 	LANDMINE.attack_damage = 100.0
 	LANDMINE.delay_before_explode = 0.5
@@ -27,6 +37,7 @@ func _ready():
 	LANDMINE.cost = 300
 	LANDMINE.attack_radius = 80.0
 	LANDMINE.attack_range = 160.0
+	LANDMINE.ui_sprite = load("res://Sprites/Structures/Landmine/128x192Landmine.png")
 	# Setup SIEGE
 	SIEGE.attack_damage = 100.0
 	SIEGE.type = structure_list.SIEGE
@@ -34,6 +45,7 @@ func _ready():
 	SIEGE.cost = 1200
 	SIEGE.attack_radius = 128.0
 	SIEGE.attack_range = 640.0
+	SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
 	# Setup INSTANT hit
 	INSTANT.attack_damage = 15.0
 	INSTANT.type = structure_list.INSTANT
@@ -41,6 +53,7 @@ func _ready():
 	INSTANT.cost = 800
 	INSTANT.attack_radius = 160.0
 	INSTANT.attack_range = 384.0
+	INSTANT.ui_sprite = load("res://Sprites/Structures/Instant/128x192Instant.png")
 	# Setup PROJECTILE hit
 	PROJECTILE.attack_damage = 20.0
 	PROJECTILE.type = structure_list.PROJECTILE
@@ -48,3 +61,66 @@ func _ready():
 	PROJECTILE.cost = 600
 	PROJECTILE.attack_radius = 128.0
 	PROJECTILE.attack_range = 512.0
+	PROJECTILE.ui_sprite = load("res://Sprites/Structures/Projectile/128x192Projectile.png")
+	
+	# ENEMIES
+	# Setup BASIC
+	BASIC.unit_name = "Basic"
+	BASIC.health = 100
+	BASIC.coin_drop_value = 100.0
+	BASIC.attack_speed = 1.0 # Delay between attacks
+	BASIC.attack_range = 64 # In pixels
+	BASIC.attack_damage = 100
+	BASIC.acceleration = 2000
+	BASIC.max_speed = 100
+	BASIC.vision_radius = 160
+	BASIC.basic_sprite = load("res://Sprites/Characters/Enemies/Basic/Basic256x256.png")
+	BASIC.collision_shape_radius = 32
+	# Setup GRUNT
+	GRUNT.unit_name = "Grunt"
+	GRUNT.health = 100
+	GRUNT.coin_drop_value = 100.0
+	GRUNT.attack_speed = 1.0 # Delay between attacks
+	GRUNT.attack_range = 64 # In pixels
+	GRUNT.attack_damage = 50
+	GRUNT.acceleration = 2000
+	GRUNT.max_speed = 200
+	GRUNT.vision_radius = 160
+	GRUNT.basic_sprite = load("res://Sprites/Characters/Enemies/Grunt/Grunt256x256.png")
+	GRUNT.collision_shape_radius = 48
+	# Setup TANK
+	TANK.unit_name = "Tank"
+	TANK.health = 1000
+	TANK.coin_drop_value = 100.0
+	TANK.attack_speed = 1.0 # Delay between attacks
+	TANK.attack_range = 64 # In pixels
+	TANK.attack_damage = 100
+	TANK.acceleration = 2000
+	TANK.max_speed = 50
+	TANK.vision_radius = 160
+	TANK.basic_sprite = load("res://Sprites/Characters/Enemies/Tank/Tank256x256.png")
+	TANK.collision_shape_radius = 64
+	# Setup SPITTER
+	SPITTER.unit_name = "Spitter"
+	SPITTER.health = 100
+	SPITTER.coin_drop_value = 100.0
+	SPITTER.attack_speed = 1.0 # Delay between attacks
+	SPITTER.attack_range = 64 # In pixels
+	SPITTER.attack_damage = 100
+	SPITTER.acceleration = 1000
+	SPITTER.max_speed = 25
+	SPITTER.vision_radius = 160
+	SPITTER.basic_sprite = load("res://Sprites/Characters/Enemies/Spitter/Spitter256x256.png")
+	SPITTER.collision_shape_radius = 56
+	# Setup FLOATER
+	FLOATER.unit_name = "Floater"
+	FLOATER.health = 100
+	FLOATER.coin_drop_value = 100.0
+	FLOATER.attack_speed = 1.0 # Delay between attacks
+	FLOATER.attack_range = 64 # In pixels
+	FLOATER.attack_damage = 100
+	FLOATER.acceleration = 2000
+	FLOATER.max_speed = 100
+	FLOATER.vision_radius = 160
+	FLOATER.basic_sprite = load("res://Sprites/Characters/Enemies/Floater/Floater256x256.png")
+	FLOATER.collision_shape_radius = 32

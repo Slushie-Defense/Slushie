@@ -2,6 +2,13 @@ extends CharacterBody2D
 
 # Enemy Data
 var enemy_data : EnemyData = EnemyData.new()
+@export var enemy_type : UnitData.enemy_list = UnitData.enemy_list.BASIC
+
+# Sprite
+@onready var character_sprite : Sprite2D = $CharacterSprite
+
+# Collision Shape
+@onready var collision_shape : CollisionShape2D = $CollisionShape2D
 
 # Health
 @onready var health : ProgressBar = $Healthbar
@@ -32,13 +39,36 @@ var coin_spawner = load("res://Entities/Coin/CoinSpawner.tscn")
 func _ready():
 	# Behavior after the Gas Station is destroyed
 	Main.signal_gas_station_destroyed.connect(_gas_station_destroyed)
+	# Set enemy type
+	_set_enemy_type()
 	# Set health
 	health.set_max_health(enemy_data.health)
+	print(str(enemy_data.unit_name) + " Health: " + str(enemy_data.health))
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
 	# Set attack speed
 	_update_attack_speed() # Set to default
 	# Update vision radius
 	_update_vision_radius()
+
+func _set_enemy_type():
+	# Set the enemy type
+
+	match enemy_type:
+		UnitData.enemy_list.BASIC:
+			enemy_data = UnitData.BASIC
+		UnitData.enemy_list.GRUNT:
+			enemy_data = UnitData.GRUNT
+		UnitData.enemy_list.SPITTER:
+			enemy_data = UnitData.SPITTER
+		UnitData.enemy_list.FLOATER:
+			enemy_data = UnitData.FLOATER
+		UnitData.enemy_list.TANK:
+			enemy_data = UnitData.TANK
+	
+	# Set texture
+	character_sprite.texture = enemy_data.basic_sprite
+	# Set collision shape
+	collision_shape.shape.radius = enemy_data.collision_shape_radius
 
 func _update_vision_radius():
 	# Update the enemy vision radius -- Right now it is just a circle

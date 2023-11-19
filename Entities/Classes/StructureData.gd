@@ -14,3 +14,5 @@ var delay_before_explode : float = 0.5 # For the landmines
 var attack_damage : int = 100
 var attack_range : float = 512.0
 var attack_radius : float = 96.0
+
+var ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
