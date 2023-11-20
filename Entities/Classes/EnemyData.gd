@@ -11,6 +11,8 @@ var attack_speed : float = 1.0 # Delay between attacks
 var attack_range : int = 64 # In pixels
 var attack_damage : int = 100
 
+var attack_type : UnitData.enemy_attack_list = UnitData.enemy_attack_list.MELEE
+
 var acceleration : float = 2000
 var max_speed : float = 100
 var vision_radius : int = 160

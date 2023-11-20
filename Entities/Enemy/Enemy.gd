@@ -137,6 +137,7 @@ func _on_attack_delay_timer_timeout():
 			# If it hits something it can attack
 			if first_collision_result.has_method("attack"):
 				# Create an attack class and pass it through
+				# This is a MELEE ATTACK
 				var attack = Attack.new()
 				attack.damage = enemy_data.attack_damage
 				first_collision_result.attack(attack)

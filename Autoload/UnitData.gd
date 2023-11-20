@@ -12,6 +12,7 @@ var PROJECTILE : StructureData = StructureData.new()
 
 # Enemy types
 enum enemy_list { BASIC, TANK, FLOATER, GRUNT, SPITTER }
+enum enemy_attack_list { MELEE, SIEGE, EXPLODE }
 
 # Enemies
 var BASIC : EnemyData = EnemyData.new()
@@ -66,7 +67,7 @@ func _ready():
 	# ENEMIES
 	# Setup BASIC
 	BASIC.unit_name = "Basic"
-	BASIC.health = 100
+	BASIC.health = 50
 	BASIC.coin_drop_value = 100.0
 	BASIC.attack_speed = 1.0 # Delay between attacks
 	BASIC.attack_range = 64 # In pixels
@@ -76,10 +77,11 @@ func _ready():
 	BASIC.vision_radius = 160
 	BASIC.basic_sprite = load("res://Sprites/Characters/Enemies/Basic/Basic256x256.png")
 	BASIC.collision_shape_radius = 32
+	BASIC.attack_type = UnitData.enemy_attack_list.MELEE
 	# Setup GRUNT
 	GRUNT.unit_name = "Grunt"
 	GRUNT.health = 100
-	GRUNT.coin_drop_value = 100.0
+	GRUNT.coin_drop_value = 200.0
 	GRUNT.attack_speed = 1.0 # Delay between attacks
 	GRUNT.attack_range = 64 # In pixels
 	GRUNT.attack_damage = 50
@@ -88,22 +90,24 @@ func _ready():
 	GRUNT.vision_radius = 160
 	GRUNT.basic_sprite = load("res://Sprites/Characters/Enemies/Grunt/Grunt256x256.png")
 	GRUNT.collision_shape_radius = 48
+	GRUNT.attack_type = UnitData.enemy_attack_list.MELEE
 	# Setup TANK
 	TANK.unit_name = "Tank"
 	TANK.health = 1000
-	TANK.coin_drop_value = 100.0
+	TANK.coin_drop_value = 500.0
 	TANK.attack_speed = 1.0 # Delay between attacks
 	TANK.attack_range = 64 # In pixels
-	TANK.attack_damage = 100
+	TANK.attack_damage = 0
 	TANK.acceleration = 2000
 	TANK.max_speed = 50
 	TANK.vision_radius = 160
 	TANK.basic_sprite = load("res://Sprites/Characters/Enemies/Tank/Tank256x256.png")
 	TANK.collision_shape_radius = 64
+	TANK.attack_type = UnitData.enemy_attack_list.MELEE
 	# Setup SPITTER
 	SPITTER.unit_name = "Spitter"
-	SPITTER.health = 100
-	SPITTER.coin_drop_value = 100.0
+	SPITTER.health = 200
+	SPITTER.coin_drop_value = 200.0
 	SPITTER.attack_speed = 1.0 # Delay between attacks
 	SPITTER.attack_range = 64 # In pixels
 	SPITTER.attack_damage = 100
@@ -112,6 +116,7 @@ func _ready():
 	SPITTER.vision_radius = 160
 	SPITTER.basic_sprite = load("res://Sprites/Characters/Enemies/Spitter/Spitter256x256.png")
 	SPITTER.collision_shape_radius = 56
+	SPITTER.attack_type = UnitData.enemy_attack_list.SIEGE
 	# Setup FLOATER
 	FLOATER.unit_name = "Floater"
 	FLOATER.health = 100
@@ -124,3 +129,4 @@ func _ready():
 	FLOATER.vision_radius = 160
 	FLOATER.basic_sprite = load("res://Sprites/Characters/Enemies/Floater/Floater256x256.png")
 	FLOATER.collision_shape_radius = 32
+	FLOATER.attack_type = UnitData.enemy_attack_list.EXPLODE
