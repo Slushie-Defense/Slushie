@@ -33,17 +33,29 @@ var autotarget_enemy : bool = true
 
 # Targeting
 var relative_target_position : Vector2 = Vector2(0, 512)
+var weapon_offset = Vector2.ZERO
 
 func _ready():
 	# Start firing immediately
 	shot_delay_timer.wait_time = weapon_data.delay_between_shots
 	shot_delay_timer.start()
 	# Show weapon range indicator
+	weapon_range_indicator.default_color.a = 0.08
 	_update_weapon_range()
+	# Change the direction
+	_update_weapon_direction(weapon_data.attack_direction)
+	# Update collision masks
+	_update_collsion_mask_layers()
+
+func _update_collsion_mask_layers():
+	for i in range(0, weapon_data.attack_collision_mask_list.size()):
+		var layer = weapon_data.attack_collision_mask_list[i][0]
+		var value = weapon_data.attack_collision_mask_list[i][1]
+		shapecast_2d.set_collision_mask_value(layer, value)
 
 func _update_weapon_range():
 	var offset = (weapon_data.attack_range * 0.5) - weapon_data.attack_radius
-	var weapon_offset = Vector2(offset, 0)
+	weapon_offset = Vector2(offset, 0)
 	# Default settings
 	shapecast_2d.shape = CapsuleShape2D.new()
 	# Weapon range Shapecast2D
@@ -52,10 +64,14 @@ func _update_weapon_range():
 	shapecast_2d.position = weapon_offset
 	# Weapon range indictator
 	var one_pixel_offset : int = 1 # Add one pixel to the x-axis so that the Landmine remains visible
-	weapon_range_indicator.default_color = Color("#FFD500")
-	weapon_range_indicator.default_color.a = 0.3
 	weapon_range_indicator.width = weapon_data.attack_radius * 2
-	weapon_range_indicator.points = [Vector2(0, 0), Vector2(weapon_data.attack_range - weapon_data.attack_radius - weapon_data.attack_radius + one_pixel_offset,0)]
+	var indicator_length = weapon_data.attack_range - weapon_data.attack_radius - weapon_data.attack_radius + one_pixel_offset
+	weapon_range_indicator.points = [Vector2(0, 0), Vector2(indicator_length, 0)]
+
+func _update_weapon_direction(aim_horizontal_direction):
+	aim_horizontal_direction = sign(aim_horizontal_direction)
+	shapecast_2d.position = weapon_offset * aim_horizontal_direction
+	weapon_range_indicator.points[1].x = weapon_range_indicator.points[1].x * aim_horizontal_direction
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= weapon_data.shots_before_reload:
@@ -121,7 +137,10 @@ func find_target_position():
 
 func create_projectile(arch_and_explode : bool = true):
 	var projectile = projectile_scene.instantiate()
+	projectile.collision_mask_list = weapon_data.attack_collision_mask_list
 	get_tree().get_root().add_child(projectile)
+	projectile._set_projectile_sprite(weapon_data.projectile_sprite)
+	projectile._set_projectile_color(weapon_data.projectile_color)
 	projectile.global_position = global_position
 	projectile.arch_and_explode = arch_and_explode
 	projectile.set_target_global_position(global_position + relative_target_position)
@@ -167,6 +186,7 @@ func clear_weapon_attack_line2d():
 func _create_landmine_explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = weapon_data.attack_damage
+	explosion.collision_mask_list = weapon_data.attack_collision_mask_list
 	get_tree().get_root().add_child(explosion)
 	explosion.global_position = global_position
 	# Destroy structure
@@ -174,6 +194,7 @@ func _create_landmine_explosion():
 
 func _self_destruct():
 	emit_signal("signal_weapon_destroyed")
+	call_deferred("queue_free")
 
 func weapon_range_indicator_visible(set_visibility):
 	weapon_range_indicator.visible = set_visibility

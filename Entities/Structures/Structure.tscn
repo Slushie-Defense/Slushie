@@ -12,6 +12,7 @@ size = Vector2(128, 128)
 
 [node name="Structure" type="StaticBody2D"]
 visibility_layer = 8
+z_index = 1
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_pfun1")
@@ -30,6 +31,10 @@ shape = SubResource("RectangleShape2D_7144t")
 texture = ExtResource("1_5wevt")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_7ms35")]
+offset_left = -56.0
+offset_top = 40.0
+offset_right = -24.0
+offset_bottom = 72.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bj2450c708xsx"]
 
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_p727u"]
-[ext_resource type="Texture2D" uid="uid://us56diwpb5tb" path="res://Sprites/Characters/PlayerPlaceholder.png" id="2_aqwo0"]
+[ext_resource type="Texture2D" uid="uid://us56diwpb5tb" path="res://Sprites/Characters/Player/Player128x192.png" id="2_aqwo0"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_4agde"]
 [ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/Managers/BuildingManager/BuildingManager.tscn" id="4_rd020"]
 
@@ -10,6 +10,7 @@ radius = 32.0
 
 [node name="Player" type="CharacterBody2D"]
 visibility_layer = 32
+z_index = 10
 collision_layer = 2
 script = ExtResource("1_p727u")
 
@@ -23,8 +24,9 @@ position = Vector2(0, -40)
 texture = ExtResource("2_aqwo0")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_4agde")]
-offset_top = -56.0
-offset_bottom = -24.0
+z_index = 11
+offset_top = -112.0
+offset_bottom = -80.0
 
 [node name="BuildingManager" parent="." instance=ExtResource("4_rd020")]
 visibility_layer = 4

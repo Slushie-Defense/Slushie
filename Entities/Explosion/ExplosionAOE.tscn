@@ -98,4 +98,5 @@ autostart = true
 stream = ExtResource("3_yq8l2")
 autoplay = true
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="DelayDamageTimer" to="." method="_on_delay_damage_timer_timeout"]

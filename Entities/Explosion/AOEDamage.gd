@@ -13,6 +13,9 @@ var attack_damage : float = 100.0 # Max damage at Epicenter
 var explosion_radius : float = 96.0
 var max_number_nodes_that_can_be_detected : int = 8
 
+# Friendly file or not
+var collision_mask_list : Array = [[1, false], [2, false], [3, false], [4, true], [6, true]] # Attack enemies default
+
 func _ready():
 	# Sprite scale
 	var explosion_diameter : float = explosion_radius * 2
@@ -23,6 +26,15 @@ func _ready():
 	collision_detection.max_results = max_number_nodes_that_can_be_detected
 	collision_detection.shape.radius = explosion_radius
 	collision_detection.enabled = false
+	
+	# Attack ENEMY or FRIENDLY
+	call_deferred("_update_collsion_mask_layers")
+
+func _update_collsion_mask_layers():
+	for i in range(0, collision_mask_list.size()):
+		var layer = collision_mask_list[i][0]
+		var value = collision_mask_list[i][1]
+		collision_detection.set_collision_mask_value(layer, value)
 
 func _deal_damage():
 	#print("AOE went off!")
@@ -48,3 +60,6 @@ func _deal_damage():
 
 func _on_delay_damage_timer_timeout():
 	_deal_damage()
+
+func _on_animation_player_animation_finished(anim_name):
+	call_deferred("queue_free") # Delete after the animation completes

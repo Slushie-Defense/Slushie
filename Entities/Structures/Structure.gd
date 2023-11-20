@@ -40,7 +40,7 @@ func attack(attack : Attack):
 	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
 
 func _event_health_is_zero():
-	print("Struture died!")
+	print("Structure died!")
 	call_deferred("queue_free")
 
 func _on_area_2d_body_entered(body):
@@ -63,9 +63,11 @@ func _convert_to_structure_type():
 	# Set health
 	health.set_max_health(structure_class.health)
 	
+	# Set placeholder sprite
+	structure_sprite.texture = structure_class.ui_sprite
+	
 	# If its a fence, do not create a weapon base
 	if structure_class.type == structure_type.FENCE:
-		structure_sprite.texture = load("res://Sprites/Structures/128x192Fence.png")
 		return # Early exit
 	
 	# Note if a weapon base has been attached
@@ -77,18 +79,6 @@ func _convert_to_structure_type():
 	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
 	# Set weapon type
 	weapon_base.weapon_data = structure_class
-	
-	# Setup structure
-	match structure_class.type:
-		structure_type.SIEGE:
-			structure_sprite.texture = load("res://Sprites/Structures/128x192Siege.png")
-		structure_type.INSTANT:
-			structure_sprite.texture = load("res://Sprites/Structures/128x192Instant.png")
-		structure_type.PROJECTILE:
-			structure_sprite.texture = load("res://Sprites/Structures/128x192Projectile.png")
-		structure_type.LANDMINE:
-			set_collision_layer_value(3, false) # Turn off the collision layer so that enemies can walk through it and do not attack it
-			structure_sprite.texture = load("res://Sprites/Structures/128x192Landmine.png")
 
 	# Add to structure
 	add_child(weapon_base)

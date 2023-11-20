@@ -29,8 +29,24 @@ var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 # Hit at target
 @onready var shapecast2d : ShapeCast2D = $ShapeCast2D
 
+# Friendly file or not
+var collision_mask_list : Array = [[1, false], [2, false], [3, false], [4, true], [6, true]] # Attack enemies default
+
 func _ready():
-	sprite_2d.self_modulate = Color("#EE00FF")
+	# Attack ENEMY or FRIENDLY
+	call_deferred("_update_collsion_mask_layers")
+
+func _update_collsion_mask_layers():
+	for i in range(0, collision_mask_list.size()):
+		var layer = collision_mask_list[i][0]
+		var value = collision_mask_list[i][1]
+		shapecast2d.set_collision_mask_value(layer, value)
+
+func _set_projectile_color(projectile_color):
+	sprite_2d.self_modulate = projectile_color
+
+func _set_projectile_sprite(projectile_sprite):
+	sprite_2d.texture = projectile_sprite
 
 func _physics_process(delta):
 	# Calculate the direction from the Coin to the player
@@ -98,5 +114,6 @@ func _reached_target():
 func _create_explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = attack_damage
+	explosion.collision_mask_list = collision_mask_list
 	get_tree().get_root().add_child(explosion)
 	explosion.global_position = target_position

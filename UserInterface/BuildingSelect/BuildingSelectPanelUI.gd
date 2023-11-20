@@ -90,11 +90,11 @@ func _update_coin_count(count):
 
 func _input(event):
 	var update : bool = false
-	if event.is_action_pressed("ui_text_caret_page_up"):
+	if event.is_action_pressed("SelectItemReverseButton"):
 		# Change to next active item
 		active_item = (active_item - 1) % (item_names.size())
 		update = true
-	if event.is_action_pressed("ui_text_caret_page_down"):
+	if event.is_action_pressed("SelectItemButton"):
 		# Change to next active item
 		active_item = (active_item + 1) % (item_names.size())
 		update = true
