@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5w6e3qraupjt"]
+
+[ext_resource type="Texture2D" uid="uid://fyv11w0s8xj5" path="res://Sprites/Coins/Coins32x32.png" id="1_01udk"]
+[ext_resource type="Script" path="res://UserInterface/SidebarHealth/SidebarHealth.gd" id="1_fh8ru"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4i834"]
+bg_color = Color(1, 0.0862745, 0.839216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uv134"]
+bg_color = Color(0, 0.698039, 0.411765, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fh8ru")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = -8
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer"]
+z_index = 1
+layout_mode = 2
+texture = ExtResource("1_01udk")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CenterContainer/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(96, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_4i834")
+theme_override_styles/fill = SubResource("StyleBoxFlat_uv134")
+value = 50.0
+show_percentage = false

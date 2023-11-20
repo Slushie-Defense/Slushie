@@ -2,6 +2,7 @@ extends ProgressBar
 
 # Signals
 signal signal_custom_health_is_zero
+signal signal_custom_health_changed(current_health, max_health)
 
 # Variables
 var max_health : float = 100.0
@@ -26,6 +27,8 @@ func update_progress_bar():
 	# Update the value
 	var weight = (current_health / max_health)
 	value = int(weight * 100.0) # Update progress bar
+	# Send the health
+	emit_signal("signal_custom_health_changed", current_health, max_health)
 	# Let the parent know it died
 	if value <= 0:
 		emit_signal("signal_custom_health_is_zero")
