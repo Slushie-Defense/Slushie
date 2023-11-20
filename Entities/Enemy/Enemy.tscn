@@ -17,6 +17,7 @@ collision_layer = 8
 collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_ff1tq")
+enemy_type = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1

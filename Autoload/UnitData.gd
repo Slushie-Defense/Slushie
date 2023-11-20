@@ -25,41 +25,41 @@ var FLOATER : EnemyData = EnemyData.new()
 func _ready():
 	# STRUCTURES
 	# Setup FENCE
-	FENCE.attack_damage = 0.0
 	FENCE.type = structure_list.FENCE
 	FENCE.unit_name = "FENCE"
 	FENCE.cost = 200
+	FENCE.attack_damage = 0.0
 	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
 	# Setup LANDMINE
-	LANDMINE.attack_damage = 100.0
 	LANDMINE.delay_before_explode = 0.5
 	LANDMINE.type = structure_list.LANDMINE
 	LANDMINE.unit_name = "LANDMINE"
 	LANDMINE.cost = 300
+	LANDMINE.attack_damage = 100.0
 	LANDMINE.attack_radius = 80.0
 	LANDMINE.attack_range = 160.0
 	LANDMINE.ui_sprite = load("res://Sprites/Structures/Landmine/128x192Landmine.png")
 	# Setup SIEGE
-	SIEGE.attack_damage = 100.0
 	SIEGE.type = structure_list.SIEGE
 	SIEGE.unit_name = "SIEGE"
 	SIEGE.cost = 1200
+	SIEGE.attack_damage = 100.0
 	SIEGE.attack_radius = 128.0
 	SIEGE.attack_range = 640.0
 	SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
 	# Setup INSTANT hit
-	INSTANT.attack_damage = 15.0
 	INSTANT.type = structure_list.INSTANT
 	INSTANT.unit_name = "INSTANT"
 	INSTANT.cost = 800
+	INSTANT.attack_damage = 15.0
 	INSTANT.attack_radius = 160.0
 	INSTANT.attack_range = 384.0
 	INSTANT.ui_sprite = load("res://Sprites/Structures/Instant/128x192Instant.png")
 	# Setup PROJECTILE hit
-	PROJECTILE.attack_damage = 20.0
 	PROJECTILE.type = structure_list.PROJECTILE
 	PROJECTILE.unit_name = "PROJECTILE"
 	PROJECTILE.cost = 600
+	PROJECTILE.attack_damage = 20.0
 	PROJECTILE.attack_radius = 128.0
 	PROJECTILE.attack_range = 512.0
 	PROJECTILE.ui_sprite = load("res://Sprites/Structures/Projectile/128x192Projectile.png")

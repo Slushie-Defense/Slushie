@@ -13,6 +13,9 @@ var attack_damage : float = 100.0 # Max damage at Epicenter
 var explosion_radius : float = 96.0
 var max_number_nodes_that_can_be_detected : int = 8
 
+# Friendly file or not
+var attack_player_and_structures : bool = false
+
 func _ready():
 	# Sprite scale
 	var explosion_diameter : float = explosion_radius * 2
@@ -23,6 +26,22 @@ func _ready():
 	collision_detection.max_results = max_number_nodes_that_can_be_detected
 	collision_detection.shape.radius = explosion_radius
 	collision_detection.enabled = false
+	
+	# Attack ENEMY or FRIENDLY
+	_set_attack_enemies() # Default
+
+func _set_attack_enemies():
+	# Attack enemy
+	collision_detection.set_collision_mask_value(1, false)
+	collision_detection.set_collision_mask_value(2, false)
+	collision_detection.set_collision_mask_value(3, false) 
+	collision_detection.set_collision_mask_value(4, true) # Attack Enemy
+
+func _set_attack_player_and_structures():
+	collision_detection.set_collision_mask_value(1, false)
+	collision_detection.set_collision_mask_value(2, true) # Attack Player
+	collision_detection.set_collision_mask_value(3, true) # Attack Player Structures
+	collision_detection.set_collision_mask_value(4, false)
 
 func _deal_damage():
 	#print("AOE went off!")

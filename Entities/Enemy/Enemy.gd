@@ -138,9 +138,24 @@ func _on_attack_delay_timer_timeout():
 			if first_collision_result.has_method("attack"):
 				# Create an attack class and pass it through
 				# This is a MELEE ATTACK
-				var attack = Attack.new()
-				attack.damage = enemy_data.attack_damage
-				first_collision_result.attack(attack)
+				match enemy_data.attack_type:
+					UnitData.enemy_attack_list.MELEE:
+						var attack = Attack.new()
+						attack.damage = enemy_data.attack_damage
+						first_collision_result.attack(attack)
+					UnitData.enemy_attack_list.EXPLODE:
+						_explode_attack()
+					UnitData.enemy_attack_list.SIEGE:
+						pass
+
+func _explode_attack():
+	var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
+	var explosion = explosion_scene.instantiate()
+	explosion.attack_damage = enemy_data.attack_damage
+	get_tree().get_root().add_child(explosion)
+	explosion._set_attack_player_and_structures()
+	explosion.global_position = global_position
+	call_deferred("queue_free") # Destroy self
 
 func _on_vision_body_entered(body):
 	if body.has_method("attack"):
