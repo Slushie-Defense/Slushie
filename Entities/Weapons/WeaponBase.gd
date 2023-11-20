@@ -40,6 +40,14 @@ func _ready():
 	shot_delay_timer.start()
 	# Show weapon range indicator
 	_update_weapon_range()
+	# Update collision masks
+	_update_collsion_mask_layers()
+
+func _update_collsion_mask_layers():
+	match weapon_data.type:
+		structure_type.LANDMINE:
+			shapecast_2d.set_collision_mask_value(4, true)
+			shapecast_2d.set_collision_mask_value(6, false) # Can't see floaters
 
 func _update_weapon_range():
 	var offset = (weapon_data.attack_range * 0.5) - weapon_data.attack_radius
@@ -122,6 +130,8 @@ func find_target_position():
 func create_projectile(arch_and_explode : bool = true):
 	var projectile = projectile_scene.instantiate()
 	get_tree().get_root().add_child(projectile)
+	projectile._set_projectile_sprite(weapon_data.projectile_sprite)
+	projectile._set_projectile_color(weapon_data.projectile_color)
 	projectile.global_position = global_position
 	projectile.arch_and_explode = arch_and_explode
 	projectile.set_target_global_position(global_position + relative_target_position)
@@ -174,6 +184,7 @@ func _create_landmine_explosion():
 
 func _self_destruct():
 	emit_signal("signal_weapon_destroyed")
+	call_deferred("queue_free")
 
 func weapon_range_indicator_visible(set_visibility):
 	weapon_range_indicator.visible = set_visibility

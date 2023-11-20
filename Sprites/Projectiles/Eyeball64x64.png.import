@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cae4ulejvrfte"
-path="res://.godot/imported/48x48Projectile.png-ac08bb5f913458dd9afe8db358a3f1c1.ctex"
+uid="uid://b3f60hjgae1ic"
+path="res://.godot/imported/Eyeball64x64.png-b2f513e82455167d36bdb2ab0527a5a1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Projectiles/48x48Projectile.png"
-dest_files=["res://.godot/imported/48x48Projectile.png-ac08bb5f913458dd9afe8db358a3f1c1.ctex"]
+source_file="res://Sprites/Projectiles/Eyeball64x64.png"
+dest_files=["res://.godot/imported/Eyeball64x64.png-b2f513e82455167d36bdb2ab0527a5a1.ctex"]
 
 [params]
 

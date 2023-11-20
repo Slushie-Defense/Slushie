@@ -40,7 +40,7 @@ func attack(attack : Attack):
 	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
 
 func _event_health_is_zero():
-	print("Struture died!")
+	print("Structure died!")
 	call_deferred("queue_free")
 
 func _on_area_2d_body_entered(body):

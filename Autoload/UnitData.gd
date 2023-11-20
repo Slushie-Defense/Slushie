@@ -21,7 +21,9 @@ var TANK : EnemyData = EnemyData.new()
 var SPITTER : EnemyData = EnemyData.new()
 var FLOATER : EnemyData = EnemyData.new()
 
-			
+# Enemy Weapon
+var SPITTER_SIEGE : StructureData = StructureData.new()
+
 func _ready():
 	# STRUCTURES
 	# Setup FENCE
@@ -117,6 +119,18 @@ func _ready():
 	SPITTER.basic_sprite = load("res://Sprites/Characters/Enemies/Spitter/Spitter256x256.png")
 	SPITTER.collision_shape_radius = 56
 	SPITTER.attack_type = UnitData.enemy_attack_list.SIEGE
+	
+		# Setup SIEGE
+	SPITTER_SIEGE.type = structure_list.SIEGE
+	SPITTER_SIEGE.unit_name = "SIEGE"
+	SPITTER_SIEGE.cost = 1200
+	SPITTER_SIEGE.attack_damage = 100.0
+	SPITTER_SIEGE.attack_radius = 128.0
+	SPITTER_SIEGE.attack_range = 640.0
+	SPITTER_SIEGE.projectile_sprite = load("res://Sprites/Projectiles/Eyeball64x64.png")
+	SPITTER_SIEGE.projectile_color = Color("#ffffff")
+	SPITTER_SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
+	
 	# Setup FLOATER
 	FLOATER.unit_name = "Floater"
 	FLOATER.health = 100

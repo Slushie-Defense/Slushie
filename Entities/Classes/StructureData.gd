@@ -16,3 +16,7 @@ var attack_range : float = 512.0
 var attack_radius : float = 96.0
 
 var ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
+
+# Projectile data
+var projectile_sprite = load("res://Sprites/Projectiles/Slushy64x64.png")
+var projectile_color = Color("#EE00FF")

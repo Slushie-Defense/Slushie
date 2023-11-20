@@ -29,8 +29,11 @@ var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 # Hit at target
 @onready var shapecast2d : ShapeCast2D = $ShapeCast2D
 
-func _ready():
-	sprite_2d.self_modulate = Color("#EE00FF")
+func _set_projectile_color(projectile_color):
+	sprite_2d.self_modulate = projectile_color
+
+func _set_projectile_sprite(projectile_sprite):
+	sprite_2d.texture = projectile_sprite
 
 func _physics_process(delta):
 	# Calculate the direction from the Coin to the player

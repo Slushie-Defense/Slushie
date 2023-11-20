@@ -35,6 +35,10 @@ var show_vision_radius : bool = true
 # Coins
 var coin_spawner = load("res://Entities/Coin/CoinSpawner.tscn")
 
+# Weapon base
+var weapon_base_scene = load("res://Entities/Weapons/WeaponBase.tscn")
+var weapon_base : Node2D = null
+
 # Initialize
 func _ready():
 	# Behavior after the Gas Station is destroyed
@@ -59,7 +63,7 @@ func _set_enemy_type():
 		UnitData.enemy_list.GRUNT:
 			enemy_data = UnitData.GRUNT
 		UnitData.enemy_list.SPITTER:
-			enemy_data = UnitData.SPITTER
+			_create_spitter()
 		UnitData.enemy_list.FLOATER:
 			enemy_data = UnitData.FLOATER
 		UnitData.enemy_list.TANK:
@@ -69,6 +73,15 @@ func _set_enemy_type():
 	character_sprite.texture = enemy_data.basic_sprite
 	# Set collision shape
 	collision_shape.shape.radius = enemy_data.collision_shape_radius
+
+func _create_spitter():
+	# Set enemy data
+	enemy_data = UnitData.SPITTER
+	# Create the weapon base
+	weapon_base = weapon_base_scene.instantiate() # Connect to weapon destroyed
+	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
+	weapon_base.weapon_data = UnitData.SPITTER_SIEGE # Set weapon type
+	add_child(weapon_base) # Add to structure
 
 func _update_vision_radius():
 	# Update the enemy vision radius -- Right now it is just a circle

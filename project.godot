@@ -105,8 +105,9 @@ SelectItemReverseButton={
 2d_render/layer_5="Projectiles"
 2d_render/layer_6="Player"
 2d_render/layer_7="Enemies"
-2d_render/layer_8="VFXs"
-2d_render/layer_9="UserInterface"
+2d_render/layer_8="Enemies Floating"
+2d_render/layer_9="VFX"
+2d_render/layer_10="UserInterface"
 2d_physics/layer_1="walls"
 3d_physics/layer_1="player"
 2d_physics/layer_2="player"
@@ -116,6 +117,8 @@ SelectItemReverseButton={
 2d_physics/layer_4="enemies"
 3d_physics/layer_4="coins"
 2d_physics/layer_5="coins"
+3d_physics/layer_5="enemies_floating"
+2d_physics/layer_6="enemies_floating"
 
 [rendering]
 
