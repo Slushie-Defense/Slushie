@@ -63,7 +63,7 @@ func _update_weapon_range():
 	#weapon_range_indicator.default_color = Color("#FFD500")
 	weapon_range_indicator.default_color.a = 0.08
 	weapon_range_indicator.width = weapon_data.attack_radius * 2
-	weapon_range_indicator.points = [Vector2(0, 0), Vector2(weapon_data.attack_range - weapon_data.attack_radius - weapon_data.attack_radius + one_pixel_offset,0)]
+	weapon_range_indicator.points = [Vector2(0, 0), Vector2(weapon_data.attack_range - weapon_data.attack_radius - weapon_data.attack_radius + one_pixel_offset, 0)]
 
 func _on_shot_delay_timer_timeout():	
 	if shot_counter >= weapon_data.shots_before_reload:

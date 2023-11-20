@@ -106,6 +106,7 @@ func _ready():
 	TANK.basic_sprite = load("res://Sprites/Characters/Enemies/Tank/Tank256x256.png")
 	TANK.collision_shape_radius = 64
 	TANK.attack_type = UnitData.enemy_attack_list.MELEE
+	
 	# Setup SPITTER
 	SPITTER.unit_name = "Spitter"
 	SPITTER.health = 200
@@ -119,8 +120,7 @@ func _ready():
 	SPITTER.basic_sprite = load("res://Sprites/Characters/Enemies/Spitter/Spitter256x256.png")
 	SPITTER.collision_shape_radius = 56
 	SPITTER.attack_type = UnitData.enemy_attack_list.SIEGE
-	
-		# Setup SIEGE
+	# Setup SPITTER WEAPON
 	SPITTER_SIEGE.type = structure_list.SIEGE
 	SPITTER_SIEGE.unit_name = "SIEGE"
 	SPITTER_SIEGE.cost = 1200
