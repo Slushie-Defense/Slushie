@@ -10,6 +10,7 @@ var coin_drop_value : float = 100.0
 var attack_speed : float = 1.0 # Delay between attacks
 var attack_range : int = 64 # In pixels
 var attack_damage : int = 100
+var attack_collision_mask_list : Array = [[2, true], [3, true], [4, false]]
 
 var attack_type : UnitData.enemy_attack_list = UnitData.enemy_attack_list.MELEE
 

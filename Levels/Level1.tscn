@@ -147,6 +147,9 @@ offset_bottom = 256.0
 position = Vector2(2560, 576)
 number_of_coins = 64
 
+[node name="Enemy" parent="." instance=ExtResource("4_e3ocv")]
+position = Vector2(2816, 320)
+
 [editable path="GroundTexture"]
 [editable path="TreesTexture2"]
 [editable path="TreesTexture3"]

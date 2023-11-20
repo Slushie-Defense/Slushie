@@ -56,7 +56,6 @@ func _ready():
 
 func _set_enemy_type():
 	# Set the enemy type
-
 	match enemy_type:
 		UnitData.enemy_list.BASIC:
 			enemy_data = UnitData.BASIC
@@ -81,6 +80,7 @@ func _create_spitter():
 	weapon_base = weapon_base_scene.instantiate() # Connect to weapon destroyed
 	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
 	weapon_base.weapon_data = UnitData.SPITTER_SIEGE # Set weapon type
+	weapon_base.position = Vector2.ZERO
 	add_child(weapon_base) # Add to structure
 
 func _update_vision_radius():
@@ -138,6 +138,9 @@ func _update_attack_speed():
 	attack_timer.wait_time = enemy_data.attack_speed
 
 func _on_attack_delay_timer_timeout():
+	# No need to attack if the enemy has a weapon attached
+	if enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
+		return 
 	# Attack
 	if ai_chase_node != null:
 		var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
@@ -158,17 +161,16 @@ func _on_attack_delay_timer_timeout():
 						first_collision_result.attack(attack)
 					UnitData.enemy_attack_list.EXPLODE:
 						_explode_attack()
-					UnitData.enemy_attack_list.SIEGE:
-						pass
 
 func _explode_attack():
 	var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = enemy_data.attack_damage
+	explosion.collision_mask_list = enemy_data.attack_collision_mask_list
 	get_tree().get_root().add_child(explosion)
-	explosion._set_attack_player_and_structures()
 	explosion.global_position = global_position
-	call_deferred("queue_free") # Destroy self
+	# Destroy self
+	_event_health_is_zero()
 
 func _on_vision_body_entered(body):
 	if body.has_method("attack"):

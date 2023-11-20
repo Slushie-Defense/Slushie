@@ -40,6 +40,7 @@ func _ready():
 	LANDMINE.attack_damage = 100.0
 	LANDMINE.attack_radius = 80.0
 	LANDMINE.attack_range = 160.0
+	LANDMINE.attack_collision_mask_list = [[2, false], [3, false], [4, true]]
 	LANDMINE.ui_sprite = load("res://Sprites/Structures/Landmine/128x192Landmine.png")
 	# Setup SIEGE
 	SIEGE.type = structure_list.SIEGE
@@ -122,11 +123,13 @@ func _ready():
 	SPITTER.attack_type = UnitData.enemy_attack_list.SIEGE
 	# Setup SPITTER WEAPON
 	SPITTER_SIEGE.type = structure_list.SIEGE
-	SPITTER_SIEGE.unit_name = "SIEGE"
+	SPITTER_SIEGE.unit_name = "Spitter Siege"
 	SPITTER_SIEGE.cost = 1200
 	SPITTER_SIEGE.attack_damage = 100.0
 	SPITTER_SIEGE.attack_radius = 128.0
 	SPITTER_SIEGE.attack_range = 640.0
+	SPITTER_SIEGE.attack_direction = -1 # AIM LEFT
+	SPITTER_SIEGE.attack_collision_mask_list = [[2, true], [3, true], [4, false]]
 	SPITTER_SIEGE.projectile_sprite = load("res://Sprites/Projectiles/Eyeball64x64.png")
 	SPITTER_SIEGE.projectile_color = Color("#ffffff")
 	SPITTER_SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")

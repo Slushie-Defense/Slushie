@@ -14,7 +14,7 @@ var explosion_radius : float = 96.0
 var max_number_nodes_that_can_be_detected : int = 8
 
 # Friendly file or not
-var attack_player_and_structures : bool = false
+var collision_mask_list : Array = [[1, false], [2, false], [3, false], [4, true], [6, true]] # Attack enemies default
 
 func _ready():
 	# Sprite scale
@@ -28,20 +28,13 @@ func _ready():
 	collision_detection.enabled = false
 	
 	# Attack ENEMY or FRIENDLY
-	_set_attack_enemies() # Default
+	call_deferred("_update_collsion_mask_layers")
 
-func _set_attack_enemies():
-	# Attack enemy
-	collision_detection.set_collision_mask_value(1, false)
-	collision_detection.set_collision_mask_value(2, false)
-	collision_detection.set_collision_mask_value(3, false) 
-	collision_detection.set_collision_mask_value(4, true) # Attack Enemy
-
-func _set_attack_player_and_structures():
-	collision_detection.set_collision_mask_value(1, false)
-	collision_detection.set_collision_mask_value(2, true) # Attack Player
-	collision_detection.set_collision_mask_value(3, true) # Attack Player Structures
-	collision_detection.set_collision_mask_value(4, false)
+func _update_collsion_mask_layers():
+	for i in range(0, collision_mask_list.size()):
+		var layer = collision_mask_list[i][0]
+		var value = collision_mask_list[i][1]
+		collision_detection.set_collision_mask_value(layer, value)
 
 func _deal_damage():
 	#print("AOE went off!")
@@ -67,3 +60,6 @@ func _deal_damage():
 
 func _on_delay_damage_timer_timeout():
 	_deal_damage()
+
+func _on_animation_player_animation_finished(anim_name):
+	call_deferred("queue_free") # Delete after the animation completes

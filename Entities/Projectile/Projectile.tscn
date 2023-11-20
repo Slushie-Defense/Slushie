@@ -8,6 +8,7 @@ radius = 12.0
 
 [node name="Projectile" type="Node2D"]
 visibility_layer = 16
+z_index = 12
 position = Vector2(640, 360)
 script = ExtResource("1_salub")
 
