@@ -35,12 +35,34 @@ var item_scene = load("res://UserInterface/BuildingSelect/SelectableItemUI.tscn"
 var coin_item_scene = load("res://UserInterface/BuildingSelect/CoinItemUI.tscn")
 var stats_scene = load("res://UserInterface/BuildingSelect/StatsItemUI.tscn")
 
+# Health bars
+var healthbar_scene = load("res://UserInterface/SidebarHealth/SidebarHealth.tscn")
+var player_healthbar
+var gas_station_healthbar
+var gas_station_healtbar_texture = load("res://Sprites/Healthbar/GasstationHealthbar32x32.png")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	call_deferred("_create_user_interface")
 	call_deferred("_update_seleted_item")
 
+func _on_signal_connect_player_healthbar(current_value, max_health):
+	player_healthbar._update_progress_bar(current_value, max_health)
+	
+func _on_signal_connect_gas_station_healthbar(current_value, max_health):
+	gas_station_healthbar._update_progress_bar(current_value, max_health)
+
 func _create_user_interface():
+	# Player
+	player_healthbar = _add_healthbar()
+	Main.player_node.health.signal_custom_health_changed.connect(_on_signal_connect_player_healthbar)
+	
+	# Gas Station
+	gas_station_healthbar = _add_healthbar()
+	gas_station_healthbar._update_texture(gas_station_healtbar_texture)
+	gas_station_healthbar._update_progress_bar_color("#000000", "#FFFFFF")
+	Main.gas_station_node.health.signal_custom_health_changed.connect(_on_signal_connect_gas_station_healthbar)
+	
 	# Create coin resource
 	coins = _add_coin(coin_item_scene, image_coins)
 	call_deferred("_connect_coins") # Connect coins
@@ -57,6 +79,11 @@ func _create_user_interface():
 	
 	# Set first item as active
 	_update_active_states()
+
+func _add_healthbar():
+	var healthbar = healthbar_scene.instantiate()
+	hboxcontainer.add_child(healthbar)
+	return healthbar
 
 func _add_coin(set_scene, item_texture):
 	var item = set_scene.instantiate()

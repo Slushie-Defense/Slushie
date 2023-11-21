@@ -28,7 +28,7 @@ func update_progress_bar():
 	var weight = (current_health / max_health)
 	value = int(weight * 100.0) # Update progress bar
 	# Send the health
-	emit_signal("signal_custom_health_changed", current_health, max_health)
+	emit_signal("signal_custom_health_changed", value, max_value)
 	# Let the parent know it died
 	if value <= 0:
 		emit_signal("signal_custom_health_is_zero")
