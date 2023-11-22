@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=18 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Portal.gd" id="2_mqamu"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
-[ext_resource type="Resource" uid="uid://bp0e2xmwm7eaq" path="res://Entities/Managers/WaveManager/DefaultGroup.tres" id="4_aqkxg"]
 [ext_resource type="PackedScene" uid="uid://digh6puar70w0" path="res://Entities/Enemy/Enemy.tscn" id="4_e3ocv"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/WaveManager.gd" id="7_d2dej"]
@@ -19,41 +18,35 @@
 [sub_resource type="Resource" id="Resource_my8wf"]
 script = ExtResource("8_qjyoi")
 enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
-type = "Basic"
+type = ""
 portals = Array[Node2D]([Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(2048, 384),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("2_mqamu"),"portal_name":"Top Lane")
 ])
 number_to_spawn_at_once = 1
 total_time = 3.0
 number_to_spawn = 1
 
+[sub_resource type="Resource" id="Resource_2nsys"]
+script = ExtResource("8_qjyoi")
+enemies = Array[PackedScene]([])
+type = ""
+portals = Array[Node2D]([Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(2048, 768),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("2_mqamu"),"portal_name":"Bot Lane")
+])
+number_to_spawn_at_once = 1
+total_time = 3.0
+number_to_spawn = 6
+
 [sub_resource type="Resource" id="Resource_upjrm"]
 script = ExtResource("9_cbk5y")
 name = "Wave 1"
 description = "The description"
-enemies = Array[ExtResource("8_qjyoi")]([ExtResource("4_aqkxg"), SubResource("Resource_my8wf")])
-
-[sub_resource type="Resource" id="Resource_e4hq0"]
-script = ExtResource("8_qjyoi")
-enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
-type = "Basic"
-portals = Array[Node2D]([Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(2048, 768),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("2_mqamu"),"portal_name":"Bot Lane")
-])
-number_to_spawn_at_once = 1
-total_time = 2.0
-number_to_spawn = 3
-
-[sub_resource type="Resource" id="Resource_rsmkp"]
-script = ExtResource("9_cbk5y")
-name = "Wave 2"
-description = "Wavy wave"
-enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_e4hq0")])
+enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_my8wf"), SubResource("Resource_2nsys")])
 
 [node name="Level1" type="Node2D"]
 
 [node name="WaveManager" type="Node2D" parent="."]
 position = Vector2(-1, 0)
 script = ExtResource("7_d2dej")
-waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm"), SubResource("Resource_rsmkp")])
+waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm")])
 
 [node name="GameStateManager" type="Node2D" parent="." node_paths=PackedStringArray("current_wave_manager")]
 process_mode = 3
@@ -80,7 +73,7 @@ offset_right = 4096.0
 offset_bottom = 1152.0
 
 [node name="Camera" parent="." instance=ExtResource("1_0xhkv")]
-zoom = Vector2(0.6, 0.6)
+zoom = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." instance=ExtResource("1_46qfd")]
 position = Vector2(1400, 576)
