@@ -10,5 +10,3 @@
 #     ◦ Minor nitpick, I would've expected us to not bother calling the check until after the fact, versus checking it within function. A bit of messy variable scope management/coupling.
 class_name Portal
 extends Node2D
-
-@export var portal_name: String
