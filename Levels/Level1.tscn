@@ -73,7 +73,6 @@ offset_right = 4096.0
 offset_bottom = 1152.0
 
 [node name="Camera" parent="." instance=ExtResource("1_0xhkv")]
-zoom = Vector2(0.5, 0.5)
 
 [node name="Player" parent="." instance=ExtResource("1_46qfd")]
 position = Vector2(1400, 576)

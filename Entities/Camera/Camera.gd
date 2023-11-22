@@ -34,3 +34,10 @@ func _update_position(set_position):
 	
 	# Position User Interface
 	user_interface.position = Vector2(offset.x - (camera_width * 0.5), offset.y - (camera_height * 0.5))
+
+func _input(event):
+	if event.is_action_pressed("ZoomIn"):
+		zoom = Vector2(1.0, 1.0)
+	if event.is_action_pressed("ZoomOut"):
+		zoom = Vector2(0.5, 0.5)	
+	
