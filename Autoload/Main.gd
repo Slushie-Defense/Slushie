@@ -1,6 +1,7 @@
 extends Node
 
 signal signal_add_player(player_node) # How we find the player
+signal signal_add_gas_station(gas_station_node) # How we find the gas station
 signal signal_update_coin_count(count)
 signal signal_purchase_failed()
 signal signal_wave_event(event_string)
@@ -9,6 +10,8 @@ signal signal_gas_station_destroyed()
 
 # Player node
 var player_node : CharacterBody2D = null
+# Gas station
+var gas_station_node : StaticBody2D = null
 
 # Coin count
 var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
@@ -18,6 +21,7 @@ var coin_reward : int = 200
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	signal_add_player.connect(_on_signal_add_player)
+	signal_add_gas_station.connect(_on_signal_add_gas_station)
 	signal_update_coin_count.connect(_update_coin_count)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -30,8 +34,11 @@ func _pause_game_toggle():
 	print(log_pause)
 	get_tree().paused = not get_tree().paused
 
-func _on_signal_add_player(pass_player_node):
-	player_node = pass_player_node
+func _on_signal_add_gas_station(pass_node):
+	gas_station_node = pass_node
+	
+func _on_signal_add_player(pass_node):
+	player_node = pass_node
 	# Reward with some coins
 	get_tree().create_timer(1.0).timeout.connect(_reward_with_coins)
 

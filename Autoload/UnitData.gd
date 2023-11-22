@@ -124,7 +124,7 @@ func _ready():
 	# Setup SPITTER WEAPON
 	SPITTER_SIEGE.type = structure_list.SIEGE
 	SPITTER_SIEGE.unit_name = "Spitter Siege"
-	SPITTER_SIEGE.cost = 1200
+	SPITTER_SIEGE.cost = 0
 	SPITTER_SIEGE.attack_damage = 100.0
 	SPITTER_SIEGE.attack_radius = 128.0
 	SPITTER_SIEGE.attack_range = 640.0
