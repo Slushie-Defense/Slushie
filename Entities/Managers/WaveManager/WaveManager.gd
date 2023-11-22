@@ -35,22 +35,24 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 		enemy_instance = enemy_info.enemies[random_index].instantiate()
 
 
+	var enemy_position = Vector2.ZERO
 	if (enemy_info.portals.size() == 0):
 		print("no portals to spawn at")
 		return
 	# if the portals array size is 1, spawn at that position
 	if (enemy_info.portals.size() == 1):
-		enemy_instance.position = enemy_info.portals[0].position
+		enemy_position = enemy_info.portals[0].position
 	else:
 	# if the portals array size is greater than 1, spawn at a random position on the portals from the array
 		var random_index = randi() % enemy_info.portals.size()
-		enemy_instance.position = enemy_info.portals[random_index].position
+		enemy_position = enemy_info.portals[random_index].position
 		
 	# add variance to the position
-	enemy_instance.position.x += randi() % 100 - 50
+	enemy_position.x += randi() % 100 - 50
 
 	#print("spawning "+ enemy_info.type + "at " + str(enemy_instance.position))
 	add_child(enemy_instance)
+	enemy_instance.position = enemy_position
 
 # spawn the enemy with a delay (coroutine)
 func _spawn_enemy(enemy_info: EnemySpawnInfo):
