@@ -52,7 +52,7 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 
 	#print("spawning "+ enemy_info.type + "at " + str(enemy_instance.position))
 	add_child(enemy_instance)
-	enemy_instance.position = enemy_position
+	enemy_instance.global_position = enemy_position
 
 # spawn the enemy with a delay (coroutine)
 func _spawn_enemy(enemy_info: EnemySpawnInfo):
