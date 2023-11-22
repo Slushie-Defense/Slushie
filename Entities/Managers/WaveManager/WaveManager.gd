@@ -36,16 +36,25 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 
 
 	var enemy_position = Vector2.ZERO
-	if (enemy_info.portals.size() == 0):
+	
+	# Find portals through strings
+	var portal_list : Array = []
+	for portal_name in enemy_info.portals:
+		for child in get_tree().current_scene.get_children():
+			if child.name == portal_name:
+				portal_list.push_back(child)
+				
+	
+	if (portal_list.size() == 0):
 		print("no portals to spawn at")
 		return
 	# if the portals array size is 1, spawn at that position
-	if (enemy_info.portals.size() == 1):
-		enemy_position = enemy_info.portals[0].position
+	if (portal_list.size() == 1):
+		enemy_position = portal_list[0].position
 	else:
 	# if the portals array size is greater than 1, spawn at a random position on the portals from the array
 		var random_index = randi() % enemy_info.portals.size()
-		enemy_position = enemy_info.portals[random_index].position
+		enemy_position = portal_list[random_index].position
 		
 	# add variance to the position
 	enemy_position.x += randi() % 100 - 50
