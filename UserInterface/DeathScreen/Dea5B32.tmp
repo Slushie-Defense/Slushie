@@ -15,7 +15,6 @@ offset_bottom = 48.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_v18lj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 5
 texture = ExtResource("2_b8xvl")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -25,13 +24,11 @@ offset_right = 1280.0
 offset_bottom = 581.0
 
 [node name="Button" type="Button" parent="CenterContainer"]
-z_index = 10
 layout_mode = 2
 theme = ExtResource("3_1kdl4")
 text = "Retry"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.001
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
