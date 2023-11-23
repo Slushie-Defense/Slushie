@@ -2,12 +2,16 @@ extends Node
 
 signal signal_add_player(player_node) # How we find the player
 signal signal_add_gas_station(gas_station_node) # How we find the gas station
+signal signal_add_camera(camera_node)
+
 signal signal_update_coin_count(count)
 signal signal_purchase_failed()
 signal signal_wave_event(event_string)
 signal signal_selected_item_update(item_type)
 signal signal_gas_station_destroyed()
 
+# Camera node
+var camera_node : Camera2D = null
 # Player node
 var player_node : CharacterBody2D = null
 # Gas station
@@ -34,6 +38,9 @@ func _pause_game_toggle():
 	print(log_pause)
 	get_tree().paused = not get_tree().paused
 
+func _on_signal_add_camera(pass_node):
+	camera_node = pass_node
+	
 func _on_signal_add_gas_station(pass_node):
 	gas_station_node = pass_node
 	

@@ -5,10 +5,14 @@ extends Camera2D
 
 var camera_width = 1280
 var camera_height = 720
+var camera_position_top_left = Vector2.ZERO
 
 var follow_position = Vector2.ZERO
 
 func _ready():
+	# Emit signal
+	Main.emit_signal("signal_add_camera", self)
+	# Get width
 	camera_width = get_viewport_rect().size.x
 	camera_height = get_viewport_rect().size.y	
 	# Wave event
@@ -33,7 +37,8 @@ func _update_position(set_position):
 	offset = limit_position
 	
 	# Position User Interface
-	user_interface.position = Vector2(offset.x - (camera_width * 0.5), offset.y - (camera_height * 0.5))
+	camera_position_top_left = Vector2(offset.x - (camera_width * 0.5), offset.y - (camera_height * 0.5))
+	user_interface.position = camera_position_top_left
 
 func _input(event):
 	if event.is_action_pressed("ZoomIn"):
