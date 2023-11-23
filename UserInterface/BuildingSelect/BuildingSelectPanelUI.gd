@@ -60,7 +60,6 @@ func _create_user_interface():
 	# Gas Station
 	gas_station_healthbar = _add_healthbar()
 	gas_station_healthbar._update_texture(gas_station_healtbar_texture)
-	gas_station_healthbar._update_progress_bar_color("#000000", "#FFFFFF")
 	Main.gas_station_node.health.signal_custom_health_changed.connect(_on_signal_connect_gas_station_healthbar)
 	
 	# Create coin resource
