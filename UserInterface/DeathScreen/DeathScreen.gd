@@ -27,28 +27,40 @@ func _ready():
 	background_panel.size = Vector2(camera_width, camera_height)
 	# Position sprite
 	player_node.position = camera_center
-	player_node.scale = Vector2(12,12)
+	#player_node.scale = Vector2(12,12)
 	# Create circle
 	timer.start()
+	# Create portals
+	var psuedo_delta : float = 1 / 60
+	var psuedo_time : int = 60 * 1.5
+	var number_of_portals : int = 5
+	for i in number_of_portals:
+		_create_portal_sprite()
+		# Pass time
+		for x in psuedo_time:
+			_update_portals(psuedo_delta)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	player_node.rotation_degrees -= player_rotation_speed * delta
 	player_node.position.y = camera_center.y + sin(player_node.rotation * 2) * 32
+	var player_scale = 1 + (sin(player_node.rotation * 2) * 0.25)
+	player_node.scale = Vector2(player_scale, player_scale)
 	# Portals
-	_update_portals(delta)
+	_update_portals(delta, true)
 	
-func _update_portals(delta):
+func _update_portals(delta, pop : bool = false):
 	# grow and spin
 	var pop_index = -1
 	if portal_list.size() > 0:
 		for i in portal_list.size():
 			var portal_spin_speed = 15
-			portal_list[i].scale = portal_list[i].scale * 1.01
-			portal_list[i].rotation_degrees += portal_spin_speed * delta
-			if portal_list[i].scale.x > 9.0:
-				portal_list[i].queue_free()
-				pop_index = i
+			if not portal_list[i] == null:
+				portal_list[i].scale = portal_list[i].scale * 1.01
+				portal_list[i].rotation_degrees += portal_spin_speed * delta
+				if portal_list[i].scale.x > 9.0:
+					portal_list[i].queue_free()
+					pop_index = i
 				
 	if not pop_index == -1:
 		portal_list.pop_at(pop_index)
@@ -63,5 +75,12 @@ func _create_portal_sprite():
 
 func _on_timer_timeout():
 	_create_portal_sprite()
-	timer.wait_time = 1.0
+	timer.wait_time = 1.5
 	timer.start()
+
+func _on_retry_button_pressed():
+	get_tree().change_scene_to_file("res://Levels/Level1.tscn")
+
+func _on_main_menu_pressed():
+	get_tree().change_scene_to_file("res://UserInterface/SplashScreen/SplashScreen.tscn")
+

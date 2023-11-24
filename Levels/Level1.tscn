@@ -19,7 +19,7 @@
 script = ExtResource("8_qjyoi")
 enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
 type = ""
-portals = PackedStringArray("TopLanePortal", "BotLanePortal")
+portals = ["TopLanePortal", "BotLanePortal"]
 number_to_spawn_at_once = 1
 total_time = 3.0
 number_to_spawn = 1
@@ -28,7 +28,7 @@ number_to_spawn = 1
 script = ExtResource("8_qjyoi")
 enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
 type = ""
-portals = PackedStringArray("TopLanePortal")
+portals = ["TopLanePortal", "BotLanePortal"]
 number_to_spawn_at_once = 1
 total_time = 3.0
 number_to_spawn = 6
