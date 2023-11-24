@@ -30,10 +30,10 @@ func _update_position(set_position):
 	# Camera limits
 	var offset_y_max : int = 512 * zoom.y
 	var level_y_center : int = 576
-	var offset_x_min : int = 1024
+	var offset_x_min : int = 256 if zoom.y == 1.0 else 720
 	var limit_position = set_position
 	limit_position.y = clamp(set_position.y, level_y_center - offset_y_max, level_y_center + offset_y_max)
-	limit_position.x = clamp(set_position.x, 1024, INF)
+	limit_position.x = clamp(set_position.x, offset_x_min, INF)
 	offset = limit_position
 	
 	# Position User Interface

@@ -37,7 +37,6 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Game over screen
 	signal_player_died.connect(_game_ended)
-	
 
 func _game_ended():
 	get_tree().create_timer(5.0).timeout.connect(_go_to_death_scene)
