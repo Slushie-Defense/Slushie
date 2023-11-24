@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://bas7al55cr6oh"]
+
+[ext_resource type="Script" path="res://UserInterface/DeathScreen/DeathScreen.gd" id="1_tw5eq"]
+[ext_resource type="Texture2D" uid="uid://b8eiyjunaiupr" path="res://Sprites/DeathScreen/stef_falling_legs.png" id="2_6mdx7"]
+[ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="3_1kdl4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v18lj"]
+
+[node name="DeathScreen" type="Node2D"]
+script = ExtResource("1_tw5eq")
+
+[node name="BackgroundPanel" type="Panel" parent="."]
+offset_right = 48.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v18lj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+texture = ExtResource("2_6mdx7")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1280, 0)
+offset_top = 540.0
+offset_right = 1280.0
+offset_bottom = 581.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="RetryButton" type="Button" parent="CenterContainer/VBoxContainer"]
+z_index = 10
+layout_mode = 2
+theme = ExtResource("3_1kdl4")
+text = "Retry"
+
+[node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
+z_index = 10
+layout_mode = 2
+theme = ExtResource("3_1kdl4")
+text = "Main Menu
+"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -29,4 +29,5 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_n22cx")
 
 [node name="Healthbar" parent="." instance=ExtResource("2_kpqkr")]
+visible = false
 scale = Vector2(1, 1)

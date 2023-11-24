@@ -24,6 +24,7 @@ position = Vector2(0, -40)
 texture = ExtResource("2_aqwo0")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_4agde")]
+visible = false
 z_index = 11
 offset_top = -112.0
 offset_bottom = -80.0
