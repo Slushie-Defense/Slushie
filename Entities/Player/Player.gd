@@ -25,6 +25,8 @@ func _ready():
 	Main.emit_signal("signal_add_player", self)
 	# Show build grid
 	building_manager.visible = show_build_grid
+	# Player dies if gas station dies
+	Main.signal_gas_station_destroyed.connect(_event_health_is_zero)
 
 # Called every frame
 func _physics_process(delta):
@@ -68,6 +70,7 @@ func building_manager_create_structure():
 		building_manager.add_structure()
 
 func _event_health_is_zero():
+	Main.emit_signal("signal_player_died")
 	call_deferred("queue_free")
 	print("Player died!")
 

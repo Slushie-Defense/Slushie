@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bas7al55cr6oh"]
 
 [ext_resource type="Script" path="res://UserInterface/DeathScreen/DeathScreen.gd" id="1_tw5eq"]
-[ext_resource type="Texture2D" uid="uid://h5jlor6efxog" path="res://Sprites/Characters/Player/Player256x256.png" id="2_b8xvl"]
+[ext_resource type="Texture2D" uid="uid://b8eiyjunaiupr" path="res://Sprites/DeathScreen/stef_falling_legs.png" id="2_6mdx7"]
 [ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="3_1kdl4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v18lj"]
@@ -16,7 +16,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_v18lj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 5
-texture = ExtResource("2_b8xvl")
+texture = ExtResource("2_6mdx7")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(1280, 0)

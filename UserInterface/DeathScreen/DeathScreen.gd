@@ -43,6 +43,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	player_node.rotation_degrees -= player_rotation_speed * delta
+	player_node.position.x = camera_center.x + sin(player_node.rotation) * 16
 	player_node.position.y = camera_center.y + sin(player_node.rotation * 2) * 32
 	var player_scale = 1 + (sin(player_node.rotation * 2) * 0.25)
 	player_node.scale = Vector2(player_scale, player_scale)
@@ -58,6 +59,11 @@ func _update_portals(delta, pop : bool = false):
 			if not portal_list[i] == null:
 				portal_list[i].scale = portal_list[i].scale * 1.01
 				portal_list[i].rotation_degrees += portal_spin_speed * delta
+				var oscillation : float = portal_list[i].rotation * 2
+				var portal_scale : float = portal_list[i].scale.x
+				portal_list[i].position.x = camera_center.x + (sin(oscillation) * 16)
+				portal_list[i].position.y = camera_center.y + (cos(oscillation) * 16)
+				
 				if portal_list[i].scale.x > 9.0:
 					portal_list[i].queue_free()
 					pop_index = i
