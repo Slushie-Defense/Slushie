@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1vyrdmd23lcq"]
+
+[ext_resource type="Script" path="res://Entities/Portal/Portal.gd" id="1_b2mcf"]
+
+[node name="Portal" type="Node2D"]
+script = ExtResource("1_b2mcf")

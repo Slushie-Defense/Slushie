@@ -39,6 +39,7 @@ func _ready():
 	signal_player_died.connect(_game_ended)
 
 func _game_ended():
+	# Open the Portal Looping Game Over Screen
 	get_tree().create_timer(5.0).timeout.connect(_go_to_death_scene)
 
 func _go_to_death_scene():

@@ -8,18 +8,22 @@ extends Node2D
 
 var spawning = false
 
+func _ready():
+	# If player or gas station is destroyed do the callback function
+	Main.signal_player_died.connect(_event_game_over)
+
 # since the spawned enemies will be childed to the object, we can use get_child_count to check the status of the enemies in the wave
 func check_wave_complete():
 	if (spawning):
 		return false
 	if (get_child_count() == 0):
-		Main.emit_signal("signal_wave_event", "Wave complete!")
-		current_wave_index+=1
+		#Main.emit_signal("signal_wave_event", "Wave complete!")
+		current_wave_index += 1
 		return true
 	else:
 		return false
 
-# gets the enemy scene from the enemy type, instantiates it, and childs it to $WaveManager
+# Gets the enemy scene from the enemy type, instantiates it, and childs it to $WaveManager
 func _add_enemy(enemy_info : EnemySpawnInfo):
 	var enemy_instance : Node2D
 	# get enemies from enemy_info
@@ -34,7 +38,6 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 		var random_index = randi() % enemy_info.enemies.size()
 		enemy_instance = enemy_info.enemies[random_index].instantiate()
 
-
 	var enemy_position = Vector2.ZERO
 	
 	# Find portals through strings
@@ -43,7 +46,6 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 		for child in get_tree().current_scene.get_children():
 			if child.name == portal_name:
 				portal_list.push_back(child)
-				
 	
 	if (portal_list.size() == 0):
 		print("no portals to spawn at")
@@ -69,32 +71,31 @@ func _spawn_enemy(enemy_info: EnemySpawnInfo):
 		_add_enemy(enemy_info)
 	await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn)).timeout
 
-
 # spawns a wave, which syncronously loops through the groups
 func spawn_wave(wave_number: int):
 	spawning = true
 	var current_wave = waves[wave_number]
-	Main.emit_signal("signal_wave_event", str(current_wave.name) + ": new wave spawning")
+	Main.emit_signal("signal_wave_event", "Wave " + str(wave_number))
 
 	# spawn the groups sequentially
 	for enemy_info in current_wave.enemies:
 		await _spawn_group(enemy_info)
 	wave_number += 1
 	spawning = false
-	Main.emit_signal("signal_wave_event", str(current_wave.name) + ": wave completed spawning")
+	# Main.emit_signal("signal_wave_event", str(current_wave.name) + ": wave completed spawning")
 
 # spawns a group of enemies within a wave
 func _spawn_group(enemy_info: EnemySpawnInfo):
-	Main.emit_signal("signal_wave_event", str(enemy_info.type) + ": new group spawning")
+	# Main.emit_signal("signal_wave_event", str(enemy_info.type) + ": new group spawning")
 	for i in range(enemy_info.number_to_spawn + 1):
 		await _spawn_enemy(enemy_info)
-	Main.emit_signal("signal_wave_event", str(enemy_info.type) + ": Spawned all enemies in this group")
+	# Main.emit_signal("signal_wave_event", str(enemy_info.type) + ": Spawned all enemies in this group")
 
 var current_wave_index = 0
 # Called when the node enters the scene tree for the first time.
 func spawn_next_wave():
 	spawn_wave(current_wave_index)
 
-func _process(delta):
-	if (spawning):
-		return
+# What happens when the creation
+func _event_game_over():
+	pass

@@ -2,10 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
-[ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Managers/WaveManager/Portal.tscn" id="1_76lsd"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/GameStateManager.gd" id="1_g46yp"]
+[ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Portal/Portal.tscn" id="1_76lsd"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Portal.gd" id="2_mqamu"]
+[ext_resource type="Script" path="res://Entities/Portal/Portal.gd" id="2_mqamu"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
 [ext_resource type="PackedScene" uid="uid://digh6puar70w0" path="res://Entities/Enemy/Enemy.tscn" id="4_e3ocv"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
@@ -18,37 +17,38 @@
 [sub_resource type="Resource" id="Resource_my8wf"]
 script = ExtResource("8_qjyoi")
 enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
-type = ""
+type = [[0, "BASIC"], [0, "SPITTER"], [0, "SIEGE"], [0, "GRUNT"], [0, "FLOATER"]]
 portals = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
 number_to_spawn_at_once = 1
 total_time = 3.0
-number_to_spawn = 0
 
 [sub_resource type="Resource" id="Resource_2nsys"]
 script = ExtResource("8_qjyoi")
 enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
-type = ""
+type = [[0, "BASIC"], [0, "SPITTER"], [0, "SIEGE"], [0, "GRUNT"], [0, "FLOATER"]]
 portals = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
 number_to_spawn_at_once = 1
 total_time = 3.0
-number_to_spawn = 0
+
+[sub_resource type="Resource" id="Resource_imfxt"]
+script = ExtResource("8_qjyoi")
+enemies = Array[PackedScene]([])
+type = [[0, "BASIC"], [0, "SPITTER"], [0, "SIEGE"], [0, "GRUNT"], [0, "FLOATER"]]
+portals = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
+number_to_spawn_at_once = 1
+total_time = 0.0
 
 [sub_resource type="Resource" id="Resource_upjrm"]
 script = ExtResource("9_cbk5y")
 name = "Wave 1"
 description = "The description"
-enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_my8wf"), SubResource("Resource_2nsys")])
+enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_my8wf"), SubResource("Resource_2nsys"), SubResource("Resource_imfxt")])
 
 [node name="Level1" type="Node2D"]
 
 [node name="WaveManager" type="Node2D" parent="."]
 script = ExtResource("7_d2dej")
 waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm")])
-
-[node name="GameStateManager" type="Node2D" parent="." node_paths=PackedStringArray("current_wave_manager")]
-process_mode = 3
-script = ExtResource("1_g46yp")
-current_wave_manager = NodePath("../WaveManager")
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 0.0
