@@ -1,6 +1,7 @@
 extends Node2D
 
 signal signal_weapon_destroyed()
+signal signal_weapon_is_attacking(target_node)
 
 @onready var sound_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
@@ -132,6 +133,7 @@ func find_target_position():
 				# If it hits something it can attack
 				if first_collision_result.has_method("attack"):
 					relative_target_position = first_collision_result.global_position - global_position
+					emit_signal("signal_weapon_is_attacking", first_collision_result)
 					return true
 	return false
 

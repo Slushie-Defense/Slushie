@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+# State
+enum enemy_states { SPAWN, IDLE, CHASE, ATTACK, DEAD }
+var enemy_state = enemy_states.SPAWN
+
 # Enemy Data
 var enemy_data : EnemyData = EnemyData.new()
 @export var enemy_type : UnitData.enemy_list = UnitData.enemy_list.BASIC
@@ -53,6 +57,8 @@ func _ready():
 	_update_attack_speed() # Set to default
 	# Update vision radius
 	_update_vision_radius()
+	# SPAWN
+	enemy_state = enemy_states.SPAWN
 
 func _set_enemy_type():
 	# Set the enemy type
@@ -73,28 +79,6 @@ func _set_enemy_type():
 	# Set collision shape
 	collision_shape.shape.radius = enemy_data.collision_shape_radius
 
-func _create_spitter():
-	# Set enemy data
-	enemy_data = UnitData.SPITTER
-	# Create the weapon base
-	weapon_base = weapon_base_scene.instantiate() # Connect to weapon destroyed
-	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
-	weapon_base.weapon_data = UnitData.SPITTER_SIEGE # Set weapon type
-	weapon_base.position = Vector2.ZERO
-	add_child(weapon_base) # Add to structure
-
-func _update_vision_radius():
-	# Update the enemy vision radius -- Right now it is just a circle
-	vision_collider.shape.radius = enemy_data.vision_radius
-	# Show vision
-	if show_vision_radius:
-		var sprite_width : float = 128.0
-		var vision_diameter : float = enemy_data.vision_radius * 2.0
-		var sprite_scale : float = vision_diameter / sprite_width
-		vision_sprite.scale = Vector2(sprite_scale, sprite_scale)
-	else:
-		vision_sprite.hide()
-
 # Called every frame
 func _physics_process(delta):
 	# Direction & Attack
@@ -114,6 +98,7 @@ func apply_movement(acceleration):
 func _ai_process():
 	# Direction priority
 	ai_direction = ai_default_direction # Default goes left
+	enemy_state = enemy_states.IDLE
 	
 	# Chase nodes
 	if ai_chase_node_list.size() > 0:
@@ -129,18 +114,18 @@ func _ai_process():
 		
 		# Found an object to chase
 		if ai_chase_node != null:
+			enemy_state = enemy_states.CHASE
 			ai_direction = global_position.direction_to(ai_chase_node.global_position)
 			# Try to attack if available
-			if attack_timer.is_stopped():
-				attack_timer.start()
+			# No need to attack if the enemy has a weapon attached
+			if not enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
+				if attack_timer.is_stopped():
+					attack_timer.start()
 
 func _update_attack_speed():
 	attack_timer.wait_time = enemy_data.attack_speed
 
 func _on_attack_delay_timer_timeout():
-	# No need to attack if the enemy has a weapon attached
-	if enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
-		return 
 	# Attack
 	if ai_chase_node != null:
 		var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
@@ -153,6 +138,7 @@ func _on_attack_delay_timer_timeout():
 			# If it hits something it can attack
 			if first_collision_result.has_method("attack"):
 				# Create an attack class and pass it through
+				_enemy_is_attacking(first_collision_result)
 				# This is a MELEE ATTACK
 				match enemy_data.attack_type:
 					UnitData.enemy_attack_list.MELEE:
@@ -161,6 +147,42 @@ func _on_attack_delay_timer_timeout():
 						first_collision_result.attack(attack)
 					UnitData.enemy_attack_list.EXPLODE:
 						_explode_attack()
+
+func _enemy_is_attacking(target_node):
+	# This triggered whenever the enemy is attacking -- Incldding if it is a weapon
+	enemy_state = enemy_states.ATTACK
+	# What type of attack is is doing
+	#match enemy_data.attack_type:
+	#	UnitData.enemy_attack_list.MELEE:
+	#		pass
+	#	UnitData.enemy_attack_list.EXPLODE:
+	#		pass
+	#	UnitData.SPITTER_SIEGE:
+	#		pass
+
+func _create_spitter():
+	# Set enemy data
+	enemy_data = UnitData.SPITTER
+	# Create the weapon base
+	weapon_base = weapon_base_scene.instantiate() # Connect to weapon destroyed
+	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
+	weapon_base.weapon_data = UnitData.SPITTER_SIEGE # Set weapon type
+	weapon_base.position = Vector2.ZERO
+	add_child(weapon_base) # Add to structure
+	# Connect to attack function
+	weapon_base.signal_weapon_is_attacking.connect(_enemy_is_attacking)
+
+func _update_vision_radius():
+	# Update the enemy vision radius -- Right now it is just a circle
+	vision_collider.shape.radius = enemy_data.vision_radius
+	# Show vision
+	if show_vision_radius:
+		var sprite_width : float = 128.0
+		var vision_diameter : float = enemy_data.vision_radius * 2.0
+		var sprite_scale : float = vision_diameter / sprite_width
+		vision_sprite.scale = Vector2(sprite_scale, sprite_scale)
+	else:
+		vision_sprite.hide()
 
 func _explode_attack():
 	var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
@@ -183,6 +205,8 @@ func attack(attack : Attack):
 	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage when hit by weapon
 	
 func _event_health_is_zero():
+	# Died
+	enemy_state = enemy_states.DEAD
 	# Spawn coin where it dies
 	_spawn_coin() 
 	# Destroy enemy
