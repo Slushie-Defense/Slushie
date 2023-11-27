@@ -67,7 +67,7 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 func _spawn_enemy(enemy_info: EnemySpawnInfo):
 	for i in range(enemy_info.number_to_spawn_at_once):
 		_add_enemy(enemy_info)
-	await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn)).timeout
+		await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn_at_once)).timeout
 
 
 # spawns a wave, which syncronously loops through the groups
@@ -85,10 +85,10 @@ func spawn_wave(wave_number: int):
 
 # spawns a group of enemies within a wave
 func _spawn_group(enemy_info: EnemySpawnInfo):
-	Main.emit_signal("signal_wave_event", str(enemy_info.type) + ": new group spawning")
-	for i in range(enemy_info.number_to_spawn + 1):
+	Main.emit_signal("signal_wave_event", "New group spawning")
+	for i in range(enemy_info.number_to_spawn):
 		await _spawn_enemy(enemy_info)
-	Main.emit_signal("signal_wave_event", str(enemy_info.type) + ": Spawned all enemies in this group")
+	Main.emit_signal("signal_wave_event",  "Spawned all enemies in this group")
 
 var current_wave_index = 0
 # Called when the node enters the scene tree for the first time.
