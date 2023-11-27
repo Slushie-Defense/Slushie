@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 signal signal_share_player_position(player_position)
 
+# Player states
+var player_state : NodeStates = NodeStates.new()
+
 # Building Manager
 @onready var building_manager : Node2D = $BuildingManager
 
@@ -27,6 +30,8 @@ func _ready():
 	building_manager.visible = show_build_grid
 	# Player dies if gas station dies
 	Main.signal_gas_station_destroyed.connect(_event_health_is_zero)
+	# Player spawn
+	player_state.current = player_state.list.SPAWN
 
 # Called every frame
 func _physics_process(delta):
@@ -34,8 +39,10 @@ func _physics_process(delta):
 	# If the player is not providing input
 	if axis == Vector2.ZERO:
 		apply_friction(ACCELERATION * delta)
+		player_state.current = player_state.list.IDLE
 	else: # Otherwise move
 		apply_movement(axis * ACCELERATION * delta)
+		player_state.current = player_state.list.MOVING
 	# Apply the motion
 	velocity = motion
 	# Move to the position unless it hits a collision then it will stop at the collision point
@@ -70,6 +77,7 @@ func building_manager_create_structure():
 		building_manager.add_structure()
 
 func _event_health_is_zero():
+	player_state.current = player_state.list.DIED
 	Main.emit_signal("signal_player_died")
 	call_deferred("queue_free")
 	print("Player died!")

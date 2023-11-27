@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
 # State
-enum enemy_states { SPAWN, IDLE, CHASE, ATTACK, DEAD }
-var enemy_state = enemy_states.SPAWN
+var enemy_state = NodeStates.new()
 
 # Enemy Data
 var enemy_data : EnemyData = EnemyData.new()
@@ -58,7 +57,7 @@ func _ready():
 	# Update vision radius
 	_update_vision_radius()
 	# SPAWN
-	enemy_state = enemy_states.SPAWN
+	enemy_state.current = enemy_state.list.SPAWN
 
 func _set_enemy_type():
 	# Set the enemy type
@@ -94,11 +93,15 @@ func apply_movement(acceleration):
 	motion += acceleration
 	if motion.length() > enemy_data.max_speed:
 		motion = motion.normalized() * enemy_data.max_speed
+	if motion.length() > 16:
+		enemy_state.current = enemy_state.list.MOVING
 		
 func _ai_process():
+	# Idle state
+	enemy_state.current = enemy_state.list.IDLE
+	
 	# Direction priority
 	ai_direction = ai_default_direction # Default goes left
-	enemy_state = enemy_states.IDLE
 	
 	# Chase nodes
 	if ai_chase_node_list.size() > 0:
@@ -114,7 +117,6 @@ func _ai_process():
 		
 		# Found an object to chase
 		if ai_chase_node != null:
-			enemy_state = enemy_states.CHASE
 			ai_direction = global_position.direction_to(ai_chase_node.global_position)
 			# Try to attack if available
 			# No need to attack if the enemy has a weapon attached
@@ -150,7 +152,7 @@ func _on_attack_delay_timer_timeout():
 
 func _enemy_is_attacking(target_node):
 	# This triggered whenever the enemy is attacking -- Incldding if it is a weapon
-	enemy_state = enemy_states.ATTACK
+	enemy_state.current = enemy_state.list.ATTACK
 	# What type of attack is is doing
 	#match enemy_data.attack_type:
 	#	UnitData.enemy_attack_list.MELEE:
@@ -206,7 +208,7 @@ func attack(attack : Attack):
 	
 func _event_health_is_zero():
 	# Died
-	enemy_state = enemy_states.DEAD
+	enemy_state.current = enemy_state.list.DIED
 	# Spawn coin where it dies
 	_spawn_coin() 
 	# Destroy enemy
