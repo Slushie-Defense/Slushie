@@ -1,13 +1,18 @@
-[gd_scene load_steps=18 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=22 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
 [ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Managers/WaveManager/Portal.tscn" id="1_76lsd"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/GameStateManager.gd" id="1_g46yp"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
+[ext_resource type="Resource" uid="uid://3o3kl4h5i58i" path="res://Entities/Managers/WaveManager/wave1.tres" id="2_ed4oo"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Portal.gd" id="2_mqamu"]
+[ext_resource type="PackedScene" uid="uid://dxpdjmjglwb4d" path="res://Entities/Enemy/Floater.tscn" id="3_6csi5"]
+[ext_resource type="PackedScene" uid="uid://d2odr3jayaich" path="res://Entities/Enemy/Grunt.tscn" id="3_uc7a1"]
+[ext_resource type="PackedScene" uid="uid://c3x54e2gv7dlp" path="res://Entities/Enemy/Tank.tscn" id="4_1ctor"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
 [ext_resource type="PackedScene" uid="uid://digh6puar70w0" path="res://Entities/Enemy/Enemy.tscn" id="4_e3ocv"]
+[ext_resource type="PackedScene" uid="uid://booay86i8n3px" path="res://Entities/Enemy/Spitter.tscn" id="4_jacdv"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/WaveManager.gd" id="7_d2dej"]
 [ext_resource type="PackedScene" uid="uid://umxdc1nk56g1" path="res://Entities/Environment/TreesTexture.tscn" id="7_jvtud"]
@@ -15,35 +20,25 @@
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="9_cbk5y"]
 [ext_resource type="PackedScene" uid="uid://m85u2pije2ka" path="res://Entities/Coin/CoinSpawner.tscn" id="11_cched"]
 
-[sub_resource type="Resource" id="Resource_my8wf"]
-script = ExtResource("8_qjyoi")
-enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
-type = ""
-portals = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
-number_to_spawn_at_once = 1
-total_time = 3.0
-number_to_spawn = 0
-
 [sub_resource type="Resource" id="Resource_2nsys"]
 script = ExtResource("8_qjyoi")
-enemies = Array[PackedScene]([ExtResource("4_e3ocv")])
-type = ""
+enemies = Array[PackedScene]([ExtResource("4_e3ocv"), ExtResource("3_6csi5"), ExtResource("3_uc7a1"), ExtResource("4_jacdv"), ExtResource("4_1ctor")])
 portals = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
-number_to_spawn_at_once = 1
-total_time = 3.0
-number_to_spawn = 0
+number_to_spawn_at_once = 5
+total_time = 2.0
+number_to_spawn = 5
 
-[sub_resource type="Resource" id="Resource_upjrm"]
+[sub_resource type="Resource" id="Resource_kjten"]
 script = ExtResource("9_cbk5y")
-name = "Wave 1"
+name = "Wave 2"
 description = "The description"
-enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_my8wf"), SubResource("Resource_2nsys")])
+enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_2nsys")])
 
 [node name="Level1" type="Node2D"]
 
 [node name="WaveManager" type="Node2D" parent="."]
 script = ExtResource("7_d2dej")
-waves = Array[ExtResource("9_cbk5y")]([SubResource("Resource_upjrm")])
+waves = Array[ExtResource("9_cbk5y")]([ExtResource("2_ed4oo"), SubResource("Resource_kjten")])
 
 [node name="GameStateManager" type="Node2D" parent="." node_paths=PackedStringArray("current_wave_manager")]
 process_mode = 3
