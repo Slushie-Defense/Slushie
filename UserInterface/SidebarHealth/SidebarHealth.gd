@@ -2,6 +2,7 @@ extends CenterContainer
 
 @onready var texture_rect : TextureRect = $HBoxContainer/TextureRect
 @onready var progress_bar : ProgressBar = $HBoxContainer/CenterContainer/ProgressBar
+@onready var ui_label : Label = $HBoxContainer/CenterContainer/Label
 
 # Color Gradient
 var health_color_gradient = load("res://Entities/Health/HealthColorGradient.tres")
@@ -23,6 +24,9 @@ func _update_progress_bar(current_value, max_health):
 
 func _update_texture(loaded_texture):
 	texture_rect.texture = loaded_texture
+
+func _update_label(label_text):
+	ui_label.text = label_text
 
 func _update_health_color_gradient(color_gradient):
 	health_color_gradient = color_gradient
