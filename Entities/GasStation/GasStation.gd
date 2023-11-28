@@ -17,4 +17,5 @@ func attack(attack : Attack):
 func _event_health_is_zero():
 	print("Gas station died!")
 	Main.emit_signal("signal_wave_event", "Gas Station Destroyed!")
+	Main.emit_signal("signal_gas_station_destroyed")
 	call_deferred("queue_free")
