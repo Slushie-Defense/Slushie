@@ -1,4 +1,3 @@
-class_name WaveManager
 extends Node2D
 
 # array of waves
@@ -6,18 +5,33 @@ extends Node2D
 # each enemy has a type, position, and time to spawn
 @export var waves: Array[Wave]
 
-var spawning = false
+# Delay between each group
+@onready var enemy_group_timer : Timer = $EnemyGroupTimer
+# Delay between each enemy
+@onready var enemy_spawn_timer : Timer = $EnemySpawnTimer
+
+# Waves
+var current_wave
+var current_wave_index : int = 0
+var current_wave_total_group_count : int = 0
+
+# Groups
+var current_group
+var current_group_index : int = 0
+
+# Active portals
+var active_portals_list : Array = []
+
+# Start the Wave
+func _input(event):
+	if event.is_action_pressed("StartButton"):
+		_spawn_wave(current_wave_index)
 
 # since the spawned enemies will be childed to the object, we can use get_child_count to check the status of the enemies in the wave
 func check_wave_complete():
-	if (spawning):
-		return false
 	if (get_child_count() == 0):
 		Main.emit_signal("signal_wave_event", "Wave complete!")
-		current_wave_index+=1
-		return true
-	else:
-		return false
+		current_wave_index += 1
 
 # gets the enemy scene from the enemy type, instantiates it, and childs it to $WaveManager
 func _add_enemy(enemy_info : EnemySpawnInfo):
@@ -36,30 +50,22 @@ func _add_enemy(enemy_info : EnemySpawnInfo):
 
 
 	var enemy_position = Vector2.ZERO
-	
-	# Find portals through strings
-	var portal_list : Array = []
-	for portal_name in enemy_info.portals:
-		for child in get_tree().current_scene.get_children():
-			if child.name == portal_name:
-				portal_list.push_back(child)
 				
 	
-	if (portal_list.size() == 0):
+	if (active_portals_list.size() == 0):
 		print("no portals to spawn at")
 		return
 	# if the portals array size is 1, spawn at that position
-	if (portal_list.size() == 1):
-		enemy_position = portal_list[0].position
+	if (active_portals_list.size() == 1):
+		enemy_position = active_portals_list[0].position
 	else:
 	# if the portals array size is greater than 1, spawn at a random position on the portals from the array
 		var random_index = randi() % enemy_info.portals.size()
-		enemy_position = portal_list[random_index].position
+		enemy_position = active_portals_list[random_index].position
 	
 	# add variance to the position
 	enemy_position.x += randi() % 100 - 50
 
-	#print("spawning "+ enemy_info.type + "at " + str(enemy_instance.position))
 	add_child(enemy_instance)
 	enemy_instance.global_position = enemy_position
 
@@ -71,17 +77,53 @@ func _spawn_enemy(enemy_info: EnemySpawnInfo):
 
 
 # spawns a wave, which syncronously loops through the groups
-func spawn_wave(wave_number: int):
-	spawning = true
-	var current_wave = waves[wave_number]
-	Main.emit_signal("signal_wave_event", str(current_wave.name) + ": new wave spawning")
-
-	# spawn the groups sequentially
-	for enemy_info in current_wave.enemies:
-		await _spawn_group(enemy_info)
+func _spawn_wave(wave_number: int):
+	# Message that he wave is starting
+	Main.emit_signal("signal_wave_event", "Start Wave: " + str(wave_number))
+	# Exit if there are no waves
+	if not waves.size() > 0:
+		print("No Waves Added")
+		return
+	# Get the current wave
+	current_wave = waves[wave_number]
+	# Number of Groups inside the wave
+	current_wave_total_group_count = current_wave.enemy_group_list.size()
+	
+	# Get the active portals of this wave
+	active_portals_list = [] # Clear current active portals
+	# Find all the porals in the level
+	for child in get_tree().current_scene.get_children():
+		# "TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"
+		match child.name:
+			"TopPortal":
+				if current_wave.top_portal:
+					active_portals_list.push_back(child)
+			"MiddleTopPortal":
+				if current_wave.middle_top_portal:
+					active_portals_list.push_back(child)
+			"MiddlePortal":
+				if current_wave.middle_portal:
+					active_portals_list.push_back(child)
+			"MiddleBottomPortal":
+				if current_wave.middle_bottom_portal:
+					active_portals_list.push_back(child)
+			"BottomPortal":
+				if current_wave.bottom_portal:
+					active_portals_list.push_back(child)
+	
+	print("Print number of active portals: " + str(active_portals_list.size()))
+	print("Active portals: " + str(active_portals_list))
+	
+	# Get the first group
+	if current_wave_total_group_count > 0:
+		# Find the current wave
+		current_group_index = 0
+		current_group = current_wave.enemy_group_list[current_group_index]
+		# Start spawning with a delay before each group
+		enemy_group_timer.wait_time = current_group.group_delay_time # Delay between groups. Universal
+		enemy_group_timer.start() # On time_out the enemies will start spawning
+	# Update the wave count
 	wave_number += 1
-	spawning = false
-	Main.emit_signal("signal_wave_event", str(current_wave.name) + ": wave completed spawning")
 
 # spawns a group of enemies within a wave
 func _spawn_group(enemy_info: EnemySpawnInfo):
@@ -90,11 +132,12 @@ func _spawn_group(enemy_info: EnemySpawnInfo):
 		await _spawn_enemy(enemy_info)
 	Main.emit_signal("signal_wave_event",  "Spawned all enemies in this group")
 
-var current_wave_index = 0
-# Called when the node enters the scene tree for the first time.
-func spawn_next_wave():
-	spawn_wave(current_wave_index)
 
-func _process(delta):
-	if (spawning):
-		return
+func _on_enemy_group_timer_timeout():
+	print("Spawned group!")
+	#_spawn_group(current_group)
+		# Find portals through strings
+
+
+func _on_enemy_spawn_timer_timeout():
+	pass # Replace with function body.

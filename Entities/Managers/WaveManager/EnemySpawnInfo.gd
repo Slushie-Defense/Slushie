@@ -1,12 +1,21 @@
 class_name EnemySpawnInfo
 extends Resource
 
-@export var enemies: Array[PackedScene]
+# Spawn types
+enum spawn_type { SIMULTANEOUS_ALL, CONSECUTIVE_ALL, CONSECUTIVE_ONE }
+# SIMULATANEOUS_ALL - Spawn at all open portals simultaneously
+# CONSECUTIVE_ALL - Spawn at any open portal one at a time
+# CONSECUTIVE_ONE - Spawn at one open portal one at a time
 
-@export var portals: PackedStringArray = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
-# the number of enemies to spawn at once, in a group
-@export var number_to_spawn_at_once : int
-# the time between each enemy spawn
-@export var total_time: float
-# number of groups to spawn
-@export var number_to_spawn: int
+@export var basic : int = 0
+@export var grunt : int = 0
+@export var spitter : int = 0
+@export var tank : int = 0
+@export var floater : int = 0
+
+# Delay before the group spawns
+@export var group_delay_time : float = 0.5
+# Delay between spawns
+@export var spawn_delay_time : float = 0.5
+# Spawn one at a time
+@export var spawn_method = spawn_type.CONSECUTIVE_ALL
