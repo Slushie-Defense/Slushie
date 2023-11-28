@@ -24,6 +24,7 @@ shape = SubResource("RectangleShape2D_l7d4t")
 shape = SubResource("RectangleShape2D_kmhig")
 
 [node name="Sprite2DRoof" type="Sprite2D" parent="."]
+y_sort_enabled = true
 rotation = -1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("1_n22cx")

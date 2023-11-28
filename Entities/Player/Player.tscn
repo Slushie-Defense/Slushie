@@ -21,6 +21,7 @@ shape = SubResource("CircleShape2D_wef8m")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 z_index = 1
+y_sort_enabled = true
 position = Vector2(0, -40)
 texture = ExtResource("2_aqwo0")
 
