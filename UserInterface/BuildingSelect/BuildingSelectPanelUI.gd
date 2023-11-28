@@ -60,6 +60,8 @@ func _create_user_interface():
 	# Gas Station
 	gas_station_healthbar = _add_healthbar()
 	gas_station_healthbar._update_texture(gas_station_healtbar_texture)
+	var color_gradient = load("res://Entities/Health/HealthColorGradientGasStation.tres")
+	gas_station_healthbar._update_health_color_gradient(color_gradient)
 	Main.gas_station_node.health.signal_custom_health_changed.connect(_on_signal_connect_gas_station_healthbar)
 	
 	# Create coin resource

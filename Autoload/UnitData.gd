@@ -24,6 +24,9 @@ var FLOATER : EnemyData = EnemyData.new()
 # Enemy Weapon
 var SPITTER_SIEGE : StructureData = StructureData.new()
 
+# Player Weapons
+var SLUSHY_GUN : StructureData = StructureData.new()
+
 func _ready():
 	# STRUCTURES
 	# Setup FENCE
@@ -147,3 +150,12 @@ func _ready():
 	FLOATER.basic_sprite = load("res://Sprites/Characters/Enemies/Floater/Floater256x256.png")
 	FLOATER.collision_shape_radius = 32
 	FLOATER.attack_type = UnitData.enemy_attack_list.EXPLODE
+	
+	# PLAYER WEAPONS
+	SLUSHY_GUN.type = structure_list.INSTANT
+	SLUSHY_GUN.unit_name = "Slushy Gun"
+	SLUSHY_GUN.cost = 800
+	SLUSHY_GUN.attack_damage = 15.0
+	SLUSHY_GUN.attack_radius = 160.0
+	SLUSHY_GUN.attack_range = 384.0
+	SLUSHY_GUN.ui_sprite = load("res://Sprites/Structures/Instant/128x192Instant.png")

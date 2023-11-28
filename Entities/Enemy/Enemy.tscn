@@ -23,6 +23,7 @@ z_index = 1
 shape = SubResource("CircleShape2D_o6l61")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("2_buj6r")
 
 [node name="Vision" type="Area2D" parent="."]

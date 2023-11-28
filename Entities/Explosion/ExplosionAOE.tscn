@@ -75,6 +75,7 @@ script = ExtResource("1_my6pk")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteRescaler"]
 self_modulate = Color(1, 1, 1, 0)
+y_sort_enabled = true
 texture = ExtResource("2_c34l5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
