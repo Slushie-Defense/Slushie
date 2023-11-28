@@ -19,7 +19,7 @@ var sound_shoot = load("res://Entities/Weapons/Sounds/Splat.wav")
 var sound_reload = load("res://Entities/Weapons/Sounds/Reload.wav")
 
 # Default weapon data stats
-var structure_type = UnitData.structure_list
+var weapon_type = UnitData.structure_list
 var weapon_data : StructureData = StructureData.new() # Replace with specific structure
 
 # Track shot count
@@ -105,16 +105,16 @@ func fire_weapon():
 		return
 	# Fire AOE Projectile
 	match weapon_data.type:
-		structure_type.SIEGE:
+		weapon_type.SIEGE:
 			fire_projectile_explosion()
 		# Fire the shot
-		structure_type.INSTANT:
+		weapon_type.INSTANT:
 			fire_instant_hit()
 		# Fire bullet
-		structure_type.PROJECTILE:
+		weapon_type.PROJECTILE:
 			fire_projectile_bullet()
 		# Check landmine
-		structure_type.LANDMINE:
+		weapon_type.LANDMINE:
 			fire_landmine_explosion()
 	# Play sound
 	sound_player.stream = sound_shoot

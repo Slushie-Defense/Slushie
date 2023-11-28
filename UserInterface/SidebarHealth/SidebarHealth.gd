@@ -24,6 +24,11 @@ func _update_progress_bar(current_value, max_health):
 func _update_texture(loaded_texture):
 	texture_rect.texture = loaded_texture
 
+func _update_health_color_gradient(color_gradient):
+	health_color_gradient = color_gradient
+	var health_color = health_color_gradient.sample(progress_bar.value / 100.0)
+	_update_progress_bar_color(health_color)
+
 func _update_progress_bar_color(fill_color):
 	progress_fill_style.bg_color = Color(fill_color)
 	progress_bar.add_theme_stylebox_override("fill", progress_fill_style)
