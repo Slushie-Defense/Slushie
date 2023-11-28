@@ -10,6 +10,9 @@ extends Node2D
 # Delay between each enemy
 @onready var enemy_spawn_timer : Timer = $EnemySpawnTimer
 
+# Enemies
+var enemy_scene = load("res://Entities/Enemy/Enemy.tscn")
+
 # Waves
 var current_wave
 var current_wave_index : int = 0
@@ -17,6 +20,7 @@ var current_wave_total_group_count : int = 0
 
 # Groups
 var current_group
+var current_group_enemy_list : Array = []
 var current_group_index : int = 0
 
 # Active portals
@@ -74,7 +78,6 @@ func _spawn_enemy(enemy_info: EnemySpawnInfo):
 	for i in range(enemy_info.number_to_spawn_at_once):
 		_add_enemy(enemy_info)
 		await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn_at_once)).timeout
-
 
 # spawns a wave, which syncronously loops through the groups
 func _spawn_wave(wave_number: int):
@@ -135,6 +138,30 @@ func _spawn_group(enemy_info: EnemySpawnInfo):
 
 func _on_enemy_group_timer_timeout():
 	print("Spawned group!")
+	
+	# Get all the enemy types
+	current_group_enemy_list = [] # Clear
+	# Basic Enemies
+	for i in range(0, current_group.basic):
+		current_group_enemy_list.push_back(UnitData.enemy_list.BASIC)
+	# Grunt Enemies
+	for i in range(0, current_group.grunt):
+		current_group_enemy_list.push_back(UnitData.enemy_list.GRUNT)
+	# Spitter Enemies
+	for i in range(0, current_group.spitter):
+		current_group_enemy_list.push_back(UnitData.enemy_list.SPITTER)
+	# Tank Enemies
+	for i in range(0, current_group.tank):
+		current_group_enemy_list.push_back(UnitData.enemy_list.TANK)
+	# Floater Enemies
+	for i in range(0, current_group.floater):
+		current_group_enemy_list.push_back(UnitData.enemy_list.FLOATER)
+
+	# Randomize array
+	current_group_enemy_list.shuffle()
+	
+	
+	# Create an array of all the enemies in a random order
 	#_spawn_group(current_group)
 		# Find portals through strings
 
