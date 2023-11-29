@@ -29,6 +29,7 @@ var current_enemy_index : int = 0
 # Portals
 var all_portals_list : Array = []
 var active_portals_list : Array = []
+var random_preselected_portal : int = 0
 
 # Spawning
 var wave_active : bool = false
@@ -47,7 +48,7 @@ func _input(event):
 func _spawn_wave(wave_number: int):
 	wave_active = true
 	# Message that he wave is starting
-	Main.emit_signal("signal_wave_event", "Start Wave: " + str(wave_number))
+	Main.emit_signal("signal_wave_event", "Start Wave: " + str(wave_number + 1))
 	# Exit if there are no waves
 	if not waves.size() > 0:
 		print("No Waves Added")
@@ -70,9 +71,11 @@ func _spawn_wave(wave_number: int):
 	_start_next_group()
 
 func _on_enemy_group_timer_timeout():
-	print("Enemy Group [" + str(current_group_index) + "] Start")
+	print("Enemy Group [" + str(current_group_index + 1) + "] Start")
 	# Create an array of all the current enemy types in a random order
 	current_group_enemy_list = _create_randomized_group_enemy_list()
+	# Preselect a random active portal that all enemies could be sent through if the condition is met
+	random_preselected_portal = randi() % active_portals_list.size()
 	# Start spawning enemies
 	_on_enemy_spawn_timer_timeout()
 
@@ -83,15 +86,27 @@ func _on_enemy_spawn_timer_timeout():
 		var current_enemy_type = current_group_enemy_list[current_enemy_index]
 		# Spawn
 		var portal
-		if current_group.spawn_method == GroupSpawn.spawn_type.CONSECUTIVE_ALL:
-			var random_index = randi() % active_portals_list.size()
-			portal = active_portals_list[random_index]
-		# Spawn it
-		_spawn_enemy(current_enemy_type, portal)
+		match current_group.spawn_method:
+			# Enemy goes through any portal
+			GroupSpawn.spawn_type.RANDOM_ANY:
+				var random_any_index = randi() % active_portals_list.size()
+				portal = active_portals_list[random_any_index]
+				_spawn_enemy(current_enemy_type, portal)
+				current_enemy_index += 1
+			# All Enemies go through the same portal
+			GroupSpawn.spawn_type.RANDOM_SAME:
+				portal = active_portals_list[random_preselected_portal]
+				_spawn_enemy(current_enemy_type, portal)
+				current_enemy_index += 1
+			# Enemies go through all portals simulataneously
+			GroupSpawn.spawn_type.ALL_AT_ONCE:
+				for i in active_portals_list.size():
+					if current_enemy_index < current_group_enemy_list.size():
+						portal = active_portals_list[i]
+						_spawn_enemy(current_enemy_type, portal)
+						current_enemy_index += 1
 		# Set the next enemy timer off
 		enemy_spawn_timer.start()
-		# Set to next enemy
-		current_enemy_index += 1
 	else:
 		# Mark the end of the group
 		print("Enemy Group [" + str(current_group_index) + "] End")
@@ -102,7 +117,7 @@ func _on_enemy_spawn_timer_timeout():
 		else:
 			wave_active = false
 			# Wave number
-			Main.emit_signal("signal_wave_event", "Wave Complete: " + str(current_wave_index))
+			Main.emit_signal("signal_wave_event", "Wave Complete: " + str(current_wave_index + 1))
 			# Close all the open portals
 			_close_all_portals()
 			# Update the wave count
@@ -183,6 +198,9 @@ func _update_active_portals_list():
 			"BottomPortal":
 				if current_wave.bottom_portal:
 					active_list.push_back(portal)
+	if active_list.size() == 0:
+		print("Wave " + str(current_wave_index) + " has no active portals.\nMiddle Portal activated as a default")
+		active_list[0] = all_portals_list[2] # Activate middle portal
 	return active_list
 
 func _open_all_active_portals():
