@@ -1,52 +1,75 @@
-[gd_scene load_steps=23 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=18 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
-[ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Managers/WaveManager/Portal.tscn" id="1_76lsd"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/GameStateManager.gd" id="1_g46yp"]
+[ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Portals/Portal.tscn" id="1_76lsd"]
+[ext_resource type="PackedScene" uid="uid://d1iguupefij64" path="res://Entities/Managers/WaveManager/WaveManager.tscn" id="1_cqx0q"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
-[ext_resource type="Resource" uid="uid://3o3kl4h5i58i" path="res://Entities/Managers/WaveManager/wave1.tres" id="2_ed4oo"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Portal.gd" id="2_mqamu"]
-[ext_resource type="PackedScene" uid="uid://dxpdjmjglwb4d" path="res://Entities/Enemy/Floater.tscn" id="3_6csi5"]
-[ext_resource type="PackedScene" uid="uid://d2odr3jayaich" path="res://Entities/Enemy/Grunt.tscn" id="3_uc7a1"]
-[ext_resource type="PackedScene" uid="uid://c3x54e2gv7dlp" path="res://Entities/Enemy/Tank.tscn" id="4_1ctor"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/GroupSpawn.gd" id="2_jxhn7"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="2_lo4u0"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
-[ext_resource type="PackedScene" uid="uid://digh6puar70w0" path="res://Entities/Enemy/Enemy.tscn" id="4_e3ocv"]
-[ext_resource type="PackedScene" uid="uid://booay86i8n3px" path="res://Entities/Enemy/Spitter.tscn" id="4_jacdv"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/WaveManager.gd" id="7_d2dej"]
 [ext_resource type="PackedScene" uid="uid://umxdc1nk56g1" path="res://Entities/Environment/TreesTexture.tscn" id="7_jvtud"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/EnemySpawnInfo.gd" id="8_qjyoi"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="9_cbk5y"]
 [ext_resource type="PackedScene" uid="uid://m85u2pije2ka" path="res://Entities/Coin/CoinSpawner.tscn" id="11_cched"]
 
-[sub_resource type="Resource" id="Resource_2nsys"]
-script = ExtResource("8_qjyoi")
-enemies = Array[PackedScene]([ExtResource("4_e3ocv"), ExtResource("3_6csi5"), ExtResource("3_uc7a1"), ExtResource("4_jacdv"), ExtResource("4_1ctor")])
-portals = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
-number_to_spawn_at_once = 5
-total_time = 2.0
-number_to_spawn = 5
+[sub_resource type="Resource" id="Resource_m6f12"]
+script = ExtResource("2_jxhn7")
+basic = 5
+grunt = 0
+spitter = 0
+tank = 0
+floater = 0
+group_delay_time = 0.5
+spawn_delay_time = 0.5
+spawn_method = 0
 
-[sub_resource type="Resource" id="Resource_kjten"]
-script = ExtResource("9_cbk5y")
-name = "Wave 2"
-description = "The description"
-enemies = Array[ExtResource("8_qjyoi")]([SubResource("Resource_2nsys")])
+[sub_resource type="Resource" id="Resource_x33yq"]
+script = ExtResource("2_jxhn7")
+basic = 0
+grunt = 0
+spitter = 0
+tank = 0
+floater = 5
+group_delay_time = 0.5
+spawn_delay_time = 0.5
+spawn_method = 0
+
+[sub_resource type="Resource" id="Resource_iflx8"]
+script = ExtResource("2_lo4u0")
+top_portal = false
+middle_top_portal = true
+middle_portal = true
+middle_bottom_portal = true
+bottom_portal = false
+enemy_group_list = Array[ExtResource("2_jxhn7")]([SubResource("Resource_m6f12"), SubResource("Resource_x33yq")])
+
+[sub_resource type="Resource" id="Resource_l5qdc"]
+script = ExtResource("2_jxhn7")
+basic = 0
+grunt = 0
+spitter = 0
+tank = 1
+floater = 0
+group_delay_time = 0.5
+spawn_delay_time = 0.5
+spawn_method = 1
+
+[sub_resource type="Resource" id="Resource_8j6p3"]
+script = ExtResource("2_lo4u0")
+top_portal = false
+middle_top_portal = false
+middle_portal = true
+middle_bottom_portal = false
+bottom_portal = false
+enemy_group_list = Array[ExtResource("2_jxhn7")]([SubResource("Resource_l5qdc")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2vj4"]
 size = Vector2(96, 1024)
 
 [node name="Level1" type="Node2D"]
 
-[node name="WaveManager" type="Node2D" parent="."]
-script = ExtResource("7_d2dej")
-waves = Array[ExtResource("9_cbk5y")]([ExtResource("2_ed4oo"), SubResource("Resource_kjten")])
-
-[node name="GameStateManager" type="Node2D" parent="." node_paths=PackedStringArray("current_wave_manager")]
-process_mode = 3
-script = ExtResource("1_g46yp")
-current_wave_manager = NodePath("../WaveManager")
+[node name="WaveManager" parent="." instance=ExtResource("1_cqx0q")]
+waves = Array[ExtResource("2_lo4u0")]([SubResource("Resource_iflx8"), SubResource("Resource_8j6p3")])
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 0.0
@@ -123,23 +146,18 @@ offset_bottom = 256.0
 
 [node name="TopPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3328, 64)
-script = ExtResource("2_mqamu")
 
 [node name="MiddleTopPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3392, 256)
-script = ExtResource("2_mqamu")
 
 [node name="MiddlePortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3456, 448)
-script = ExtResource("2_mqamu")
 
 [node name="MiddleBottomPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3392, 640)
-script = ExtResource("2_mqamu")
 
 [node name="BottomPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3328, 832)
-script = ExtResource("2_mqamu")
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
 position = Vector2(2304, 448)

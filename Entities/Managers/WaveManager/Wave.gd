@@ -1,6 +1,10 @@
 class_name Wave 
 extends Resource
 
-@export var name: String
-@export var description: String
-@export var enemies: Array[EnemySpawnInfo] #Array of EnemySpawnInfo Resources
+@export var top_portal : bool = false
+@export var middle_top_portal : bool = false
+@export var middle_portal : bool = false
+@export var middle_bottom_portal : bool = false
+@export var bottom_portal : bool = false
+
+@export var enemy_group_list : Array[GroupSpawn] #Array of EnemySpawnInfo Resources

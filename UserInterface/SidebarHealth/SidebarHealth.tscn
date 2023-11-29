@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5w6e3qraupjt"]
+[gd_scene load_steps=6 format=3 uid="uid://c5w6e3qraupjt"]
 
 [ext_resource type="Script" path="res://UserInterface/SidebarHealth/SidebarHealth.gd" id="1_fh8ru"]
 [ext_resource type="Texture2D" uid="uid://dirdc7g5r05xu" path="res://Sprites/Healthbar/PlayerHealthbar32x32.png" id="2_axkl7"]
+[ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="3_5ak4r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4i834"]
 bg_color = Color(0, 0, 0, 1)
@@ -35,3 +36,13 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_uv134")
 step = 1.0
 value = 100.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_5ak4r")
+theme_override_font_sizes/font_size = 10
+text = "Player"
+horizontal_alignment = 2
+vertical_alignment = 2
