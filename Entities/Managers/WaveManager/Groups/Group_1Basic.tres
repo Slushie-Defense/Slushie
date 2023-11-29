@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GroupSpawn" load_steps=2 format=3 uid="uid://k7r4nmb6ppeq"]
+
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/GroupSpawn.gd" id="1_e71uc"]
+
+[resource]
+script = ExtResource("1_e71uc")
+basic = 1
+grunt = 0
+spitter = 0
+tank = 0
+floater = 0
+group_delay_time = 0.5
+spawn_delay_time = 0.5
+spawn_method = 1
