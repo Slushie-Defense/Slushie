@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=17 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
@@ -23,6 +23,28 @@ group_delay_time = 0.5
 spawn_delay_time = 0.5
 spawn_method = 1
 
+[sub_resource type="Resource" id="Resource_m6f12"]
+script = ExtResource("2_jxhn7")
+basic = 5
+grunt = 0
+spitter = 0
+tank = 0
+floater = 0
+group_delay_time = 0.5
+spawn_delay_time = 0.5
+spawn_method = 1
+
+[sub_resource type="Resource" id="Resource_x33yq"]
+script = ExtResource("2_jxhn7")
+basic = 0
+grunt = 0
+spitter = 0
+tank = 0
+floater = 5
+group_delay_time = 0.5
+spawn_delay_time = 0.5
+spawn_method = 1
+
 [sub_resource type="Resource" id="Resource_iflx8"]
 script = ExtResource("2_lo4u0")
 top_portal = false
@@ -30,7 +52,7 @@ middle_top_portal = true
 middle_portal = true
 middle_bottom_portal = true
 bottom_portal = false
-enemy_group_list = Array[ExtResource("2_jxhn7")]([SubResource("Resource_ijmf1")])
+enemy_group_list = Array[ExtResource("2_jxhn7")]([SubResource("Resource_ijmf1"), SubResource("Resource_m6f12"), SubResource("Resource_x33yq")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2vj4"]
 size = Vector2(96, 1024)

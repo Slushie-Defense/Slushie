@@ -26,7 +26,7 @@ var current_group_index : int = 0
 # Enemies
 var current_enemy_index : int = 0
 
-# Active portals
+# Portals
 var all_portals_list : Array = []
 var active_portals_list : Array = []
 
@@ -61,14 +61,8 @@ func _spawn_wave(wave_number: int):
 		return
 	# Find the current wave
 	current_group_index = 0
-	current_group = current_wave.enemy_group_list[current_group_index]
-	# Start spawning with a delay before each group
-	enemy_group_timer.wait_time = current_group.group_delay_time # Delay between groups. Universal
-	enemy_group_timer.start() # On time_out the enemies will start spawning
-	# Set the Enemy spawn delay time
-	enemy_spawn_timer.wait_time = current_group.spawn_delay_time
-	# Update the wave count
-	wave_number += 1
+	# Start the first group
+	_start_next_group()
 
 func _on_enemy_group_timer_timeout():
 	print("Enemy Group [" + str(current_group_index) + "] Start")
@@ -83,22 +77,51 @@ func _on_enemy_spawn_timer_timeout():
 		# Get current enemy
 		var current_enemy_type = current_group_enemy_list[current_enemy_index]
 		# Spawn
-		_spawn_enemy(current_enemy_type)
+		var portal
+		if current_group.spawn_method == GroupSpawn.spawn_type.CONSECUTIVE_ALL:
+			var random_index = randi() % active_portals_list.size()
+			portal = active_portals_list[random_index]
+		# Spawn it
+		_spawn_enemy(current_enemy_type, portal)
 		# Set the next enemy timer off
 		enemy_spawn_timer.start()
 		# Set to next enemy
 		current_enemy_index += 1
 	else:
+		# Mark the end of the group
 		print("Enemy Group [" + str(current_group_index) + "] End")
+		# Go to next group
+		current_group_index += 1
+		if current_group_index < current_wave.enemy_group_list.size():
+			_start_next_group()
+		else:
+			# Wave number
+			Main.emit_signal("signal_wave_event", "Wave Complete: " + str(current_wave_index))
+			# Close all the open portals
+			_close_all_portals()
+			# Update the wave count
+			current_wave_index += 1
 
-func _spawn_enemy(current_enemy_type):
+func _start_next_group():
+	# Find the current wave
+	current_group = current_wave.enemy_group_list[current_group_index]
+	# Start spawning with a delay before each group
+	enemy_group_timer.wait_time = current_group.group_delay_time # Delay between groups. Universal
+	enemy_group_timer.start() # On time_out the enemies will start spawning
+	# Set the Enemy spawn delay time
+	enemy_spawn_timer.wait_time = current_group.spawn_delay_time
+	# Reset enemy count
+	current_enemy_index = 0
+
+func _spawn_enemy(current_enemy_type, portal):
 	var enemy = enemy_scene.instantiate()
 	enemy.enemy_type = current_enemy_type
-	# Portal position
+	# Add Enemy to the WaveManager
 	add_child(enemy)
-	#enemy.position = active_portals_list
+	# Portal position
+	enemy.global_position = portal.global_position
+	# Print current enemy number
 	print(str(current_enemy_type) + " Number : " + str(current_enemy_index))
-
 
 func _create_randomized_group_enemy_list():
 	# Get all the enemy types
