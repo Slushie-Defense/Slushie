@@ -81,9 +81,9 @@ func _on_enemy_spawn_timer_timeout():
 	# Recursive loop of spawning enemies
 	if current_enemy_index < current_group_enemy_list.size():
 		# Get current enemy
-		var current_enemy = current_group_enemy_list[current_enemy_index]
+		var current_enemy_type = current_group_enemy_list[current_enemy_index]
 		# Spawn
-		_spawn_enemy(current_enemy)
+		_spawn_enemy(current_enemy_type)
 		# Set the next enemy timer off
 		enemy_spawn_timer.start()
 		# Set to next enemy
@@ -91,8 +91,13 @@ func _on_enemy_spawn_timer_timeout():
 	else:
 		print("Enemy Group [" + str(current_group_index) + "] End")
 
-func _spawn_enemy(current_enemy):
-	print(str(current_enemy) + " Number : " + str(current_enemy_index))
+func _spawn_enemy(current_enemy_type):
+	var enemy = enemy_scene.instantiate()
+	enemy.enemy_type = current_enemy_type
+	# Portal position
+	add_child(enemy)
+	#enemy.position = active_portals_list
+	print(str(current_enemy_type) + " Number : " + str(current_enemy_index))
 
 
 func _create_randomized_group_enemy_list():
