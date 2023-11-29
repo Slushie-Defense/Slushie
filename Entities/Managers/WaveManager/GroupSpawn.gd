@@ -1,4 +1,4 @@
-class_name GroupSpawnClassG
+class_name GroupSpawn
 extends Resource
 
 # Spawn types

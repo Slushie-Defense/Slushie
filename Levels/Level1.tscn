@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Portals/Portal.tscn" id="1_76lsd"]
 [ext_resource type="PackedScene" uid="uid://d1iguupefij64" path="res://Entities/Managers/WaveManager/WaveManager.tscn" id="1_cqx0q"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/EnemySpawnInfo.gd" id="2_cngtf"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/GroupSpawn.gd" id="2_jxhn7"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="2_lo4u0"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://m85u2pije2ka" path="res://Entities/Coin/CoinSpawner.tscn" id="11_cched"]
 
 [sub_resource type="Resource" id="Resource_ijmf1"]
-script = ExtResource("2_cngtf")
+script = ExtResource("2_jxhn7")
 basic = 0
 grunt = 0
 spitter = 0
@@ -30,7 +30,7 @@ middle_top_portal = false
 middle_portal = false
 middle_bottom_portal = false
 bottom_portal = false
-enemy_group_list = Array[ExtResource("2_cngtf")]([SubResource("Resource_ijmf1")])
+enemy_group_list = Array[ExtResource("2_jxhn7")]([SubResource("Resource_ijmf1")])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2vj4"]
 size = Vector2(96, 1024)

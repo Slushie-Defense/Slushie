@@ -9,4 +9,4 @@ extends Resource
 @export var bottom_portal : bool = false
 
 @export_group("Enemy Groups")
-@export var enemy_group_list : Array[EnemySpawnInfo] #Array of EnemySpawnInfo Resources
+@export var enemy_group_list : Array[GroupSpawn] #Array of EnemySpawnInfo Resources

@@ -3,12 +3,11 @@ extends Node2D
 
 @onready var portal_sprite : Sprite2D = $Sprite2D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
-@onready var timer : Timer = $Timer
 
 var open_state : bool = false
 
 func _ready():
-	_set_portal_state_open(true)
+	portal_sprite.scale = Vector2.ZERO
 
 func _set_portal_state_open(set_state):
 	# Set the state

@@ -10,7 +10,7 @@ middle_top_portal = false
 middle_portal = false
 middle_bottom_portal = false
 bottom_portal = false
-enemy_group_list = Array[Resource("res://Entities/Managers/WaveManager/EnemySpawnInfo.gd")]([])
+enemy_group_list = Array[Resource("res://Entities/Managers/WaveManager/GroupSpawn.gd")]([])
 
 [node name="WaveManager" type="Node2D"]
 script = ExtResource("1_nnul2")
