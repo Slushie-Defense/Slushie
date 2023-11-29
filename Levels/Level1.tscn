@@ -1,13 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=15 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
-[ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Managers/WaveManager/Portal.tscn" id="1_76lsd"]
+[ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Portals/Portal.tscn" id="1_76lsd"]
 [ext_resource type="PackedScene" uid="uid://d1iguupefij64" path="res://Entities/Managers/WaveManager/WaveManager.tscn" id="1_cqx0q"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/EnemySpawnInfo.gd" id="2_cngtf"]
 [ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="2_lo4u0"]
-[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Portal.gd" id="2_mqamu"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
 [ext_resource type="PackedScene" uid="uid://umxdc1nk56g1" path="res://Entities/Environment/TreesTexture.tscn" id="7_jvtud"]
@@ -116,23 +115,18 @@ offset_bottom = 256.0
 
 [node name="TopPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3328, 64)
-script = ExtResource("2_mqamu")
 
 [node name="MiddleTopPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3392, 256)
-script = ExtResource("2_mqamu")
 
 [node name="MiddlePortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3456, 448)
-script = ExtResource("2_mqamu")
 
 [node name="MiddleBottomPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3392, 640)
-script = ExtResource("2_mqamu")
 
 [node name="BottomPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3328, 832)
-script = ExtResource("2_mqamu")
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
 position = Vector2(2304, 448)

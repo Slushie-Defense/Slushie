@@ -24,7 +24,11 @@ var current_group_enemy_list : Array = []
 var current_group_index : int = 0
 
 # Active portals
+var all_portals_list : Array = []
 var active_portals_list : Array = []
+
+func _ready():
+	_find_all_portals()
 
 # Start the Wave
 func _input(event):
@@ -165,6 +169,12 @@ func _on_enemy_group_timer_timeout():
 	#_spawn_group(current_group)
 		# Find portals through strings
 
-
 func _on_enemy_spawn_timer_timeout():
 	pass # Replace with function body.
+
+func _find_all_portals():
+	var portal_names = ["TopPortal", "MiddleTopPortal", "MiddlePortal", "MiddleBottomPortal", "BottomPortal"]
+	for child in get_tree().current_scene.get_children():
+		for i in portal_names.size():
+			if portal_names[i] == child.name:
+				all_portals_list.push_back(child)
