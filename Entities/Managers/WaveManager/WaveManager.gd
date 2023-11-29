@@ -30,6 +30,9 @@ var current_enemy_index : int = 0
 var all_portals_list : Array = []
 var active_portals_list : Array = []
 
+# Spawning
+var wave_active : bool = false
+
 # Initatialize
 func _ready():
 	all_portals_list = _find_all_portals()
@@ -37,10 +40,12 @@ func _ready():
 # Start the Wave
 func _input(event):
 	if event.is_action_pressed("StartButton"):
-		_spawn_wave(current_wave_index)
+		if not wave_active:
+			_spawn_wave(current_wave_index)
 
 # spawns a wave, which syncronously loops through the groups
 func _spawn_wave(wave_number: int):
+	wave_active = true
 	# Message that he wave is starting
 	Main.emit_signal("signal_wave_event", "Start Wave: " + str(wave_number))
 	# Exit if there are no waves
@@ -95,6 +100,7 @@ func _on_enemy_spawn_timer_timeout():
 		if current_group_index < current_wave.enemy_group_list.size():
 			_start_next_group()
 		else:
+			wave_active = false
 			# Wave number
 			Main.emit_signal("signal_wave_event", "Wave Complete: " + str(current_wave_index))
 			# Close all the open portals

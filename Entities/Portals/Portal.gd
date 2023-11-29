@@ -10,6 +10,8 @@ func _ready():
 	portal_sprite.scale = Vector2.ZERO
 
 func _set_portal_state_open(set_state):
+	if open_state == set_state:
+		return # Ignore if its the current state
 	# Set the state
 	open_state = set_state
 	# Play animation
