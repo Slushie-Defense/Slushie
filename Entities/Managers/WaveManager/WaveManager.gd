@@ -23,6 +23,9 @@ var current_group
 var current_group_enemy_list : Array = []
 var current_group_index : int = 0
 
+# Enemies
+var current_enemy_index : int = 0
+
 # Active portals
 var all_portals_list : Array = []
 var active_portals_list : Array = []
@@ -50,35 +53,47 @@ func _spawn_wave(wave_number: int):
 	current_wave_total_group_count = current_wave.enemy_group_list.size()
 	# Find all the active portals in this wave
 	active_portals_list = _update_active_portals_list()
-	print("Number of active portals: " + str(active_portals_list.size()))
+	# Open all active portals
+	_open_all_active_portals()
 	# Get the first group
-	if current_wave_total_group_count > 0:
-		# Find the current wave
-		current_group_index = 0
-		current_group = current_wave.enemy_group_list[current_group_index]
-		# Start spawning with a delay before each group
-		enemy_group_timer.wait_time = current_group.group_delay_time # Delay between groups. Universal
-		enemy_group_timer.start() # On time_out the enemies will start spawning
+	if not current_wave_total_group_count > 0:
+		print("No Groups Added")
+		return
+	# Find the current wave
+	current_group_index = 0
+	current_group = current_wave.enemy_group_list[current_group_index]
+	# Start spawning with a delay before each group
+	enemy_group_timer.wait_time = current_group.group_delay_time # Delay between groups. Universal
+	enemy_group_timer.start() # On time_out the enemies will start spawning
+	# Set the Enemy spawn delay time
+	enemy_spawn_timer.wait_time = current_group.spawn_delay_time
 	# Update the wave count
 	wave_number += 1
 
-# spawns a group of enemies within a wave
-func _spawn_group(enemy_info: GroupSpawn):
-	Main.emit_signal("signal_wave_event", "New group spawning")
-	for i in range(enemy_info.number_to_spawn):
-		await _spawn_enemy(enemy_info)
-	Main.emit_signal("signal_wave_event",  "Spawned all enemies in this group")
-
-
 func _on_enemy_group_timer_timeout():
-	print("Spawned group!")
+	print("Enemy Group [" + str(current_group_index) + "] Start")
 	# Create an array of all the current enemy types in a random order
 	current_group_enemy_list = _create_randomized_group_enemy_list()
-	#_spawn_group(current_group)
-		# Find portals through strings
+	# Start spawning enemies
+	_on_enemy_spawn_timer_timeout()
 
 func _on_enemy_spawn_timer_timeout():
-	pass # Replace with function body.
+	# Recursive loop of spawning enemies
+	if current_enemy_index < current_group_enemy_list.size():
+		# Get current enemy
+		var current_enemy = current_group_enemy_list[current_enemy_index]
+		# Spawn
+		_spawn_enemy(current_enemy)
+		# Set the next enemy timer off
+		enemy_spawn_timer.start()
+		# Set to next enemy
+		current_enemy_index += 1
+	else:
+		print("Enemy Group [" + str(current_group_index) + "] End")
+
+func _spawn_enemy(current_enemy):
+	print(str(current_enemy) + " Number : " + str(current_enemy_index))
+
 
 func _create_randomized_group_enemy_list():
 	# Get all the enemy types
@@ -136,56 +151,10 @@ func _update_active_portals_list():
 					active_list.push_back(portal)
 	return active_list
 
-func _open_all_portals():
-	for portal in all_portals_list:
+func _open_all_active_portals():
+	for portal in active_portals_list:
 		portal._set_portal_state_open(true)
 
 func _close_all_portals():
 	for portal in all_portals_list:
 		portal._set_portal_state_open(false)
-
-# since the spawned enemies will be childed to the object, we can use get_child_count to check the status of the enemies in the wave
-func check_wave_complete():
-	if (get_child_count() == 0):
-		Main.emit_signal("signal_wave_event", "Wave complete!")
-		current_wave_index += 1
-
-# gets the enemy scene from the enemy type, instantiates it, and childs it to $WaveManager
-func _add_enemy(enemy_info : GroupSpawn):
-	var enemy_instance : Node2D
-	# get enemies from enemy_info
-	if (enemy_info.enemies.size() == 0):
-		print("no enemies to spawn")
-		return
-	# if the array size is 1, then spawn that enemy
-	if (enemy_info.enemies.size() == 1):
-		enemy_instance = (enemy_info.enemies[0]).instantiate()
-	# if the array size is greater than 1, then spawn a random enemy from the array
-	else:
-		var random_index = randi() % enemy_info.enemies.size()
-		enemy_instance = enemy_info.enemies[random_index].instantiate()
-	
-	var enemy_position = Vector2.ZERO
-	
-	if (active_portals_list.size() == 0):
-		print("no portals to spawn at")
-		return
-	# if the portals array size is 1, spawn at that position
-	if (active_portals_list.size() == 1):
-		enemy_position = active_portals_list[0].position
-	else:
-	# if the portals array size is greater than 1, spawn at a random position on the portals from the array
-		var random_index = randi() % enemy_info.portals.size()
-		enemy_position = active_portals_list[random_index].position
-	
-	# add variance to the position
-	enemy_position.x += randi() % 100 - 50
-
-	add_child(enemy_instance)
-	enemy_instance.global_position = enemy_position
-
-# spawn the enemy with a delay (coroutine)
-func _spawn_enemy(enemy_info: GroupSpawn):
-	for i in range(enemy_info.number_to_spawn_at_once):
-		_add_enemy(enemy_info)
-		await get_tree().create_timer(enemy_info.total_time / float(enemy_info.number_to_spawn_at_once)).timeout
