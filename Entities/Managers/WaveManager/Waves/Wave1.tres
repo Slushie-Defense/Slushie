@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Wave" load_steps=4 format=3 uid="uid://df1kqs6hna3g6"]
+
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/GroupSpawn.gd" id="1_4kikn"]
+[ext_resource type="Script" path="res://Entities/Managers/WaveManager/Wave.gd" id="1_73vd8"]
+
+[sub_resource type="Resource" id="Resource_epned"]
+script = ExtResource("1_4kikn")
+basic = 1
+grunt = 0
+spitter = 0
+tank = 0
+floater = 0
+group_delay_time = 0.5
+spawn_delay_time = 0.5
+spawn_method = 1
+
+[resource]
+script = ExtResource("1_73vd8")
+top_portal = false
+middle_top_portal = false
+middle_portal = true
+middle_bottom_portal = false
+bottom_portal = false
+enemy_group_list = Array[ExtResource("1_4kikn")]([SubResource("Resource_epned")])
