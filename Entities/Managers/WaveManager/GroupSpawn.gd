@@ -19,3 +19,15 @@ enum spawn_type { ALL_AT_ONCE, RANDOM_ANY, RANDOM_SAME }
 @export var spawn_delay_time : float = 0.5
 # Spawn one at a time
 @export var spawn_method = spawn_type.RANDOM_ANY
+
+func _init(
+	basicn: int, gruntn: int, spittern: int, tankn: int, floatern: int,
+	gdelay: float, sdelay: float
+):
+	basic = basicn
+	grunt = gruntn
+	spitter = spittern
+	tank = tankn
+	floater = floatern
+	group_delay_time = gdelay
+	spawn_delay_time = sdelay
