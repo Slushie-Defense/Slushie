@@ -114,7 +114,7 @@ func _connect_coins():
 	Main.signal_update_coin_count.connect(_update_coin_count)
 	_update_coin_count(0)
 
-func _update_coin_count(count):
+func _update_coin_count(_count):
 	coins.set_label_value(Main.coins)
 
 func _input(event):
@@ -167,8 +167,8 @@ func _update_seleted_item():
 	# Set damage
 	var health : String = str(active_item_type.health)
 	# Set range
-	var range : String = str(active_item_type.attack_range / GameGrid.cell_size)
+	var stats_range : String = str(active_item_type.attack_range / GameGrid.cell_size)
 	# Update 
-	stats._set_stats("Damage: " + damage + "\nHealth: " + health + "\nRange: " + range)
+	stats._set_stats("Damage: " + damage + "\nHealth: " + health + "\nRange: " + stats_range)
 	
 	Main.emit_signal("signal_selected_item_update", active_item_type)

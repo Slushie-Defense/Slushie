@@ -51,9 +51,9 @@ func _deal_damage():
 		# Change the collision mask if this is supposed to do friendly fire
 		if child.has_method("attack"): # Check if it has attack
 			var distance_from_center : float = global_position.distance_to(child.global_position)
-			var attack = Attack.new()
-			attack.damage = attack_damage * damage_fallout_curve.sample(distance_from_center / explosion_radius)
-			child.attack(attack)
+			var _attack = Attack.new()
+			_attack.damage = attack_damage * damage_fallout_curve.sample(distance_from_center / explosion_radius)
+			child.attack(_attack)
 	
 	# Turn off collision detection after use
 	collision_detection.call_deferred("queue_free") # Remove from scene
@@ -61,5 +61,5 @@ func _deal_damage():
 func _on_delay_damage_timer_timeout():
 	_deal_damage()
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	call_deferred("queue_free") # Delete after the animation completes

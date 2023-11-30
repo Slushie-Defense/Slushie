@@ -11,8 +11,8 @@ func _ready():
 	# Stores the gas station
 	Main.emit_signal("signal_add_gas_station", self)
 
-func attack(attack : Attack):
-	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
+func attack(_attack : Attack):
+	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage
 
 func _event_health_is_zero():
 	print("Gas station died!")

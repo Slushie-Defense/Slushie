@@ -72,12 +72,12 @@ func _player_alive():
 
 func _reward_with_coins():
 	if _player_alive():
-		var coins = coin_spawner_scene.instantiate()
-		coins.number_of_coins = coin_reward
-		get_tree().get_root().add_child(coins)
-		coins.randomize_postion = true
-		coins.instant_pickup = true
-		coins.global_position = player_node.global_position
+		var spawned_coins = coin_spawner_scene.instantiate()
+		spawned_coins.number_of_coins = coin_reward
+		spawned_coins.randomize_postion = true
+		spawned_coins.instant_pickup = true
+		spawned_coins.global_position = player_node.global_position
+		get_tree().get_root().add_child(spawned_coins)
 
 func _try_to_buy(cost):
 	var can_purchase : bool = Main.coins - cost >= 0

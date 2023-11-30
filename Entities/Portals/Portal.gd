@@ -22,7 +22,7 @@ func _set_portal_state_open(set_state):
 	# Play the animation
 	animation_player.play()
 
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	if open_state:
 		animation_player.current_animation = "LoopPortal"
 		animation_player.play()

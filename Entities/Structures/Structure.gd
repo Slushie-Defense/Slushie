@@ -36,8 +36,8 @@ func _initialize_building_construction():
 		# Add weapon
 		call_deferred("_convert_to_structure_type")
 
-func attack(attack : Attack):
-	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
+func attack(_attack : Attack):
+	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage
 
 func _event_health_is_zero():
 	print("Structure died!")
