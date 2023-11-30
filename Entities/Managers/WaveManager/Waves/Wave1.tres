@@ -5,20 +5,20 @@
 
 [sub_resource type="Resource" id="Resource_epned"]
 script = ExtResource("1_4kikn")
-basic = 1
-grunt = 0
+basic = 15
+grunt = 15
 spitter = 0
 tank = 0
 floater = 0
 group_delay_time = 0.5
 spawn_delay_time = 0.5
-spawn_method = 1
+spawn_method = 0
 
 [resource]
 script = ExtResource("1_73vd8")
 top_portal = false
-middle_top_portal = false
+middle_top_portal = true
 middle_portal = true
-middle_bottom_portal = false
+middle_bottom_portal = true
 bottom_portal = false
 enemy_group_list = Array[ExtResource("1_4kikn")]([SubResource("Resource_epned")])

@@ -20,6 +20,7 @@ script = ExtResource("1_ff1tq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
+y_sort_enabled = true
 shape = SubResource("CircleShape2D_o6l61")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
