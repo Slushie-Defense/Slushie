@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
 [ext_resource type="PackedScene" uid="uid://d1vyrdmd23lcq" path="res://Entities/Portals/Portal.tscn" id="1_76lsd"]
 [ext_resource type="PackedScene" uid="uid://d1iguupefij64" path="res://Entities/Managers/WaveManager/WaveManager.tscn" id="1_cqx0q"]
+[ext_resource type="Script" path="res://Levels/Level1.gd" id="1_ftbg0"]
 [ext_resource type="PackedScene" uid="uid://bb541y6133q8o" path="res://Entities/Environment/GroundTexture.tscn" id="1_xivym"]
 [ext_resource type="Script" path="res://Utilities/VisiblePolygon2DColliders.gd" id="4_4bbal"]
 [ext_resource type="PackedScene" uid="uid://thui7p52g4o6" path="res://Entities/GasStation/GasStation.tscn" id="5_0xu7d"]
@@ -14,6 +15,7 @@
 size = Vector2(96, 1024)
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_ftbg0")
 
 [node name="WaveManager" parent="." instance=ExtResource("1_cqx0q")]
 y_sort_enabled = true

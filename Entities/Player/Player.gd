@@ -85,8 +85,8 @@ func apply_movement(acceleration):
 	if motion.length() > MAX_SPEED:
 		motion = motion.normalized() * MAX_SPEED
 
-func attack(attack : Attack):
-	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage
+func attack(_attack : Attack):
+	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage
 
 func building_manager_create_structure():
 	if Input.is_action_just_released("ActionButton"):

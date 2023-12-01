@@ -171,7 +171,7 @@ func _on_attack_delay_timer_timeout():
 		return
 	# Attack
 	if ai_chase_node != null:
-		var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
+		# var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
 		# Attack within the attack range
 		attack_range_raycast.target_position = global_position.direction_to(ai_chase_node.global_position) * enemy_data.attack_range
 		attack_range_raycast.force_raycast_update() # Launch the ray
@@ -196,7 +196,7 @@ func _on_attack_delay_timer_timeout():
 		else:
 			enemy_state.current = enemy_state.list.MOVING
 
-func _enemy_is_attacking(target_node):
+func _enemy_is_attacking(_target_node):
 	# This triggered whenever the enemy is attacking -- Incldding if it is a weapon
 	enemy_state.current = enemy_state.list.ATTACK
 	# What type of attack is is doing
