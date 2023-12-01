@@ -5,11 +5,11 @@
 
 [sub_resource type="Resource" id="Resource_epned"]
 script = ExtResource("1_4kikn")
-basic = 1
+basic = 0
 grunt = 0
-spitter = 0
+spitter = 1
 tank = 0
-floater = 0
+floater = 1
 group_delay_time = 0.5
 spawn_delay_time = 0.5
 spawn_method = 0

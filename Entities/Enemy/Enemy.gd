@@ -44,6 +44,8 @@ var weapon_base : Node2D = null
 
 # Animation Player
 @onready var ap
+var my_sprite
+@onready var damage_flash_timer : Timer = $DamageFlashTimer
 
 # Initialize
 func _ready():
@@ -69,16 +71,27 @@ func _set_enemy_type():
 			enemy_data = UnitData.BASIC
 			ap = $BasicAP
 			$BasicSS.visible = true
+			my_sprite = $BasicSS
 		UnitData.enemy_list.GRUNT:
 			enemy_data = UnitData.GRUNT
 			ap = $GruntAP
 			$GruntSS.visible = true
+			my_sprite = $GruntSS
 		UnitData.enemy_list.SPITTER:
 			_create_spitter()
+			ap = $SpitterAP
+			$SpitterSS.visible = true
+			my_sprite = $SpitterSS;
 		UnitData.enemy_list.FLOATER:
 			enemy_data = UnitData.FLOATER
+			ap = $FloaterAP
+			$FloaterSS.visible = true
+			my_sprite = $FloaterSS;
 		UnitData.enemy_list.TANK:
 			enemy_data = UnitData.TANK
+			ap = $TankAP
+			$TankSS.visible = true
+			my_sprite = $TankSS;
 	
 	# Set texture
 	character_sprite.texture = enemy_data.basic_sprite
@@ -143,8 +156,12 @@ func _ai_process():
 				if attack_timer.is_stopped():
 					attack_timer.start()
 	
-	$BasicSS.flip_h = true if (ai_direction.x > 0) else false
-	$GruntSS.flip_h = true if (ai_direction.x > 0) else false
+	var dirFlip = true if (ai_direction.x > 0) else false
+	$BasicSS.flip_h = dirFlip
+	$GruntSS.flip_h = dirFlip
+	$FloaterSS.flip_h = dirFlip
+	$TankSS.flip_h = dirFlip
+	$SpitterSS.flip_h = dirFlip
 
 func _update_attack_speed():
 	attack_timer.wait_time = enemy_data.attack_speed
@@ -170,7 +187,7 @@ func _on_attack_delay_timer_timeout():
 				# This is a MELEE ATTACK
 				match enemy_data.attack_type:
 					UnitData.enemy_attack_list.MELEE:
-						$SFXGrunt1.play()
+						$SFXGrunt2.play()
 						var attack = Attack.new()
 						attack.damage = enemy_data.attack_damage
 						first_collision_result.attack(attack)
@@ -233,11 +250,17 @@ func _on_vision_body_exited(body):
 	ai_chase_node_list.erase(body)
 
 func attack(attack : Attack):
+	if (enemy_state.current == enemy_state.list.DIED):
+		return
 	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage when hit by weapon
+	my_sprite.modulate = Color.INDIAN_RED
+	$SFXGrunt1.play()
+	damage_flash_timer.start()
 	
 func _event_health_is_zero():
 	if (enemy_state.current == enemy_state.list.DIED):
 		return
+		
 	# Died
 	enemy_state.current = enemy_state.list.DIED
 	$SFXDeath.play()
@@ -261,6 +284,24 @@ func _on_basic_ap_animation_finished(anim_name):
 	if (anim_name == "Death"):
 		call_deferred("queue_free")
 
+func _on_floater_ap_animation_finished(anim_name):
+	var isDeath = (anim_name == "Death")
+	var isAttack = (anim_name == "Attack")
+	if (isDeath || isAttack):
+		call_deferred("queue_free")
+
 func _on_grunt_ap_animation_finished(anim_name):
 	if (anim_name == "Death"):
 		call_deferred("queue_free")
+
+
+func _on_tank_ap_animation_finished(anim_name):
+	if (anim_name == "Death"):
+		call_deferred("queue_free")
+
+func _on_spitter_ap_animation_finished(anim_name):
+	if (anim_name == "Death"):
+		call_deferred("queue_free")
+
+func _on_damage_flash_timer_timeout():
+	my_sprite.modulate = Color.WHITE	
