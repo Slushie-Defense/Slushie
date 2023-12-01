@@ -258,7 +258,7 @@ func attack(_attack : Attack):
 	my_sprite.modulate = Color.INDIAN_RED
 	$SFXGrunt1.play()
 	damage_flash_timer.start()
-
+	
 func _event_health_is_zero():
 	if (enemy_state.current == enemy_state.list.DIED):
 		return
