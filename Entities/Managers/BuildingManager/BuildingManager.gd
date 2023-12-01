@@ -63,12 +63,12 @@ func _ready():
 func _on_player_add(player):
 	player.signal_share_player_position.connect(_update_position)
 
-func _update_position(set_position):
+func _update_position(_set_position):
 	# Set GRID position
-	var offset_grid_to_center_player = Vector2(set_position.x + game_grid_cell_size_halved, set_position.y + game_grid_cell_size_halved)
+	var offset_grid_to_center_player = Vector2(_set_position.x + game_grid_cell_size_halved, _set_position.y + game_grid_cell_size_halved)
 	global_position = GameGrid.snap_coordinate_to_grid_top_left_corner(offset_grid_to_center_player)
 	# Set HIGHLIGHT SQUARE position
-	structure_position = GameGrid.snap_coordinate_to_grid_top_left_corner(set_position)
+	structure_position = GameGrid.snap_coordinate_to_grid_top_left_corner(_set_position)
 	highlight_square_sprite.global_position = structure_position
 
 func _update_build_state():
