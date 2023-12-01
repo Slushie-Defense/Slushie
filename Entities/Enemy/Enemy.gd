@@ -42,6 +42,11 @@ var coin_spawner = load("res://Entities/Coin/CoinSpawner.tscn")
 var weapon_base_scene = load("res://Entities/Weapons/WeaponBase.tscn")
 var weapon_base : Node2D = null
 
+# Animation Player
+@onready var ap
+var my_sprite
+@onready var damage_flash_timer : Timer = $DamageFlashTimer
+
 # Initialize
 func _ready():
 	# Behavior after the Gas Station is destroyed
@@ -50,7 +55,7 @@ func _ready():
 	_set_enemy_type()
 	# Set health
 	health.set_max_health(enemy_data.health)
-	print(str(enemy_data.unit_name) + " Health: " + str(enemy_data.health))
+	# print(str(enemy_data.unit_name) + " Health: " + str(enemy_data.health))
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
 	# Set attack speed
 	_update_attack_speed() # Set to default
@@ -64,22 +69,51 @@ func _set_enemy_type():
 	match enemy_type:
 		UnitData.enemy_list.BASIC:
 			enemy_data = UnitData.BASIC
+			ap = $BasicAP
+			$BasicSS.visible = true
+			my_sprite = $BasicSS
 		UnitData.enemy_list.GRUNT:
 			enemy_data = UnitData.GRUNT
+			ap = $GruntAP
+			$GruntSS.visible = true
+			my_sprite = $GruntSS
 		UnitData.enemy_list.SPITTER:
 			_create_spitter()
+			ap = $SpitterAP
+			$SpitterSS.visible = true
+			my_sprite = $SpitterSS;
 		UnitData.enemy_list.FLOATER:
 			enemy_data = UnitData.FLOATER
+			ap = $FloaterAP
+			$FloaterSS.visible = true
+			my_sprite = $FloaterSS;
 		UnitData.enemy_list.TANK:
 			enemy_data = UnitData.TANK
+			ap = $TankAP
+			$TankSS.visible = true
+			my_sprite = $TankSS;
 	
 	# Set texture
 	character_sprite.texture = enemy_data.basic_sprite
 	# Set collision shape
 	collision_shape.shape.radius = enemy_data.collision_shape_radius
 
+var prevState = enemy_state.list.IDLE
+func _process(delta):
+	if (enemy_state.current != prevState):		
+		match enemy_state.current:
+			enemy_state.list.DIED:
+				pass
+			enemy_state.list.MOVING:
+				ap.play("Move")
+			enemy_state.list.ATTACK:
+				ap.play("Attack")
+	prevState = enemy_state.current
+
 # Called every frame
 func _physics_process(delta):
+	if (enemy_state.current == enemy_state.list.DIED):
+		return
 	# Direction & Attack
 	_ai_process()
 	# Move
@@ -88,18 +122,16 @@ func _physics_process(delta):
 	velocity = motion
 	# Move to the position unless it hits a collision then it will stop at the collision point
 	move_and_slide()
-
+	
 func apply_movement(acceleration):
 	motion += acceleration
 	if motion.length() > enemy_data.max_speed:
 		motion = motion.normalized() * enemy_data.max_speed
 	if motion.length() > 16:
-		enemy_state.current = enemy_state.list.MOVING
+		if (enemy_state.current != enemy_state.list.ATTACK):
+			enemy_state.current = enemy_state.list.MOVING
 		
-func _ai_process():
-	# Idle state
-	enemy_state.current = enemy_state.list.IDLE
-	
+func _ai_process():	
 	# Direction priority
 	ai_direction = ai_default_direction # Default goes left
 	
@@ -123,11 +155,20 @@ func _ai_process():
 			if not enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
 				if attack_timer.is_stopped():
 					attack_timer.start()
+	
+	var dirFlip = true if (ai_direction.x > 0) else false
+	$BasicSS.flip_h = dirFlip
+	$GruntSS.flip_h = dirFlip
+	$FloaterSS.flip_h = dirFlip
+	$TankSS.flip_h = dirFlip
+	$SpitterSS.flip_h = dirFlip
 
 func _update_attack_speed():
 	attack_timer.wait_time = enemy_data.attack_speed
 
-func _on_attack_delay_timer_timeout():
+func _on_attack_delay_timer_timeout():	
+	if (enemy_state.current == enemy_state.list.DIED):
+		return
 	# Attack
 	if ai_chase_node != null:
 		# var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
@@ -137,18 +178,25 @@ func _on_attack_delay_timer_timeout():
 		# See what it hit
 		var first_collision_result = attack_range_raycast.get_collider()
 		if first_collision_result != null:
+			enemy_state.current = enemy_state.list.ATTACK
 			# If it hits something it can attack
-			if first_collision_result.has_method("attack"):
+			if first_collision_result.has_method("attack"):	
 				# Create an attack class and pass it through
-				_enemy_is_attacking(first_collision_result)
+				_enemy_is_attacking(first_collision_result)				
+				enemy_state.current = enemy_state.list.ATTACK
 				# This is a MELEE ATTACK
 				match enemy_data.attack_type:
 					UnitData.enemy_attack_list.MELEE:
+
+						$SFXGrunt2.play()
 						var _attack = Attack.new()
 						_attack.damage = enemy_data.attack_damage
 						first_collision_result.attack(_attack)
+
 					UnitData.enemy_attack_list.EXPLODE:
 						_explode_attack()
+		else:
+			enemy_state.current = enemy_state.list.MOVING
 
 func _enemy_is_attacking(_target_node):
 	# This triggered whenever the enemy is attacking -- Incldding if it is a weapon
@@ -204,16 +252,24 @@ func _on_vision_body_exited(body):
 	ai_chase_node_list.erase(body)
 
 func attack(_attack : Attack):
+	if (enemy_state.current == enemy_state.list.DIED):
+		return
 	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage when hit by weapon
+	my_sprite.modulate = Color.INDIAN_RED
+	$SFXGrunt1.play()
+	damage_flash_timer.start()
 	
 func _event_health_is_zero():
+	if (enemy_state.current == enemy_state.list.DIED):
+		return
+		
 	# Died
 	enemy_state.current = enemy_state.list.DIED
+	$SFXDeath.play()
+	ap.play("Death")
+	
 	# Spawn coin where it dies
 	_spawn_coin() 
-	# Destroy enemy
-	call_deferred("queue_free")
-	print("Enemy died!")
 
 func _spawn_coin():
 	# Spawn coin
@@ -225,3 +281,29 @@ func _spawn_coin():
 
 func _gas_station_destroyed():
 	ai_default_direction = Vector2(0, 0)
+
+func _on_basic_ap_animation_finished(anim_name):	
+	if (anim_name == "Death"):
+		call_deferred("queue_free")
+
+func _on_floater_ap_animation_finished(anim_name):
+	var isDeath = (anim_name == "Death")
+	var isAttack = (anim_name == "Attack")
+	if (isDeath || isAttack):
+		call_deferred("queue_free")
+
+func _on_grunt_ap_animation_finished(anim_name):
+	if (anim_name == "Death"):
+		call_deferred("queue_free")
+
+
+func _on_tank_ap_animation_finished(anim_name):
+	if (anim_name == "Death"):
+		call_deferred("queue_free")
+
+func _on_spitter_ap_animation_finished(anim_name):
+	if (anim_name == "Death"):
+		call_deferred("queue_free")
+
+func _on_damage_flash_timer_timeout():
+	my_sprite.modulate = Color.WHITE	

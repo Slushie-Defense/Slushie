@@ -18,6 +18,8 @@ size = Vector2(96, 1024)
 script = ExtResource("1_ftbg0")
 
 [node name="WaveManager" parent="." instance=ExtResource("1_cqx0q")]
+y_sort_enabled = true
+waves = Array[Resource("res://Entities/Managers/WaveManager/Wave.gd")]([])
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 0.0

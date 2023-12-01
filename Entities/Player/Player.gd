@@ -19,6 +19,9 @@ const MAX_SPEED : float = 500
 var ACCELERATION : float = 2000
 var motion : Vector2 = Vector2.ZERO # Equaliant to Vector2(0,0)
 
+# Animation Player
+@onready var ap = $AnimationPlayer
+
 # Initialize
 func _ready():
 	# Set player health
@@ -35,12 +38,16 @@ func _ready():
 
 # Called every frame
 func _physics_process(delta):
+	if (player_state.current == player_state.list.DIED):
+		return
+		
 	var axis = get_input_axis()
 	# If the player is not providing input
 	if axis == Vector2.ZERO:
 		apply_friction(ACCELERATION * delta)
 		player_state.current = player_state.list.IDLE
 	else: # Otherwise move
+		$CharacterSprite.flip_h = true if (axis.x < 0) else false
 		apply_movement(axis * ACCELERATION * delta)
 		player_state.current = player_state.list.MOVING
 	# Apply the motion
@@ -51,6 +58,15 @@ func _physics_process(delta):
 	emit_signal("signal_share_player_position", global_position)
 	# Add building
 	building_manager_create_structure()
+
+func _process(delta):
+	match player_state.current:
+		player_state.list.IDLE:
+			ap.play("Idle")
+		player_state.list.MOVING:
+			ap.play("Run")
+		player_state.list.DIED:			
+			ap.play("Death")
 
 func get_input_axis():
 	var axis = Vector2.ZERO
@@ -63,7 +79,7 @@ func apply_friction(amount):
 		motion -= motion.normalized() * amount
 	else:
 		motion = Vector2.ZERO
-	
+		
 func apply_movement(acceleration):
 	motion += acceleration
 	if motion.length() > MAX_SPEED:
@@ -77,10 +93,16 @@ func building_manager_create_structure():
 		building_manager.add_structure()
 
 func _event_health_is_zero():
+	if (player_state.current == player_state.list.DIED):
+		return		
+		
 	player_state.current = player_state.list.DIED
 	Main.emit_signal("signal_player_died")
-	call_deferred("queue_free")
 	print("Player died!")
 
 func _is_player():
 	pass
+
+func _on_animation_player_animation_finished(anim_name):
+	if (anim_name == "Death"):
+		call_deferred("queue_free")

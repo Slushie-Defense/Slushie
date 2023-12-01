@@ -5,8 +5,8 @@
 
 [sub_resource type="Resource" id="Resource_epned"]
 script = ExtResource("1_3vwhc")
-basic = 4
-grunt = 0
+basic = 5
+grunt = 5
 spitter = 0
 tank = 0
 floater = 0
