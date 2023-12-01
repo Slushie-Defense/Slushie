@@ -239,7 +239,7 @@ func _explode_attack():
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = enemy_data.attack_damage
 	explosion.collision_mask_list = enemy_data.attack_collision_mask_list
-	get_tree().get_root().add_child(explosion)
+	get_tree().current_scene.add_child(explosion)
 	explosion.global_position = global_position
 	# Destroy self
 	_event_health_is_zero()
@@ -276,7 +276,7 @@ func _spawn_coin():
 	var coins = coin_spawner.instantiate()
 	coins.number_of_coins = ceil(enemy_data.coin_drop_value / 100.0)
 	coins.randomize_postion = true
-	get_tree().get_root().add_child(coins)
+	get_tree().current_scene.add_child(coins)
 	coins.global_position = global_position
 
 func _gas_station_destroyed():

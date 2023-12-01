@@ -140,7 +140,7 @@ func find_target_position():
 func create_projectile(arch_and_explode : bool = true):
 	var projectile = projectile_scene.instantiate()
 	projectile.collision_mask_list = weapon_data.attack_collision_mask_list
-	get_tree().get_root().add_child(projectile)
+	get_tree().current_scene.add_child(projectile)
 	projectile._set_projectile_sprite(weapon_data.projectile_sprite)
 	projectile._set_projectile_color(weapon_data.projectile_color)
 	projectile.global_position = global_position
@@ -189,7 +189,7 @@ func _create_landmine_explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = weapon_data.attack_damage
 	explosion.collision_mask_list = weapon_data.attack_collision_mask_list
-	get_tree().get_root().add_child(explosion)
+	get_tree().current_scene.add_child(explosion)
 	explosion.global_position = global_position
 	# Destroy structure
 	_self_destruct()

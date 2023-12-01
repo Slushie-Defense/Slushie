@@ -71,7 +71,7 @@ func _spawn_wave(wave_number: int):
 	_start_next_group()
 
 func _on_enemy_group_timer_timeout():
-	print("Enemy Group [" + str(current_group_index + 1) + "] Start")
+	#print("Enemy Group [" + str(current_group_index + 1) + "] Start")
 	# Create an array of all the current enemy types in a random order
 	current_group_enemy_list = _create_randomized_group_enemy_list()
 	# Preselect a random active portal that all enemies could be sent through if the condition is met
@@ -109,7 +109,7 @@ func _on_enemy_spawn_timer_timeout():
 		enemy_spawn_timer.start()
 	else:
 		# Mark the end of the group
-		print("Enemy Group [" + str(current_group_index) + "] End")
+		#print("Enemy Group [" + str(current_group_index) + "] End")
 		# Go to next group
 		current_group_index += 1
 		if current_group_index < current_wave.enemy_group_list.size():
@@ -142,7 +142,7 @@ func _spawn_enemy(current_enemy_type, portal):
 	# Portal position
 	enemy.global_position = portal.global_position
 	# Print current enemy number
-	print(str(current_enemy_type) + " Number : " + str(current_enemy_index))
+	#print(str(current_enemy_type) + " Number : " + str(current_enemy_index))
 
 func _create_randomized_group_enemy_list():
 	# Get all the enemy types
