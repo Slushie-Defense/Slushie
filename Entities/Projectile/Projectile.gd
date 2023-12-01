@@ -51,7 +51,7 @@ func _set_projectile_sprite(projectile_sprite):
 func _physics_process(delta):
 	# Calculate the direction from the Coin to the player
 	var direction_to_target = initial_position.direction_to(target_position)
-	var distance_to_target = global_position.distance_to(target_position)
+	# var distance_to_target = global_position.distance_to(target_position)
 	
 	# Arch
 	var distance_ratio = linear_position.distance_to(target_position) / initial_distance
@@ -81,9 +81,9 @@ func _physics_process(delta):
 			if not collision_result == null:
 				if collision_result.has_method("attack"):
 					# Create an attack class and pass it through
-					var attack = Attack.new()
-					attack.damage = attack_damage
-					collision_result.attack(attack)
+					var _attack = Attack.new()
+					_attack.damage = attack_damage
+					collision_result.attack(_attack)
 					# Has reached target
 					_reached_target()
 	

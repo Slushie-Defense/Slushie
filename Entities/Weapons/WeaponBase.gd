@@ -169,9 +169,9 @@ func fire_instant_hit():
 		# If it hits something it can attack
 		if first_collision_result.has_method("attack"):
 			# Create an attack class and pass it through
-			var attack = Attack.new()
-			attack.damage = weapon_data.attack_damage
-			first_collision_result.attack(attack)
+			var _attack = Attack.new()
+			_attack.damage = weapon_data.attack_damage
+			first_collision_result.attack(_attack)
 			# Draw the line
 			draw_line2d(raycast_2d)
 

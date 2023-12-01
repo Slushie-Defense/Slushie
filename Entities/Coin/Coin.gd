@@ -42,7 +42,7 @@ func _on_area_2d_body_entered(body):
 	# Remove collision detection
 	area_2d.call_deferred("queue_free")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Calculate the direction from the Coin to the player
 	var direction = initial_position.direction_to(player_position)
 	var distance_to_player = initial_position.distance_to(player_position)

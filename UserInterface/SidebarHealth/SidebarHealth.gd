@@ -16,7 +16,7 @@ func _ready():
 	background_fill_style.bg_color = Color("#555555")
 	progress_bar.add_theme_stylebox_override("background", background_fill_style)
 
-func _update_progress_bar(current_value, max_health):
+func _update_progress_bar(current_value, _max_health):
 	progress_bar.value = current_value
 	# Change the color
 	var health_color = health_color_gradient.sample(current_value / 100.0)

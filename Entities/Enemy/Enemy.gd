@@ -130,7 +130,7 @@ func _update_attack_speed():
 func _on_attack_delay_timer_timeout():
 	# Attack
 	if ai_chase_node != null:
-		var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
+		# var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
 		# Attack within the attack range
 		attack_range_raycast.target_position = global_position.direction_to(ai_chase_node.global_position) * enemy_data.attack_range
 		attack_range_raycast.force_raycast_update() # Launch the ray
@@ -144,13 +144,13 @@ func _on_attack_delay_timer_timeout():
 				# This is a MELEE ATTACK
 				match enemy_data.attack_type:
 					UnitData.enemy_attack_list.MELEE:
-						var attack = Attack.new()
-						attack.damage = enemy_data.attack_damage
-						first_collision_result.attack(attack)
+						var _attack = Attack.new()
+						_attack.damage = enemy_data.attack_damage
+						first_collision_result.attack(_attack)
 					UnitData.enemy_attack_list.EXPLODE:
 						_explode_attack()
 
-func _enemy_is_attacking(target_node):
+func _enemy_is_attacking(_target_node):
 	# This triggered whenever the enemy is attacking -- Incldding if it is a weapon
 	enemy_state.current = enemy_state.list.ATTACK
 	# What type of attack is is doing
@@ -203,8 +203,8 @@ func _on_vision_body_entered(body):
 func _on_vision_body_exited(body):
 	ai_chase_node_list.erase(body)
 
-func attack(attack : Attack):
-	health.add_or_subtract_health_by_value(-attack.damage) # Subtract damage when hit by weapon
+func attack(_attack : Attack):
+	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage when hit by weapon
 	
 func _event_health_is_zero():
 	# Died
