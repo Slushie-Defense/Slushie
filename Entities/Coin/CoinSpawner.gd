@@ -24,7 +24,7 @@ func _spawn_coins():
 		for y1 in range(0, grid_size):
 			if x1 + y1 * grid_size < number_of_coins:
 				var coin = coin_scene.instantiate()
-				get_tree().get_root().add_child(coin)
+				get_tree().current_scene.add_child(coin)
 				# Does it go straight to the player
 				if instant_pickup:
 					coin.timer.wait_time = randf_range(0.25, 0.5)

@@ -42,6 +42,7 @@ func _game_ended():
 	get_tree().create_timer(5.0).timeout.connect(_go_to_death_scene)
 
 func _go_to_death_scene():
+	coins = 0
 	get_tree().change_scene_to_file("res://UserInterface/DeathScreen/DeathScreen.tscn")
 
 func _input(event):
@@ -77,7 +78,7 @@ func _reward_with_coins():
 		spawned_coins.randomize_postion = true
 		spawned_coins.instant_pickup = true
 		spawned_coins.global_position = player_node.global_position
-		get_tree().get_root().add_child(spawned_coins)
+		get_tree().current_scene.add_child(spawned_coins)
 
 func _try_to_buy(cost):
 	var can_purchase : bool = Main.coins - cost >= 0

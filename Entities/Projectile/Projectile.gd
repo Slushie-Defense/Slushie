@@ -115,5 +115,5 @@ func _create_explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = attack_damage
 	explosion.collision_mask_list = collision_mask_list
-	get_tree().get_root().add_child(explosion)
+	get_tree().current_scene.add_child(explosion)
 	explosion.global_position = target_position
