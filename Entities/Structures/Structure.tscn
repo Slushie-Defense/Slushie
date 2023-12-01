@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ds15dcep7fhyn"]
+[gd_scene load_steps=8 format=3 uid="uid://ds15dcep7fhyn"]
 
-[ext_resource type="Texture2D" uid="uid://dj4usx0levw84" path="res://Sprites/Squares/128x128Construction.png" id="1_5wevt"]
 [ext_resource type="Script" path="res://Entities/Structures/Structure.gd" id="1_pfun1"]
+[ext_resource type="Texture2D" uid="uid://3xwi6uylpa23" path="res://Sprites/Structures/Construction/SlushieToolkit192x192.png" id="2_jexur"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_7ms35"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lbip"]
@@ -9,6 +9,19 @@ size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7144t"]
 size = Vector2(128, 128)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5s7ls"]
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0024"]
+bg_color = Color(0.988235, 0, 0.898039, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="Structure" type="StaticBody2D"]
 visibility_layer = 8
@@ -29,13 +42,31 @@ shape = SubResource("RectangleShape2D_7144t")
 
 [node name="StructureSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("1_5wevt")
+texture = ExtResource("2_jexur")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_7ms35")]
 offset_left = -56.0
 offset_top = 40.0
 offset_right = -24.0
 offset_bottom = 72.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(48, 24)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -64.0
+offset_right = 16.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5s7ls")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d0024")
+value = 50.0
+show_percentage = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
