@@ -29,7 +29,7 @@ texture = ExtResource("2_axkl7")
 layout_mode = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/CenterContainer"]
-custom_minimum_size = Vector2(72, 16)
+custom_minimum_size = Vector2(72, 20)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_4i834")
 theme_override_styles/fill = SubResource("StyleBoxFlat_uv134")

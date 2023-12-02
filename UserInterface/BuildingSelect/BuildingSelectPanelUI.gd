@@ -1,15 +1,15 @@
 extends Control
 
 # Images
-var image_fence = load("res://Sprites/ItemsUI/Items/Fence.png")
-var image_landmine = load("res://Sprites/ItemsUI/Items/Landmine.png")
-var image_instant_structure = load("res://Sprites/ItemsUI/Items/Instant.png")
-var image_aoe_structure = load("res://Sprites/ItemsUI/Items/AOE.png")
-var image_bullet_structure = load("res://Sprites/ItemsUI/Items/Bullet.png")
-var image_coins = load("res://Sprites/ItemsUI/Items/Coins.png")
+var image_fence = load("res://Sprites/ItemsUI/Items/Fence_64.png")
+var image_landmine = load("res://Sprites/ItemsUI/Items/CherryBomb_64.png")
+var image_instant_structure = load("res://Sprites/ItemsUI/Items/SingleProjectile_64.png")
+var image_aoe_structure = load("res://Sprites/ItemsUI/Items/SiegeTurret_64.png")
+var image_bullet_structure = load("res://Sprites/ItemsUI/Items/InstantShoot_64.png")
+var image_coins = load("res://Sprites/ItemsUI/Items/CoinGroup.png")
 
 # HBox Container
-@onready var hboxcontainer : VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer
+@onready var vboxcontainer : VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer
 
 # Resources
 var coins : Panel
@@ -41,6 +41,14 @@ var player_healthbar
 var gas_station_healthbar
 var gas_station_healtbar_texture = load("res://Sprites/Healthbar/GasstationHealthbar32x32.png")
 
+# Separator
+var h_separator_scene = load("res://UserInterface/BuildingSelect/HSeparator.tscn")
+
+func _add_h_separator():
+	var h_separator =  h_separator_scene.instantiate()
+	vboxcontainer.add_child(h_separator)
+	
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	call_deferred("_create_user_interface")
@@ -53,10 +61,7 @@ func _on_signal_connect_gas_station_healthbar(current_value, max_health):
 	gas_station_healthbar._update_progress_bar(current_value, max_health)
 
 func _create_user_interface():
-	# Player
-	player_healthbar = _add_healthbar()
-	Main.player_node.health.signal_custom_health_changed.connect(_on_signal_connect_player_healthbar)
-	
+	_add_h_separator()
 	# Gas Station
 	gas_station_healthbar = _add_healthbar()
 	gas_station_healthbar._update_label("Gas Station")
@@ -65,6 +70,11 @@ func _create_user_interface():
 	gas_station_healthbar._update_health_color_gradient(color_gradient)
 	Main.gas_station_node.health.signal_custom_health_changed.connect(_on_signal_connect_gas_station_healthbar)
 	
+	# Player
+	player_healthbar = _add_healthbar()
+	Main.player_node.health.signal_custom_health_changed.connect(_on_signal_connect_player_healthbar)
+	
+	_add_h_separator()
 	# Create coin resource
 	coins = _add_coin(coin_item_scene, image_coins)
 	call_deferred("_connect_coins") # Connect coins
@@ -84,18 +94,18 @@ func _create_user_interface():
 
 func _add_healthbar():
 	var healthbar = healthbar_scene.instantiate()
-	hboxcontainer.add_child(healthbar)
+	vboxcontainer.add_child(healthbar)
 	return healthbar
 
 func _add_coin(set_scene, item_texture):
 	var item = set_scene.instantiate()
-	hboxcontainer.add_child(item)
+	vboxcontainer.add_child(item)
 	item.set_image_texture(item_texture)
 	return item
 
 func _add_item(set_scene, item_texture, unit_data):
 	var item = set_scene.instantiate()
-	hboxcontainer.add_child(item)
+	vboxcontainer.add_child(item)
 	item.set_image_texture(item_texture)
 	# Set the value
 	item.set_label_value(unit_data.cost)
@@ -107,7 +117,7 @@ func _add_item(set_scene, item_texture, unit_data):
 
 func _add_stats():
 	var item = stats_scene.instantiate()
-	hboxcontainer.add_child(item)
+	vboxcontainer.add_child(item)
 	return item
 
 func _connect_coins():
