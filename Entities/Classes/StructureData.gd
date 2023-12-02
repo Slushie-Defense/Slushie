@@ -5,6 +5,7 @@ var unit_name : String = "FENCE"
 var type
 var cost : int = 100
 var health : int = 300
+var build_speed : float = 3.0
 
 var delay_between_shots : float = 0.5 # Pause between each shot being fired
 var reload_time : float = 2.0 # How long it takes to reload - Minimum is 0.75

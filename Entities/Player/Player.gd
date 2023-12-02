@@ -89,7 +89,7 @@ func attack(_attack : Attack):
 	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage
 
 func building_manager_create_structure():
-	if Input.is_action_just_released("ActionButton"):
+	if Input.is_action_just_pressed("ActionButton"):
 		building_manager.add_structure()
 
 func _event_health_is_zero():

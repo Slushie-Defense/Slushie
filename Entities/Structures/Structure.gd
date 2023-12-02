@@ -34,7 +34,7 @@ func _initialize_building_construction():
 		is_building_constructed = true
 		# Add weapon
 		call_deferred("_convert_to_structure_type")
-		# Hide progress bar
+		# Remove progress bar
 		progress_bar.queue_free()
 
 func attack(_attack : Attack):
@@ -53,6 +53,8 @@ func _on_area_2d_body_entered(body):
 				return
 		else:
 			# Only check for input when the player is in the area
+			if not progress_bar == null:
+				progress_bar.visible = true
 			set_process(true)
 	nodes_in_build_area_list.push_back(body)
 
@@ -63,6 +65,8 @@ func _on_area_2d_body_exited(body):
 			return
 	nodes_in_build_area_list.erase(body)
 	set_process(false)
+	if not progress_bar == null:
+		progress_bar.visible = false
 
 func _convert_to_structure_type():
 	var structure_type = UnitData.structure_list
@@ -93,10 +97,10 @@ func _process(_delta):
 	if Input.is_action_pressed("ActionButton"):
 		# If only the node is is ontop of the building
 		if nodes_in_build_area_list.size() == 2:
-			print(nodes_in_build_area_list)
+			#print(nodes_in_build_area_list)
 			for child in nodes_in_build_area_list:
 				# If player is ontop of the building
 				if child.has_method("_is_player"):
-					progress_bar.value += 1
+					progress_bar.value += structure_class.build_speed
 					if progress_bar.value >= 100:
 						_initialize_building_construction()

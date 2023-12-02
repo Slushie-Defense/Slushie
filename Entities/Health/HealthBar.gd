@@ -13,6 +13,7 @@ var health_color_gradient = load("res://Entities/Health/HealthColorGradient.tres
 
 func _ready():
 	modulate = health_color_gradient.sample(1.0)
+	visible = false
 
 func set_max_health(new_value):
 	max_health = new_value
@@ -27,6 +28,9 @@ func update_progress_bar():
 	# Update the value
 	var weight = (current_health / max_health)
 	value = int(weight * 100.0) # Update progress bar
+	# Only show health bar if damaged
+	if value < 100:
+		visible = true
 	# Send the health
 	emit_signal("signal_custom_health_changed", value, max_value)
 	# Let the parent know it died
