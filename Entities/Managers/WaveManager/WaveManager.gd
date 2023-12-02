@@ -51,7 +51,8 @@ func _input(event):
 func _spawn_wave(wave_number: int):
 	wave_active = true
 	# Message that he wave is starting
-	Main.emit_signal("signal_wave_event", "Start Wave: " + str(wave_number + 1))
+	print("Start Wave: " + str(wave_number + 1))
+	Main.emit_signal("signal_wave_event", wave_number + 1)
 	# Exit if there are no waves
 	if not waves.size() > 0:
 		print("No Waves Added")
@@ -128,7 +129,7 @@ func _on_enemy_spawn_timer_timeout():
 		else:
 			wave_active = false
 			# Wave number
-			Main.emit_signal("signal_wave_event", "Wave Complete: " + str(current_wave_index + 1))
+			print("Wave Complete: " + str(current_wave_index + 1))
 			# Close all the open portals
 			_close_all_portals()
 			# Update the wave count

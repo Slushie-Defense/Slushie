@@ -11,7 +11,7 @@ signal signal_purchase_failed()
 signal signal_selected_item_update(item_type)
 
 # Waves
-signal signal_wave_event(event_string)
+signal signal_wave_event(event_number : int)
 
 # End game events
 signal signal_player_died()
