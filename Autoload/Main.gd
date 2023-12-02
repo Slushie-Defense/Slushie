@@ -17,6 +17,9 @@ signal signal_wave_event(event_string)
 signal signal_player_died()
 signal signal_gas_station_destroyed()
 
+# MadKing Screen
+var company_screen_shown : bool = false
+
 # Camera node
 var camera_node : Camera2D = null
 # Player node
