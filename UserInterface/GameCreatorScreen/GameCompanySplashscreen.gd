@@ -9,4 +9,4 @@ func _ready():
 	visible = true
 
 func _on_animation_player_animation_finished(anim_name):
-	call_deferred("queue_free")
+	visible = false
