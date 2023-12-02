@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://by0auqtq2081q"]
+[gd_scene load_steps=6 format=3 uid="uid://by0auqtq2081q"]
 
 [ext_resource type="Script" path="res://UserInterface/Credits/Credits.gd" id="1_feahg"]
 [ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="2_lr0v4"]
+[ext_resource type="PackedScene" uid="uid://jhxq5b5fc05s" path="res://UserInterface/PortalAnimation/PortalScreen.tscn" id="2_oobnt"]
 [ext_resource type="FontFile" uid="uid://vhjqvhs8uj3e" path="res://Fonts/Grandstander/Grandstander-Medium.ttf" id="3_rjdal"]
 [ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="4_vupxa"]
 
@@ -14,8 +15,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_feahg")
 
+[node name="PortalScreen" parent="." instance=ExtResource("2_oobnt")]
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
-custom_minimum_size = Vector2(1280, 720)
+custom_minimum_size = Vector2(1280, 700)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -43,13 +46,14 @@ theme_override_fonts/font = ExtResource("2_lr0v4")
 theme_override_font_sizes/font_size = 32
 text = "Bart
 Bokhum
-CM
-Jason
+Carlos M.
+GloriousClover
+Luis Gonzales
 Lyndon
-Paul
+Paul B.
 Susanche
-Sushi
-Jason"
+MoldySushi
+Tyler Gonelli"
 
 [node name="Titles" type="Label" parent="CenterContainer/VBoxContainer/HSplitContainer"]
 layout_mode = 2
@@ -57,14 +61,15 @@ theme_override_colors/font_color = Color(0, 0.827451, 0.607843, 1)
 theme_override_fonts/font = ExtResource("3_rjdal")
 theme_override_font_sizes/font_size = 32
 text = "Writer
-Weapons Designer
+Weapons Artist
 Developer
-Project Manager
-Creative Director
+Game Designer / Developer, PM
+Developer
+Creative Director / Developer
 UX/UI Designer
-Art Director
-Character Designer
-Music Composer"
+Art Director, Environment Designer
+Character Designer, Lead Animator
+Sound Design / Music"
 horizontal_alignment = 2
 
 [node name="GoBack" type="Button" parent="CenterContainer/VBoxContainer"]

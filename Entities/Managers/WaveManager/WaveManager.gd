@@ -10,6 +10,9 @@ extends Node2D
 # Delay between each enemy
 @onready var enemy_spawn_timer : Timer = $EnemySpawnTimer
 
+# Max enemies on screen
+var max_enemies_alive_simultaneously : int = 64
+
 # Enemies
 var enemy_scene = load("res://Entities/Enemy/Enemy.tscn")
 
@@ -82,6 +85,13 @@ func _on_enemy_group_timer_timeout():
 func _on_enemy_spawn_timer_timeout():
 	# Recursive loop of spawning enemies
 	if current_enemy_index < current_group_enemy_list.size():
+		# Cap the number of enemies spawned in the level
+		if get_child_count() > max_enemies_alive_simultaneously + 1:
+			enemy_spawn_timer.wait_time = 1.0 # Wait one second before checking again
+			enemy_spawn_timer.start() # Check again after a pause
+			return # Exit the script
+		# Set wait time back to normal
+		enemy_spawn_timer.wait_time = current_group.spawn_delay_time
 		# Get current enemy
 		var current_enemy_type = current_group_enemy_list[current_enemy_index]
 		# Spawn
@@ -103,6 +113,7 @@ func _on_enemy_spawn_timer_timeout():
 				for i in active_portals_list.size():
 					if current_enemy_index < current_group_enemy_list.size():
 						portal = active_portals_list[i]
+						current_enemy_type = current_group_enemy_list[current_enemy_index]
 						_spawn_enemy(current_enemy_type, portal)
 						current_enemy_index += 1
 		# Set the next enemy timer off

@@ -1,5 +1,6 @@
 extends Camera2D
 
+@onready var _canvas_layer : CanvasLayer = $UserInterfaceParent/CanvasLayer
 @onready var user_interface : Node2D = $UserInterfaceParent
 @onready var wave_event_user_interface : Control = $UserInterfaceParent/CanvasLayer/WaveEvent
 

@@ -17,6 +17,9 @@ signal signal_wave_event(event_string)
 signal signal_player_died()
 signal signal_gas_station_destroyed()
 
+# MadKing Screen
+var company_screen_shown : bool = false
+
 # Camera node
 var camera_node : Camera2D = null
 # Player node
@@ -29,11 +32,15 @@ var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
 var coins : int = 0
 var coin_reward : int = 200
 
+# Pause scene
+var pause_scene = load("res://UserInterface/PauseScreen/PauseScreen.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	signal_add_player.connect(_on_signal_add_player)
 	signal_add_gas_station.connect(_on_signal_add_gas_station)
 	signal_update_coin_count.connect(_update_coin_count)
+	signal_add_camera.connect(_on_signal_add_camera)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Game over screen
 	signal_player_died.connect(_game_ended)
@@ -51,8 +58,13 @@ func _input(event):
 
 func _pause_game_toggle():
 	var log_pause : String = "CONTINUE GAME!" if get_tree().paused else "PAUSE GAME!"
-	print(log_pause)
 	get_tree().paused = not get_tree().paused
+	# Add the pause screen
+	if get_tree().paused:
+		if not camera_node == null:
+			var pause = pause_scene.instantiate()
+			camera_node._canvas_layer.add_child(pause)
+			print(camera_node.get_children())
 
 func _on_signal_add_camera(pass_node):
 	camera_node = pass_node

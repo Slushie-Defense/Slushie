@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://da7cisyixrj1k"]
+[gd_scene load_steps=6 format=3 uid="uid://da7cisyixrj1k"]
 
 [ext_resource type="Script" path="res://UserInterface/SplashScreen/SplashScreen.gd" id="1_fvgs3"]
-[ext_resource type="Texture2D" uid="uid://sis4goh1hj2k" path="res://UserInterface/Logo/SlushTillDawnHalfSize.png" id="2_2q87j"]
+[ext_resource type="PackedScene" uid="uid://jhxq5b5fc05s" path="res://UserInterface/PortalAnimation/PortalScreen.tscn" id="2_44dwe"]
 [ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="3_0g8i1"]
+[ext_resource type="Texture2D" uid="uid://bdrucljj40xnd" path="res://UserInterface/Logo/STD_Logo.png" id="3_r5iro"]
+[ext_resource type="PackedScene" uid="uid://dwqjamdgleiaa" path="res://UserInterface/GameCreatorScreen/GameCompanySplashscreen.tscn" id="4_dsx31"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,6 +12,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_fvgs3")
+
+[node name="PortalScreen" parent="." instance=ExtResource("2_44dwe")]
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(1280, 592)
@@ -19,7 +23,7 @@ offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer"]
 layout_mode = 2
-texture = ExtResource("2_2q87j")
+texture = ExtResource("3_r5iro")
 
 [node name="CenterContainer2" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(1280, 0)
@@ -51,6 +55,10 @@ offset_bottom = 73.0
 theme = ExtResource("3_0g8i1")
 text = "X"
 icon_alignment = 1
+
+[node name="MadKing" parent="." instance=ExtResource("4_dsx31")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="CenterContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="CenterContainer2/VBoxContainer/Credits" to="." method="_on_credits_pressed"]

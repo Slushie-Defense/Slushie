@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://orn12t4tvhr"]
+
+[ext_resource type="Texture2D" uid="uid://cbcm4dslbl6hr" path="res://Sprites/Controls/ControlScreen.png" id="1_4b73v"]
+[ext_resource type="Script" path="res://UserInterface/PauseScreen/PauseScreen.gd" id="1_73jr0"]
+[ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="2_677u4"]
+[ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="3_67q2n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jivy"]
+bg_color = Color(0, 0, 0, 0.768627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0spx"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.227451, 0.219608, 0.329412, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.756863, 0.164706, 0.584314, 1)
+
+[node name="Pause" type="Control"]
+process_mode = 3
+top_level = true
+z_index = 1000
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_73jr0")
+
+[node name="Panel" type="Panel" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5jivy")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_4b73v")
+expand_mode = 5
+
+[node name="CloseButton" type="Button" parent="."]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 0
+offset_left = 1212.0
+offset_top = 32.0
+offset_right = 1260.0
+offset_bottom = 73.0
+theme = ExtResource("2_677u4")
+text = "X"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 211.0
+offset_bottom = 84.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g0spx")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_67q2n")
+theme_override_font_sizes/font_size = 32
+text = "Game Paused"
+vertical_alignment = 2
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
