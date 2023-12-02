@@ -45,4 +45,4 @@ func _input(event):
 	if event.is_action_pressed("ZoomIn"):
 		zoom = Vector2(1.0, 1.0)
 	if event.is_action_pressed("ZoomOut"):
-		zoom = Vector2(0.6, 0.6)
+		zoom = Vector2(0.5, 0.5)

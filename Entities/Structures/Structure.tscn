@@ -52,6 +52,8 @@ offset_right = -24.0
 offset_bottom = 72.0
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 100
+z_as_relative = false
 custom_minimum_size = Vector2(48, 20)
 anchors_preset = 8
 anchor_left = 0.5
@@ -59,9 +61,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -24.0
-offset_top = -64.0
+offset_top = -32.0
 offset_right = 24.0
-offset_bottom = -44.0
+offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_5s7ls")

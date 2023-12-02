@@ -35,6 +35,7 @@ func _ready():
 	FENCE.cost = 200
 	FENCE.attack_damage = 0.0
 	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
+	FENCE.build_speed = 3.0
 	# Setup LANDMINE
 	LANDMINE.delay_before_explode = 0.5
 	LANDMINE.type = structure_list.LANDMINE
@@ -45,6 +46,7 @@ func _ready():
 	LANDMINE.attack_range = 160.0
 	LANDMINE.attack_collision_mask_list = [[2, false], [3, false], [4, true]]
 	LANDMINE.ui_sprite = load("res://Sprites/Structures/Landmine/128x192Landmine.png")
+	LANDMINE.build_speed = 4.0
 	# Setup SIEGE
 	SIEGE.type = structure_list.SIEGE
 	SIEGE.unit_name = "SIEGE"
@@ -53,6 +55,7 @@ func _ready():
 	SIEGE.attack_radius = 128.0
 	SIEGE.attack_range = 640.0
 	SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
+	SIEGE.build_speed = 0.5
 	# Setup INSTANT hit
 	INSTANT.type = structure_list.INSTANT
 	INSTANT.unit_name = "INSTANT"
@@ -61,6 +64,7 @@ func _ready():
 	INSTANT.attack_radius = 160.0
 	INSTANT.attack_range = 384.0
 	INSTANT.ui_sprite = load("res://Sprites/Structures/Instant/128x192Instant.png")
+	INSTANT.build_speed = 1
 	# Setup PROJECTILE hit
 	PROJECTILE.type = structure_list.PROJECTILE
 	PROJECTILE.unit_name = "PROJECTILE"
@@ -69,6 +73,7 @@ func _ready():
 	PROJECTILE.attack_radius = 128.0
 	PROJECTILE.attack_range = 512.0
 	PROJECTILE.ui_sprite = load("res://Sprites/Structures/Projectile/128x192Projectile.png")
+	PROJECTILE.build_speed = 2
 	
 	# ENEMIES
 	# Setup BASIC
