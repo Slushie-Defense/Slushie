@@ -1,5 +1,6 @@
 extends Control
 
+@onready var mad_king_screen : Control = $MadKing
 @onready var portal_screen : Node2D = $PortalScreen
 
 func _ready():
@@ -18,6 +19,10 @@ func _on_close_pressed():
 
 func _input(event):
 	if event.is_action_pressed("ActionButton"):
-		_on_start_pressed()
+		if mad_king_screen.visible:
+			mad_king_screen.visible = false
+			Main.company_screen_shown = true
+		else:
+			_on_start_pressed()
 	if event.is_action_pressed("PauseButton"):
 		get_tree().quit()

@@ -56,7 +56,7 @@ theme = ExtResource("3_0g8i1")
 text = "X"
 icon_alignment = 1
 
-[node name="Control" parent="." instance=ExtResource("4_dsx31")]
+[node name="MadKing" parent="." instance=ExtResource("4_dsx31")]
 layout_mode = 1
 
 [connection signal="pressed" from="CenterContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
