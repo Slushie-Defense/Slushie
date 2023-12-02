@@ -7,6 +7,7 @@ extends StaticBody2D
 func _ready():
 	health.set_max_health(1000)
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
+	health.always_hidden = true
 	area_collision_shape_2d.shape.size = collision_shape_2d.shape.size
 	# Stores the gas station
 	Main.emit_signal("signal_add_gas_station", self)

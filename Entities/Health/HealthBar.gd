@@ -4,6 +4,9 @@ extends ProgressBar
 signal signal_custom_health_is_zero
 signal signal_custom_health_changed(current_health, max_health)
 
+# Always hidden
+var always_hidden : bool = false
+
 # Variables
 var max_health : float = 100.0
 var current_health : float = 100.0
@@ -29,7 +32,7 @@ func update_progress_bar():
 	var weight = (current_health / max_health)
 	value = int(weight * 100.0) # Update progress bar
 	# Only show health bar if damaged
-	if value < 100:
+	if value < 100 and always_hidden == false:
 		visible = true
 	# Send the health
 	emit_signal("signal_custom_health_changed", value, max_value)
