@@ -12,6 +12,7 @@ signal signal_selected_item_update(item_type)
 
 # Waves
 signal signal_wave_event(event_number : int)
+signal signal_trigger_wave_event()
 
 # End game events
 signal signal_player_died()
@@ -32,6 +33,9 @@ var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
 var coins : int = 0
 var coin_reward : int = 200
 
+# Wave number
+var current_wave_number : int = 1
+
 # Pause scene
 var pause_scene = load("res://UserInterface/PauseScreen/PauseScreen.tscn")
 
@@ -41,12 +45,17 @@ func _ready():
 	signal_add_gas_station.connect(_on_signal_add_gas_station)
 	signal_update_coin_count.connect(_update_coin_count)
 	signal_add_camera.connect(_on_signal_add_camera)
+	
+	signal_wave_event.connect(_on_signal_wave_start)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Game over screen
 	signal_player_died.connect(_game_ended)
 
+func _on_signal_wave_start(_number):
+	current_wave_number = _number
+
 func _game_ended():
-	get_tree().create_timer(5.0).timeout.connect(_go_to_death_scene)
+	get_tree().create_timer(3.0).timeout.connect(_go_to_death_scene)
 
 func _go_to_death_scene():
 	coins = 0

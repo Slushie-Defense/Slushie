@@ -11,7 +11,8 @@ func _ready():
 	#animation_player.play()
 	
 func wave_event(wave_event_number):
-	label.rotation_degrees = randi_range(-3.0, 3.0)
-	label.text = str(wave_event_number)
-	animation_player.current_animation = "ShowWaveUI"
-	animation_player.play()
+	if wave_event_number > 0: # We use -1 to signify the end of a wave
+		label.rotation_degrees = randi_range(-3.0, 3.0)
+		label.text = str(wave_event_number)
+		animation_player.current_animation = "ShowWaveUI"
+		animation_player.play()

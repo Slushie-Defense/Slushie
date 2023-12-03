@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d05a21782kpoa"]
+[gd_scene load_steps=6 format=3 uid="uid://d05a21782kpoa"]
 
 [ext_resource type="Script" path="res://Entities/Camera/Camera.gd" id="1_5preo"]
 [ext_resource type="PackedScene" uid="uid://bb1dvqwxyrpgu" path="res://UserInterface/FPSCounter/FPSCounter.tscn" id="2_6loqe"]
-[ext_resource type="PackedScene" uid="uid://chax58s57d85u" path="res://UserInterface/Wave/WaveCount.tscn" id="3_b4vnn"]
+[ext_resource type="PackedScene" uid="uid://chax58s57d85u" path="res://UserInterface/Wave/WaveNumber/WaveCount.tscn" id="3_b4vnn"]
 [ext_resource type="PackedScene" uid="uid://d0ltdactna7rd" path="res://UserInterface/BuildingSelect/BuildingSelectPanelUI.tscn" id="3_qjdnk"]
+[ext_resource type="PackedScene" uid="uid://eh2fax1evhsa" path="res://UserInterface/Wave/WaveStartPrompt/WaveStartPrompt.tscn" id="5_0lhfk"]
 
 [node name="Camera" type="Camera2D"]
 script = ExtResource("1_5preo")
@@ -13,11 +14,21 @@ script = ExtResource("1_5preo")
 [node name="CanvasLayer" type="CanvasLayer" parent="UserInterfaceParent"]
 
 [node name="WaveEvent" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("3_b4vnn")]
+mouse_filter = 1
 
 [node name="BuildingSelectUI" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("3_qjdnk")]
 
 [node name="FPSCounter" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("2_6loqe")]
-offset_left = 1224.0
+offset_left = 1192.0
 offset_top = 668.0
-offset_right = 1224.0
+offset_right = 1192.0
 offset_bottom = 668.0
+
+[node name="StartWaveButton" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("5_0lhfk")]
+z_index = 2
+z_as_relative = false
+offset_left = -161.0
+offset_top = 28.0
+offset_right = -27.0
+offset_bottom = 76.0
+mouse_filter = 1
