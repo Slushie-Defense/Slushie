@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_4agde"]
 [ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/Managers/BuildingManager/BuildingManager.tscn" id="4_rd020"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wef8m"]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fykp"]
+size = Vector2(40, 20)
 
 [sub_resource type="Animation" id="Animation_vkm7u"]
 resource_name = "Build"
@@ -193,19 +193,21 @@ script = ExtResource("1_p727u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
-shape = SubResource("CircleShape2D_wef8m")
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_6fykp")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, -40)
 texture = ExtResource("2_e6uvt")
+offset = Vector2(1, -50)
 hframes = 23
 vframes = 8
 frame = 23
 
 [node name="WeaponSprite" type="Sprite2D" parent="."]
+position = Vector2(1, -8.5)
 
 [node name="Healthbar" parent="." instance=ExtResource("3_4agde")]
 visible = false
@@ -215,6 +217,8 @@ offset_bottom = -80.0
 
 [node name="BuildingManager" parent="." instance=ExtResource("4_rd020")]
 visibility_layer = 4
+y_sort_enabled = true
+position = Vector2(1, -8.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CharacterSprite")
