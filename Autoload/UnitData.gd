@@ -46,7 +46,7 @@ func _ready():
 	LANDMINE.attack_range = 160.0
 	LANDMINE.attack_collision_mask_list = [[2, false], [3, false], [4, true]]
 	LANDMINE.ui_sprite = load("res://Sprites/Structures/Landmine/128x192Landmine.png")
-	LANDMINE.build_speed = 4.0
+	LANDMINE.build_speed = 70.0
 	# Setup SIEGE
 	SIEGE.type = structure_list.SIEGE
 	SIEGE.unit_name = "SIEGE"
