@@ -217,6 +217,7 @@ offset_bottom = -80.0
 
 [node name="BuildingManager" parent="." instance=ExtResource("4_rd020")]
 visibility_layer = 4
+y_sort_enabled = true
 position = Vector2(1, -8.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

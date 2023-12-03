@@ -25,8 +25,9 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Structure" type="StaticBody2D"]
-visibility_layer = 8
-z_index = 1
+visibility_layer = 32
+z_index = 10
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_pfun1")
@@ -42,6 +43,7 @@ collision_mask = 15
 shape = SubResource("RectangleShape2D_7144t")
 
 [node name="StructureSprite" type="Sprite2D" parent="."]
+z_index = 1
 y_sort_enabled = true
 texture = ExtResource("2_jexur")
 
