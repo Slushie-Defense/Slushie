@@ -17,8 +17,8 @@ func _ready():
 	camera_width = get_viewport_rect().size.x
 	camera_height = get_viewport_rect().size.y	
 	# Wave event
-	wave_event_user_interface.center_container.size.y = camera_height * 0.5
-	wave_event_user_interface.center_container.size.x = camera_width
+	#wave_event_user_interface.center_container.size.y = camera_height * 0.5
+	#wave_event_user_interface.center_container.size.x = camera_width
 	# Main recieves a signal that the player node exists
 	# When the signal arrives it connects the player node custom "update position" signal to the camera
 	# Now the camera knows where the player is

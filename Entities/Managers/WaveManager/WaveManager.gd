@@ -10,9 +10,6 @@ extends Node2D
 # Delay between each enemy
 @onready var enemy_spawn_timer : Timer = $EnemySpawnTimer
 
-# Max enemies on screen
-var max_enemies_alive_simultaneously : int = 64
-
 # Enemies
 var enemy_scene = load("res://Entities/Enemy/Enemy.tscn")
 
@@ -28,6 +25,7 @@ var current_group_index : int = 0
 
 # Enemies
 var current_enemy_index : int = 0
+var max_enemy_spawn_delay : float = 15.0
 
 # Portals
 var all_portals_list : Array = []
@@ -40,18 +38,23 @@ var wave_active : bool = false
 # Initatialize
 func _ready():
 	all_portals_list = _find_all_portals()
+	Main.signal_trigger_wave_event.connect(_start_wave)
 
 # Start the Wave
 func _input(event):
 	if event.is_action_pressed("StartButton"):
-		if not wave_active:
-			_spawn_wave(current_wave_index)
+		Main.emit_signal("signal_trigger_wave_event")
+
+func _start_wave():
+	if not wave_active:
+		_spawn_wave(current_wave_index)
 
 # spawns a wave, which syncronously loops through the groups
 func _spawn_wave(wave_number: int):
 	wave_active = true
 	# Message that he wave is starting
-	Main.emit_signal("signal_wave_event", "Start Wave: " + str(wave_number + 1))
+	print("Start Wave: " + str(wave_number + 1))
+	Main.emit_signal("signal_wave_event", wave_number + 1)
 	# Exit if there are no waves
 	if not waves.size() > 0:
 		print("No Waves Added")
@@ -85,13 +88,6 @@ func _on_enemy_group_timer_timeout():
 func _on_enemy_spawn_timer_timeout():
 	# Recursive loop of spawning enemies
 	if current_enemy_index < current_group_enemy_list.size():
-		# Cap the number of enemies spawned in the level
-		if get_child_count() > max_enemies_alive_simultaneously + 1:
-			enemy_spawn_timer.wait_time = 1.0 # Wait one second before checking again
-			enemy_spawn_timer.start() # Check again after a pause
-			return # Exit the script
-		# Set wait time back to normal
-		enemy_spawn_timer.wait_time = current_group.spawn_delay_time
 		# Get current enemy
 		var current_enemy_type = current_group_enemy_list[current_enemy_index]
 		# Spawn
@@ -128,7 +124,8 @@ func _on_enemy_spawn_timer_timeout():
 		else:
 			wave_active = false
 			# Wave number
-			Main.emit_signal("signal_wave_event", "Wave Complete: " + str(current_wave_index + 1))
+			Main.emit_signal("signal_wave_event", -1)
+			print("Wave Complete: " + str(current_wave_index + 1))
 			# Close all the open portals
 			_close_all_portals()
 			# Update the wave count
@@ -141,7 +138,7 @@ func _start_next_group():
 	enemy_group_timer.wait_time = current_group.group_delay_time # Delay between groups. Universal
 	enemy_group_timer.start() # On time_out the enemies will start spawning
 	# Set the Enemy spawn delay time
-	enemy_spawn_timer.wait_time = current_group.spawn_delay_time
+	enemy_spawn_timer.wait_time = clamp(current_group.spawn_delay_time, 0.01, max_enemy_spawn_delay)
 	# Reset enemy count
 	current_enemy_index = 0
 

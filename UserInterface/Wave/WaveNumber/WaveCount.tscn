@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://chax58s57d85u"]
+
+[ext_resource type="Script" path="res://UserInterface/Wave/WaveNumber/WaveCount.gd" id="1_31nu8"]
+[ext_resource type="Texture2D" uid="uid://bpugxwx0y7yrp" path="res://Sprites/WaveNumber/WaveStartSign.png" id="2_1gfug"]
+[ext_resource type="FontFile" uid="uid://b6g3jg7d4namh" path="res://Fonts/Grandstander/Grandstander-Black.ttf" id="3_ktok7"]
+
+[sub_resource type="Animation" id="Animation_fjghx"]
+resource_name = "NoLabel"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -300)]
+}
+
+[sub_resource type="Animation" id="Animation_0004s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_obn42"]
+resource_name = "ShowWaveUI"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9, 3.1, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -300), Vector2(0, -12), Vector2(0, -32), Vector2(0, -32), Vector2(0, -8), Vector2(0, -300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1, 2.8, 3.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.289725, 0.0, -0.0715585, 0.0471239, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w7apv"]
+_data = {
+"NoLabel": SubResource("Animation_fjghx"),
+"RESET": SubResource("Animation_0004s"),
+"ShowWaveUI": SubResource("Animation_obn42")
+}
+
+[node name="WaveEvent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_31nu8")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 289.0
+pivot_offset = Vector2(640, 0)
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("2_1gfug")
+
+[node name="Label" type="Label" parent="CenterContainer/TextureRect"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 200.0
+offset_top = 120.0
+offset_right = 400.0
+offset_bottom = 187.0
+rotation = 0.139626
+pivot_offset = Vector2(100, 0)
+theme_override_fonts/font = ExtResource("3_ktok7")
+theme_override_font_sizes/font_size = 64
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "NoLabel"
+libraries = {
+"": SubResource("AnimationLibrary_w7apv")
+}
