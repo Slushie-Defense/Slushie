@@ -6,9 +6,8 @@ func _ready():
 	var curGroup
 	var curWave
 	
-	curWave = Wave.new(false, false, true, false, false);
-	curWave.appendGroup(5, 0, 0, 0, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
-	curWave.appendGroup(0, 3, 0, 0, 0, 3, 1)
+	curWave = Wave.new(true, true, true, true, true);
+	curWave.appendGroup(1, 1, 1, 1, 1, 0, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	wm.waves.append(curWave)
 	
 	curWave = Wave.new(false, true, true, true, false);

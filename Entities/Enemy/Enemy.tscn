@@ -440,7 +440,8 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody2D"]
-z_index = 3
+visibility_layer = 32
+z_index = 10
 y_sort_enabled = true
 collision_layer = 8
 collision_mask = 15
@@ -488,6 +489,7 @@ libraries = {
 
 [node name="BasicSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -26.665)
 scale = Vector2(1, 1.05)
@@ -504,6 +506,7 @@ libraries = {
 
 [node name="GruntSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -25)
 scale = Vector2(1.1, 1)
@@ -518,6 +521,7 @@ libraries = {
 
 [node name="TankSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -25)
 scale = Vector2(1.1, 1)
@@ -532,6 +536,7 @@ libraries = {
 
 [node name="FloaterSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -25)
 scale = Vector2(1.1, 1)
@@ -548,6 +553,7 @@ libraries = {
 
 [node name="SpitterSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -25)
 scale = Vector2(1, 1.05)
@@ -579,7 +585,7 @@ one_shot = true
 [connection signal="animation_finished" from="BasicAP" to="." method="_on_basic_ap_animation_finished"]
 [connection signal="animation_finished" from="GruntAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="TankAP" to="." method="_on_tank_ap_animation_finished"]
-[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="FloaterAP" to="." method="_on_floater_ap_animation_finished"]
+[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="SpitterAP" to="." method="_on_spitter_ap_animation_finished"]
 [connection signal="timeout" from="DamageFlashTimer" to="." method="_on_damage_flash_timer_timeout"]
