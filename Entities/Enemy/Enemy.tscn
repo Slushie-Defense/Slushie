@@ -13,8 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://dangcwolpa8dw" path="res://Sprites/Characters/Enemies/Grunt02.wav" id="9_5qx37"]
 [ext_resource type="Texture2D" uid="uid://ignrvlqxql12" path="res://Sprites/Characters/Enemies/Spitter/SpitterSpritesheet.png" id="9_d5q7e"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_o6l61"]
-radius = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_quke3"]
+size = Vector2(40, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hdjo8"]
 radius = 128.0
@@ -440,7 +440,8 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody2D"]
-z_index = 3
+visibility_layer = 32
+z_index = 10
 y_sort_enabled = true
 collision_layer = 8
 collision_mask = 15
@@ -450,7 +451,8 @@ script = ExtResource("1_ff1tq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
 y_sort_enabled = true
-shape = SubResource("CircleShape2D_o6l61")
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_quke3")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 visible = false
@@ -458,6 +460,7 @@ y_sort_enabled = true
 texture = ExtResource("2_buj6r")
 
 [node name="Vision" type="Area2D" parent="."]
+position = Vector2(2, -21.51)
 collision_layer = 8
 collision_mask = 6
 
@@ -474,6 +477,7 @@ offset_top = -56.0
 offset_bottom = -24.0
 
 [node name="AttackRangeRayCast" type="RayCast2D" parent="."]
+position = Vector2(2, -21.51)
 enabled = false
 target_position = Vector2(0, 0)
 collision_mask = 6
@@ -488,10 +492,11 @@ libraries = {
 
 [node name="BasicSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -26.665)
 scale = Vector2(1, 1.05)
 texture = ExtResource("5_5qb4p")
+offset = Vector2(2, -45.881)
 hframes = 18
 vframes = 3
 frame = 18
@@ -504,10 +509,12 @@ libraries = {
 
 [node name="GruntSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -25)
+position = Vector2(4.76837e-07, 0)
 scale = Vector2(1.1, 1)
 texture = ExtResource("6_g03wq")
+offset = Vector2(-10.9091, -46)
 hframes = 14
 vframes = 3
 
@@ -518,10 +525,11 @@ libraries = {
 
 [node name="TankSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -25)
 scale = Vector2(1.1, 1)
 texture = ExtResource("7_74n1a")
+offset = Vector2(-0.909091, -47)
 hframes = 24
 vframes = 2
 
@@ -532,10 +540,11 @@ libraries = {
 
 [node name="FloaterSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -25)
 scale = Vector2(1.1, 1)
 texture = ExtResource("8_j2eln")
+offset = Vector2(-0.909091, -55)
 hframes = 15
 vframes = 2
 frame = 15
@@ -548,23 +557,27 @@ libraries = {
 
 [node name="SpitterSS" type="Sprite2D" parent="."]
 visible = false
+z_index = 1
 y_sort_enabled = true
-position = Vector2(0, -25)
 scale = Vector2(1, 1.05)
 texture = ExtResource("9_d5q7e")
+offset = Vector2(0, -46.6667)
 hframes = 24
 vframes = 3
 
 [node name="SFXDeath" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(2, -21.51)
 stream = ExtResource("7_2qpm3")
 max_distance = 1000.0
 
 [node name="SFXGrunt1" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(2, -21.51)
 stream = ExtResource("8_h4apb")
 volume_db = -1.0
 max_distance = 1000.0
 
 [node name="SFXGrunt2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(2, -21.51)
 stream = ExtResource("9_5qx37")
 volume_db = -1.0
 max_distance = 1000.0
@@ -579,7 +592,7 @@ one_shot = true
 [connection signal="animation_finished" from="BasicAP" to="." method="_on_basic_ap_animation_finished"]
 [connection signal="animation_finished" from="GruntAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="TankAP" to="." method="_on_tank_ap_animation_finished"]
-[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="FloaterAP" to="." method="_on_floater_ap_animation_finished"]
+[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="SpitterAP" to="." method="_on_spitter_ap_animation_finished"]
 [connection signal="timeout" from="DamageFlashTimer" to="." method="_on_damage_flash_timer_timeout"]

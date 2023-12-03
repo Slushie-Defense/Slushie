@@ -20,6 +20,12 @@ script = ExtResource("1_ftbg0")
 [node name="WaveManager" parent="." instance=ExtResource("1_cqx0q")]
 y_sort_enabled = true
 
+[node name="Camera" parent="WaveManager" instance=ExtResource("1_0xhkv")]
+
+[node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
+position = Vector2(1400, 576)
+motion_mode = 1
+
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
 offset_right = 0.0
 offset_bottom = 0.0
@@ -28,12 +34,6 @@ metadata/_edit_use_anchors_ = true
 [node name="Container" parent="GroundTexture" index="0"]
 offset_right = 3072.0
 offset_bottom = 896.0
-
-[node name="Camera" parent="." instance=ExtResource("1_0xhkv")]
-
-[node name="Player" parent="." instance=ExtResource("1_46qfd")]
-position = Vector2(1400, 576)
-motion_mode = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 0

@@ -37,6 +37,13 @@ var nodes_in_build_area_list : Array = []
 @onready var area_2d_collision_shape : CollisionShape2D = $HighlightSquare/Area2D/CollisionShape2D
 var collision_shape_padding : int = 4
 
+# Hack - create the structures as wavemanager children, for the Y-Sorting 
+# to work properly since enemies and player will also be placed there now
+# as a workaround
+#
+# Wavemanager contains player, contains building manager
+@onready var grandpa : Node2D = self.get_parent().get_parent()
+
 func _ready():
 	Main.signal_add_player.connect(_on_player_add)
 	Main.signal_selected_item_update.connect(_update_active_item_type)
@@ -88,7 +95,7 @@ func add_structure():
 			var structure_node = structure_scene.instantiate()
 			var structure_offset = Vector2(game_grid_cell_size_halved, game_grid_cell_size_halved)
 			structure_node.global_position = structure_position + structure_offset
-			get_tree().current_scene.add_child(structure_node) # Add to the main scene
+			grandpa.add_child(structure_node) # Hack - add to wave manager
 			# Set building type
 			structure_node._set_structure_class(selected_item_type)
 

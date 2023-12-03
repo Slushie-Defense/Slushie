@@ -82,6 +82,7 @@ func _set_enemy_type():
 			ap = $SpitterAP
 			$SpitterSS.visible = true
 			my_sprite = $SpitterSS;
+			collision_shape.shape.set_size(Vector2(100, 20))
 		UnitData.enemy_list.FLOATER:
 			enemy_data = UnitData.FLOATER
 			ap = $FloaterAP
@@ -92,11 +93,10 @@ func _set_enemy_type():
 			ap = $TankAP
 			$TankSS.visible = true
 			my_sprite = $TankSS;
+			collision_shape.shape.set_size(Vector2(200, 20))
 	
 	# Set texture
 	character_sprite.texture = enemy_data.basic_sprite
-	# Set collision shape
-	collision_shape.shape.radius = enemy_data.collision_shape_radius
 
 var prevState = enemy_state.list.IDLE
 func _process(delta):
