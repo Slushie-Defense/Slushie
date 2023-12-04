@@ -20,5 +20,5 @@ func _ready():
 
 func _on_timer_timeout():
 	print("Triggered")
-	instance.set_parameter_by_name("wave_onoff", 1.0, false)
-	#instance.set_parameter_by_name("wave_intensity", wave_intensity, false)
+	instance.set_parameter_by_name("wave onoff", 1.0, false)
+	instance.set_parameter_by_name("Wave Intensity", 10.0, false)

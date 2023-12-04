@@ -54,8 +54,4 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[node name="StudioEventEmitter2D" type="StudioEventEmitter2D" parent="."]
-event = SubResource("EventAsset_5w6kx")
-"parameter_wave onoff" = 1.0
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
