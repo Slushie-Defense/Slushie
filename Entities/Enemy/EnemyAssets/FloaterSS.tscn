@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://clj5e6bpcovhv"]
+
+[ext_resource type="Texture2D" uid="uid://c314le44bcy5b" path="res://Sprites/Characters/Enemies/Floater/FloaterSpritesheet.png" id="1_8t612"]
+
+[node name="FloaterSS" type="Sprite2D"]
+visible = false
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(1.1, 1)
+texture = ExtResource("1_8t612")
+offset = Vector2(-0.909091, -55)
+hframes = 15
+vframes = 2
+frame = 15

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjuc85kg1ygcg"]
+
+[ext_resource type="Texture2D" uid="uid://dos47cknnegjx" path="res://Sprites/Characters/Enemies/Tank/TankSpritesheet.png" id="1_5ap2q"]
+
+[node name="TankSS" type="Sprite2D"]
+visible = false
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(1.1, 1)
+texture = ExtResource("1_5ap2q")
+offset = Vector2(-0.909091, -47)
+hframes = 24
+vframes = 2

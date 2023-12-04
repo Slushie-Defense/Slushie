@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3s8uyycu2t4v"]
+
+[ext_resource type="Texture2D" uid="uid://bo6nr3wb5xuml" path="res://Sprites/Characters/Enemies/Grunt/GruntSpritesheet.png" id="1_amrue"]
+
+[node name="GruntSS" type="Sprite2D"]
+visible = false
+z_index = 1
+y_sort_enabled = true
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(1.1, 1)
+texture = ExtResource("1_amrue")
+offset = Vector2(-10.9091, -46)
+hframes = 14
+vframes = 3
