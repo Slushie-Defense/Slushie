@@ -63,6 +63,8 @@ func _ready():
 	_update_vision_radius()
 	# SPAWN
 	enemy_state.current = enemy_state.list.SPAWN
+	# Add Enemy
+	Main.emit_signal("signal_update_enemy_count", 1)
 
 func _set_enemy_type():
 	# Set the enemy type
@@ -99,6 +101,7 @@ func _set_enemy_type():
 	character_sprite.texture = enemy_data.basic_sprite
 
 var prevState = enemy_state.list.IDLE
+
 func _process(delta):
 	if (enemy_state.current != prevState):		
 		match enemy_state.current:
@@ -268,6 +271,9 @@ func _event_health_is_zero():
 	$SFXDeath.play()
 	ap.play("Death")
 	
+	# Remove Enemy
+	Main.emit_signal("signal_update_enemy_count", -1)
+	
 	# Spawn coin where it dies
 	_spawn_coin() 
 
@@ -295,7 +301,6 @@ func _on_floater_ap_animation_finished(anim_name):
 func _on_grunt_ap_animation_finished(anim_name):
 	if (anim_name == "Death"):
 		call_deferred("queue_free")
-
 
 func _on_tank_ap_animation_finished(anim_name):
 	if (anim_name == "Death"):
