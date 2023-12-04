@@ -592,7 +592,7 @@ one_shot = true
 [connection signal="animation_finished" from="BasicAP" to="." method="_on_basic_ap_animation_finished"]
 [connection signal="animation_finished" from="GruntAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="TankAP" to="." method="_on_tank_ap_animation_finished"]
-[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="FloaterAP" to="." method="_on_floater_ap_animation_finished"]
+[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="SpitterAP" to="." method="_on_spitter_ap_animation_finished"]
 [connection signal="timeout" from="DamageFlashTimer" to="." method="_on_damage_flash_timer_timeout"]
