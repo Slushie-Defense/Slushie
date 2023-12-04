@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ccabdjtsxc3fx"]
 
-[ext_resource type="Script" path="res://Test.gd" id="1_ddt60"]
+[ext_resource type="Script" path="res://Entities/Managers/FMOD/FMODManager.gd" id="1_poiva"]
 
 [sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_1tn8e"]
 data1 = 3165566854
@@ -45,13 +45,6 @@ path = "event:/SLUSHIEMUSICSYSTEM"
 guid = "{71b42255-973d-4648-81cc-a709230a43e2}"
 name = "SLUSHIEMUSICSYSTEM"
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_ddt60")
+[node name="FMOD" type="Node2D"]
+script = ExtResource("1_poiva")
 event = SubResource("EventAsset_5w6kx")
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-autostart = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

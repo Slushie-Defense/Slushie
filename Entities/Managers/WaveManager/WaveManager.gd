@@ -25,7 +25,7 @@ var current_group_index : int = 0
 
 # Enemies
 var current_enemy_index : int = 0
-var max_enemy_spawn_delay : float = 15.0
+var max_spawn_delay : float = 15.0
 
 # Portals
 var all_portals_list : Array = []
@@ -135,10 +135,10 @@ func _start_next_group():
 	# Find the current wave
 	current_group = current_wave.enemy_group_list[current_group_index]
 	# Start spawning with a delay before each group
-	enemy_group_timer.wait_time = current_group.group_delay_time # Delay between groups. Universal
+	enemy_group_timer.wait_time = clamp(current_group.group_delay_time, 0.01, max_spawn_delay) # Delay between groups. Universal
 	enemy_group_timer.start() # On time_out the enemies will start spawning
 	# Set the Enemy spawn delay time
-	enemy_spawn_timer.wait_time = clamp(current_group.spawn_delay_time, 0.01, max_enemy_spawn_delay)
+	enemy_spawn_timer.wait_time = clamp(current_group.spawn_delay_time, 0.01, max_spawn_delay)
 	# Reset enemy count
 	current_enemy_index = 0
 
