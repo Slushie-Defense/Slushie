@@ -153,6 +153,10 @@ func _ai_process():
 		# Found an object to chase
 		if ai_chase_node != null:
 			ai_direction = global_position.direction_to(ai_chase_node.global_position)
+			# Attack again
+			if not enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
+				if attack_timer.is_stopped():
+					attack_timer.start()
 	
 	var dirFlip = true if (ai_direction.x > 0) else false
 	$BasicSS.flip_h = dirFlip
@@ -165,9 +169,6 @@ func _update_attack_speed():
 	attack_timer.wait_time = enemy_data.attack_speed
 
 func _on_attack_delay_timer_timeout():	
-	# Attack again
-	if not enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
-		attack_timer.start()
 	# Exit if dead?
 	if (enemy_state.current == enemy_state.list.DIED):
 		return
