@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{26579aed-a499-4cc8-ac92-4c48d22d4b52}">
+		<property name="assetPath">
+			<value>slushie calm strings.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>29.090895833333335</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{0805425d-6bbf-4d34-8ac4-3ffc777f327d}</destination>
+		</relationship>
+	</object>
+</objects>

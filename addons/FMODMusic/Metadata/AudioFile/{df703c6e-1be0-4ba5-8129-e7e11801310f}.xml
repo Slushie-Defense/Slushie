@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{df703c6e-1be0-4ba5-8129-e7e11801310f}">
+		<property name="assetPath">
+			<value>slushie wave end hi strings.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>5.4545416666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{0805425d-6bbf-4d34-8ac4-3ffc777f327d}</destination>
+		</relationship>
+	</object>
+</objects>
