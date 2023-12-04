@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4aflmj6wbe46"
+path="res://.godot/imported/slushie wave orch perc.wav-9a858d90f803ec66165e9fc77767c853.sample"
+
+[deps]
+
+source_file="res://addons/FMODMusic/Assets/slushie wave orch perc.wav"
+dest_files=["res://.godot/imported/slushie wave orch perc.wav-9a858d90f803ec66165e9fc77767c853.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

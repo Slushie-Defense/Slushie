@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dfhvilet1n3l8"
+path="res://.godot/imported/slushie base wave.wav-cdf4e64464ae5f3ff2e2f8e8855f013c.sample"
+
+[deps]
+
+source_file="res://addons/FMODMusic/Assets/slushie base wave.wav"
+dest_files=["res://.godot/imported/slushie base wave.wav-cdf4e64464ae5f3ff2e2f8e8855f013c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

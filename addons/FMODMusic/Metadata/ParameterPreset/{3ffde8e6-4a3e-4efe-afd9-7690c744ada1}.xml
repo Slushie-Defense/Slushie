@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{3ffde8e6-4a3e-4efe-afd9-7690c744ada1}">
+		<property name="name">
+			<value>wave onoff</value>
+		</property>
+		<relationship name="folder">
+			<destination>{8598c648-49bc-4663-a2c3-b4e7ac10c53e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{92394cae-4b39-476c-b16f-47ad2f71c7e0}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{92394cae-4b39-476c-b16f-47ad2f71c7e0}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

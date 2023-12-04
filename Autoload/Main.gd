@@ -4,6 +4,7 @@ extends Node
 signal signal_add_player(player_node) # How we find the player
 signal signal_add_gas_station(gas_station_node) # How we find the gas station
 signal signal_add_camera(camera_node)
+signal signal_update_enemy_count(enemy_number)
 
 # Money
 signal signal_update_coin_count(count)
@@ -27,6 +28,8 @@ var camera_node : Camera2D = null
 var player_node : CharacterBody2D = null
 # Gas station
 var gas_station_node : StaticBody2D = null
+# Enemy count
+var enemy_counter : int = 0
 
 # Coin count
 var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
@@ -45,11 +48,18 @@ func _ready():
 	signal_add_gas_station.connect(_on_signal_add_gas_station)
 	signal_update_coin_count.connect(_update_coin_count)
 	signal_add_camera.connect(_on_signal_add_camera)
+	signal_update_enemy_count.connect(_update_enemy_count)
 	
 	signal_wave_event.connect(_on_signal_wave_start)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Game over screen
 	signal_player_died.connect(_game_ended)
+
+func _update_enemy_count(enemy_number):
+	enemy_counter = clamp(enemy_counter + enemy_number, 0, 999999)
+	# Check if the Wave is over
+	if current_wave_number > 0 and enemy_counter == 0:
+			Main.emit_signal("signal_wave_event", -1)
 
 func _on_signal_wave_start(_number):
 	current_wave_number = _number

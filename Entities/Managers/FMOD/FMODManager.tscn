@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccabdjtsxc3fx"]
+
+[ext_resource type="Script" path="res://Entities/Managers/FMOD/FMODManager.gd" id="1_poiva"]
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_1tn8e"]
+data1 = 3165566854
+data2 = 3882929752
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_s5pjg"]
+name = "wave onoff"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_1tn8e")
+maximum = 1.0
+guid = "{92394cae-4b39-476c-b16f-47ad2f71c7e0}"
+
+[sub_resource type="ParameterAsset" id="ParameterAsset_517id"]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_s5pjg")
+path = "parameter:/Wave onoff"
+guid = "{92394cae-4b39-476c-b16f-47ad2f71c7e0}"
+name = "wave onoff"
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_5ol4o"]
+data1 = 1391545390
+data2 = 3865959040
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_an6b7"]
+name = "Wave Intensity"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_5ol4o")
+maximum = 10.0
+guid = "{ad244c25-119e-4973-8ace-07f5ce8bf6d8}"
+
+[sub_resource type="ParameterAsset" id="ParameterAsset_pcn6e"]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_an6b7")
+path = "parameter:/Wave Intensity"
+guid = "{ad244c25-119e-4973-8ace-07f5ce8bf6d8}"
+name = "Wave Intensity"
+
+[sub_resource type="EventAsset" id="EventAsset_5w6kx"]
+min_distance = 1.0
+max_distance = 20.0
+parameters = {
+"{92394cae-4b39-476c-b16f-47ad2f71c7e0}": SubResource("ParameterAsset_517id"),
+"{ad244c25-119e-4973-8ace-07f5ce8bf6d8}": SubResource("ParameterAsset_pcn6e")
+}
+path = "event:/SLUSHIEMUSICSYSTEM"
+guid = "{71b42255-973d-4648-81cc-a709230a43e2}"
+name = "SLUSHIEMUSICSYSTEM"
+
+[node name="FMOD" type="Node2D"]
+script = ExtResource("1_poiva")
+event = SubResource("EventAsset_5w6kx")
