@@ -123,8 +123,6 @@ func _on_enemy_spawn_timer_timeout():
 			_start_next_group()
 		else:
 			wave_active = false
-			# Wave number
-			Main.emit_signal("signal_wave_event", -1)
 			print("Wave Complete: " + str(current_wave_index + 1))
 			# Close all the open portals
 			_close_all_portals()

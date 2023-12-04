@@ -153,11 +153,6 @@ func _ai_process():
 		# Found an object to chase
 		if ai_chase_node != null:
 			ai_direction = global_position.direction_to(ai_chase_node.global_position)
-			# Try to attack if available
-			# No need to attack if the enemy has a weapon attached
-			if not enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
-				if attack_timer.is_stopped():
-					attack_timer.start()
 	
 	var dirFlip = true if (ai_direction.x > 0) else false
 	$BasicSS.flip_h = dirFlip
@@ -170,13 +165,17 @@ func _update_attack_speed():
 	attack_timer.wait_time = enemy_data.attack_speed
 
 func _on_attack_delay_timer_timeout():	
+	# Attack again
+	if not enemy_data.attack_type == UnitData.enemy_attack_list.SIEGE:
+		attack_timer.start()
+	# Exit if dead?
 	if (enemy_state.current == enemy_state.list.DIED):
 		return
 	# Attack
 	if ai_chase_node != null:
 		# var distance_to_node = global_position.distance_to(ai_chase_node.global_position)
 		# Attack within the attack range
-		attack_range_raycast.target_position = global_position.direction_to(ai_chase_node.global_position) * enemy_data.attack_range
+		attack_range_raycast.target_position = attack_range_raycast.global_position.direction_to(ai_chase_node.global_position) * enemy_data.attack_range
 		attack_range_raycast.force_raycast_update() # Launch the ray
 		# See what it hit
 		var first_collision_result = attack_range_raycast.get_collider()
@@ -185,17 +184,14 @@ func _on_attack_delay_timer_timeout():
 			# If it hits something it can attack
 			if first_collision_result.has_method("attack"):	
 				# Create an attack class and pass it through
-				_enemy_is_attacking(first_collision_result)				
-				enemy_state.current = enemy_state.list.ATTACK
+				_enemy_is_attacking(first_collision_result)
 				# This is a MELEE ATTACK
 				match enemy_data.attack_type:
 					UnitData.enemy_attack_list.MELEE:
-
 						$SFXGrunt2.play()
 						var _attack = Attack.new()
 						_attack.damage = enemy_data.attack_damage
 						first_collision_result.attack(_attack)
-
 					UnitData.enemy_attack_list.EXPLODE:
 						_explode_attack()
 		else:
@@ -204,14 +200,6 @@ func _on_attack_delay_timer_timeout():
 func _enemy_is_attacking(_target_node):
 	# This triggered whenever the enemy is attacking -- Incldding if it is a weapon
 	enemy_state.current = enemy_state.list.ATTACK
-	# What type of attack is is doing
-	#match enemy_data.attack_type:
-	#	UnitData.enemy_attack_list.MELEE:
-	#		pass
-	#	UnitData.enemy_attack_list.EXPLODE:
-	#		pass
-	#	UnitData.SPITTER_SIEGE:
-	#		pass
 
 func _create_spitter():
 	# Set enemy data
@@ -238,12 +226,13 @@ func _update_vision_radius():
 		vision_sprite.hide()
 
 func _explode_attack():
+	print("Explode")
 	var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = enemy_data.attack_damage
 	explosion.collision_mask_list = enemy_data.attack_collision_mask_list
 	get_tree().current_scene.add_child(explosion)
-	explosion.global_position = global_position
+	explosion.global_position = global_position + Vector2(0, -64)
 	# Destroy self
 	_event_health_is_zero()
 

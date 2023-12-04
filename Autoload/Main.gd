@@ -57,6 +57,9 @@ func _ready():
 
 func _update_enemy_count(enemy_number):
 	enemy_counter = clamp(enemy_counter + enemy_number, 0, 999999)
+	# Check if the Wave is over
+	if current_wave_number > 0 and enemy_counter == 0:
+			Main.emit_signal("signal_wave_event", -1)
 
 func _on_signal_wave_start(_number):
 	current_wave_number = _number

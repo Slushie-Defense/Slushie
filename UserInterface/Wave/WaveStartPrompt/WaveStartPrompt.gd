@@ -18,5 +18,5 @@ func _on_pressed():
 	Main.emit_signal("signal_trigger_wave_event")
 
 func _on_timer_timeout():
-	text = "Begin Wave: " + str(wave_number_count + 1)
+	text = "Start Wave [" + str(wave_number_count + 1) + "]"
 	visible = true

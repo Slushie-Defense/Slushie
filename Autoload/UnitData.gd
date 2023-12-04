@@ -147,7 +147,7 @@ func _ready():
 	FLOATER.health = 100
 	FLOATER.coin_drop_value = 100.0
 	FLOATER.attack_speed = 1.0 # Delay between attacks
-	FLOATER.attack_range = 64 # In pixels
+	FLOATER.attack_range = 96 # In pixels
 	FLOATER.attack_damage = 100
 	FLOATER.acceleration = 2000
 	FLOATER.max_speed = 100
