@@ -95,7 +95,7 @@ func building_manager_create_structure():
 
 func _event_health_is_zero():
 	if (player_state.current == player_state.list.DIED):
-		return		
+		return
 		
 	player_state.current = player_state.list.DIED
 	Main.emit_signal("signal_player_died")

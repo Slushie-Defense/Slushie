@@ -8,10 +8,12 @@ func _ready():
 	Main.signal_wave_event.connect(_wave_event_triggered)
 
 func _wave_event_triggered(wave_number):
+	# Wave start was triggered
 	if wave_number > 0:
 		wave_number_count = wave_number
 		visible = false
-	else:
+	# Wave End was triggered
+	if wave_number == -1:
 		timer.start()
 
 func _on_pressed():

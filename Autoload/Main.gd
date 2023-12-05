@@ -20,6 +20,10 @@ signal signal_trigger_wave_event()
 signal signal_player_died()
 signal signal_gas_station_destroyed()
 
+# Intro music
+var music_scene = load("res://Music/Music.tscn")
+var music : AudioStreamPlayer
+
 # MadKing Screen
 var company_screen_shown : bool = false
 
@@ -40,6 +44,7 @@ var coin_reward : int = 200
 # Wave number
 var current_wave_number : int = 1
 var current_wave_spawning : bool = false
+var current_wave_active : bool = false
 
 # Pause scene
 var pause_scene = load("res://UserInterface/PauseScreen/PauseScreen.tscn")
@@ -57,6 +62,18 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Game over screen
 	signal_player_died.connect(_game_ended)
+	# Add music
+	_add_theme_music()
+
+func _add_theme_music():
+	music = music_scene.instantiate()
+	add_child(music)
+
+func _play_theme_music():
+	music.play()
+
+func _stop_theme_music():
+	music.stop()
 
 func _update_wave_active_state(_wave_active):
 	current_wave_spawning = _wave_active
@@ -67,19 +84,25 @@ func _update_enemy_count(enemy_number):
 	_is_wave_over()
 
 func _is_wave_over():
-	# Check if the Wave is over
-	if current_wave_number > 0 and enemy_counter == 0 and not current_wave_spawning:
-		Main.emit_signal("signal_wave_event", -1)
+	# Check if the wave is active
+	if current_wave_number > 0:
+		current_wave_active = true
+		# If there are no enemies and the portals are not spawning it is not active
+		if enemy_counter == 0 and not current_wave_spawning:
+			Main.emit_signal("signal_wave_event", -1)
+			current_wave_active = false
 
 func _on_signal_wave_start(_number):
 	current_wave_number = _number
 
 func _game_ended():
-	get_tree().create_timer(3.0).timeout.connect(_go_to_death_scene)
+	get_tree().create_timer(4.0).timeout.connect(_go_to_death_scene)
 
 func _go_to_death_scene():
 	coins = 0
 	get_tree().change_scene_to_file("res://UserInterface/DeathScreen/DeathScreen.tscn")
+	# Play Main Theme
+	_play_theme_music()
 
 func _input(event):
 	if event.is_action_pressed("PauseButton"):
@@ -105,6 +128,8 @@ func _on_signal_add_player(pass_node):
 	player_node = pass_node
 	# Reward with some coins
 	get_tree().create_timer(1.0).timeout.connect(_reward_with_coins)
+	# Stop music when the player is added
+	_stop_theme_music()
 
 func _update_coin_count(count):
 	coins = clamp(coins + count, 0, 9999999999)

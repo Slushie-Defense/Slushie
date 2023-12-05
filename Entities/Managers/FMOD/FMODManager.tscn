@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccabdjtsxc3fx"]
+[gd_scene load_steps=10 format=3 uid="uid://ccabdjtsxc3fx"]
 
 [ext_resource type="Script" path="res://Entities/Managers/FMOD/FMODManager.gd" id="1_poiva"]
+[ext_resource type="AudioStream" uid="uid://b5xhejta4v5on" path="res://Music/ending_fanfare.wav" id="2_3hykc"]
 
 [sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_1tn8e"]
 data1 = 3165566854
@@ -48,3 +49,8 @@ name = "SLUSHIEMUSICSYSTEM"
 [node name="FMOD" type="Node2D"]
 script = ExtResource("1_poiva")
 event = SubResource("EventAsset_5w6kx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_3hykc")
+volume_db = 2.0
