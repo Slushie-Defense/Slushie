@@ -59,13 +59,17 @@ func _ready():
 	signal_player_died.connect(_game_ended)
 
 func _update_wave_active_state(_wave_active):
-	current_wave_spawning = _wave_active 
+	current_wave_spawning = _wave_active
+	_is_wave_over()
 
 func _update_enemy_count(enemy_number):
 	enemy_counter = clamp(enemy_counter + enemy_number, 0, 999999)
+	_is_wave_over()
+
+func _is_wave_over():
 	# Check if the Wave is over
 	if current_wave_number > 0 and enemy_counter == 0 and not current_wave_spawning:
-			Main.emit_signal("signal_wave_event", -1)
+		Main.emit_signal("signal_wave_event", -1)
 
 func _on_signal_wave_start(_number):
 	current_wave_number = _number
