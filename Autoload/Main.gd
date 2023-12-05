@@ -13,6 +13,7 @@ signal signal_selected_item_update(item_type)
 
 # Waves
 signal signal_wave_event(event_number : int)
+signal signal_wave_spawning(_is_active)
 signal signal_trigger_wave_event()
 
 # End game events
@@ -38,6 +39,7 @@ var coin_reward : int = 200
 
 # Wave number
 var current_wave_number : int = 1
+var current_wave_spawning : bool = false
 
 # Pause scene
 var pause_scene = load("res://UserInterface/PauseScreen/PauseScreen.tscn")
@@ -49,16 +51,20 @@ func _ready():
 	signal_update_coin_count.connect(_update_coin_count)
 	signal_add_camera.connect(_on_signal_add_camera)
 	signal_update_enemy_count.connect(_update_enemy_count)
+	signal_wave_spawning.connect(_update_wave_active_state)
 	
 	signal_wave_event.connect(_on_signal_wave_start)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Game over screen
 	signal_player_died.connect(_game_ended)
 
+func _update_wave_active_state(_wave_active):
+	current_wave_spawning = _wave_active 
+
 func _update_enemy_count(enemy_number):
 	enemy_counter = clamp(enemy_counter + enemy_number, 0, 999999)
 	# Check if the Wave is over
-	if current_wave_number > 0 and enemy_counter == 0:
+	if current_wave_number > 0 and enemy_counter == 0 and not current_wave_spawning:
 			Main.emit_signal("signal_wave_event", -1)
 
 func _on_signal_wave_start(_number):

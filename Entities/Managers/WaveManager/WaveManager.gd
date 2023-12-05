@@ -47,6 +47,8 @@ func _input(event):
 
 func _start_wave():
 	if not wave_active:
+		# Spawning
+		Main.emit_signal("signal_wave_spawning", true)
 		_spawn_wave(current_wave_index)
 
 # spawns a wave, which syncronously loops through the groups
@@ -123,6 +125,8 @@ func _on_enemy_spawn_timer_timeout():
 			_start_next_group()
 		else:
 			wave_active = false
+			# Spawning
+			Main.emit_signal("signal_wave_spawning", false)
 			print("Wave Complete: " + str(current_wave_index + 1))
 			# Close all the open portals
 			_close_all_portals()
