@@ -46,7 +46,7 @@ func _input(event):
 		Main.emit_signal("signal_trigger_wave_event")
 
 func _start_wave():
-	if not wave_active:
+	if not Main.current_wave_active:
 		# Spawning
 		Main.emit_signal("signal_wave_spawning", true)
 		_spawn_wave(current_wave_index)

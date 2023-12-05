@@ -6,18 +6,23 @@ var instance: EventInstance
 var wave_active : bool = false
 var wave_intensity : int = 0
 
+@onready var death_music : AudioStreamPlayer = $AudioStreamPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	instance = FMODRuntime.create_instance(event)
-	#instance.set_parameter_by_name("Wave_Onoff", false, false)
-	instance.start()
-	# Release FMOD from memory to prevent memory leaks
-	instance.release()
+	_create_FMOD()
 	# Connect to wave triggers
 	Main.signal_wave_event.connect(_wave_event)
 	# Destroy if you leave the scene
 	Main.signal_player_died.connect(_stop_FMOD)
-	
+
+func _create_FMOD():
+	instance = FMODRuntime.create_instance(event)
+	# Start the song
+	instance.start()
+	# Release FMOD from memory to prevent memory leaks
+	instance.release()
+
 func _wave_event(wave_number):
 	wave_active = not wave_number == -1
 	var increase_every_x_waves : float = floor(wave_number / 2.0)
@@ -39,3 +44,5 @@ func _update_intensity():
 func _stop_FMOD():
 	# Stop the music
 	instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+	# Play Death
+	death_music.play()

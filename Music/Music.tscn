@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://crrmox31w23"]
+
+[ext_resource type="AudioStream" uid="uid://de84yxf1xl0kb" path="res://Music/slusie_main.ogg" id="1_jcqkg"]
+
+[node name="Music" type="AudioStreamPlayer"]
+stream = ExtResource("1_jcqkg")
+autoplay = true
