@@ -18,6 +18,7 @@ var player_state : NodeStates = NodeStates.new()
 const MAX_SPEED : float = 500
 var ACCELERATION : float = 2000
 var motion : Vector2 = Vector2.ZERO # Equaliant to Vector2(0,0)
+var isBuilding = false
 
 # Animation Player
 @onready var ap = $AnimationPlayer
@@ -101,8 +102,10 @@ func building_manager_create_structure():
 	if Input.is_action_pressed("ActionButton"):
 		player_state.current = player_state.list.BUILD
 		motion = Vector2.ZERO
-	else:
-		player_state.current = player_state.list.IDLE
+		isBuilding = true
+	elif (isBuilding == true):
+		isBuilding = false
+		player_state.current = player_state.list.MOVING
 
 func _event_health_is_zero():
 	if (player_state.current == player_state.list.DIED):
