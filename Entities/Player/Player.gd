@@ -41,20 +41,21 @@ func _ready():
 func _physics_process(delta):
 	if (player_state.current == player_state.list.DIED):
 		return
-		
-	var axis = get_input_axis()
-	# If the player is not providing input
-	if axis == Vector2.ZERO:
-		apply_friction(ACCELERATION * delta)
-		player_state.current = player_state.list.IDLE
-	else: # Otherwise move
-		$CharacterSprite.flip_h = true if (axis.x < 0) else false
-		apply_movement(axis * ACCELERATION * delta)
-		player_state.current = player_state.list.MOVING
-	# Apply the motion
-	velocity = motion
-	# Move to the position unless it hits a collision then it will stop at the collision point
-	move_and_slide()
+	
+	if (player_state.current != player_state.list.BUILD):
+		var axis = get_input_axis()
+		# If the player is not providing input
+		if axis == Vector2.ZERO:
+			apply_friction(ACCELERATION * delta)
+			player_state.current = player_state.list.IDLE
+		else: # Otherwise move
+			$CharacterSprite.flip_h = true if (axis.x < 0) else false
+			apply_movement(axis * ACCELERATION * delta)
+			player_state.current = player_state.list.MOVING
+		# Apply the motion
+		velocity = motion
+		# Move to the position unless it hits a collision then it will stop at the collision point
+		move_and_slide()
 	# This signal tells any object listening where the player is currently located
 	emit_signal("signal_share_player_position", global_position)
 	# Add building
@@ -66,8 +67,10 @@ func _process(delta):
 			ap.play("Idle")
 		player_state.list.MOVING:
 			ap.play("Run")
-		player_state.list.DIED:			
+		player_state.list.DIED:
 			ap.play("Death")
+		player_state.list.BUILD:
+			ap.play("Build")
 
 func get_input_axis():
 	var axis = Vector2.ZERO
@@ -92,6 +95,14 @@ func attack(_attack : Attack):
 func building_manager_create_structure():
 	if Input.is_action_just_pressed("ActionButton"):
 		building_manager.add_structure()
+	
+	# Building receives input from the structure, instead of player sending a build 
+	# command to the structure, so using this hack to fake the build state on the player layer
+	if Input.is_action_pressed("ActionButton"):
+		player_state.current = player_state.list.BUILD
+		motion = Vector2.ZERO
+	else:
+		player_state.current = player_state.list.IDLE
 
 func _event_health_is_zero():
 	if (player_state.current == player_state.list.DIED):
