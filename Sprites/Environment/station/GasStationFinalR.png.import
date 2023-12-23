@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwhcgwpwv5ue5"
-path="res://.godot/imported/RockMid1.png-94e9a884d6594d09e8658c7216835fa7.ctex"
+uid="uid://c8h5gh2qyp01d"
+path="res://.godot/imported/GasStationFinalR.png-e87ba9374432e2a085e8a83b29b1c590.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Environment/rocks/RockMid1.png"
-dest_files=["res://.godot/imported/RockMid1.png-94e9a884d6594d09e8658c7216835fa7.ctex"]
+source_file="res://Sprites/Environment/station/GasStationFinalR.png"
+dest_files=["res://.godot/imported/GasStationFinalR.png-e87ba9374432e2a085e8a83b29b1c590.ctex"]
 
 [params]
 

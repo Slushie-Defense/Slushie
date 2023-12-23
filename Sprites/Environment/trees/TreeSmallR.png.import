@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1ti2v5o8m66m"
-path="res://.godot/imported/GasStationFinal.png-47f448e4267c4c4c492d9665eaffc2a3.ctex"
+uid="uid://muohme6c7w7p"
+path="res://.godot/imported/TreeSmallR.png-8b335446f551906b85f3d2632cd2177d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Environment/station/GasStationFinal.png"
-dest_files=["res://.godot/imported/GasStationFinal.png-47f448e4267c4c4c492d9665eaffc2a3.ctex"]
+source_file="res://Sprites/Environment/trees/TreeSmallR.png"
+dest_files=["res://.godot/imported/TreeSmallR.png-8b335446f551906b85f3d2632cd2177d.ctex"]
 
 [params]
 

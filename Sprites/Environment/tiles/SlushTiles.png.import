@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgmku8x6i0v37"
-path="res://.godot/imported/TreeSmall.png-4205a97da4bd51ecae610ee45a82c5bb.ctex"
+uid="uid://cpcmlvst0glik"
+path="res://.godot/imported/SlushTiles.png-d6950f48caa5e12d75e84ca536f70204.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Environment/trees/TreeSmall.png"
-dest_files=["res://.godot/imported/TreeSmall.png-4205a97da4bd51ecae610ee45a82c5bb.ctex"]
+source_file="res://Sprites/Environment/tiles/SlushTiles.png"
+dest_files=["res://.godot/imported/SlushTiles.png-d6950f48caa5e12d75e84ca536f70204.ctex"]
 
 [params]
 

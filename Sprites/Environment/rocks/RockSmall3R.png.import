@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlvrkvjr546bl"
-path="res://.godot/imported/Bush2.png-a8006f207bb33d640526b54429da5e89.ctex"
+uid="uid://d1ljger167k58"
+path="res://.godot/imported/RockSmall3R.png-a0db47beb5bc9a37321cbe9936d99062.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Environment/trees/Bush2.png"
-dest_files=["res://.godot/imported/Bush2.png-a8006f207bb33d640526b54429da5e89.ctex"]
+source_file="res://Sprites/Environment/rocks/RockSmall3R.png"
+dest_files=["res://.godot/imported/RockSmall3R.png-a0db47beb5bc9a37321cbe9936d99062.ctex"]
 
 [params]
 
