@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://f1honnv3nt85"]
+
+[ext_resource type="PackedScene" uid="uid://c4ke37km2o2uw" path="res://Sprites/Environment/objects/Bush1R.tscn" id="1_twk4s"]
+[ext_resource type="PackedScene" uid="uid://bw4ejfmauhh8d" path="res://Sprites/Environment/objects/TreeThickR.tscn" id="1_wc6l2"]
+[ext_resource type="PackedScene" uid="uid://cfbbmfyjbcq82" path="res://Sprites/Environment/objects/TreeSmallR.tscn" id="2_cylr1"]
+[ext_resource type="PackedScene" uid="uid://i8ar1ndpghxg" path="res://Sprites/Environment/objects/TreeMediumR.tscn" id="3_33emo"]
+[ext_resource type="PackedScene" uid="uid://xh1gv38hg15g" path="res://Sprites/Environment/objects/RockSmall3R.tscn" id="4_pi6pj"]
+[ext_resource type="PackedScene" uid="uid://bi5pvv1j237fc" path="res://Sprites/Environment/objects/RockSmall2R.tscn" id="5_4iffu"]
+[ext_resource type="PackedScene" uid="uid://qxa1vx2gf3qv" path="res://Sprites/Environment/objects/Bush2R.tscn" id="6_v8a2y"]
+[ext_resource type="PackedScene" uid="uid://cadsqp1tnelxj" path="res://Sprites/Environment/objects/RockMid2R.tscn" id="7_0dpg6"]
+[ext_resource type="PackedScene" uid="uid://c4kcr3weg1syu" path="res://Sprites/Environment/objects/RockSmall1R.tscn" id="9_vhj3s"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(1, 1)
+
+[node name="RockBig1R" parent="." instance=ExtResource("1_wc6l2")]
+position = Vector2(-52, 95)
+
+[node name="RockBig1R2" parent="." instance=ExtResource("2_cylr1")]
+position = Vector2(-410, 49)
+
+[node name="RockBig1R3" parent="." instance=ExtResource("2_cylr1")]
+position = Vector2(71, 95)
+
+[node name="RockBig1R4" parent="." instance=ExtResource("1_wc6l2")]
+position = Vector2(338, 107)
+
+[node name="RockBig1R5" parent="." instance=ExtResource("1_wc6l2")]
+position = Vector2(-237, 183)
+
+[node name="RockBig1R6" parent="." instance=ExtResource("3_33emo")]
+position = Vector2(-186, -30)
+
+[node name="RockBig1R7" parent="." instance=ExtResource("2_cylr1")]
+position = Vector2(452, 113)
+
+[node name="RockBig1R8" parent="." instance=ExtResource("3_33emo")]
+position = Vector2(306, 195)
+
+[node name="RockBig1R9" parent="." instance=ExtResource("2_cylr1")]
+position = Vector2(213, 49)
+
+[node name="RockBig1R10" parent="." instance=ExtResource("2_cylr1")]
+position = Vector2(-96, 154)
+
+[node name="RockBig1R11" parent="." instance=ExtResource("2_cylr1")]
+position = Vector2(138, 214)
+
+[node name="RockBig1R12" parent="." instance=ExtResource("3_33emo")]
+position = Vector2(-282, 74)
+
+[node name="RockBig1R13" parent="." instance=ExtResource("1_twk4s")]
+position = Vector2(-410, 170)
+
+[node name="RockBig1R14" parent="." instance=ExtResource("1_twk4s")]
+position = Vector2(-154, 32)
+
+[node name="RockBig1R15" parent="." instance=ExtResource("1_twk4s")]
+position = Vector2(372, 127)
+
+[node name="RockBig1R16" parent="." instance=ExtResource("1_twk4s")]
+position = Vector2(160, 147)
+
+[node name="RockBig1R17" parent="." instance=ExtResource("6_v8a2y")]
+position = Vector2(-524, 82)
+
+[node name="RockBig1R18" parent="." instance=ExtResource("6_v8a2y")]
+position = Vector2(-282, 131)
+
+[node name="RockBig1R19" parent="." instance=ExtResource("6_v8a2y")]
+position = Vector2(-282, 230)
+
+[node name="RockBig1R20" parent="." instance=ExtResource("6_v8a2y")]
+position = Vector2(-186, 214)
+
+[node name="RockBig1R21" parent="." instance=ExtResource("6_v8a2y")]
+position = Vector2(71, 193)
+
+[node name="RockBig1R22" parent="." instance=ExtResource("6_v8a2y")]
+position = Vector2(306, 209)
+
+[node name="RockBig1R23" parent="." instance=ExtResource("6_v8a2y")]
+position = Vector2(225, 246)
+
+[node name="RockBig1R24" parent="." instance=ExtResource("5_4iffu")]
+position = Vector2(194, 177)
+
+[node name="RockBig1R25" parent="." instance=ExtResource("5_4iffu")]
+position = Vector2(-217, 63)
+
+[node name="RockBig1R26" parent="." instance=ExtResource("7_0dpg6")]
+position = Vector2(113, 164)
+
+[node name="RockBig1R27" parent="." instance=ExtResource("4_pi6pj")]
+position = Vector2(405, 164)
+
+[node name="RockBig1R28" parent="." instance=ExtResource("5_4iffu")]
+position = Vector2(-490, 107)
+
+[node name="RockBig1R29" parent="." instance=ExtResource("9_vhj3s")]
+position = Vector2(-20, 145)
+
+[node name="RockBig1R30" parent="." instance=ExtResource("4_pi6pj")]
+position = Vector2(-381, 74)

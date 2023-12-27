@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://tseeja844fpv"]
+
+[ext_resource type="PackedScene" uid="uid://bw4ejfmauhh8d" path="res://Sprites/Environment/objects/TreeThickR.tscn" id="1_avsv6"]
+[ext_resource type="PackedScene" uid="uid://cfbbmfyjbcq82" path="res://Sprites/Environment/objects/TreeSmallR.tscn" id="2_4bpjc"]
+[ext_resource type="PackedScene" uid="uid://i8ar1ndpghxg" path="res://Sprites/Environment/objects/TreeMediumR.tscn" id="3_cvl4d"]
+[ext_resource type="PackedScene" uid="uid://c4ke37km2o2uw" path="res://Sprites/Environment/objects/Bush1R.tscn" id="4_ifnhg"]
+[ext_resource type="PackedScene" uid="uid://qxa1vx2gf3qv" path="res://Sprites/Environment/objects/Bush2R.tscn" id="5_o0kfs"]
+[ext_resource type="PackedScene" uid="uid://bi5pvv1j237fc" path="res://Sprites/Environment/objects/RockSmall2R.tscn" id="6_7lw6h"]
+[ext_resource type="PackedScene" uid="uid://cadsqp1tnelxj" path="res://Sprites/Environment/objects/RockMid2R.tscn" id="7_10wod"]
+[ext_resource type="PackedScene" uid="uid://xh1gv38hg15g" path="res://Sprites/Environment/objects/RockSmall3R.tscn" id="8_gorqe"]
+[ext_resource type="PackedScene" uid="uid://c4kcr3weg1syu" path="res://Sprites/Environment/objects/RockSmall1R.tscn" id="9_1ifep"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(1, 1)
+
+[node name="RockBig1R" parent="." instance=ExtResource("1_avsv6")]
+position = Vector2(-31, 30)
+
+[node name="RockBig1R3" parent="." instance=ExtResource("2_4bpjc")]
+position = Vector2(81, 26)
+
+[node name="RockBig1R5" parent="." instance=ExtResource("1_avsv6")]
+position = Vector2(-135, 128)
+
+[node name="RockBig1R6" parent="." instance=ExtResource("3_cvl4d")]
+position = Vector2(-228, 120)
+
+[node name="RockBig1R9" parent="." instance=ExtResource("2_4bpjc")]
+position = Vector2(184, 76)
+
+[node name="RockBig1R10" parent="." instance=ExtResource("2_4bpjc")]
+position = Vector2(-31, 177)
+
+[node name="RockBig1R11" parent="." instance=ExtResource("2_4bpjc")]
+position = Vector2(61, 177)
+
+[node name="RockBig1R14" parent="." instance=ExtResource("4_ifnhg")]
+position = Vector2(-72, 96)
+
+[node name="RockBig1R15" parent="." instance=ExtResource("4_ifnhg")]
+position = Vector2(127, 145)
+
+[node name="RockBig1R16" parent="." instance=ExtResource("4_ifnhg")]
+position = Vector2(-49, 227)
+
+[node name="RockBig1R17" parent="." instance=ExtResource("5_o0kfs")]
+position = Vector2(-294, 138)
+
+[node name="RockBig1R19" parent="." instance=ExtResource("5_o0kfs")]
+position = Vector2(-146, 185)
+
+[node name="RockBig1R20" parent="." instance=ExtResource("5_o0kfs")]
+position = Vector2(232, 105)
+
+[node name="RockBig1R25" parent="." instance=ExtResource("6_7lw6h")]
+position = Vector2(-177, 96)
+
+[node name="RockBig1R26" parent="." instance=ExtResource("7_10wod")]
+position = Vector2(74, 118)
+
+[node name="RockBig1R28" parent="." instance=ExtResource("6_7lw6h")]
+position = Vector2(-261, 164)
+
+[node name="RockBig1R29" parent="." instance=ExtResource("9_1ifep")]
+position = Vector2(12, 158)
+
+[node name="RockBig1R30" parent="." instance=ExtResource("8_gorqe")]
+position = Vector2(-225, 63)

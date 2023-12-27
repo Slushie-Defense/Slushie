@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjow5f3a1q3ue"]
+
+[ext_resource type="PackedScene" uid="uid://c4ke37km2o2uw" path="res://Sprites/Environment/objects/Bush1R.tscn" id="1_i2ww3"]
+[ext_resource type="PackedScene" uid="uid://rsxgpf65i34c" path="res://Sprites/Environment/objects/RockBig2R.tscn" id="2_qf8l0"]
+[ext_resource type="PackedScene" uid="uid://b3n06f0pki57j" path="res://Sprites/Environment/objects/RockMid3R.tscn" id="3_v0mwj"]
+[ext_resource type="PackedScene" uid="uid://xh1gv38hg15g" path="res://Sprites/Environment/objects/RockSmall3R.tscn" id="4_8xuqq"]
+[ext_resource type="PackedScene" uid="uid://bi5pvv1j237fc" path="res://Sprites/Environment/objects/RockSmall2R.tscn" id="5_a6nm0"]
+[ext_resource type="PackedScene" uid="uid://qxa1vx2gf3qv" path="res://Sprites/Environment/objects/Bush2R.tscn" id="6_gt8fo"]
+[ext_resource type="PackedScene" uid="uid://cadsqp1tnelxj" path="res://Sprites/Environment/objects/RockMid2R.tscn" id="7_s31ji"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(1, 1)
+
+[node name="RockBig1R" parent="." instance=ExtResource("1_i2ww3")]
+position = Vector2(-74, 48)
+
+[node name="RockBig1R2" parent="." instance=ExtResource("2_qf8l0")]
+position = Vector2(-20, -67)
+
+[node name="RockBig1R3" parent="." instance=ExtResource("3_v0mwj")]
+position = Vector2(60, -27)
+
+[node name="RockBig1R4" parent="." instance=ExtResource("4_8xuqq")]
+position = Vector2(141, 37)
+
+[node name="RockBig1R5" parent="." instance=ExtResource("5_a6nm0")]
+position = Vector2(-157, 0)
+
+[node name="RockBig1R6" parent="." instance=ExtResource("6_gt8fo")]
+position = Vector2(-143, -27)
+
+[node name="RockBig1R7" parent="." instance=ExtResource("1_i2ww3")]
+position = Vector2(106, -88)
+
+[node name="RockBig1R8" parent="." instance=ExtResource("6_gt8fo")]
+position = Vector2(112, 10)
+
+[node name="RockBig1R9" parent="." instance=ExtResource("6_gt8fo")]
+position = Vector2(59, 60)
+
+[node name="RockBig1R10" parent="." instance=ExtResource("7_s31ji")]
+position = Vector2(-41, 18)
