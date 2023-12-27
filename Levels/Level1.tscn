@@ -137,7 +137,7 @@ position = Vector2(-315, 484)
 position = Vector2(-732, 773)
 
 [node name="Node2D5" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(473, 1158)
+position = Vector2(484, 1151)
 
 [node name="Node2D6" parent="Env" instance=ExtResource("14_k3rbh")]
 position = Vector2(-170, -203)
@@ -149,7 +149,7 @@ position = Vector2(324, -460)
 position = Vector2(3655, 1115)
 
 [node name="Node2D9" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(-201, 1051)
+position = Vector2(-215, 1051)
 
 [node name="Node2D10" parent="Env" instance=ExtResource("14_k3rbh")]
 position = Vector2(666, 1475)
@@ -173,7 +173,7 @@ position = Vector2(2512, 1552)
 position = Vector2(3288, 1453)
 
 [node name="Node2D17" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(38, 1377)
+position = Vector2(14, 1350)
 
 [node name="Node2D18" parent="Env" instance=ExtResource("14_k3rbh")]
 position = Vector2(-435, 1586)
