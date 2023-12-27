@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0icm00gdo5jl"
-path="res://.godot/imported/128x192Instant.png-9cbc120df1385be375df8f015de0e7d9.ctex"
+uid="uid://c2kwthfypq3vx"
+path="res://.godot/imported/Slushie_Final_Turrets_InstantShot_Nozzle.png-0dece43d75cdbb5f9f13615200e8563b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Structures/Instant/128x192Instant.png"
-dest_files=["res://.godot/imported/128x192Instant.png-9cbc120df1385be375df8f015de0e7d9.ctex"]
+source_file="res://Sprites/Structures/Projectile/Slushie_Final_Turrets_InstantShot_Nozzle.png"
+dest_files=["res://.godot/imported/Slushie_Final_Turrets_InstantShot_Nozzle.png-0dece43d75cdbb5f9f13615200e8563b.ctex"]
 
 [params]
 

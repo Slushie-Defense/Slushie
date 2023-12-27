@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0icm00gdo5jl"
-path="res://.godot/imported/128x192Instant.png-9cbc120df1385be375df8f015de0e7d9.ctex"
+uid="uid://c03q3es8118px"
+path="res://.godot/imported/Slushie_Final_Turrets_Cherry_Fuse2.png-e49a7914642b425ba7a52db23ac1cc84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Structures/Instant/128x192Instant.png"
-dest_files=["res://.godot/imported/128x192Instant.png-9cbc120df1385be375df8f015de0e7d9.ctex"]
+source_file="res://Sprites/Structures/Landmine/Slushie_Final_Turrets_Cherry_Fuse2.png"
+dest_files=["res://.godot/imported/Slushie_Final_Turrets_Cherry_Fuse2.png-e49a7914642b425ba7a52db23ac1cc84.ctex"]
 
 [params]
 
