@@ -227,7 +227,6 @@ func _update_vision_radius():
 		vision_sprite.hide()
 
 func _explode_attack():
-	print("Explode")
 	var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
 	var explosion = explosion_scene.instantiate()
 	explosion.attack_damage = enemy_data.attack_damage
