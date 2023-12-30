@@ -209,7 +209,7 @@ func _create_spitter():
 	weapon_base = weapon_base_scene.instantiate() # Connect to weapon destroyed
 	weapon_base.signal_weapon_destroyed.connect(_event_health_is_zero) # If the weapon is destroyed the health is zero
 	weapon_base.weapon_data = UnitData.SPITTER_SIEGE # Set weapon type
-	weapon_base.position = Vector2(-32, -32)
+	weapon_base.position = Vector2(-32, -48)
 	add_child(weapon_base) # Add to structure
 	# Connect to attack function
 	weapon_base.signal_weapon_is_attacking.connect(_enemy_is_attacking)

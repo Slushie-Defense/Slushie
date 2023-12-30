@@ -134,8 +134,8 @@ func _ready():
 	SPITTER_SIEGE.unit_name = "Spitter Siege"
 	SPITTER_SIEGE.cost = 0
 	# Total time is 2.3
-	SPITTER_SIEGE.delay_before_fireweapon = 1.0
-	SPITTER_SIEGE.delay_between_shots = 1.0 # Pause between each shot being fired
+	SPITTER_SIEGE.delay_before_fireweapon = 1.2
+	SPITTER_SIEGE.delay_between_shots = 1.5 # Pause between each shot being fired
 	SPITTER_SIEGE.reload_time = 1.5 # How long it takes to reload - Minimum is 0.75
 	SPITTER_SIEGE.shots_before_reload = 1 # Number of shots you can take before reloading
 
