@@ -358,7 +358,6 @@ _data = {
 [sub_resource type="Animation" id="Animation_lqwqn"]
 resource_name = "Attack"
 length = 2.4
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -560,7 +559,7 @@ libraries = {
 visible = false
 z_index = 1
 y_sort_enabled = true
-scale = Vector2(1, 1.05)
+scale = Vector2(1.1, 1)
 texture = ExtResource("9_d5q7e")
 offset = Vector2(0, -46.6667)
 hframes = 24
@@ -593,7 +592,7 @@ one_shot = true
 [connection signal="animation_finished" from="BasicAP" to="." method="_on_basic_ap_animation_finished"]
 [connection signal="animation_finished" from="GruntAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="TankAP" to="." method="_on_tank_ap_animation_finished"]
-[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="FloaterAP" to="." method="_on_floater_ap_animation_finished"]
+[connection signal="animation_finished" from="FloaterAP" to="." method="_on_grunt_ap_animation_finished"]
 [connection signal="animation_finished" from="SpitterAP" to="." method="_on_spitter_ap_animation_finished"]
 [connection signal="timeout" from="DamageFlashTimer" to="." method="_on_damage_flash_timer_timeout"]

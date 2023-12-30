@@ -19,11 +19,11 @@ func _init(
 	bottom_portal = p5
 
 func appendGroup(
-	g1: int, g2: int, g3: int, g4: int, g5:int,
+	g1_basic: int, g2_grunt: int, g3_spitter: int, g4_tank: int, g5_floater:int,
 	gdelay: float, sdelay: float,
 	spawnMethod: GroupSpawn.spawn_type = -1
 ):
-	var newGroup = GroupSpawn.new(g1, g2, g3, g4, g5, gdelay, sdelay)
+	var newGroup = GroupSpawn.new(g1_basic, g2_grunt, g3_spitter, g4_tank, g5_floater, gdelay, sdelay)
 	enemy_group_list.append(newGroup)
 	if (spawnMethod == -1):
 		newGroup.spawn_method = GroupSpawn.spawn_type.RANDOM_ANY

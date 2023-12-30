@@ -37,7 +37,7 @@ func _ready():
 	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
 	FENCE.build_speed = 3.0
 	# Setup LANDMINE
-	LANDMINE.delay_before_explode = 0.5
+	LANDMINE.delay_before_fireweapon = 0.5
 	LANDMINE.type = structure_list.LANDMINE
 	LANDMINE.unit_name = "LANDMINE"
 	LANDMINE.cost = 300
@@ -133,11 +133,18 @@ func _ready():
 	SPITTER_SIEGE.type = structure_list.SIEGE
 	SPITTER_SIEGE.unit_name = "Spitter Siege"
 	SPITTER_SIEGE.cost = 0
+	# Total time is 2.3
+	SPITTER_SIEGE.delay_before_fireweapon = 1.0
+	SPITTER_SIEGE.delay_between_shots = 1.0 # Pause between each shot being fired
+	SPITTER_SIEGE.reload_time = 1.5 # How long it takes to reload - Minimum is 0.75
+	SPITTER_SIEGE.shots_before_reload = 1 # Number of shots you can take before reloading
+
 	SPITTER_SIEGE.attack_damage = 100.0
 	SPITTER_SIEGE.attack_radius = 128.0
 	SPITTER_SIEGE.attack_range = 640.0
 	SPITTER_SIEGE.attack_direction = -1 # AIM LEFT
 	SPITTER_SIEGE.attack_collision_mask_list = [[2, true], [3, true], [4, false]]
+	
 	SPITTER_SIEGE.projectile_sprite = load("res://Sprites/Projectiles/Eyeball64x64.png")
 	SPITTER_SIEGE.projectile_color = Color("#ffffff")
 	SPITTER_SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
