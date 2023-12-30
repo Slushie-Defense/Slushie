@@ -8,7 +8,8 @@ radius = 96.0
 height = 512.0
 
 [node name="WeaponBase" type="Node2D"]
-visibility_layer = 4
+show_behind_parent = true
+visibility_layer = 32
 z_index = -2
 script = ExtResource("1_81enj")
 
@@ -46,4 +47,9 @@ autoplay = true
 [node name="ShotDelayTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="FireProjectileDelayTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="ShotDelayTimer" to="." method="_on_shot_delay_timer_timeout"]
+[connection signal="timeout" from="FireProjectileDelayTimer" to="." method="_on_fire_projectile_delay_timer_timeout"]

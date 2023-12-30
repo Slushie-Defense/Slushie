@@ -10,7 +10,7 @@ var build_speed : float = 3.0
 var delay_between_shots : float = 0.5 # Pause between each shot being fired
 var reload_time : float = 2.0 # How long it takes to reload - Minimum is 0.75
 var shots_before_reload : int = 5 # Number of shots you can take before reloading
-var delay_before_explode : float = 0.5 # For the landmines
+var delay_before_fireweapon : float = 0.06 # For weapons that need a delay before attack
 
 var attack_damage : float = 100
 var attack_range : float = 512.0

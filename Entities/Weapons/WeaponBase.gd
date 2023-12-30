@@ -5,6 +5,7 @@ signal signal_weapon_is_attacking(target_node)
 
 @onready var sound_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
+@onready var fire_projectile_delay_timer : Timer = $FireProjectileDelayTimer
 @onready var weapon_attack_line2d : Line2D = $WeaponAttackLine
 
 # Show collision shape
@@ -103,24 +104,32 @@ func fire_weapon():
 	# If nothing is found. Do not fire, just check again next shot
 	if not found_target:
 		return
+	# Signal attack
+	emit_signal("signal_weapon_is_attacking", found_target)
 	# Fire AOE Projectile
 	match weapon_data.type:
 		weapon_type.SIEGE:
-			fire_projectile_explosion()
+			# Set the delay before the attack
+			fire_projectile_delay_timer.wait_time = weapon_data.delay_before_fireweapon
+			fire_projectile_delay_timer.start()
 		# Fire the shot
 		weapon_type.INSTANT:
+			play_attack_sound()
 			fire_instant_hit()
 		# Fire bullet
 		weapon_type.PROJECTILE:
+			play_attack_sound()
 			fire_projectile_bullet()
 		# Check landmine
 		weapon_type.LANDMINE:
+			play_attack_sound()
 			fire_landmine_explosion()
-	# Play sound
-	sound_player.stream = sound_shoot
-	sound_player.play()
 	# Count shot
 	shot_counter += 1
+
+func play_attack_sound():
+	sound_player.stream = sound_shoot
+	sound_player.play()
 
 func find_target_position():
 	if autotarget_enemy:
@@ -133,7 +142,6 @@ func find_target_position():
 				# If it hits something it can attack
 				if first_collision_result.has_method("attack"):
 					relative_target_position = first_collision_result.global_position - global_position
-					emit_signal("signal_weapon_is_attacking", first_collision_result)
 					return true
 	return false
 
@@ -157,7 +165,7 @@ func fire_projectile_bullet():
 	projectile.attack_damage = weapon_data.attack_damage
 
 func fire_landmine_explosion():
-	var mine_delay : float = weapon_data.delay_before_explode
+	var mine_delay : float = weapon_data.delay_before_fireweapon
 	get_tree().create_timer(mine_delay).timeout.connect(_create_landmine_explosion)
 
 func fire_instant_hit():
@@ -200,3 +208,7 @@ func _self_destruct():
 
 func weapon_range_indicator_visible(set_visibility):
 	weapon_range_indicator.visible = set_visibility
+
+func _on_fire_projectile_delay_timer_timeout():
+	play_attack_sound()
+	fire_projectile_explosion()
