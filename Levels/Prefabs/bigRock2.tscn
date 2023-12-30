@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://i6geikbdg7om"]
+
+[ext_resource type="PackedScene" uid="uid://c4ke37km2o2uw" path="res://Sprites/Environment/objects/Bush1R.tscn" id="1_7k0sw"]
+[ext_resource type="PackedScene" uid="uid://rsxgpf65i34c" path="res://Sprites/Environment/objects/RockBig2R.tscn" id="2_ajr1v"]
+[ext_resource type="PackedScene" uid="uid://b2mnj658a4l6w" path="res://Sprites/Environment/objects/RockMid1R.tscn" id="3_4iqbb"]
+[ext_resource type="PackedScene" uid="uid://xh1gv38hg15g" path="res://Sprites/Environment/objects/RockSmall3R.tscn" id="4_fovqc"]
+[ext_resource type="PackedScene" uid="uid://bi5pvv1j237fc" path="res://Sprites/Environment/objects/RockSmall2R.tscn" id="5_m5foy"]
+[ext_resource type="PackedScene" uid="uid://qxa1vx2gf3qv" path="res://Sprites/Environment/objects/Bush2R.tscn" id="6_0iyu0"]
+[ext_resource type="PackedScene" uid="uid://c4kcr3weg1syu" path="res://Sprites/Environment/objects/RockSmall1R.tscn" id="6_25lfn"]
+[ext_resource type="PackedScene" uid="uid://cadsqp1tnelxj" path="res://Sprites/Environment/objects/RockMid2R.tscn" id="7_aedbh"]
+
+[node name="Node2D" type="Node2D"]
+y_sort_enabled = true
+position = Vector2(1, 1)
+
+[node name="RockBig1R" parent="." instance=ExtResource("2_ajr1v")]
+position = Vector2(17, 20)
+
+[node name="RockBig1R2" parent="." instance=ExtResource("7_aedbh")]
+position = Vector2(183, 20)
+
+[node name="RockBig1R4" parent="." instance=ExtResource("3_4iqbb")]
+position = Vector2(-100, 35)
+
+[node name="RockBig1R3" parent="." instance=ExtResource("6_0iyu0")]
+position = Vector2(5, 76)
+
+[node name="RockBig1R5" parent="." instance=ExtResource("1_7k0sw")]
+position = Vector2(123, 45)
+
+[node name="RockBig1R6" parent="." instance=ExtResource("6_0iyu0")]
+position = Vector2(-153, 48)
+
+[node name="RockBig1R7" parent="." instance=ExtResource("6_25lfn")]
+position = Vector2(-100, 86)
+
+[node name="RockBig1R8" parent="." instance=ExtResource("5_m5foy")]
+position = Vector2(19, 103)
+
+[node name="RockBig1R9" parent="." instance=ExtResource("4_fovqc")]
+position = Vector2(106, 73)

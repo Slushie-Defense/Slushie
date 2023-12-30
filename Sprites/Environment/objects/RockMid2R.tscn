@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cadsqp1tnelxj"]
+
+[ext_resource type="Texture2D" uid="uid://btme7hgak8wac" path="res://Sprites/Environment/rocks/RockMid2R.png" id="1_qmejs"]
+
+[node name="RockBig1R" type="Node2D"]
+
+[node name="RockMid2r" type="Sprite2D" parent="."]
+position = Vector2(1, -54)
+texture = ExtResource("1_qmejs")

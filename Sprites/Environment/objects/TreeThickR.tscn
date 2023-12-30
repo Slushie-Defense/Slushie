@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw4ejfmauhh8d"]
+
+[ext_resource type="Texture2D" uid="uid://bcoino51ewt1" path="res://Sprites/Environment/trees/TreeThickR.png" id="1_lcpyb"]
+
+[node name="RockBig1R" type="Node2D"]
+
+[node name="TreeThickR" type="Sprite2D" parent="."]
+position = Vector2(3, -139)
+texture = ExtResource("1_lcpyb")
