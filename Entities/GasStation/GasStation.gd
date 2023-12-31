@@ -9,6 +9,7 @@ func _ready():
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
 	health.always_hidden = true
 	area_collision_shape_2d.shape.size = collision_shape_2d.shape.size
+	area_collision_shape_2d.position = collision_shape_2d.position
 	# Stores the gas station
 	Main.emit_signal("signal_add_gas_station", self)
 
