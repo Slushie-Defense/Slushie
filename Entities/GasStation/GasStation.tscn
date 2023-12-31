@@ -1,11 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://thui7p52g4o6"]
+[gd_scene load_steps=7 format=3 uid="uid://thui7p52g4o6"]
 
 [ext_resource type="Script" path="res://Entities/GasStation/GasStation.gd" id="1_e2gd2"]
+[ext_resource type="Texture2D" uid="uid://chjpmiegugq6d" path="res://Sprites/Environment/station/GasStationFinalRoof.png" id="2_ids57"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="2_kpqkr"]
-[ext_resource type="Texture2D" uid="uid://c8h5gh2qyp01d" path="res://Sprites/Environment/station/GasStationFinalR.png" id="2_mtq15"]
+[ext_resource type="Texture2D" uid="uid://bxfs6lso3m8s6" path="res://Sprites/Environment/station/GasStationFinalFloor.png" id="3_ioh8u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7d4t"]
-size = Vector2(256, 512)
+size = Vector2(256, 380)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmhig"]
 
@@ -16,6 +17,7 @@ collision_mask = 0
 script = ExtResource("1_e2gd2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -130)
 shape = SubResource("RectangleShape2D_l7d4t")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -25,8 +27,20 @@ shape = SubResource("RectangleShape2D_kmhig")
 
 [node name="Sprite2DRoof" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("2_mtq15")
+position = Vector2(0, -160)
+texture = ExtResource("2_ids57")
+
+[node name="Sprite2DFloor" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(0, -160)
+texture = ExtResource("3_ioh8u")
 
 [node name="Healthbar" parent="." instance=ExtResource("2_kpqkr")]
 visible = false
 scale = Vector2(1, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 32
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-72, 60, 128, 60, 128, -230, 64, -320, -128, -320, -128, -32)

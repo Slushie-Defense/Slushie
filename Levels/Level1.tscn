@@ -57,6 +57,10 @@ y_sort_enabled = true
 
 [node name="Camera" parent="WaveManager" instance=ExtResource("1_0xhkv")]
 
+[node name="GasStation" parent="WaveManager" instance=ExtResource("5_0xu7d")]
+z_index = 11
+position = Vector2(384, 580)
+
 [node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
 position = Vector2(1400, 576)
 motion_mode = 1
@@ -65,6 +69,7 @@ motion_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Container" parent="GroundTexture" index="0"]
 offset_right = 3072.0
@@ -89,9 +94,6 @@ polygon = PackedVector2Array(-64, -64, 5632, -64, 5632, 960, -64, 960, -64, 0, 0
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
 color = Color(1, 0, 1, 0.117647)
 script = ExtResource("4_4bbal")
-
-[node name="GasStation" parent="." instance=ExtResource("5_0xu7d")]
-position = Vector2(384, 448)
 
 [node name="TopPortal" parent="." instance=ExtResource("1_76lsd")]
 position = Vector2(3328, 64)
