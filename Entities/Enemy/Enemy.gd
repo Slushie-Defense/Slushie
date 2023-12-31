@@ -27,7 +27,7 @@ var ai_chase_node = null
 var ai_default_direction : Vector2 = Vector2(-1, 0)
 
 # How far the enemy can see
-var show_vision_radius : bool = true
+var show_vision_radius : bool = false
 @onready var vision_collider : CollisionShape2D = $Vision/CollisionShape2D
 @onready var vision_sprite : Sprite2D = $Vision/VisionCircle
 
@@ -217,14 +217,13 @@ func _create_spitter():
 func _update_vision_radius():
 	# Update the enemy vision radius -- Right now it is just a circle
 	vision_collider.shape.radius = enemy_data.vision_radius
+	vision_sprite.visible = show_vision_radius
 	# Show vision
 	if show_vision_radius:
 		var sprite_width : float = 128.0
 		var vision_diameter : float = enemy_data.vision_radius * 2.0
 		var sprite_scale : float = vision_diameter / sprite_width
 		vision_sprite.scale = Vector2(sprite_scale, sprite_scale)
-	else:
-		vision_sprite.hide()
 
 func _explode_attack():
 	var explosion_scene = load("res://Entities/Explosion/ExplosionAOE.tscn")
