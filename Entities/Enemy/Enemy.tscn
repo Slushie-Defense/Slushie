@@ -443,7 +443,7 @@ visibility_layer = 32
 z_index = 10
 y_sort_enabled = true
 collision_layer = 8
-collision_mask = 15
+collision_mask = 79
 motion_mode = 1
 script = ExtResource("1_ff1tq")
 
