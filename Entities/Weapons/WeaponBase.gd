@@ -64,6 +64,7 @@ func _update_weapon_range():
 	shapecast_2d.shape.radius = weapon_data.attack_radius
 	shapecast_2d.shape.height = weapon_data.attack_range
 	shapecast_2d.position = weapon_offset
+	shapecast_2d.max_results = 10
 	# Weapon range indictator
 	var one_pixel_offset : int = 1 # Add one pixel to the x-axis so that the Landmine remains visible
 	weapon_range_indicator.width = weapon_data.attack_radius * 2
@@ -137,12 +138,15 @@ func find_target_position():
 		# Doing this as an optimization
 		shapecast_2d.force_shapecast_update() # Only enabled during the shot fired
 		if shapecast_2d.is_colliding():
-			var first_collision_result = shapecast_2d.get_collider(0)
-			if first_collision_result != null:
-				# If it hits something it can attack
-				if first_collision_result.has_method("attack") && !first_collision_result.isDead():
-					relative_target_position = first_collision_result.global_position - global_position
-					return true
+			var collisionCount = shapecast_2d.get_collision_count()
+			print("FOund colliders " + str(collisionCount))
+			for i in collisionCount:
+				var collision_result = shapecast_2d.get_collider(i)
+				if collision_result != null:
+					# If it hits something it can attack
+					if collision_result.has_method("attack") && !collision_result.isDead():
+						relative_target_position = collision_result.global_position - global_position
+						return true
 	return false
 
 func create_projectile(arch_and_explode : bool = true):

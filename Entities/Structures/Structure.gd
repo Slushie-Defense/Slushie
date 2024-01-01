@@ -97,7 +97,6 @@ func _process(_delta):
 	if Input.is_action_pressed("ActionButton"):
 		# If only the node is is ontop of the building
 		if nodes_in_build_area_list.size() == 2:
-			#print(nodes_in_build_area_list)
 			for child in nodes_in_build_area_list:
 				# If player is ontop of the building
 				if child.has_method("_is_player"):

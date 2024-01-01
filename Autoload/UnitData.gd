@@ -57,36 +57,41 @@ func _ready():
 	SIEGE.attack_range = 640.0
 	SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
 	SIEGE.build_speed = 0.5
+	
 	# Setup INSTANT hit
 	INSTANT.type = structure_list.INSTANT
 	INSTANT.unit_name = "INSTANT"
-	INSTANT.cost = 800
+	INSTANT.cost = 1000
 	INSTANT.attack_damage = 3.0
 	INSTANT.attack_radius = 160.0
-	INSTANT.attack_range = 384.0
+	INSTANT.attack_range = 768.0
 	INSTANT.ui_sprite = load("res://Sprites/Structures/Instant/128x192Instant.png")
-	INSTANT.build_speed = 3
+	INSTANT.build_speed = 0.5
 	INSTANT.health = 30
-	INSTANT.reload_time = 0
 	INSTANT.delay_before_fireweapon = 0.0
 	INSTANT.delay_between_shots = 0.1
-	INSTANT.reload_time = 1
+	INSTANT.reload_time = 0.5
 	INSTANT.shots_before_reload = 10
 	
 	# Setup PROJECTILE hit
 	PROJECTILE.type = structure_list.PROJECTILE
 	PROJECTILE.unit_name = "PROJECTILE"
-	PROJECTILE.cost = 600
+	PROJECTILE.cost = 1500
 	PROJECTILE.attack_damage = 20.0
 	PROJECTILE.attack_radius = 128.0
 	PROJECTILE.attack_range = 512.0
 	PROJECTILE.ui_sprite = load("res://Sprites/Structures/Projectile/128x192Projectile.png")
 	PROJECTILE.build_speed = 2
+	INSTANT.health = 30
+	INSTANT.delay_before_fireweapon = 0.0
+	INSTANT.delay_between_shots = 0.1
+	INSTANT.reload_time = 0.5
+	INSTANT.shots_before_reload = 10
 	
 	# ENEMIES
 	# Setup BASIC
 	BASIC.unit_name = "Basic"
-	BASIC.health = 10
+	BASIC.health = 8
 	BASIC.coin_drop_value = 100.0
 	BASIC.attack_speed = 1.0 # Delay between attacks
 	BASIC.attack_range = 64 # In pixels
@@ -112,7 +117,7 @@ func _ready():
 	GRUNT.attack_type = UnitData.enemy_attack_list.MELEE
 	# Setup TANK
 	TANK.unit_name = "Tank"
-	TANK.health = 1000
+	TANK.health = 100000
 	TANK.coin_drop_value = 500.0
 	TANK.attack_speed = 1.0 # Delay between attacks
 	TANK.attack_range = 64 # In pixels

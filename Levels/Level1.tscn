@@ -17,13 +17,13 @@
 [ext_resource type="PackedScene" uid="uid://tseeja844fpv" path="res://Levels/Prefabs/treeCluster2.tscn" id="14_k3rbh"]
 [ext_resource type="PackedScene" uid="uid://i6geikbdg7om" path="res://Levels/Prefabs/bigRock2.tscn" id="15_64cep"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmfcc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xpqfe"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pa0gm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eddkq"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -79,12 +79,12 @@ y_sort_enabled = true
 
 [node name="GasStation" parent="WaveManager" instance=ExtResource("5_0xu7d")]
 z_index = 11
-material = SubResource("ShaderMaterial_cmfcc")
+material = SubResource("ShaderMaterial_xpqfe")
 position = Vector2(384, 580)
 
 [node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
-material = SubResource("ShaderMaterial_pa0gm")
-position = Vector2(1400, 576)
+material = SubResource("ShaderMaterial_eddkq")
+position = Vector2(2422, 464)
 motion_mode = 1
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
@@ -130,7 +130,7 @@ position = Vector2(3328, 832)
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
 position = Vector2(2304, 448)
-number_of_coins = 64
+number_of_coins = 0
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(2304, 448)
@@ -175,16 +175,16 @@ position = Vector2(-215, 1051)
 position = Vector2(666, 1475)
 
 [node name="Node2D11" parent="Env" instance=ExtResource("13_nw437")]
-position = Vector2(1348, 1252)
+position = Vector2(1346, 1303)
 
 [node name="Node2D12" parent="Env" instance=ExtResource("13_nw437")]
-position = Vector2(2512, 1210)
+position = Vector2(2505, 1233)
 
 [node name="Node2D13" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(2108, 1829)
+position = Vector2(1867, 1165)
 
 [node name="Node2D14" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(1967, 1473)
+position = Vector2(1943, 1523)
 
 [node name="Node2D15" parent="Env" instance=ExtResource("14_k3rbh")]
 position = Vector2(2512, 1552)
@@ -226,7 +226,7 @@ position = Vector2(4058, -8)
 position = Vector2(3828, 687)
 
 [node name="Node2D28" parent="Env" instance=ExtResource("12_yvbna")]
-position = Vector2(1598, 1212)
+position = Vector2(1360, 1205)
 
 [node name="Node2D29" parent="Env" instance=ExtResource("15_64cep")]
 position = Vector2(4458, 885)
