@@ -139,7 +139,6 @@ func find_target_position():
 		shapecast_2d.force_shapecast_update() # Only enabled during the shot fired
 		if shapecast_2d.is_colliding():
 			var collisionCount = shapecast_2d.get_collision_count()
-			print("FOund colliders " + str(collisionCount))
 			for i in collisionCount:
 				var collision_result = shapecast_2d.get_collider(i)
 				if collision_result != null:
