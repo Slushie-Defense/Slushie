@@ -6,6 +6,10 @@ var wave_number_count : int = 1
 # alled when the node enters the scene tree for the first time.
 func _ready():
 	Main.signal_wave_event.connect(_wave_event_triggered)
+	Main.signal_game_completed.connect(_game_completed_event)
+
+func _game_completed_event():
+	call_deferred("queue_free")
 
 func _wave_event_triggered(wave_number):
 	# Wave start was triggered

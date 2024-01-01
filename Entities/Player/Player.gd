@@ -25,6 +25,12 @@ var isBuilding = false
 
 # Initialize
 func _ready():
+	# Set shader
+	#var shader_material = material
+	#var flash_color = shader_material.get_shader_parameter("flash_color")
+	#var flash_modifier = shader_material.get_shader_parameter("flash_modifier")
+	#shader_material.set_shader_parameter("flash_modifier", 1.0)
+
 	# Set player health
 	health.set_max_health(50)
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
