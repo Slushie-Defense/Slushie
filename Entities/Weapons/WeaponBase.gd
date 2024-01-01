@@ -22,6 +22,7 @@ var sound_reload = load("res://Entities/Weapons/Sounds/Reload.wav")
 # Default weapon data stats
 var weapon_type = UnitData.structure_list
 var weapon_data : StructureData = StructureData.new() # Replace with specific structure
+var weapon_shots_reload = 0
 
 # Track shot count
 var shot_counter : int = 1 # Start at 1 to remove glitch shot
@@ -32,6 +33,7 @@ var shot_counter : int = 1 # Start at 1 to remove glitch shot
 # Enemy targeting
 @onready var shapecast_2d : ShapeCast2D = $ShapeCast2D
 var autotarget_enemy : bool = true
+var current_target : Object = null
 
 # Targeting
 var relative_target_position : Vector2 = Vector2(0, 512)
@@ -48,6 +50,7 @@ func _ready():
 	_update_weapon_direction(weapon_data.attack_direction)
 	# Update collision masks
 	_update_collsion_mask_layers()
+	weapon_shots_reload = weapon_data.shots_before_reload
 
 func _update_collsion_mask_layers():
 	for i in range(0, weapon_data.attack_collision_mask_list.size()):
@@ -77,7 +80,7 @@ func _update_weapon_direction(aim_horizontal_direction):
 	weapon_range_indicator.points[1].x = weapon_range_indicator.points[1].x * aim_horizontal_direction
 
 func _on_shot_delay_timer_timeout():	
-	if shot_counter >= weapon_data.shots_before_reload:
+	if ((weapon_shots_reload > 0) && (shot_counter >= weapon_data.shots_before_reload)):
 		reload_weapon()
 	else:
 		fire_weapon()
@@ -143,11 +146,12 @@ func find_target_position():
 				var collision_result = shapecast_2d.get_collider(i)
 				if collision_result != null:
 					# If it hits something it can attack
-					if collision_result.has_method("attack") && !collision_result.isDead():
+					if collision_result.has_method("attack") && !collision_result.health.is_dead():
+						current_target = collision_result
 						relative_target_position = collision_result.global_position - global_position
 						return true
 	return false
-
+	
 func create_projectile(arch_and_explode : bool = true):
 	var projectile = projectile_scene.instantiate()
 	projectile.collision_mask_list = weapon_data.attack_collision_mask_list
@@ -172,24 +176,16 @@ func fire_landmine_explosion():
 	get_tree().create_timer(mine_delay).timeout.connect(_create_landmine_explosion)
 
 func fire_instant_hit():
-	raycast_2d.target_position = relative_target_position
-	raycast_2d.force_raycast_update()
-	# See what it hit
-	var first_collision_result = raycast_2d.get_collider()
-	if first_collision_result != null:
-		# If it hits something it can attack
-		if first_collision_result.has_method("attack"):
-			# Create an attack class and pass it through
-			var _attack = Attack.new()
-			_attack.damage = weapon_data.attack_damage
-			first_collision_result.attack(_attack)
-			# Draw the line
-			draw_line2d(raycast_2d)
+	# Create an attack class and pass it through
+	var _attack = Attack.new()
+	_attack.damage = weapon_data.attack_damage
+	current_target.attack(_attack)
+	# Draw the line
+	draw_line2d(current_target)
 
-func draw_line2d(passed_raycast):
+func draw_line2d(target):
 	# Line 2D
-	var global_position_of_hit : Vector2 = passed_raycast.get_collision_point()
-	var relative_position_of_hit : Vector2 = global_position_of_hit - global_position if passed_raycast.is_colliding() else relative_target_position 
+	var relative_position_of_hit : Vector2 = relative_target_position 
 	weapon_attack_line2d.points = [Vector2.ZERO, relative_position_of_hit]
 	get_tree().create_timer(0.1).timeout.connect(clear_weapon_attack_line2d)
 

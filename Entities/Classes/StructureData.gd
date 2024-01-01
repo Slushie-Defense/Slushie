@@ -17,6 +17,7 @@ var attack_range : float = 512.0
 var attack_radius : float = 96.0
 var attack_direction : int = 1 # 1 is right. -1 is left
 var attack_collision_mask_list : Array = [[2, false], [3, false], [4, true]]
+var description : String = ""
 
 var ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
 

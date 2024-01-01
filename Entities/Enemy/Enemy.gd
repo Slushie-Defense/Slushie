@@ -245,12 +245,6 @@ func _on_vision_body_entered(body):
 func _on_vision_body_exited(body):
 	ai_chase_node_list.erase(body)
 
-func isDead():
-	if (enemy_state.current == enemy_state.list.DIED):
-		return true
-	else:
-		return false
-
 func attack(_attack : Attack):
 	if (enemy_state.current == enemy_state.list.DIED):
 		return

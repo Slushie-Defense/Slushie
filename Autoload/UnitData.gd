@@ -29,29 +29,35 @@ var SLUSHY_GUN : StructureData = StructureData.new()
 
 func _ready():
 	# STRUCTURES
+	
 	# Setup FENCE
 	FENCE.type = structure_list.FENCE
 	FENCE.unit_name = "FENCE"
-	FENCE.cost = 500
+	FENCE.description = "Stalling"
+	FENCE.cost = 50000
 	FENCE.attack_damage = 0.0
 	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
-	FENCE.build_speed = 5.0
-	FENCE.health = 500;
+	FENCE.build_speed = 0.2
+	FENCE.health = 500;	
+	
 	# Setup LANDMINE
 	LANDMINE.delay_before_fireweapon = 0.5
 	LANDMINE.type = structure_list.LANDMINE
 	LANDMINE.unit_name = "LANDMINE"
-	LANDMINE.cost = 300
+	LANDMINE.description = "Emergency"
+	LANDMINE.cost = 9999999999
 	LANDMINE.attack_damage = 100.0
 	LANDMINE.attack_radius = 80.0
 	LANDMINE.attack_range = 160.0
 	LANDMINE.attack_collision_mask_list = [[2, false], [3, false], [4, true]]
 	LANDMINE.ui_sprite = load("res://Sprites/Structures/Landmine/128x192Landmine.png")
 	LANDMINE.build_speed = 70.0
+	
 	# Setup SIEGE
 	SIEGE.type = structure_list.SIEGE
 	SIEGE.unit_name = "SIEGE"
-	SIEGE.cost = 1200
+	SIEGE.description = "Hate crowds"
+	SIEGE.cost = 9999999999
 	SIEGE.attack_damage = 100.0
 	SIEGE.attack_radius = 128.0
 	SIEGE.attack_range = 640.0
@@ -60,8 +66,9 @@ func _ready():
 	
 	# Setup INSTANT hit
 	INSTANT.type = structure_list.INSTANT
-	INSTANT.unit_name = "INSTANT"
-	INSTANT.cost = 1000
+	INSTANT.unit_name = "PEWPEW"
+	INSTANT.description = "Real fast"
+	INSTANT.cost = 5000
 	INSTANT.attack_damage = 3.0
 	INSTANT.attack_radius = 160.0
 	INSTANT.attack_range = 768.0
@@ -70,23 +77,24 @@ func _ready():
 	INSTANT.health = 30
 	INSTANT.delay_before_fireweapon = 0.0
 	INSTANT.delay_between_shots = 0.1
-	INSTANT.reload_time = 0.5
+	INSTANT.reload_time = 1.0
 	INSTANT.shots_before_reload = 10
 	
 	# Setup PROJECTILE hit
 	PROJECTILE.type = structure_list.PROJECTILE
-	PROJECTILE.unit_name = "PROJECTILE"
-	PROJECTILE.cost = 1500
-	PROJECTILE.attack_damage = 20.0
-	PROJECTILE.attack_radius = 128.0
-	PROJECTILE.attack_range = 512.0
+	PROJECTILE.unit_name = "CANNON"
+	PROJECTILE.description = "Slow steady"
+	PROJECTILE.cost = 10000
+	PROJECTILE.attack_damage = 100.0
+	PROJECTILE.attack_radius = 512.0
+	PROJECTILE.attack_range = 4096.0
 	PROJECTILE.ui_sprite = load("res://Sprites/Structures/Projectile/128x192Projectile.png")
-	PROJECTILE.build_speed = 2
-	INSTANT.health = 30
-	INSTANT.delay_before_fireweapon = 0.0
-	INSTANT.delay_between_shots = 0.1
-	INSTANT.reload_time = 0.5
-	INSTANT.shots_before_reload = 10
+	PROJECTILE.build_speed = 0.4
+	PROJECTILE.health = 50
+	PROJECTILE.delay_before_fireweapon = 1.0
+	PROJECTILE.delay_between_shots = 0
+	PROJECTILE.reload_time = 3
+	PROJECTILE.shots_before_reload = 1
 	
 	# ENEMIES
 	# Setup BASIC
@@ -102,23 +110,25 @@ func _ready():
 	BASIC.basic_sprite = load("res://Sprites/Characters/Enemies/Basic/Basic256x256.png")
 	BASIC.collision_shape_radius = 32
 	BASIC.attack_type = UnitData.enemy_attack_list.MELEE
+	
 	# Setup GRUNT
 	GRUNT.unit_name = "Grunt"
-	GRUNT.health = 100
-	GRUNT.coin_drop_value = 200.0
+	GRUNT.health = 30
+	GRUNT.coin_drop_value = 250.0
 	GRUNT.attack_speed = 1.0 # Delay between attacks
 	GRUNT.attack_range = 64 # In pixels
-	GRUNT.attack_damage = 50
+	GRUNT.attack_damage = 5
 	GRUNT.acceleration = 2000
-	GRUNT.max_speed = 200
+	GRUNT.max_speed = 100
 	GRUNT.vision_radius = 160
 	GRUNT.basic_sprite = load("res://Sprites/Characters/Enemies/Grunt/Grunt256x256.png")
 	GRUNT.collision_shape_radius = 48
 	GRUNT.attack_type = UnitData.enemy_attack_list.MELEE
+	
 	# Setup TANK
 	TANK.unit_name = "Tank"
-	TANK.health = 100000
-	TANK.coin_drop_value = 500.0
+	TANK.health = 300
+	TANK.coin_drop_value = 2500.0
 	TANK.attack_speed = 1.0 # Delay between attacks
 	TANK.attack_range = 64 # In pixels
 	TANK.attack_damage = 0

@@ -17,13 +17,13 @@
 [ext_resource type="PackedScene" uid="uid://tseeja844fpv" path="res://Levels/Prefabs/treeCluster2.tscn" id="14_k3rbh"]
 [ext_resource type="PackedScene" uid="uid://i6geikbdg7om" path="res://Levels/Prefabs/bigRock2.tscn" id="15_64cep"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_umq8e"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_loe81"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pu3gw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1xpdo"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -79,12 +79,12 @@ y_sort_enabled = true
 
 [node name="GasStation" parent="WaveManager" instance=ExtResource("5_0xu7d")]
 z_index = 11
-material = SubResource("ShaderMaterial_umq8e")
+material = SubResource("ShaderMaterial_loe81")
 position = Vector2(384, 580)
 
 [node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
-material = SubResource("ShaderMaterial_pu3gw")
-position = Vector2(1400, 576)
+material = SubResource("ShaderMaterial_1xpdo")
+position = Vector2(654, 460)
 motion_mode = 1
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
@@ -129,8 +129,9 @@ position = Vector2(1879, 640)
 position = Vector2(1815, 832)
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
-position = Vector2(836, 460)
-number_of_coins = 0
+position = Vector2(2926, 450)
+scale = Vector2(1, 1.04667)
+number_of_coins = 64
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(2304, 448)

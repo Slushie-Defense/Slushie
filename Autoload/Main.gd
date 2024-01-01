@@ -42,7 +42,7 @@ var enemy_counter : int = 0
 # Coin count
 var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
 var coins : int = 0
-var coin_base_reward : int = 10
+var coin_base_reward : int = 50
 var coin_reward : int = coin_base_reward
 
 # Wave number
@@ -101,7 +101,7 @@ func _is_wave_over():
 func _wave_over():
 	Main.emit_signal("signal_wave_event", -1)
 	# Reward with coins
-	var extra_coins : int = round(current_wave_number * 1.5)
+	var extra_coins : int = round(current_wave_number * 5)
 	coin_reward = coin_base_reward + extra_coins
 	_reward_with_coins()
 	

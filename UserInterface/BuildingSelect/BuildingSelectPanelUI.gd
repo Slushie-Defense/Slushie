@@ -80,10 +80,10 @@ func _create_user_interface():
 	call_deferred("_connect_coins") # Connect coins
 	
 	# Create items
+	instant_structure = _add_item(item_scene, image_instant_structure, UnitData.INSTANT)
+	projectile_structure = _add_item(item_scene, image_bullet_structure, UnitData.PROJECTILE)
 	fence = _add_item(item_scene, image_fence, UnitData.FENCE)
 	landmine = _add_item(item_scene, image_landmine, UnitData.LANDMINE)
-	projectile_structure = _add_item(item_scene, image_bullet_structure, UnitData.PROJECTILE)
-	instant_structure = _add_item(item_scene, image_instant_structure, UnitData.INSTANT)
 	siege_structure = _add_item(item_scene, image_aoe_structure, UnitData.SIEGE)
 	
 	# Add stats
@@ -163,9 +163,9 @@ func _update_seleted_item():
 			active_item_type = UnitData.FENCE
 		"SIEGE":
 			active_item_type = UnitData.SIEGE
-		"INSTANT":
+		"PEWPEW":
 			active_item_type = UnitData.INSTANT
-		"PROJECTILE":
+		"CANNON":
 			active_item_type = UnitData.PROJECTILE
 		"LANDMINE":
 			active_item_type = UnitData.LANDMINE
@@ -178,7 +178,10 @@ func _update_seleted_item():
 	var health : String = str(active_item_type.health)
 	# Set range
 	var stats_range : String = str(active_item_type.attack_range / GameGrid.cell_size)
+	var structure_desc = active_item_type.description
 	# Update 
-	stats._set_stats("Damage: " + damage + "\nHealth: " + health + "\nRange: " + stats_range)
+	var stat_string = "Damage: " + damage + "\nHealth: " + health + "\nRange: " + stats_range
+	stat_string += "\n" + structure_desc
+	stats._set_stats(stat_string)
 	
 	Main.emit_signal("signal_selected_item_update", active_item_type)
