@@ -32,7 +32,7 @@ func _ready():
 	#shader_material.set_shader_parameter("flash_modifier", 1.0)
 
 	# Set player health
-	health.set_max_health(1000)
+	health.set_max_health(50)
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
 	health.always_hidden = true
 	# This signal tells a global script/object called Main that the player node exists

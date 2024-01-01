@@ -5,7 +5,7 @@ extends StaticBody2D
 @onready var area_collision_shape_2d : CollisionShape2D = $Area2D/CollisionShape2D
 
 func _ready():
-	health.set_max_health(1000)
+	health.set_max_health(500)
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
 	health.always_hidden = true
 	# Stores the gas station

@@ -18,6 +18,12 @@ func _ready():
 	modulate = health_color_gradient.sample(1.0)
 	visible = false
 
+func is_dead():
+	if (current_health <= 0):
+		return true
+	else:
+		return false
+
 func set_max_health(new_value):
 	max_health = new_value
 	current_health = max_health

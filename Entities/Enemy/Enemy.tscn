@@ -451,7 +451,7 @@ z_index = 10
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_2ev2i")
 collision_layer = 8
-collision_mask = 79
+collision_mask = 71
 motion_mode = 1
 script = ExtResource("1_ff1tq")
 
@@ -482,7 +482,6 @@ texture = ExtResource("3_jff1g")
 visible = false
 offset_top = -56.0
 offset_bottom = -24.0
-always_hidden = true
 
 [node name="AttackRangeRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -20)

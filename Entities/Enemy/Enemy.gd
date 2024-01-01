@@ -57,6 +57,7 @@ func _ready():
 	health.set_max_health(enemy_data.health)
 	# print(str(enemy_data.unit_name) + " Health: " + str(enemy_data.health))
 	health.signal_custom_health_is_zero.connect(_event_health_is_zero)
+	health.always_hidden = true
 	# Set attack speed
 	_update_attack_speed() # Set to default
 	# Update vision radius

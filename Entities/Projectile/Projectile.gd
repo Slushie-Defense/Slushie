@@ -76,16 +76,19 @@ func _physics_process(delta):
 	if not arch_and_explode:
 		# Check for collision ahead
 		shapecast2d.target_position = direction_to_target * calculated_speed * delta
+		shapecast2d.max_results = 10
 		if shapecast2d.is_colliding():
-			var collision_result = shapecast2d.get_collider(0) # Get first collision. Only looks for one.
-			if not collision_result == null:
-				if collision_result.has_method("attack"):
-					# Create an attack class and pass it through
-					var _attack = Attack.new()
-					_attack.damage = attack_damage
-					collision_result.attack(_attack)
-					# Has reached target
-					_reached_target()
+			var collisionCount = shapecast2d.get_collision_count()
+			for i in collisionCount:
+				var collision_result = shapecast2d.get_collider(i)
+				if collision_result != null:
+					# If it hits something it can attack
+					if collision_result.has_method("attack") && !collision_result.health.is_dead():						
+						# Create an attack class and pass it through
+						var _attack = Attack.new()
+						_attack.damage = attack_damage
+						collision_result.attack(_attack)
+						_reached_target()
 	
 	# Update position
 	global_position = curve_position
