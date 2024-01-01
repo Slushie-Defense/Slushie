@@ -39,6 +39,10 @@ var wave_active : bool = false
 func _ready():
 	all_portals_list = _find_all_portals()
 	Main.signal_trigger_wave_event.connect(_start_wave)
+	Main.signal_wave_event.connect(_wave_event_happened)
+	# Open Portals
+	call_deferred("_update_wave_and_portals", current_wave_index)
+	#_update_wave_and_portals(current_wave_index)
 
 # Start the Wave
 func _input(event):
@@ -61,14 +65,8 @@ func _spawn_wave(wave_number: int):
 	if not waves.size() > 0:
 		print("No Waves Added")
 		return
-	# Get the current wave
-	current_wave = waves[wave_number]
-	# Number of Groups inside the wave
-	current_wave_total_group_count = current_wave.enemy_group_list.size()
-	# Find all the active portals in this wave
-	active_portals_list = _update_active_portals_list()
-	# Open all active portals
-	_open_all_active_portals()
+	# Update waves and portals
+	# _update_wave_and_portals(wave_number)
 	# Get the first group
 	if not current_wave_total_group_count > 0:
 		print("No Groups Added")
@@ -77,6 +75,16 @@ func _spawn_wave(wave_number: int):
 	current_group_index = 0
 	# Start the first group
 	_start_next_group()
+
+func _update_wave_and_portals(wave_number):
+	# Get the current wave
+	current_wave = waves[wave_number]
+	# Number of Groups inside the wave
+	current_wave_total_group_count = current_wave.enemy_group_list.size()
+	# Find all the active portals in this wave
+	active_portals_list = _update_active_portals_list()
+	# Open all active portals
+	_open_all_active_portals()
 
 func _on_enemy_group_timer_timeout():
 	#print("Enemy Group [" + str(current_group_index + 1) + "] Start")
@@ -132,6 +140,13 @@ func _on_enemy_spawn_timer_timeout():
 			_close_all_portals()
 			# Update the wave count
 			current_wave_index += 1
+			
+
+func _wave_event_happened(index):
+	# If the wave is over. Open the next Portals
+	if index == -1:
+		# Open new Portals
+		_update_wave_and_portals(current_wave_index)
 
 func _start_next_group():
 	# Find the current wave
