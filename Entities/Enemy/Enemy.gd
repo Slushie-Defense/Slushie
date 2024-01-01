@@ -106,7 +106,9 @@ func _process(delta):
 	if (enemy_state.current != prevState):		
 		match enemy_state.current:
 			enemy_state.list.DIED:
-				pass
+				set_process(false)
+				set_physics_process(false)
+				return
 			enemy_state.list.MOVING:
 				ap.play("Move")
 			enemy_state.list.ATTACK:
@@ -253,17 +255,18 @@ func attack(_attack : Attack):
 func _event_health_is_zero():
 	if (enemy_state.current == enemy_state.list.DIED):
 		return
-		
+	
 	# Died
 	enemy_state.current = enemy_state.list.DIED
 	$SFXDeath.play()
 	ap.play("Death")
 	
-	# Remove Enemy
-	Main.emit_signal("signal_update_enemy_count", -1)
-	
 	# Spawn coin where it dies
-	_spawn_coin() 
+	_spawn_coin()
+
+func _remove_enemy():
+	Main.emit_signal("signal_update_enemy_count", -1)
+	queue_free()
 
 func _spawn_coin():
 	# Spawn coin
@@ -278,25 +281,25 @@ func _gas_station_destroyed():
 
 func _on_basic_ap_animation_finished(anim_name):	
 	if (anim_name == "Death"):
-		call_deferred("queue_free")
+		_remove_enemy()
 
 func _on_floater_ap_animation_finished(anim_name):
 	var isDeath = (anim_name == "Death")
 	var isAttack = (anim_name == "Attack")
 	if (isDeath || isAttack):
-		call_deferred("queue_free")
+		_remove_enemy()
 
 func _on_grunt_ap_animation_finished(anim_name):
 	if (anim_name == "Death"):
-		call_deferred("queue_free")
+		_remove_enemy()
 
 func _on_tank_ap_animation_finished(anim_name):
 	if (anim_name == "Death"):
-		call_deferred("queue_free")
+		_remove_enemy()
 
 func _on_spitter_ap_animation_finished(anim_name):
 	if (anim_name == "Death"):
-		call_deferred("queue_free")
+		_remove_enemy()
 	elif (anim_name == "Attack"):
 		enemy_state.current = enemy_state.list.MOVING
 

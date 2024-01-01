@@ -5,7 +5,7 @@ signal signal_custom_health_is_zero
 signal signal_custom_health_changed(current_health, max_health)
 
 # Always hidden
-var always_hidden : bool = false
+@export var always_hidden : bool = false
 
 # Variables
 var max_health : float = 100.0

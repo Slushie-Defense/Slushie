@@ -15,6 +15,8 @@ func _ready():
 	Main.signal_wave_event.connect(_wave_event)
 	# Destroy if you leave the scene
 	Main.signal_player_died.connect(_stop_FMOD)
+	# Stop FMOD
+	Main.signal_stop_fmod.connect(_stop_FMOD_no_death_music)
 
 func _create_FMOD():
 	instance = FMODRuntime.create_instance(event)
@@ -46,3 +48,7 @@ func _stop_FMOD():
 	instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 	# Play Death
 	death_music.play()
+
+func _stop_FMOD_no_death_music():
+	# Stop the music
+	instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
