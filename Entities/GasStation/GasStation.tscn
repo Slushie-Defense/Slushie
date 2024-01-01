@@ -1,15 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://thui7p52g4o6"]
+[gd_scene load_steps=8 format=3 uid="uid://thui7p52g4o6"]
 
 [ext_resource type="Script" path="res://Entities/GasStation/GasStation.gd" id="1_e2gd2"]
+[ext_resource type="Shader" path="res://Utilities/FlashEffect.gdshader" id="1_g6w5o"]
 [ext_resource type="Texture2D" uid="uid://chjpmiegugq6d" path="res://Sprites/Environment/station/GasStationFinalRoof.png" id="2_ids57"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="2_kpqkr"]
 [ext_resource type="Texture2D" uid="uid://bxfs6lso3m8s6" path="res://Sprites/Environment/station/GasStationFinalFloor.png" id="3_ioh8u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7t2kx"]
+resource_local_to_scene = true
+shader = ExtResource("1_g6w5o")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kmhig"]
 size = Vector2(256, 380)
 
 [node name="GasStation" type="StaticBody2D"]
 visibility_layer = 8
+material = SubResource("ShaderMaterial_7t2kx")
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_e2gd2")

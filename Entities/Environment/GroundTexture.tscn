@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb541y6133q8o"]
-
-[ext_resource type="Texture2D" uid="uid://brk7ph7hu6aa2" path="res://Sprites/Squares/128x128-Graybox.png" id="1_3s81x"]
+[gd_scene load_steps=2 format=3 uid="uid://bb541y6133q8o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0tq6m"]
 
@@ -15,8 +13,3 @@ layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_0tq6m")
-
-[node name="GroundTexture" type="TextureRect" parent="Container"]
-layout_mode = 2
-texture = ExtResource("1_3s81x")
-stretch_mode = 1
