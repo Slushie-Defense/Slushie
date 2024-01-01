@@ -66,6 +66,11 @@ func _ready():
 	enemy_state.current = enemy_state.list.SPAWN
 	# Add Enemy
 	Main.emit_signal("signal_update_enemy_count", 1)
+	# Hurt effect
+	health.signal_flash_effect.connect(_apply_hurt_effect)
+
+func _apply_hurt_effect(flash_value):
+	material.set_shader_parameter("flash_modifier", flash_value)
 
 func _set_enemy_type():
 	# Set the enemy type

@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://bas7al55cr6oh"]
 
-[ext_resource type="Script" path="res://UserInterface/DeathScreen/DeathScreen.gd" id="1_tw5eq"]
+[ext_resource type="Script" path="res://UserInterface/DeathScreen/DeadScreen.gd" id="1_y12eh"]
 [ext_resource type="Texture2D" uid="uid://b8eiyjunaiupr" path="res://Sprites/DeathScreen/stef_falling_legs.png" id="2_6mdx7"]
 [ext_resource type="PackedScene" uid="uid://jhxq5b5fc05s" path="res://UserInterface/PortalAnimation/PortalScreen.tscn" id="2_iwg0f"]
 [ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="3_1kdl4"]
 
 [node name="DeathScreen" type="Node2D"]
-script = ExtResource("1_tw5eq")
+script = ExtResource("1_y12eh")
 
 [node name="PortalScreen" parent="." instance=ExtResource("2_iwg0f")]
 

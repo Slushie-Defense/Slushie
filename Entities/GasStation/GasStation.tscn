@@ -33,11 +33,13 @@ shape = SubResource("RectangleShape2D_kmhig")
 
 [node name="Sprite2DRoof" type="Sprite2D" parent="."]
 y_sort_enabled = true
+use_parent_material = true
 position = Vector2(0, -160)
 texture = ExtResource("2_ids57")
 
 [node name="Sprite2DFloor" type="Sprite2D" parent="."]
 z_index = -2
+use_parent_material = true
 position = Vector2(0, -160)
 texture = ExtResource("3_ioh8u")
 

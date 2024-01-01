@@ -141,7 +141,7 @@ func _on_signal_add_gas_station(pass_node):
 func _on_signal_add_player(pass_node):
 	player_node = pass_node
 	# Reward with some coins
-	get_tree().create_timer(1.0).timeout.connect(_reward_with_coins)
+	#get_tree().create_timer(1.0).timeout.connect(_reward_with_coins)
 	# Stop music when the player is added
 	_stop_theme_music()
 

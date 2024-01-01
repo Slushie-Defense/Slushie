@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvke1fhsiyvft"]
+[gd_scene load_steps=7 format=3 uid="uid://bvke1fhsiyvft"]
 
 [ext_resource type="Script" path="res://Entities/Health/HealthBar.gd" id="1_upvjd"]
 
@@ -8,6 +8,43 @@ border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ki6c5"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_348jd"]
+resource_name = "FlashDamage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flash_value")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_bb853"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vakfr"]
+_data = {
+"FlashDamage": SubResource("Animation_348jd"),
+"RESET": SubResource("Animation_bb853")
+}
 
 [node name="Healthbar" type="ProgressBar"]
 visibility_layer = 256
@@ -24,3 +61,11 @@ rounded = true
 fill_mode = 3
 show_percentage = false
 script = ExtResource("1_upvjd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vakfr")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
