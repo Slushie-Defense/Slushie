@@ -1,9 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://bj2450c708xsx"]
+[gd_scene load_steps=18 format=3 uid="uid://bj2450c708xsx"]
 
 [ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_p727u"]
+[ext_resource type="Shader" path="res://Utilities/FlashEffect.gdshader" id="1_sgiij"]
 [ext_resource type="Texture2D" uid="uid://dn3yytjyv5yyj" path="res://Sprites/Characters/Player/McSpritesheet.png" id="2_e6uvt"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_4agde"]
 [ext_resource type="PackedScene" uid="uid://cjvvi1wm1eukc" path="res://Entities/Managers/BuildingManager/BuildingManager.tscn" id="4_rd020"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwk08"]
+resource_local_to_scene = true
+shader = ExtResource("1_sgiij")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fykp"]
 size = Vector2(40, 20)
@@ -187,6 +194,7 @@ _data = {
 visibility_layer = 32
 z_index = 10
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_rwk08")
 collision_layer = 2
 collision_mask = 33
 script = ExtResource("1_p727u")
@@ -200,6 +208,7 @@ shape = SubResource("RectangleShape2D_6fykp")
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
+use_parent_material = true
 texture = ExtResource("2_e6uvt")
 offset = Vector2(1, -50)
 hframes = 23

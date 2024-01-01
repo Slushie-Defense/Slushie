@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://ds15dcep7fhyn"]
+[gd_scene load_steps=10 format=3 uid="uid://ds15dcep7fhyn"]
 
+[ext_resource type="Shader" path="res://Utilities/FlashEffect.gdshader" id="1_5s78y"]
 [ext_resource type="Script" path="res://Entities/Structures/Structure.gd" id="1_pfun1"]
 [ext_resource type="Texture2D" uid="uid://3xwi6uylpa23" path="res://Sprites/Structures/Construction/SlushieToolkit192x192.png" id="2_jexur"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_7ms35"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_back3"]
+resource_local_to_scene = true
+shader = ExtResource("1_5s78y")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lbip"]
 size = Vector2(128, 128)
@@ -28,6 +35,7 @@ corner_radius_bottom_left = 4
 visibility_layer = 32
 z_index = 10
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_back3")
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_pfun1")
@@ -45,6 +53,7 @@ shape = SubResource("RectangleShape2D_7144t")
 [node name="StructureSprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
+use_parent_material = true
 position = Vector2(0, 35)
 texture = ExtResource("2_jexur")
 offset = Vector2(0, -35)
