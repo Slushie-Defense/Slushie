@@ -17,13 +17,13 @@
 [ext_resource type="PackedScene" uid="uid://tseeja844fpv" path="res://Levels/Prefabs/treeCluster2.tscn" id="14_k3rbh"]
 [ext_resource type="PackedScene" uid="uid://i6geikbdg7om" path="res://Levels/Prefabs/bigRock2.tscn" id="15_64cep"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_loe81"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4vg7"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1xpdo"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2vv85"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -79,11 +79,11 @@ y_sort_enabled = true
 
 [node name="GasStation" parent="WaveManager" instance=ExtResource("5_0xu7d")]
 z_index = 11
-material = SubResource("ShaderMaterial_loe81")
+material = SubResource("ShaderMaterial_n4vg7")
 position = Vector2(384, 580)
 
 [node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
-material = SubResource("ShaderMaterial_1xpdo")
+material = SubResource("ShaderMaterial_2vv85")
 position = Vector2(654, 460)
 motion_mode = 1
 
@@ -129,7 +129,7 @@ position = Vector2(1879, 640)
 position = Vector2(1815, 832)
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
-position = Vector2(2926, 450)
+position = Vector2(1371, 447)
 scale = Vector2(1, 1.04667)
 number_of_coins = 64
 
@@ -138,7 +138,7 @@ position = Vector2(2304, 448)
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(784, 0)
+position = Vector2(-528, 0)
 shape = SubResource("RectangleShape2D_y2vj4")
 
 [node name="Env" type="Node2D" parent="."]
@@ -167,7 +167,7 @@ position = Vector2(-170, -203)
 position = Vector2(324, -460)
 
 [node name="Node2D8" parent="Env" instance=ExtResource("13_nw437")]
-position = Vector2(3655, 1115)
+position = Vector2(2586, 913)
 
 [node name="Node2D9" parent="Env" instance=ExtResource("14_k3rbh")]
 position = Vector2(-215, 1051)
@@ -209,34 +209,34 @@ position = Vector2(1260, 1753)
 position = Vector2(-683, 1221)
 
 [node name="Node2D22" parent="Env" instance=ExtResource("15_64cep")]
-position = Vector2(1883, -144)
+position = Vector2(1847, -373)
 
 [node name="Node2D23" parent="Env" instance=ExtResource("13_nw437")]
 position = Vector2(1208, -310)
 
 [node name="Node2D24" parent="Env" instance=ExtResource("13_nw437")]
-position = Vector2(2599, -315)
+position = Vector2(2699, -430)
 
 [node name="Node2D25" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(3464, -278)
+position = Vector2(3347, -177)
 
 [node name="Node2D26" parent="Env" instance=ExtResource("13_nw437")]
-position = Vector2(4058, -8)
+position = Vector2(3510, 685)
 
 [node name="Node2D27" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(3828, 687)
+position = Vector2(2777, 460)
 
 [node name="Node2D28" parent="Env" instance=ExtResource("12_yvbna")]
 position = Vector2(1360, 1205)
 
 [node name="Node2D29" parent="Env" instance=ExtResource("15_64cep")]
-position = Vector2(4458, 885)
+position = Vector2(2242, 447)
 
 [node name="Node2D30" parent="Env" instance=ExtResource("13_nw437")]
-position = Vector2(4510, 550)
+position = Vector2(2801, 11)
 
 [node name="Node2D31" parent="Env" instance=ExtResource("14_k3rbh")]
-position = Vector2(3962, 283)
+position = Vector2(2089, -285)
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 collision_layer = 64

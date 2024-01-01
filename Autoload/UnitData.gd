@@ -68,14 +68,14 @@ func _ready():
 	INSTANT.type = structure_list.INSTANT
 	INSTANT.unit_name = "PEWPEW"
 	INSTANT.description = "Real fast"
-	INSTANT.cost = 5000
+	INSTANT.cost = 100
 	INSTANT.attack_damage = 3.0
 	INSTANT.attack_radius = 160.0
 	INSTANT.attack_range = 768.0
 	INSTANT.ui_sprite = load("res://Sprites/Structures/Instant/128x192Instant.png")
 	INSTANT.build_speed = 0.5
 	INSTANT.health = 30
-	INSTANT.delay_before_fireweapon = 0.0
+	INSTANT.delay_before_fireweapon = 0.06 # Always keep a minimum of 0.06
 	INSTANT.delay_between_shots = 0.1
 	INSTANT.reload_time = 1.0
 	INSTANT.shots_before_reload = 10
@@ -84,7 +84,7 @@ func _ready():
 	PROJECTILE.type = structure_list.PROJECTILE
 	PROJECTILE.unit_name = "CANNON"
 	PROJECTILE.description = "Slow steady"
-	PROJECTILE.cost = 10000
+	PROJECTILE.cost = 100
 	PROJECTILE.attack_damage = 100.0
 	PROJECTILE.attack_radius = 512.0
 	PROJECTILE.attack_range = 4096.0

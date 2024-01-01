@@ -10,6 +10,11 @@ func _ready():
 	health.always_hidden = true
 	# Stores the gas station
 	Main.emit_signal("signal_add_gas_station", self)
+	# Hurt effect
+	health.signal_flash_effect.connect(_apply_hurt_effect)
+
+func _apply_hurt_effect(flash_value):
+	material.set_shader_parameter("flash_modifier", flash_value)
 
 func attack(_attack : Attack):
 	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage

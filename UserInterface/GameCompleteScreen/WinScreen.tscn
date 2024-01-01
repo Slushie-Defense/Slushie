@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://jy6msg3s15lw"]
 
-[ext_resource type="Script" path="res://UserInterface/DeathScreen/DeathScreen.gd" id="1_jpv4h"]
+[ext_resource type="Script" path="res://UserInterface/GameCompleteScreen/CompletedScreen.gd" id="1_jpv4h"]
 [ext_resource type="PackedScene" uid="uid://jhxq5b5fc05s" path="res://UserInterface/PortalAnimation/PortalScreen.tscn" id="2_oharo"]
 [ext_resource type="FontFile" uid="uid://bj7861a0lm02c" path="res://Fonts/Grandstander/Grandstander-ExtraBold.ttf" id="3_db4eb"]
 [ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="4_mnym6"]

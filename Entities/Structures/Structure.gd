@@ -27,6 +27,12 @@ func _ready():
 	static_body_2d_collision_shape_2d.shape.size = collision_shape_size
 	# If the area is clear create the building
 	static_body_2d_collision_shape_2d.disabled = false
+	# Hurt effect
+	health.signal_flash_effect.connect(_apply_hurt_effect)
+
+func _apply_hurt_effect(flash_value):
+	material.set_shader_parameter("flash_modifier", flash_value)
+
 
 func _initialize_building_construction():
 	if not is_building_constructed:
