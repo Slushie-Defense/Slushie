@@ -140,7 +140,7 @@ func find_target_position():
 			var first_collision_result = shapecast_2d.get_collider(0)
 			if first_collision_result != null:
 				# If it hits something it can attack
-				if first_collision_result.has_method("attack"):
+				if first_collision_result.has_method("attack") && !first_collision_result.isDead():
 					relative_target_position = first_collision_result.global_position - global_position
 					return true
 	return false

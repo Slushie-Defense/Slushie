@@ -32,10 +32,11 @@ func _ready():
 	# Setup FENCE
 	FENCE.type = structure_list.FENCE
 	FENCE.unit_name = "FENCE"
-	FENCE.cost = 200
+	FENCE.cost = 500
 	FENCE.attack_damage = 0.0
 	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
-	FENCE.build_speed = 3.0
+	FENCE.build_speed = 5.0
+	FENCE.health = 500;
 	# Setup LANDMINE
 	LANDMINE.delay_before_fireweapon = 0.5
 	LANDMINE.type = structure_list.LANDMINE
@@ -60,11 +61,18 @@ func _ready():
 	INSTANT.type = structure_list.INSTANT
 	INSTANT.unit_name = "INSTANT"
 	INSTANT.cost = 800
-	INSTANT.attack_damage = 15.0
+	INSTANT.attack_damage = 3.0
 	INSTANT.attack_radius = 160.0
 	INSTANT.attack_range = 384.0
 	INSTANT.ui_sprite = load("res://Sprites/Structures/Instant/128x192Instant.png")
-	INSTANT.build_speed = 1
+	INSTANT.build_speed = 3
+	INSTANT.health = 30
+	INSTANT.reload_time = 0
+	INSTANT.delay_before_fireweapon = 0.0
+	INSTANT.delay_between_shots = 0.1
+	INSTANT.reload_time = 1
+	INSTANT.shots_before_reload = 10
+	
 	# Setup PROJECTILE hit
 	PROJECTILE.type = structure_list.PROJECTILE
 	PROJECTILE.unit_name = "PROJECTILE"
@@ -78,11 +86,11 @@ func _ready():
 	# ENEMIES
 	# Setup BASIC
 	BASIC.unit_name = "Basic"
-	BASIC.health = 50
+	BASIC.health = 10
 	BASIC.coin_drop_value = 100.0
 	BASIC.attack_speed = 1.0 # Delay between attacks
 	BASIC.attack_range = 64 # In pixels
-	BASIC.attack_damage = 100
+	BASIC.attack_damage = 2
 	BASIC.acceleration = 2000
 	BASIC.max_speed = 100
 	BASIC.vision_radius = 160

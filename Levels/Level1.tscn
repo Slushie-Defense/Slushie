@@ -65,7 +65,7 @@ z_index = 11
 position = Vector2(384, 580)
 
 [node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
-position = Vector2(1400, 576)
+position = Vector2(2773, 450)
 motion_mode = 1
 
 [node name="GroundTexture" parent="." instance=ExtResource("1_xivym")]
