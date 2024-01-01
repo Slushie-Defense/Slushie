@@ -15,6 +15,9 @@ signal signal_selected_item_update(item_type)
 signal signal_wave_event(event_number : int)
 signal signal_wave_spawning(_is_active)
 signal signal_trigger_wave_event()
+signal signal_game_completed()
+
+signal signal_stop_fmod()
 
 # End game events
 signal signal_player_died()
@@ -58,6 +61,7 @@ func _ready():
 	signal_add_camera.connect(_on_signal_add_camera)
 	signal_update_enemy_count.connect(_update_enemy_count)
 	signal_wave_spawning.connect(_update_wave_active_state)
+	signal_game_completed.connect(_game_completed_event)
 	
 	signal_wave_event.connect(_on_signal_wave_start)
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -87,18 +91,23 @@ func _update_enemy_count(enemy_number):
 func _is_wave_over():
 	# Check if the wave is active
 	if current_wave_number > 0:
-		current_wave_active = true
+		if enemy_counter > 0 or current_wave_spawning:
+			current_wave_active = true
 		# If there are no enemies and the portals are not spawning it is not active
 		if enemy_counter == 0 and not current_wave_spawning:
-			Main.emit_signal("signal_wave_event", -1)
+			call_deferred("_wave_over")
 			current_wave_active = false
-			# Reward with coins
-			var extra_coins = round(current_wave_number * 1.5)
-			coin_reward = coin_base_reward + extra_coins
-			_reward_with_coins()
 
+func _wave_over():
+	Main.emit_signal("signal_wave_event", -1)
+	# Reward with coins
+	var extra_coins : int = round(current_wave_number * 1.5)
+	coin_reward = coin_base_reward + extra_coins
+	_reward_with_coins()
+	
 func _on_signal_wave_start(_number):
-	current_wave_number = _number
+	if not _number == -1:
+		current_wave_number = _number
 
 func _game_ended():
 	get_tree().create_timer(4.0).timeout.connect(_go_to_death_scene)
@@ -158,3 +167,16 @@ func _try_to_buy(cost):
 	else:
 		emit_signal("signal_purchase_failed")
 	return can_purchase
+
+func _game_completed_event():
+	print("Game completed! Congrats!")
+	get_tree().create_timer(8.0).timeout.connect(_stop_fmod)
+	get_tree().create_timer(10.0).timeout.connect(_goto_win_screen)
+
+func _stop_fmod():
+	emit_signal("signal_stop_fmod")
+
+func _goto_win_screen():
+	get_tree().change_scene_to_file("res://UserInterface/GameCompleteScreen/WinScreen.tscn")
+	# Play Main Theme
+	_play_theme_music()

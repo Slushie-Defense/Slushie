@@ -482,6 +482,7 @@ texture = ExtResource("3_jff1g")
 visible = false
 offset_top = -56.0
 offset_bottom = -24.0
+always_hidden = true
 
 [node name="AttackRangeRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -20)

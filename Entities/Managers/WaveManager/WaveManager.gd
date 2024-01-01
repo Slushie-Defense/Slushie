@@ -42,7 +42,6 @@ func _ready():
 	Main.signal_wave_event.connect(_wave_event_happened)
 	# Open Portals
 	call_deferred("_update_wave_and_portals", current_wave_index)
-	#_update_wave_and_portals(current_wave_index)
 
 # Start the Wave
 func _input(event):
@@ -51,6 +50,10 @@ func _input(event):
 
 func _start_wave():
 	if not Main.current_wave_active:
+		# Check if we still have waves
+		if current_wave_index > waves.size() - 1:
+			print("Run out of waves")
+			return
 		# Spawning
 		Main.emit_signal("signal_wave_spawning", true)
 		_spawn_wave(current_wave_index)
@@ -66,7 +69,7 @@ func _spawn_wave(wave_number: int):
 		print("No Waves Added")
 		return
 	# Update waves and portals
-	# _update_wave_and_portals(wave_number)
+	_update_wave_and_portals(wave_number)
 	# Get the first group
 	if not current_wave_total_group_count > 0:
 		print("No Groups Added")
@@ -140,13 +143,18 @@ func _on_enemy_spawn_timer_timeout():
 			_close_all_portals()
 			# Update the wave count
 			current_wave_index += 1
-			
 
 func _wave_event_happened(index):
 	# If the wave is over. Open the next Portals
 	if index == -1:
-		# Open new Portals
-		_update_wave_and_portals(current_wave_index)
+		# Open portals if there are any
+		if current_wave_index <= waves.size() - 1:
+			# Open new Portals
+			_update_wave_and_portals(current_wave_index)
+		# If the wave is over and its the final wave
+		if current_wave_index > waves.size() - 1:
+			# Player beat the game
+			Main.emit_signal("signal_game_completed")
 
 func _start_next_group():
 	# Find the current wave

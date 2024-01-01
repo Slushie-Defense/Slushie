@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://jy6msg3s15lw"]
+
+[ext_resource type="Script" path="res://UserInterface/DeathScreen/DeathScreen.gd" id="1_jpv4h"]
+[ext_resource type="PackedScene" uid="uid://jhxq5b5fc05s" path="res://UserInterface/PortalAnimation/PortalScreen.tscn" id="2_oharo"]
+[ext_resource type="FontFile" uid="uid://bj7861a0lm02c" path="res://Fonts/Grandstander/Grandstander-ExtraBold.ttf" id="3_db4eb"]
+[ext_resource type="Theme" uid="uid://crp0o88uid1pe" path="res://UserInterface/MainUserInterfaceTheme.tres" id="4_mnym6"]
+
+[node name="WinScreen" type="Node2D"]
+script = ExtResource("1_jpv4h")
+
+[node name="PortalScreen" parent="." instance=ExtResource("2_oharo")]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_fonts/font = ExtResource("3_db4eb")
+theme_override_font_sizes/font_size = 96
+text = "You survived!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_right = 1280.0
+offset_bottom = 531.0
+theme_override_fonts/font = ExtResource("3_db4eb")
+theme_override_font_sizes/font_size = 48
+text = "Game completed"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(1280, 0)
+offset_top = 540.0
+offset_right = 1280.0
+offset_bottom = 581.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer"]
+z_index = 10
+layout_mode = 2
+theme = ExtResource("4_mnym6")
+text = "Main Menu
+"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
