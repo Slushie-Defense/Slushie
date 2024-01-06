@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ds15dcep7fhyn"]
+[gd_scene load_steps=11 format=3 uid="uid://ds15dcep7fhyn"]
 
 [ext_resource type="Shader" path="res://Utilities/FlashEffect.gdshader" id="1_5s78y"]
 [ext_resource type="Script" path="res://Entities/Structures/Structure.gd" id="1_pfun1"]
 [ext_resource type="Texture2D" uid="uid://3xwi6uylpa23" path="res://Sprites/Structures/Construction/SlushieToolkit192x192.png" id="2_jexur"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_7ms35"]
+[ext_resource type="AudioStream" uid="uid://c0foywjya7m13" path="res://Audio/Construction/Hammer.wav" id="5_780ut"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_back3"]
 resource_local_to_scene = true
@@ -84,5 +85,13 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_d0024")
 step = 0.1
 show_percentage = false
 
+[node name="SFXHammer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_780ut")
+
+[node name="TimerHammerSFX" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="TimerHammerSFX" to="." method="_on_timer_hammer_sfx_timeout"]

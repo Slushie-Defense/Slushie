@@ -60,7 +60,7 @@ func _ready():
 	SIEGE.cost = 750
 	SIEGE.attack_damage = 100.0
 	SIEGE.attack_radius = 128.0
-	SIEGE.attack_range = 640.0
+	SIEGE.attack_range = 1024.0
 	SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
 	SIEGE.build_speed = 0.5
 	SIEGE.delay_before_fireweapon = 1.0
@@ -149,7 +149,7 @@ func _ready():
 	SPITTER.coin_drop_value = 25.0
 	SPITTER.attack_speed = 1.0 # Delay between attacks
 	SPITTER.attack_range = 64 # In pixels
-	SPITTER.attack_damage = 25
+	SPITTER.attack_damage = 0
 	SPITTER.acceleration = 2000
 	SPITTER.max_speed = 100
 	SPITTER.vision_radius = 160
@@ -168,7 +168,7 @@ func _ready():
 	SPITTER_SIEGE.reload_time = 1.5 # Animation synced -Do not edit this
 	SPITTER_SIEGE.shots_before_reload = 1 # Animation synced -Do not edit this
 
-	SPITTER_SIEGE.attack_damage = 100.0
+	SPITTER_SIEGE.attack_damage = 25.0
 	SPITTER_SIEGE.attack_radius = 128.0
 	SPITTER_SIEGE.attack_range = 640.0
 	SPITTER_SIEGE.attack_direction = -1 # AIM LEFT

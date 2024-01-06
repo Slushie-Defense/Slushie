@@ -14,8 +14,6 @@ func _ready():
 		Best to put the machine gun (only turret you can afford) in between two portals
 		Machine gun will take damage unless you distract the monsters somewhat
 		Grunt spawns at the end to give you an idea of how much tougher it is
-	Advanced:
-		Player could spend money earned during wave to more turrets to speed up the round
 	"""
 	curWave = Wave.new(false, true, true, false, false);
 	curWave.description = "I hear something to the east..."
@@ -30,8 +28,6 @@ func _ready():
 		Rush of fodder and grunts at the same time
 	Learning:
 		Player may have to build turret during wave, or distract enemies to avoid turret damage
-	Advanced:
-		
 	"""
 	curWave = Wave.new(false, true, true, true, false);
 	curWave.description = "Is it just me or are there more portals?"
@@ -46,8 +42,6 @@ func _ready():
 		Tanks shortly followed by grunts. Two waves of this.
 	Learning:
 		Player can win with just basic turrets, but 1 cannon can help signfiicantly
-	Advanced:
-		
 	"""
 	curWave = Wave.new(false, true, true, true, false);
 	curWave.description = "There's something really big coming..."
@@ -58,14 +52,12 @@ func _ready():
 	wm.waves.append(curWave)
 	
 	"""
-	Wave 4 - Shock Troop
+	Wave 4 - Infantry Squad
 	Goal: 
 		Strengthen defenses for a large group of grunts, fodder, and tanks
 	Learning:
 		Time for player to kill stuff and earn some money, try to minimize damage.
 		Finishes off with a group of floaters where player learns they need rapid fire
-	Advanced:
-		
 	"""
 	curWave = Wave.new(false, true, true, true, false);
 	curWave.description = "Sounds like a stampede..."
@@ -85,11 +77,9 @@ func _ready():
 		If player uses, shield, they'll see the benefit of its tankiness
 		Both options work at this point, since firepower is high
 		Either option player realizes importance of watching portal locations
-	Advanced:
-		
 	"""
 	curWave = Wave.new(false, false, false, true, true);
-	curWave.description = "Crap, why are the portals there now?"
+	curWave.description = "Did those portals move?"
 	curWave.appendGroup(0, 0, 0, 6, 0, 5, 2, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(0, 36, 0, 0, 0, 3, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	wm.waves.append(curWave)
@@ -100,8 +90,6 @@ func _ready():
 		Short wave to demonstrate the power of seige enemies
 	Learning:
 		No particular strat, just to learn that seige enemies exist
-	Advanced:
-		
 	"""
 	
 	curWave = Wave.new(false, true, false, true, false);
@@ -110,6 +98,22 @@ func _ready():
 	curWave.appendGroup(0, 0, 6, 0, 0, 3, 2, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	wm.waves.append(curWave)
 	
-	wm.current_wave_index = 5
-	$CoinSpawner.number_of_coins = 0
-	Main.coins = 2595
+	"""
+	Wave 7 - Shock Troop
+	Goal: 
+		Wave of everything
+	Learning:
+		A bit of everything to deal with, in a strategic order to destroy Steve
+	"""
+	
+	curWave = Wave.new(true, true, false, true, true);
+	curWave.description = "I see all kinds of problems coming."
+	curWave.appendGroup(0, 0, 0, 12, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
+	curWave.appendGroup(12, 12, 0, 0, 0, 3, 1, GroupSpawn.spawn_type.RANDOM_ANY)
+	curWave.appendGroup(0, 0, 8, 0, 0, 3, 2, GroupSpawn.spawn_type.ALL_AT_ONCE)
+	curWave.appendGroup(0, 0, 0, 0, 24, 3, 2, GroupSpawn.spawn_type.ALL_AT_ONCE)
+	wm.waves.append(curWave)
+	
+	#wm.current_wave_index = 5
+	#$CoinSpawner.number_of_coins = 0
+	#Main.coins = 2595

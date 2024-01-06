@@ -5,6 +5,7 @@ extends StaticBody2D
 @onready var static_body_2d_collision_shape_2d : CollisionShape2D = $CollisionShape2D
 @onready var structure_sprite : Sprite2D = $StructureSprite
 @onready var progress_bar : ProgressBar = $ProgressBar
+@onready var timer_hammer_sfx : Timer = $TimerHammerSFX
 
 # Building construction
 var is_building_constructed : bool = false
@@ -107,5 +108,10 @@ func _process(_delta):
 				# If player is ontop of the building
 				if child.has_method("_is_player"):
 					progress_bar.value += structure_class.build_speed
-					if progress_bar.value >= 1:
+					if (timer_hammer_sfx.is_stopped()):
+						timer_hammer_sfx.start()
+					if progress_bar.value >= 100:
 						_initialize_building_construction()
+
+func _on_timer_hammer_sfx_timeout():
+	$SFXHammer.play()
