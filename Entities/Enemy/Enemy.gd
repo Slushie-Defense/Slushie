@@ -26,6 +26,9 @@ var ai_attack_node_list : Array = []
 var ai_chase_node = null
 var ai_default_direction : Vector2 = Vector2(-1, 0)
 
+# Enemy collisions
+var ai_enemies_overlapping : Array = []
+
 # How far the enemy can see
 var show_vision_radius : bool = false
 @onready var vision_collider : CollisionShape2D = $Vision/CollisionShape2D
@@ -133,13 +136,21 @@ func _physics_process(delta):
 		return
 	# Direction & Attack
 	_ai_process()
+	# Be pushed away from enemies
+	_repelled()
 	# Move
 	apply_movement(ai_direction * enemy_data.acceleration * delta)
 	# Apply the motion
 	velocity = motion
 	# Move to the position unless it hits a collision then it will stop at the collision point
 	move_and_slide()
-	
+
+func _repelled():
+	# Enemies that are overlapping will try to separate when not chasing the player
+	var repel_speed : float = 5.0
+	for child in ai_enemies_overlapping:
+		motion -= child.global_position.direction_to(self.global_position) * -repel_speed;
+
 func apply_movement(acceleration):
 	motion += acceleration
 	if motion.length() > enemy_data.max_speed:
@@ -317,3 +328,10 @@ func _on_spitter_ap_animation_finished(anim_name):
 
 func _on_damage_flash_timer_timeout():
 	my_sprite.modulate = Color.WHITE	
+
+
+func _on_enemy_collisions_body_entered(body):
+	ai_enemies_overlapping.push_back(body)
+	
+func _on_enemy_collisions_body_exited(body):
+	ai_enemies_overlapping.erase(body)

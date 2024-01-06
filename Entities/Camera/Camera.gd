@@ -35,7 +35,7 @@ func _update_camera_position(_set_position):
 	var limit_position = _set_position
 	limit_position.y = _set_position.y
 	limit_position.x = _set_position.x
-	offset = limit_position
+	offset = limit_position + Vector2(0, -32)
 	
 	# Position User Interface
 	camera_position_top_left = Vector2(offset.x - (camera_width * 0.5), offset.y - (camera_height * 0.5))
