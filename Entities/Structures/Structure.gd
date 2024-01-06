@@ -107,5 +107,5 @@ func _process(_delta):
 				# If player is ontop of the building
 				if child.has_method("_is_player"):
 					progress_bar.value += structure_class.build_speed
-					if progress_bar.value >= 100:
+					if progress_bar.value >= 1:
 						_initialize_building_construction()

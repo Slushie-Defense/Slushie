@@ -16,6 +16,7 @@ signal signal_wave_event(event_number : int)
 signal signal_wave_spawning(_is_active)
 signal signal_trigger_wave_event()
 signal signal_game_completed()
+signal signal_wave_description(description: String)
 
 signal signal_stop_fmod()
 

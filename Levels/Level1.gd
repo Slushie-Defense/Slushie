@@ -18,6 +18,7 @@ func _ready():
 		Player could spend money earned during wave to more turrets to speed up the round
 	"""
 	curWave = Wave.new(false, true, true, false, false);
+	curWave.description = "I hear something to the east..."
 	curWave.appendGroup(20, 0, 0, 0, 0, 3, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(10, 0, 0, 0, 0, 5, 0.5, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(0, 1, 0, 0, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
@@ -33,6 +34,7 @@ func _ready():
 		
 	"""
 	curWave = Wave.new(false, true, true, true, false);
+	curWave.description = "Is it just me or are there more portals?"
 	curWave.appendGroup(6, 0, 0, 0, 0, 3, 0.5, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(0, 6, 0, 0, 0, 0, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(6, 6, 0, 0, 0, 5, 0.5, GroupSpawn.spawn_type.ALL_AT_ONCE)
@@ -48,6 +50,7 @@ func _ready():
 		
 	"""
 	curWave = Wave.new(false, true, true, true, false);
+	curWave.description = "There's something really big coming..."
 	curWave.appendGroup(0, 0, 0, 3, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(0, 6, 0, 0, 0, 3, 3, GroupSpawn.spawn_type.ALL_AT_ONCE)	
 	curWave.appendGroup(0, 0, 0, 3, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
@@ -65,6 +68,7 @@ func _ready():
 		
 	"""
 	curWave = Wave.new(false, true, true, true, false);
+	curWave.description = "Sounds like a stampede..."
 	curWave.appendGroup(0, 0, 0, 3, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(12, 0, 0, 0, 0, 2, 0.5, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(0, 12, 0, 0, 0, 5, 0.5, GroupSpawn.spawn_type.ALL_AT_ONCE)
@@ -85,6 +89,7 @@ func _ready():
 		
 	"""
 	curWave = Wave.new(false, false, false, true, true);
+	curWave.description = "Crap, why are the portals there now?"
 	curWave.appendGroup(0, 0, 0, 6, 0, 5, 2, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	curWave.appendGroup(0, 36, 0, 0, 0, 3, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	wm.waves.append(curWave)
@@ -99,10 +104,12 @@ func _ready():
 		
 	"""
 	
-	curWave = Wave.new(false, false, false, true, true);
-	curWave.appendGroup(0, 0, 5, 0, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
+	curWave = Wave.new(false, true, false, true, false);
+	curWave.description = "What the heck is that?"
+	curWave.appendGroup(0, 12, 0, 0, 0, 5, 1, GroupSpawn.spawn_type.ALL_AT_ONCE)
+	curWave.appendGroup(0, 0, 6, 0, 0, 3, 2, GroupSpawn.spawn_type.ALL_AT_ONCE)
 	wm.waves.append(curWave)
 	
-	wm.current_wave_index = 6
+	wm.current_wave_index = 5
 	$CoinSpawner.number_of_coins = 0
 	Main.coins = 2595

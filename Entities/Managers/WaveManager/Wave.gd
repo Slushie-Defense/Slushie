@@ -1,6 +1,8 @@
 class_name Wave 
 extends Resource
 
+#Populate this where waves are defined, currently in Level1.gd
+@export var description: String = ""
 @export var top_portal : bool = false
 @export var middle_top_portal : bool = false
 @export var middle_portal : bool = false

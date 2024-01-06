@@ -145,13 +145,13 @@ func _ready():
 	
 	# Setup SPITTER
 	SPITTER.unit_name = "Spitter"
-	SPITTER.health = 100
+	SPITTER.health = 200
 	SPITTER.coin_drop_value = 25.0
 	SPITTER.attack_speed = 1.0 # Delay between attacks
 	SPITTER.attack_range = 64 # In pixels
 	SPITTER.attack_damage = 25
-	SPITTER.acceleration = 1000
-	SPITTER.max_speed = 25
+	SPITTER.acceleration = 2000
+	SPITTER.max_speed = 100
 	SPITTER.vision_radius = 160
 	SPITTER.basic_sprite = load("res://Sprites/Characters/Enemies/Spitter/Spitter256x256.png")
 	SPITTER.collision_shape_radius = 56
