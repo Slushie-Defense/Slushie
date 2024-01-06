@@ -34,10 +34,10 @@ func _ready():
 	FENCE.type = structure_list.FENCE
 	FENCE.unit_name = "FENCE"
 	FENCE.description = "Hold lane"
-	FENCE.cost = 500
+	FENCE.cost = 350
 	FENCE.attack_damage = 0.0
 	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
-	FENCE.build_speed = 0.2
+	FENCE.build_speed = 0.3
 	FENCE.health = 1000;	
 	
 	# Setup LANDMINE
@@ -45,7 +45,7 @@ func _ready():
 	LANDMINE.type = structure_list.LANDMINE
 	LANDMINE.unit_name = "LANDMINE"
 	LANDMINE.description = "Emergency"
-	LANDMINE.cost = 500
+	LANDMINE.cost = 50
 	LANDMINE.attack_damage = 150.0
 	LANDMINE.attack_radius = 80.0
 	LANDMINE.attack_range = 160.0
@@ -56,13 +56,14 @@ func _ready():
 	# Setup SIEGE
 	SIEGE.type = structure_list.SIEGE
 	SIEGE.unit_name = "SIEGE"
-	SIEGE.description = "Hate crowds"
-	SIEGE.cost = 750
-	SIEGE.attack_damage = 100.0
+	SIEGE.description = "Hates crowds"
+	SIEGE.cost = 500
+	SIEGE.attack_damage = 75.0
 	SIEGE.attack_radius = 128.0
-	SIEGE.attack_range = 1024.0
+	SIEGE.attack_range = 4096.0
 	SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
-	SIEGE.build_speed = 0.5
+	SIEGE.build_speed = 0.35
+	SIEGE.health = 150;	
 	SIEGE.delay_before_fireweapon = 1.0
 	SIEGE.delay_between_shots = 0
 	SIEGE.reload_time = 3
@@ -146,7 +147,7 @@ func _ready():
 	# Setup SPITTER
 	SPITTER.unit_name = "Spitter"
 	SPITTER.health = 200
-	SPITTER.coin_drop_value = 25.0
+	SPITTER.coin_drop_value = 100.0
 	SPITTER.attack_speed = 1.0 # Delay between attacks
 	SPITTER.attack_range = 64 # In pixels
 	SPITTER.attack_damage = 0
