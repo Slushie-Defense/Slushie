@@ -168,7 +168,7 @@ func _start_next_group():
 	current_enemy_index = 0
 
 func _spawn_enemy(current_enemy_type, portal):
-	var enemy = enemy_scene.instantiate()
+	var enemy = enemy_scene.instantiate()	
 	enemy.enemy_type = current_enemy_type
 	# Add Enemy to the WaveManager
 	add_child(enemy)

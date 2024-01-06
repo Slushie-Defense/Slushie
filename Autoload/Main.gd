@@ -42,7 +42,7 @@ var enemy_counter : int = 0
 # Coin count
 var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
 var coins : int = 0
-var coin_base_reward : int = 50
+var coin_base_reward : int = 10
 var coin_reward : int = coin_base_reward
 
 # Wave number

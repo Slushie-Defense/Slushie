@@ -49,6 +49,9 @@ var my_sprite
 
 # Initialize
 func _ready():
+	# CollisionShape2D
+	var new_collision_shape = collision_shape.shape.duplicate()
+	collision_shape.shape = new_collision_shape	
 	# Behavior after the Gas Station is destroyed
 	Main.signal_gas_station_destroyed.connect(_gas_station_destroyed)
 	# Set enemy type
@@ -80,11 +83,13 @@ func _set_enemy_type():
 			ap = $BasicAP
 			$BasicSS.visible = true
 			my_sprite = $BasicSS
+			collision_shape.shape.set_size(Vector2(40, 20))
 		UnitData.enemy_list.GRUNT:
 			enemy_data = UnitData.GRUNT
 			ap = $GruntAP
 			$GruntSS.visible = true
 			my_sprite = $GruntSS
+			collision_shape.shape.set_size(Vector2(40, 20))
 		UnitData.enemy_list.SPITTER:
 			_create_spitter()
 			ap = $SpitterAP
@@ -96,6 +101,7 @@ func _set_enemy_type():
 			ap = $FloaterAP
 			$FloaterSS.visible = true
 			my_sprite = $FloaterSS;
+			collision_shape.shape.set_size(Vector2(40, 20))
 		UnitData.enemy_list.TANK:
 			enemy_data = UnitData.TANK
 			ap = $TankAP
@@ -277,7 +283,7 @@ func _remove_enemy():
 func _spawn_coin():
 	# Spawn coin
 	var coins = coin_spawner.instantiate()
-	coins.number_of_coins = ceil(enemy_data.coin_drop_value / 100.0)
+	coins.number_of_coins = ceil(enemy_data.coin_drop_value / 5.0)
 	coins.randomize_postion = true
 	get_tree().current_scene.add_child(coins)
 	coins.global_position = global_position
