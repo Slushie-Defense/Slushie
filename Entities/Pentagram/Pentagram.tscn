@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dudw3o8a7d45h"]
+
+[ext_resource type="Texture2D" uid="uid://be1nxeswrw55m" path="res://Sprites/Pentgram/Pentagram800x800.png" id="1_ek84e"]
+
+[node name="Pentagram" type="Sprite2D"]
+texture = ExtResource("1_ek84e")

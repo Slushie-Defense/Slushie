@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=24 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
@@ -16,14 +16,15 @@
 [ext_resource type="PackedScene" uid="uid://f1honnv3nt85" path="res://Levels/Prefabs/treeCluster1.tscn" id="13_nw437"]
 [ext_resource type="PackedScene" uid="uid://tseeja844fpv" path="res://Levels/Prefabs/treeCluster2.tscn" id="14_k3rbh"]
 [ext_resource type="PackedScene" uid="uid://i6geikbdg7om" path="res://Levels/Prefabs/bigRock2.tscn" id="15_64cep"]
+[ext_resource type="PackedScene" uid="uid://dudw3o8a7d45h" path="res://Entities/Pentagram/Pentagram.tscn" id="17_5roiw"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e01ad"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q3cah"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmika"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_toulb"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -79,11 +80,11 @@ y_sort_enabled = true
 
 [node name="GasStation" parent="WaveManager" instance=ExtResource("5_0xu7d")]
 z_index = 11
-material = SubResource("ShaderMaterial_e01ad")
+material = SubResource("ShaderMaterial_q3cah")
 position = Vector2(384, 580)
 
 [node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
-material = SubResource("ShaderMaterial_wmika")
+material = SubResource("ShaderMaterial_toulb")
 position = Vector2(654, 460)
 motion_mode = 1
 
@@ -129,7 +130,7 @@ position = Vector2(1879, 640)
 position = Vector2(1815, 832)
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
-position = Vector2(1371, 447)
+position = Vector2(1371, 446)
 scale = Vector2(1, 1.04667)
 number_of_coins = 20
 
@@ -254,5 +255,9 @@ shape = SubResource("RectangleShape2D_6xb86")
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D3"]
 position = Vector2(126, 464)
 shape = SubResource("RectangleShape2D_6xb86")
+
+[node name="Pentagram" parent="." instance=ExtResource("17_5roiw")]
+self_modulate = Color(0, 0, 0, 0.172549)
+position = Vector2(1339, 432)
 
 [editable path="GroundTexture"]
