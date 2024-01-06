@@ -16,6 +16,7 @@ signal signal_wave_event(event_number : int)
 signal signal_wave_spawning(_is_active)
 signal signal_trigger_wave_event()
 signal signal_game_completed()
+signal signal_wave_description(description: String)
 
 signal signal_stop_fmod()
 
@@ -42,7 +43,7 @@ var enemy_counter : int = 0
 # Coin count
 var coin_spawner_scene = load("res://Entities/Coin/CoinSpawner.tscn")
 var coins : int = 0
-var coin_base_reward : int = 50
+var coin_base_reward : int = 10
 var coin_reward : int = coin_base_reward
 
 # Wave number

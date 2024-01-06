@@ -33,36 +33,41 @@ func _ready():
 	# Setup FENCE
 	FENCE.type = structure_list.FENCE
 	FENCE.unit_name = "FENCE"
-	FENCE.description = "Stalling"
-	FENCE.cost = 50000
+	FENCE.description = "Hold lane"
+	FENCE.cost = 350
 	FENCE.attack_damage = 0.0
 	FENCE.ui_sprite = load("res://Sprites/Structures/Fence/128x192Fence.png")
-	FENCE.build_speed = 0.2
-	FENCE.health = 500;	
+	FENCE.build_speed = 0.3
+	FENCE.health = 1000;	
 	
 	# Setup LANDMINE
 	LANDMINE.delay_before_fireweapon = 0.5
 	LANDMINE.type = structure_list.LANDMINE
 	LANDMINE.unit_name = "LANDMINE"
 	LANDMINE.description = "Emergency"
-	LANDMINE.cost = 9999999999
-	LANDMINE.attack_damage = 100.0
+	LANDMINE.cost = 50
+	LANDMINE.attack_damage = 150.0
 	LANDMINE.attack_radius = 80.0
 	LANDMINE.attack_range = 160.0
 	LANDMINE.attack_collision_mask_list = [[2, false], [3, false], [4, true]]
 	LANDMINE.ui_sprite = load("res://Sprites/Structures/Landmine/128x192Landmine.png")
-	LANDMINE.build_speed = 70.0
+	LANDMINE.build_speed = 10.0
 	
 	# Setup SIEGE
 	SIEGE.type = structure_list.SIEGE
 	SIEGE.unit_name = "SIEGE"
-	SIEGE.description = "Hate crowds"
-	SIEGE.cost = 9999999999
-	SIEGE.attack_damage = 100.0
+	SIEGE.description = "Hates crowds"
+	SIEGE.cost = 500
+	SIEGE.attack_damage = 75.0
 	SIEGE.attack_radius = 128.0
-	SIEGE.attack_range = 640.0
+	SIEGE.attack_range = 4096.0
 	SIEGE.ui_sprite = load("res://Sprites/Structures/Siege/128x192Siege.png")
-	SIEGE.build_speed = 0.5
+	SIEGE.build_speed = 0.35
+	SIEGE.health = 150;	
+	SIEGE.delay_before_fireweapon = 1.0
+	SIEGE.delay_between_shots = 0
+	SIEGE.reload_time = 3
+	SIEGE.shots_before_reload = 1
 	
 	# Setup INSTANT hit
 	INSTANT.type = structure_list.INSTANT
@@ -83,9 +88,9 @@ func _ready():
 	# Setup PROJECTILE hit
 	PROJECTILE.type = structure_list.PROJECTILE
 	PROJECTILE.unit_name = "CANNON"
-	PROJECTILE.description = "Slow steady"
-	PROJECTILE.cost = 100
-	PROJECTILE.attack_damage = 100.0
+	PROJECTILE.description = "Tank buster"
+	PROJECTILE.cost = 200
+	PROJECTILE.attack_damage = 150.0
 	PROJECTILE.attack_radius = 512.0
 	PROJECTILE.attack_range = 4096.0
 	PROJECTILE.ui_sprite = load("res://Sprites/Structures/Projectile/128x192Projectile.png")
@@ -93,14 +98,14 @@ func _ready():
 	PROJECTILE.health = 50
 	PROJECTILE.delay_before_fireweapon = 1.0
 	PROJECTILE.delay_between_shots = 0
-	PROJECTILE.reload_time = 3
+	PROJECTILE.reload_time = 1.5
 	PROJECTILE.shots_before_reload = 1
 	
 	# ENEMIES
 	# Setup BASIC
 	BASIC.unit_name = "Basic"
-	BASIC.health = 8
-	BASIC.coin_drop_value = 100.0
+	BASIC.health = 9
+	BASIC.coin_drop_value = 5.0
 	BASIC.attack_speed = 1.0 # Delay between attacks
 	BASIC.attack_range = 64 # In pixels
 	BASIC.attack_damage = 2
@@ -113,14 +118,14 @@ func _ready():
 	
 	# Setup GRUNT
 	GRUNT.unit_name = "Grunt"
-	GRUNT.health = 30
-	GRUNT.coin_drop_value = 250.0
+	GRUNT.health = 45
+	GRUNT.coin_drop_value = 10.0
 	GRUNT.attack_speed = 1.0 # Delay between attacks
 	GRUNT.attack_range = 64 # In pixels
 	GRUNT.attack_damage = 5
 	GRUNT.acceleration = 2000
 	GRUNT.max_speed = 100
-	GRUNT.vision_radius = 160
+	GRUNT.vision_radius = 320
 	GRUNT.basic_sprite = load("res://Sprites/Characters/Enemies/Grunt/Grunt256x256.png")
 	GRUNT.collision_shape_radius = 48
 	GRUNT.attack_type = UnitData.enemy_attack_list.MELEE
@@ -128,12 +133,12 @@ func _ready():
 	# Setup TANK
 	TANK.unit_name = "Tank"
 	TANK.health = 300
-	TANK.coin_drop_value = 2500.0
+	TANK.coin_drop_value = 50.0
 	TANK.attack_speed = 1.0 # Delay between attacks
 	TANK.attack_range = 64 # In pixels
 	TANK.attack_damage = 0
 	TANK.acceleration = 2000
-	TANK.max_speed = 50
+	TANK.max_speed = 75
 	TANK.vision_radius = 160
 	TANK.basic_sprite = load("res://Sprites/Characters/Enemies/Tank/Tank256x256.png")
 	TANK.collision_shape_radius = 64
@@ -142,12 +147,12 @@ func _ready():
 	# Setup SPITTER
 	SPITTER.unit_name = "Spitter"
 	SPITTER.health = 200
-	SPITTER.coin_drop_value = 200.0
+	SPITTER.coin_drop_value = 100.0
 	SPITTER.attack_speed = 1.0 # Delay between attacks
 	SPITTER.attack_range = 64 # In pixels
-	SPITTER.attack_damage = 100
-	SPITTER.acceleration = 1000
-	SPITTER.max_speed = 25
+	SPITTER.attack_damage = 0
+	SPITTER.acceleration = 2000
+	SPITTER.max_speed = 100
 	SPITTER.vision_radius = 160
 	SPITTER.basic_sprite = load("res://Sprites/Characters/Enemies/Spitter/Spitter256x256.png")
 	SPITTER.collision_shape_radius = 56
@@ -164,7 +169,7 @@ func _ready():
 	SPITTER_SIEGE.reload_time = 1.5 # Animation synced -Do not edit this
 	SPITTER_SIEGE.shots_before_reload = 1 # Animation synced -Do not edit this
 
-	SPITTER_SIEGE.attack_damage = 100.0
+	SPITTER_SIEGE.attack_damage = 25.0
 	SPITTER_SIEGE.attack_radius = 128.0
 	SPITTER_SIEGE.attack_range = 640.0
 	SPITTER_SIEGE.attack_direction = -1 # AIM LEFT
@@ -176,13 +181,13 @@ func _ready():
 	
 	# Setup FLOATER
 	FLOATER.unit_name = "Floater"
-	FLOATER.health = 100
-	FLOATER.coin_drop_value = 100.0
+	FLOATER.health = 18
+	FLOATER.coin_drop_value = 5.0
 	FLOATER.attack_speed = 1.0 # Delay between attacks
 	FLOATER.attack_range = 96 # In pixels
-	FLOATER.attack_damage = 100
+	FLOATER.attack_damage = 50
 	FLOATER.acceleration = 2000
-	FLOATER.max_speed = 100
+	FLOATER.max_speed = 150
 	FLOATER.vision_radius = 160
 	FLOATER.basic_sprite = load("res://Sprites/Characters/Enemies/Floater/Floater256x256.png")
 	FLOATER.collision_shape_radius = 32

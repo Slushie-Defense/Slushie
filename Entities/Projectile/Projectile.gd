@@ -7,7 +7,7 @@ extends Node2D
 var attack_damage = 50.0 # his is modified in UnitData
 
 # Stats
-var linear_speed : float = 400.0  # Let's not edit this
+var linear_speed : float = 600.0  # Let's not edit this
 var curve_speed : float = 0.0  # Let's not edit this
 var calculated_speed : float = linear_speed
 var target_position : Vector2 = Vector2.ZERO

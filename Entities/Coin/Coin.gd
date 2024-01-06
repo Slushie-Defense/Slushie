@@ -1,7 +1,7 @@
 extends Node2D
 
 # Value
-@export_range(0, 1000, 100) var coin_value : int = 100
+@export_range(0, 1000, 100) var coin_value : int = 5
 
 # Detection
 @onready var area_2d : Area2D = $Area2D

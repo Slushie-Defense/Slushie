@@ -60,6 +60,7 @@ func _start_wave():
 
 # spawns a wave, which syncronously loops through the groups
 func _spawn_wave(wave_number: int):
+	Main.emit_signal("signal_wave_description", "")
 	wave_active = true
 	# Message that he wave is starting
 	print("Start Wave: " + str(wave_number + 1))
@@ -88,6 +89,7 @@ func _update_wave_and_portals(wave_number):
 	active_portals_list = _update_active_portals_list()
 	# Open all active portals
 	_open_all_active_portals()
+	Main.emit_signal("signal_wave_description", current_wave.description)
 
 func _on_enemy_group_timer_timeout():
 	#print("Enemy Group [" + str(current_group_index + 1) + "] Start")
@@ -168,7 +170,7 @@ func _start_next_group():
 	current_enemy_index = 0
 
 func _spawn_enemy(current_enemy_type, portal):
-	var enemy = enemy_scene.instantiate()
+	var enemy = enemy_scene.instantiate()	
 	enemy.enemy_type = current_enemy_type
 	# Add Enemy to the WaveManager
 	add_child(enemy)

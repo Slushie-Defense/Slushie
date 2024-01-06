@@ -131,7 +131,7 @@ position = Vector2(1815, 832)
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
 position = Vector2(1371, 447)
 scale = Vector2(1, 1.04667)
-number_of_coins = 64
+number_of_coins = 20
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(2304, 448)
