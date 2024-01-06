@@ -17,13 +17,13 @@
 [ext_resource type="PackedScene" uid="uid://tseeja844fpv" path="res://Levels/Prefabs/treeCluster2.tscn" id="14_k3rbh"]
 [ext_resource type="PackedScene" uid="uid://i6geikbdg7om" path="res://Levels/Prefabs/bigRock2.tscn" id="15_64cep"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4vg7"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e01ad"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2vv85"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmika"]
 resource_local_to_scene = true
 shader = ExtResource("6_fhnco")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
@@ -79,11 +79,11 @@ y_sort_enabled = true
 
 [node name="GasStation" parent="WaveManager" instance=ExtResource("5_0xu7d")]
 z_index = 11
-material = SubResource("ShaderMaterial_n4vg7")
+material = SubResource("ShaderMaterial_e01ad")
 position = Vector2(384, 580)
 
 [node name="Player" parent="WaveManager" instance=ExtResource("1_46qfd")]
-material = SubResource("ShaderMaterial_2vv85")
+material = SubResource("ShaderMaterial_wmika")
 position = Vector2(654, 460)
 motion_mode = 1
 
