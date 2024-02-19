@@ -41,7 +41,7 @@ func _ready():
 	Main.signal_trigger_wave_event.connect(_start_wave)
 	Main.signal_wave_event.connect(_wave_event_happened)
 	# Open Portals
-	call_deferred("_update_wave_and_portals", current_wave_index)
+	call_deferred("_update_wave_and_portals", current_wave_index, "OpenMiniPortal")
 
 # Start the Wave
 func _input(event):
@@ -70,7 +70,7 @@ func _spawn_wave(wave_number: int):
 		print("No Waves Added")
 		return
 	# Update waves and portals
-	_update_wave_and_portals(wave_number)
+	_update_wave_and_portals(wave_number, "OpenPortal")
 	# Get the first group
 	if not current_wave_total_group_count > 0:
 		print("No Groups Added")
@@ -80,7 +80,7 @@ func _spawn_wave(wave_number: int):
 	# Start the first group
 	_start_next_group()
 
-func _update_wave_and_portals(wave_number):
+func _update_wave_and_portals(wave_number, portal_state : String = "OpenPortal"):
 	# Get the current wave
 	current_wave = waves[wave_number]
 	# Number of Groups inside the wave
@@ -88,7 +88,7 @@ func _update_wave_and_portals(wave_number):
 	# Find all the active portals in this wave
 	active_portals_list = _update_active_portals_list()
 	# Open all active portals
-	_open_all_active_portals()
+	_open_all_active_portals(portal_state)
 	Main.emit_signal("signal_wave_description", current_wave.description)
 
 func _on_enemy_group_timer_timeout():
@@ -152,7 +152,7 @@ func _wave_event_happened(index):
 		# Open portals if there are any
 		if current_wave_index <= waves.size() - 1:
 			# Open new Portals
-			_update_wave_and_portals(current_wave_index)
+			_update_wave_and_portals(current_wave_index, "OpenMiniPortal")
 		# If the wave is over and its the final wave
 		if current_wave_index > waves.size() - 1:
 			# Player beat the game
@@ -238,10 +238,11 @@ func _update_active_portals_list():
 		active_list[0] = all_portals_list[2] # Activate middle portal
 	return active_list
 
-func _open_all_active_portals():
+
+func _open_all_active_portals(state : String = "OpenPortal"):
 	for portal in active_portals_list:
-		portal._set_portal_state_open(true)
+		portal._set_portal_state_open(state)
 
 func _close_all_portals():
 	for portal in all_portals_list:
-		portal._set_portal_state_open(false)
+		portal._set_portal_state_open("ClosePortal")

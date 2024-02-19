@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://brlxqgkx4kxcf"
+path="res://.godot/imported/slushie wave hi intensity.ogg-95c8e14109ec4017647d919af7d401b9.oggvorbisstr"
+
+[deps]
+
+source_file="res://Audio/Music/slushie wave hi intensity.ogg"
+dest_files=["res://.godot/imported/slushie wave hi intensity.ogg-95c8e14109ec4017647d919af7d401b9.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

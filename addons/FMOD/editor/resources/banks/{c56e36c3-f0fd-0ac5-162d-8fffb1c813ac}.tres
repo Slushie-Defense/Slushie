@@ -1,8 +1,0 @@
-[gd_resource type="BankAsset" format=3 uid="uid://cgpyfr8ycjt2q"]
-
-[resource]
-file_path = "res://addons/FMODMusic/Build/Desktop/Master.strings.bank"
-modified_time = 1701658700
-path = "bank:/Master.strings"
-guid = "{c56e36c3-f0fd-0ac5-162d-8fffb1c813ac}"
-name = "Master.strings"
