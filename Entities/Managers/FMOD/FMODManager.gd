@@ -15,7 +15,7 @@ func _ready():
 	# Connect to wave triggers
 	Main.signal_wave_event.connect(_wave_event)
 	# Destroy if you leave the scene
-	Main.signal_player_died.connect(_stop_ingame_soundtrack)
+	Main.signal_player_died.connect(_wave_end)
 	# Stop FMOD
 	Main.signal_stop_ingame_soundtrack.connect(_stop_ingame_soundtrack_no_audio_player)
 
@@ -30,6 +30,7 @@ func _wave_event(wave_number):
 	# React to wave update
 	if wave_active:
 		# Start the wave music immediately
+		audio_player.stop()
 		audio_player.stream = wave_start_wave
 		audio_player.play()
 	else:
@@ -38,12 +39,6 @@ func _wave_event(wave_number):
 		get_tree().create_timer(delay_wave_deactivated).timeout.connect(_wave_end)
 
 func _wave_end():
-	audio_player.stop()
-	audio_player.stream = wave_end_wave
-	audio_player.play()
-
-func _stop_ingame_soundtrack():
-	# Play Death
 	audio_player.stop()
 	audio_player.stream = wave_end_wave
 	audio_player.play()
