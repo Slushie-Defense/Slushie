@@ -1,54 +1,61 @@
 extends Node2D
 
-@export var event: EventAsset
-var instance: EventInstance
-
 var wave_active : bool = false
-var wave_intensity : int = 0
 
-@onready var death_music : AudioStreamPlayer = $AudioStreamPlayer
+@onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
+
+var wave_clam_before_storm = load("res://Audio/Music/slushie calm between wave.wav")
+var wave_high_intensity = load("res://Audio/Music/slushie wave hi intensity.ogg")
+var wave_start_wave = load("res://Audio/Music/slushie wave stinger hi intensity.wav")
+var wave_end_wave = load("res://Audio/Music/slusie fanfare hi intensity.wav")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_create_FMOD()
+	_start_calm_music()
 	# Connect to wave triggers
 	Main.signal_wave_event.connect(_wave_event)
 	# Destroy if you leave the scene
-	Main.signal_player_died.connect(_stop_FMOD)
+	Main.signal_player_died.connect(_stop_ingame_soundtrack)
 	# Stop FMOD
-	Main.signal_stop_fmod.connect(_stop_FMOD_no_death_music)
+	Main.signal_stop_ingame_soundtrack.connect(_stop_ingame_soundtrack_no_audio_player)
 
-func _create_FMOD():
-	instance = FMODRuntime.create_instance(event)
-	# Start the song
-	instance.start()
-	# Release FMOD from memory to prevent memory leaks
-	instance.release()
+func _start_calm_music():
+	audio_player.stop()
+	audio_player.stream = wave_clam_before_storm
+	audio_player.play()
 
 func _wave_event(wave_number):
+	# If wave is active TRUE OR FALSE
 	wave_active = not wave_number == -1
-	var increase_every_x_waves : float = floor(wave_number / 2.0)
-	wave_intensity = int(clamp(increase_every_x_waves, 0, 8))
 	# React to wave update
 	if wave_active:
 		# Start the wave music immediately
-		_update_intensity()
+		audio_player.stream = wave_start_wave
+		audio_player.play()
 	else:
 		# Delay the end of the wave music
 		var delay_wave_deactivated : float = 4.0
-		get_tree().create_timer(delay_wave_deactivated).timeout.connect(_update_intensity)
+		get_tree().create_timer(delay_wave_deactivated).timeout.connect(_wave_end)
 
-func _update_intensity():
-	# Update parameters
-	instance.set_parameter_by_name("wave onoff", int(wave_active), false)
-	instance.set_parameter_by_name("Wave Intensity", wave_intensity, false)
+func _wave_end():
+	audio_player.stop()
+	audio_player.stream = wave_end_wave
+	audio_player.play()
 
-func _stop_FMOD():
-	# Stop the music
-	instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+func _stop_ingame_soundtrack():
 	# Play Death
-	death_music.play()
+	audio_player.stop()
+	audio_player.stream = wave_end_wave
+	audio_player.play()
 
-func _stop_FMOD_no_death_music():
+func _stop_ingame_soundtrack_no_audio_player():
 	# Stop the music
-	instance.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
+	audio_player.stop()
+
+func _on_audio_stream_player_finished():
+	if audio_player.stream == wave_end_wave:
+		_start_calm_music()
+	elif audio_player.stream == wave_start_wave:
+		audio_player.stop()
+		audio_player.stream = wave_high_intensity
+		audio_player.play()

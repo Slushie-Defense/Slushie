@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ch6twbbxl2btw"
+path="res://.godot/imported/slushie wave lo intensity.wav-617030049fd9cc88d2c774b5e0fece6b.sample"
+
+[deps]
+
+source_file="res://Audio/Music/slushie wave lo intensity.wav"
+dest_files=["res://.godot/imported/slushie wave lo intensity.wav-617030049fd9cc88d2c774b5e0fece6b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

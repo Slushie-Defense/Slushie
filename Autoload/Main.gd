@@ -18,7 +18,7 @@ signal signal_trigger_wave_event()
 signal signal_game_completed()
 signal signal_wave_description(description: String)
 
-signal signal_stop_fmod()
+signal signal_stop_ingame_soundtrack()
 
 # End game events
 signal signal_player_died()
@@ -172,11 +172,11 @@ func _try_to_buy(cost):
 
 func _game_completed_event():
 	print("Game completed! Congrats!")
-	get_tree().create_timer(8.0).timeout.connect(_stop_fmod)
+	get_tree().create_timer(8.0).timeout.connect(_stop_ingame_soundtrack)
 	get_tree().create_timer(10.0).timeout.connect(_goto_win_screen)
 
-func _stop_fmod():
-	emit_signal("signal_stop_fmod")
+func _stop_ingame_soundtrack():
+	emit_signal("signal_stop_ingame_soundtrack")
 
 func _goto_win_screen():
 	get_tree().change_scene_to_file("res://UserInterface/GameCompleteScreen/WinScreen.tscn")

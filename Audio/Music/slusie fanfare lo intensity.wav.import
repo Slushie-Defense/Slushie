@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbktisiw115i5"
+path="res://.godot/imported/slusie fanfare lo intensity.wav-ce0c15c00b860b0ffe75dc5d7eedefef.sample"
+
+[deps]
+
+source_file="res://Audio/Music/slusie fanfare lo intensity.wav"
+dest_files=["res://.godot/imported/slusie fanfare lo intensity.wav-ce0c15c00b860b0ffe75dc5d7eedefef.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
