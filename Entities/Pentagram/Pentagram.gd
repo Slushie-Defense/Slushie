@@ -3,6 +3,8 @@ extends Sprite2D
 @onready var timer : Timer = $Timer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
+@export var hide : bool = false
+
 var flame_scene = load("res://Entities/Pentagram/Flame.tscn")
 var total_number_of_flames : int = 16
 var number_flames_created : int = 0
@@ -14,6 +16,8 @@ var adding_flames : bool = false
 var all_flames_activated : bool = false
 
 func _ready():
+	if hide:
+		queue_free()
 	timer.wait_time = 0.25
 	timer.start()
 
