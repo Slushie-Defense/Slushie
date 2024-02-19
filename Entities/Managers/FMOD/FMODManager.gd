@@ -4,7 +4,7 @@ var wave_active : bool = false
 
 @onready var audio_player : AudioStreamPlayer = $AudioStreamPlayer
 
-var wave_clam_before_storm = load("res://Audio/Music/slushie calm between wave.wav")
+var wave_clam_before_storm = load("res://Audio/Music/slushie calm between wave.ogg")
 var wave_high_intensity = load("res://Audio/Music/slushie wave hi intensity.ogg")
 var wave_start_wave = load("res://Audio/Music/slushie wave stinger hi intensity.wav")
 var wave_end_wave = load("res://Audio/Music/slusie fanfare hi intensity.wav")
