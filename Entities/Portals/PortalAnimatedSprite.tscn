@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dudcibbnxe5fy"]
+[gd_scene load_steps=23 format=3 uid="uid://dudcibbnxe5fy"]
 
 [ext_resource type="Texture2D" uid="uid://xun06yrfbc4m" path="res://Sprites/Portals/Portal176x176.png" id="1_ej6ci"]
 [ext_resource type="Texture2D" uid="uid://c23h217l3cemq" path="res://Entities/Portals/2x/Artboard 1@2x.png" id="1_wtadr"]
@@ -123,19 +123,96 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Animation" id="Animation_kvmf4"]
+resource_name = "Loop"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flame/MiniFlame:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.6, 0.6), Vector2(0.25, 0.65), Vector2(0.3, 0.7), Vector2(0.5, 0.55), Vector2(0.2, 0.4), Vector2(0.6, 0.6), Vector2(0.3, 0.7), Vector2(0.5, 0.55)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flame:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.85, 0.85), Vector2(0.8, 0.75), Vector2(0.8, 0.85), Vector2(0.85, 0.85)]
+}
 
-[node name="CenterSpinning" type="Sprite2D" parent="."]
+[sub_resource type="Animation" id="Animation_iixwp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flame/MiniFlame:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.6, 0.6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flame:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.85, 0.85)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yreqg"]
+_data = {
+"Loop": SubResource("Animation_kvmf4"),
+"RESET": SubResource("Animation_iixwp")
+}
+
+[node name="Portal" type="Node2D"]
+
+[node name="Flame" type="Sprite2D" parent="."]
 self_modulate = Color(0.756863, 0.305882, 0.576471, 1)
 z_index = 1
 position = Vector2(-14.4, 0)
+scale = Vector2(0.85, 0.85)
 texture = ExtResource("1_ej6ci")
-offset = Vector2(10, -4)
+offset = Vector2(14, -32)
+
+[node name="MiniFlame" type="Sprite2D" parent="Flame"]
+self_modulate = Color(0.917647, 0.807843, 0.72549, 1)
+z_index = 1
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_ej6ci")
+offset = Vector2(32, -32)
 
 [node name="Portal2D" type="AnimatedSprite2D" parent="."]
-z_index = 1
+z_index = 2
 z_as_relative = false
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_xpugw")
 autoplay = "default"
 frame_progress = 0.561293
+offset = Vector2(0, -40)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yreqg")
+}
+autoplay = "Loop"

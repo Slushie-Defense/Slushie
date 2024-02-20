@@ -1,7 +1,7 @@
 class_name Portal
 extends Node2D
 
-@onready var portal_sprite : Sprite2D = $Flame
+@onready var portal_sprite : Node2D = $Portal2D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 #var open_state : bool = false
