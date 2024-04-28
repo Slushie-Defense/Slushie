@@ -3,6 +3,7 @@ extends StaticBody2D
 @onready var health : ProgressBar = $Healthbar
 @onready var collision_shape_2d : CollisionPolygon2D = $CollisionPolygon2D
 @onready var area_collision_shape_2d : CollisionShape2D = $Area2D/CollisionShape2D
+@onready var structure_hit_audioplayer : AudioStreamPlayer = $StructureHitAudio
 
 func _ready():
 	health.set_max_health(500)
@@ -18,6 +19,7 @@ func _apply_hurt_effect(flash_value):
 
 func attack(_attack : Attack):
 	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage
+	structure_hit_audioplayer._been_hit()
 
 func _event_health_is_zero():
 	print("Gas station died!")

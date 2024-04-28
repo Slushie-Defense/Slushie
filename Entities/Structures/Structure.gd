@@ -6,6 +6,7 @@ extends StaticBody2D
 @onready var structure_sprite : Sprite2D = $StructureSprite
 @onready var progress_bar : ProgressBar = $ProgressBar
 @onready var timer_hammer_sfx : Timer = $TimerHammerSFX
+@onready var structure_hit_audio : AudioStreamPlayer =  $StructureHitAudio
 
 # Building construction
 var is_building_constructed : bool = false
@@ -46,6 +47,8 @@ func _initialize_building_construction():
 
 func attack(_attack : Attack):
 	health.add_or_subtract_health_by_value(-_attack.damage) # Subtract damage
+	# Play sound effect when hit
+	structure_hit_audio._been_hit()
 
 func _event_health_is_zero():
 	print("Structure died!")
@@ -64,6 +67,7 @@ func _on_area_2d_body_entered(body):
 				progress_bar.visible = true
 			set_process(true)
 	nodes_in_build_area_list.push_back(body)
+	#print(nodes_in_build_area_list)
 
 func _on_area_2d_body_exited(body):
 	if body.has_method("_is_player"):

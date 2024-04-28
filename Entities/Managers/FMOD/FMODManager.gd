@@ -35,7 +35,7 @@ func _wave_event(wave_number):
 		audio_player.play()
 	else:
 		# Delay the end of the wave music
-		var delay_wave_deactivated : float = 4.0
+		var delay_wave_deactivated : float = 1.00
 		get_tree().create_timer(delay_wave_deactivated).timeout.connect(_wave_end)
 
 func _wave_end():

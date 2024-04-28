@@ -27,8 +27,12 @@ offset_bottom = 668.0
 [node name="StartWaveButton" parent="UserInterfaceParent/CanvasLayer" instance=ExtResource("5_0lhfk")]
 z_index = 2
 z_as_relative = false
-offset_left = -161.0
-offset_top = 28.0
-offset_right = -27.0
-offset_bottom = 76.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.0
+offset_top = 128.0
+offset_right = 67.0
+offset_bottom = 176.0
+grow_horizontal = 2
 mouse_filter = 1

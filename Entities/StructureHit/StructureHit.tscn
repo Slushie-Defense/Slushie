@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://du3kaaihb00sc"]
+
+[ext_resource type="AudioStream" uid="uid://h1yyof668pld" path="res://Audio/Structure/MetalHit.wav" id="1_krdgy"]
+[ext_resource type="Script" path="res://Entities/StructureHit/StructureHit.gd" id="2_yq8hn"]
+
+[node name="StructureHitAudio" type="AudioStreamPlayer"]
+stream = ExtResource("1_krdgy")
+script = ExtResource("2_yq8hn")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

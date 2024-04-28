@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://chejjmfnqqb3"]
+[gd_scene load_steps=26 format=3 uid="uid://chejjmfnqqb3"]
 
 [ext_resource type="PackedScene" uid="uid://d05a21782kpoa" path="res://Entities/Camera/Camera.tscn" id="1_0xhkv"]
 [ext_resource type="PackedScene" uid="uid://bj2450c708xsx" path="res://Entities/Player/Player.tscn" id="1_46qfd"]
@@ -66,6 +66,9 @@ sources/7 = SubResource("TileSetAtlasSource_5w54a")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y2vj4"]
 size = Vector2(96, 1024)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m685l"]
+size = Vector2(640, 1024)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xb86"]
 size = Vector2(256, 480)
 
@@ -131,12 +134,22 @@ position = Vector2(1879, 640)
 position = Vector2(1815, 832)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(2304, 448)
+position = Vector2(2624, 448)
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(-528, 0)
 shape = SubResource("RectangleShape2D_y2vj4")
+
+[node name="StaticBody2DNoBuildZone" type="StaticBody2D" parent="."]
+position = Vector2(2304, 448)
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2DNoBuildZone"]
+position = Vector2(-256, 0)
+shape = SubResource("RectangleShape2D_m685l")
+debug_color = Color(0.811765, 0.352941, 0.556863, 0.419608)
 
 [node name="Env" type="Node2D" parent="."]
 visibility_layer = 524288
@@ -253,7 +266,7 @@ position = Vector2(126, 464)
 shape = SubResource("RectangleShape2D_6xb86")
 
 [node name="Pentagram" parent="." instance=ExtResource("17_5roiw")]
-position = Vector2(1339, 432)
+position = Vector2(1344, 432)
 
 [node name="CoinSpawner" parent="." instance=ExtResource("11_cched")]
 position = Vector2(1343, 482)

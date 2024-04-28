@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://do86ddfdct5h3"]
+
+[ext_resource type="FontFile" uid="uid://kug8qtkuvhhc" path="res://Fonts/Grandstander/Grandstander-Bold.ttf" id="1_1a3ep"]
+[ext_resource type="Script" path="res://UserInterface/FlagLabel/UIFlagLabel.gd" id="1_pnwre"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fyq1t"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_thwhl"]
+font = ExtResource("1_1a3ep")
+font_color = Color(0, 0, 0, 1)
+
+[node name="PanelContainerFlag" type="PanelContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 33.0
+offset_bottom = 33.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fyq1t")
+script = ExtResource("1_pnwre")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HealthLabel" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "HP"
+label_settings = SubResource("LabelSettings_thwhl")

@@ -1,5 +1,8 @@
 extends Control
 
+# Flag Lbael
+var flag_label = load("res://UserInterface/FlagLabel/UIFlagLabel.tscn")
+
 # Images
 var image_fence = load("res://Sprites/ItemsUI/Items/Fence_64.png")
 var image_landmine = load("res://Sprites/ItemsUI/Items/CherryBomb_64.png")
@@ -54,6 +57,13 @@ func _ready():
 	call_deferred("_create_user_interface")
 	call_deferred("_update_seleted_item")
 
+func _add_flag(my_label, my_color, my_position):
+	var new_flag = flag_label.instantiate()
+	add_child(new_flag)
+	new_flag._set_text(my_label)
+	new_flag.self_modulate = my_color
+	new_flag.global_position = my_position
+	
 func _on_signal_connect_player_healthbar(current_value, max_health):
 	player_healthbar._update_progress_bar(current_value, max_health)
 	
@@ -62,6 +72,8 @@ func _on_signal_connect_gas_station_healthbar(current_value, max_health):
 
 func _create_user_interface():
 	_add_h_separator()
+	_add_flag("HP", Color("#00FF00"), Vector2(128, 8))
+	
 	# Gas Station
 	gas_station_healthbar = _add_healthbar()
 	gas_station_healthbar._update_label("Gas Station")

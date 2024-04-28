@@ -24,6 +24,9 @@ func _physics_process(delta):
 	player_node.scale = Vector2(player_scale, player_scale)
 
 func _on_retry_button_pressed():
+	Main.current_wave_active = false
+	Main.current_wave_number = 1
+	Main.enemy_counter = 0
 	get_tree().change_scene_to_file("res://Levels/Level1.tscn")
 
 func _on_main_menu_pressed():

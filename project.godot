@@ -144,6 +144,7 @@ SelectItemButton={
 3d_physics/layer_5="enemies_floating"
 2d_physics/layer_6="invisible_wall"
 2d_physics/layer_7="enemy_invisible_wall"
+2d_physics/layer_8="no_build_zone"
 
 [rendering]
 

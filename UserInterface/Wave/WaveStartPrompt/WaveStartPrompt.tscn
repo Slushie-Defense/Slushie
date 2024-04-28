@@ -58,14 +58,9 @@ alignment = 2
 script = ExtResource("2_bujjb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "FadeIn"
 libraries = {
 "": SubResource("AnimationLibrary_yg3hx")
 }
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 6.0
-one_shot = true
+autoplay = "FadeIn"
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

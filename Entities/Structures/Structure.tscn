@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ds15dcep7fhyn"]
+[gd_scene load_steps=12 format=3 uid="uid://ds15dcep7fhyn"]
 
 [ext_resource type="Shader" path="res://Utilities/FlashEffect.gdshader" id="1_5s78y"]
 [ext_resource type="Script" path="res://Entities/Structures/Structure.gd" id="1_pfun1"]
 [ext_resource type="Texture2D" uid="uid://3xwi6uylpa23" path="res://Sprites/Structures/Construction/SlushieToolkit192x192.png" id="2_jexur"]
 [ext_resource type="PackedScene" uid="uid://bvke1fhsiyvft" path="res://Entities/Health/HealthBar.tscn" id="3_7ms35"]
 [ext_resource type="AudioStream" uid="uid://c0foywjya7m13" path="res://Audio/Construction/Hammer.wav" id="5_780ut"]
+[ext_resource type="PackedScene" uid="uid://du3kaaihb00sc" path="res://Entities/StructureHit/StructureHit.tscn" id="6_vs7xk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_back3"]
 resource_local_to_scene = true
@@ -46,7 +47,7 @@ shape = SubResource("RectangleShape2D_7lbip")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 143
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_7144t")
@@ -91,6 +92,8 @@ stream = ExtResource("5_780ut")
 [node name="TimerHammerSFX" type="Timer" parent="."]
 wait_time = 0.6
 one_shot = true
+
+[node name="StructureHitAudio" parent="." instance=ExtResource("6_vs7xk")]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

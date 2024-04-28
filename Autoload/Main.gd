@@ -50,6 +50,7 @@ var coin_reward : int = coin_base_reward
 var current_wave_number : int = 1
 var current_wave_spawning : bool = false
 var current_wave_active : bool = false
+var summoning_ready : bool = false
 
 # Pause scene
 var pause_scene = load("res://UserInterface/PauseScreen/PauseScreen.tscn")

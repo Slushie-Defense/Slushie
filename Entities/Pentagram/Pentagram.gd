@@ -3,8 +3,6 @@ extends Sprite2D
 @onready var timer : Timer = $Timer
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 
-@export var hide : bool = false
-
 var flame_scene = load("res://Entities/Pentagram/Flame.tscn")
 var total_number_of_flames : int = 16
 var number_flames_created : int = 0
@@ -16,10 +14,12 @@ var adding_flames : bool = false
 var all_flames_activated : bool = false
 
 func _ready():
-	if hide:
+	if not visible:
 		queue_free()
 	timer.wait_time = 0.25
 	timer.start()
+	
+	Main.signal_trigger_wave_event.connect(_kill_all_flames)
 
 func _on_timer_timeout():
 	number_flames_created = flame_list.size()
@@ -45,22 +45,27 @@ func _on_timer_timeout():
 	if all_flames_activated:
 		for flame in flame_list:
 			flame.scale.y = 2.0
+	
+	# Can start wave
+	Main.summoning_ready = all_flames_activated
 
 func _on_area_2d_body_entered(body):
-	adding_flames = true
-	timer.wait_time = 0.25
-	timer.start()
-	_play_strobe_effect()
+	if not Main.current_wave_active:
+		adding_flames = true
+		timer.wait_time = 0.15
+		timer.start()
+		_play_strobe_effect()
 
 func _on_area_2d_body_exited(body):
 	adding_flames = false
-	timer.wait_time = 0.1
+	timer.wait_time = 0.05
 	timer.start()
 	
 func _kill_all_flames():
 	for child in flame_list:
 		child.kill_flame()
 	flame_list = []
+	animation_player.stop()
 
 func _play_strobe_effect():
 	animation_player.current_animation = "FlashActivate"

@@ -5,24 +5,15 @@ var wave_number_count : int = 1
 
 # alled when the node enters the scene tree for the first time.
 func _ready():
-	Main.signal_wave_event.connect(_wave_event_triggered)
 	Main.signal_game_completed.connect(_game_completed_event)
+	text = "Summon The Horde"
 
 func _game_completed_event():
 	call_deferred("queue_free")
 
-func _wave_event_triggered(wave_number):
-	# Wave start was triggered
-	if wave_number > 0:
-		wave_number_count = wave_number
-		visible = false
-	# Wave End was triggered
-	if wave_number == -1:
-		timer.start()
+func _process(delta):
+	visible = Main.summoning_ready and not Main.current_wave_active
 
 func _on_pressed():
-	Main.emit_signal("signal_trigger_wave_event")
-
-func _on_timer_timeout():
-	text = "Start Wave [" + str(wave_number_count + 1) + "]"
-	visible = true
+	if visible:
+		Main.emit_signal("signal_trigger_wave_event")
