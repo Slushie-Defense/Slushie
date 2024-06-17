@@ -14,10 +14,13 @@ var base_siege = load("res://Sprites/Structures/Siege/Slushie_Final_Turrets_Seig
 var turret_projectile = load("res://Sprites/Structures/Projectile/Slushie_Final_Turrets_InstantShot_Nozzle.png")
 var base_projectile = load("res://Sprites/Structures/Projectile/Slushie_Final_Turrets_InstantShot_Stool.png")
 
-var downward_angle_limit : int = 20
+var downward_angle_limit : int = 15
+var sprite_angle_shift : int = 90
 
 var x_scale : float = 1.0
 var y_scale : float = 1.0
+
+var turret_end_point : Vector2 = Vector2.ZERO
 
 func _ready():
 	position = Vector2(540, 540)
@@ -25,25 +28,39 @@ func _ready():
 
 func _change_weapon(weapon):
 	# Baseline
+	downward_angle_limit = 15
 	turret.offset = Vector2.ZERO
 	turret.position = Vector2.ZERO
 	turret.z_index = 0
 	base.z_index = 0
+	sprite_angle_shift = 90
+	turret_end_point = Vector2.ZERO
 	# BASELINE
 	if weapon == "Instant":
 		turret.texture = turret_instant
 		base.texture = base_instant
+		# Properties
+		turret.position =  Vector2(0,0)
+		turret.offset = Vector2(0,0)
+		sprite_angle_shift = 0
+		downward_angle_limit = 45
 	elif weapon == "Projectile":
 		turret.texture = turret_projectile
 		base.texture = base_projectile
+		# Properties
+		turret.position =  Vector2(-16,-20)
+		turret.offset = Vector2(16,20)
+		sprite_angle_shift = 0
+		downward_angle_limit = 45
 	elif weapon == "Siege":
 		turret.texture = turret_siege
 		base.texture = base_siege
-		# Unique
+		# Properties
 		base.z_index = 1
-		var shift_y : int = 24
-		turret.position.y = shift_y
-		turret.offset.y = -shift_y
+		turret.position = Vector2(0,24)
+		turret.offset = Vector2(0,-24)
+		downward_angle_limit = 15
+		sprite_angle_shift = 90
 
 func _process(delta):
 	var target_position = get_global_mouse_position()
@@ -56,7 +73,7 @@ func _process(delta):
 	if turret_deg > 90 and turret_deg < 180 - downward_angle_limit:
 		turret_clamped = 180 - downward_angle_limit
 
-	turret.rotation = deg_to_rad(turret_clamped) + deg_to_rad(90)
+	turret.rotation = deg_to_rad(turret_clamped) + deg_to_rad(sprite_angle_shift)
 	
 	var shoot = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	if shoot:
