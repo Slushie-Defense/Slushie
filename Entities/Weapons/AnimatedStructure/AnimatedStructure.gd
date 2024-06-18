@@ -2,9 +2,10 @@ extends Node2D
 
 @export_enum("Instant", "Projectile", "Siege") var weapon_class : String = "Siege"
 
-@onready var turret : Sprite2D = $Turret
-@onready var base : Sprite2D = $Base
-@onready var end_point : Sprite2D = $Turret/EndPoint
+@onready var canvas_group : CanvasGroup = $CanvasGroup
+@onready var turret : Sprite2D = $CanvasGroup/Turret
+@onready var base : Sprite2D = $CanvasGroup/Base
+@onready var end_point : Node2D = $CanvasGroup/Turret/EndPoint
 
 var turret_instant = load("res://Sprites/Structures/Instant/Slushie_Final_Turrets_Single_Base.png")
 var base_instant = load("res://Sprites/Structures/Instant/Slushie_Final_Turrets_Single_Leg.png")
@@ -22,15 +23,19 @@ var x_scale : float = 1.0
 var y_scale : float = 1.0
 
 var turret_end_point : Vector2 = Vector2.ZERO
+var target_position : Vector2 = Vector2.ZERO
+var default_target_position : Vector2 = Vector2.ZERO
 
 func _ready():
-	position = Vector2(540, 540)
 	_change_weapon(weapon_class)
+	default_target_position = Vector2(240, 0)
+	target_position = Vector2(global_position.x + 240, global_position.y - 240)
+	global_position -= canvas_group.position
 
 func _change_weapon(weapon):
 	# Baseline
 	downward_angle_limit = 15
-	turret.z_index = 0
+	turret.z_index = 1
 	base.z_index = 0
 	sprite_angle_shift = 90
 	turret_end_point = Vector2.ZERO
@@ -58,14 +63,15 @@ func _change_weapon(weapon):
 		base.texture = base_siege
 		# Properties
 		base.z_index = 1
+		turret.z_index = 0
 		turret.position = Vector2(0,24)
 		turret.offset = Vector2(24,0)
 		downward_angle_limit = 15
 		sprite_angle_shift = 0
 		end_point.position = Vector2(48,4)
+		default_target_position = Vector2(48, -72)
 
 func _process(delta):
-	var target_position = get_global_mouse_position()
 	var turret_angle = global_position.angle_to_point(target_position)
 	
 	"""
@@ -86,6 +92,9 @@ func _process(delta):
 	# Reset
 	turret.scale.x = lerpf(turret.scale.x, 1.0, 0.1)
 	turret.scale.y = lerpf(turret.scale.y, 1.0, 0.1)
+	
+	target_position.x = lerpf(target_position.x, global_position.x + default_target_position.x, 0.01)
+	target_position.y = lerpf(target_position.y, global_position.y + default_target_position.y, 0.01)
 
 func _shoot_animation():
 	turret.scale.x = 0.8

@@ -85,6 +85,10 @@ func _convert_to_structure_type():
 	health.set_max_health(structure_class.health)
 	# Set placeholder sprite
 	structure_sprite.texture = structure_class.ui_sprite
+	# Hide if using animated sprite
+	if structure_class.type == structure_type.SIEGE or structure_class.type == structure_type.INSTANT or structure_class.type == structure_type.PROJECTILE:
+		structure_sprite.visible = false
+		
 	# If its a fence, do not create a weapon base
 	if structure_class.type == structure_type.FENCE:
 		return # Early exit

@@ -1,21 +1,26 @@
 [gd_scene load_steps=5 format=3 uid="uid://bargsspji5g0g"]
 
-[ext_resource type="Script" path="res://Entities/Structures/AnimatedStructure/AnimatedStructure.gd" id="1_onyyr"]
+[ext_resource type="Script" path="res://Entities/Weapons/AnimatedStructure/AnimatedStructure.gd" id="1_onyyr"]
 [ext_resource type="Texture2D" uid="uid://cnoykqianp4a8" path="res://Sprites/Structures/Siege/Slushie_Final_Turrets_Seige_Base.png" id="2_4b8ui"]
 [ext_resource type="Texture2D" uid="uid://bko12j7hgpl6t" path="res://Sprites/Structures/Siege/Slushie_Final_Turrets_Seige_Barrel.png" id="3_umlbc"]
 [ext_resource type="Texture2D" uid="uid://dpt0tifft75jw" path="res://Sprites/Circles/32x32WhiteCircle.png" id="4_l8eak"]
 
 [node name="AnimatedStructure" type="Node2D"]
-position = Vector2(2.08165e-12, -35)
 script = ExtResource("1_onyyr")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+z_index = 10
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(2.08165e-12, -32)
+
+[node name="Base" type="Sprite2D" parent="CanvasGroup"]
 texture = ExtResource("2_4b8ui")
 
-[node name="Turret" type="Sprite2D" parent="."]
+[node name="Turret" type="Sprite2D" parent="CanvasGroup"]
 texture = ExtResource("3_umlbc")
-offset = Vector2(2.08165e-12, 2.08165e-12)
 
-[node name="EndPoint" type="Sprite2D" parent="Turret"]
+[node name="EndPoint" type="Sprite2D" parent="CanvasGroup/Turret"]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_l8eak")

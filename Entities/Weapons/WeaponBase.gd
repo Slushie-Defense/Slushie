@@ -39,6 +39,8 @@ var current_target : Object = null
 var relative_target_position : Vector2 = Vector2(0, 512)
 var weapon_offset = Vector2.ZERO
 
+var weapon_animation : Node2D = null
+
 func _ready():
 	# Start firing immediately
 	shot_delay_timer.wait_time = weapon_data.delay_between_shots
@@ -51,6 +53,25 @@ func _ready():
 	# Update collision masks
 	_update_collsion_mask_layers()
 	weapon_shots_reload = weapon_data.shots_before_reload
+	# Add animated base
+	add_animated_sprite.call_deferred()
+	
+
+func add_animated_sprite():
+	# Add weapon sprite
+	if weapon_data.type == weapon_type.SIEGE or weapon_data.type == weapon_type.PROJECTILE or weapon_data.type == weapon_type.INSTANT:
+		var weapon_animation_scene = load("res://Entities/Weapons/AnimatedStructure/AnimatedStructure.tscn")
+		weapon_animation = weapon_animation_scene.instantiate()
+		add_child(weapon_animation)
+	
+	match weapon_data.type:
+		weapon_type.SIEGE:
+			weapon_animation._change_weapon("Siege")
+		weapon_type.INSTANT:
+			weapon_animation._change_weapon("Instant")
+		weapon_type.PROJECTILE:
+			weapon_animation._change_weapon("Projectile")
+
 
 func _update_collsion_mask_layers():
 	for i in range(0, weapon_data.attack_collision_mask_list.size()):
@@ -116,14 +137,20 @@ func fire_weapon():
 			# Set the delay before the attack
 			fire_projectile_delay_timer.wait_time = weapon_data.delay_before_fireweapon
 			fire_projectile_delay_timer.start()
+			weapon_animation.target_position = current_target.global_position
+			weapon_animation._shoot_animation()
 		# Fire the shot
 		weapon_type.INSTANT:
 			play_attack_sound()
 			fire_instant_hit()
+			weapon_animation.target_position = current_target.global_position
+			weapon_animation._shoot_animation()
 		# Fire bullet
 		weapon_type.PROJECTILE:
 			play_attack_sound()
 			fire_projectile_bullet()
+			weapon_animation.target_position = current_target.global_position 
+			weapon_animation._shoot_animation()
 		# Check landmine
 		weapon_type.LANDMINE:
 			play_attack_sound()
