@@ -58,11 +58,11 @@ func _change_weapon(weapon):
 		base.texture = base_siege
 		# Properties
 		base.z_index = 1
-		turret.position = Vector2(0,-16)
-		turret.offset = Vector2(16,0)
+		turret.position = Vector2(0,24)
+		turret.offset = Vector2(24,0)
 		downward_angle_limit = 15
 		sprite_angle_shift = 0
-		end_point.position = Vector2(64,4)
+		end_point.position = Vector2(48,4)
 
 func _process(delta):
 	var target_position = get_global_mouse_position()
