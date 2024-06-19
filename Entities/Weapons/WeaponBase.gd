@@ -184,7 +184,8 @@ func create_projectile(arch_and_explode : bool = true):
 	get_tree().current_scene.add_child(projectile)
 	projectile._set_projectile_sprite(weapon_data.projectile_sprite)
 	projectile._set_projectile_color(weapon_data.projectile_color)
-	projectile.global_position = global_position
+	var weapon_end_point = (weapon_animation.end_point.global_position - weapon_animation.global_position)
+	projectile.global_position = global_position + weapon_end_point
 	projectile.arch_and_explode = arch_and_explode
 	projectile.set_target_global_position(global_position + relative_target_position)
 	return projectile
