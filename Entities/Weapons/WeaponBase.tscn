@@ -33,14 +33,6 @@ collision_mask = 8
 target_position = Vector2(0, 0)
 collision_mask = 8
 
-[node name="WeaponAttackLine" type="Line2D" parent="."]
-z_index = 9
-z_as_relative = false
-points = PackedVector2Array(0, 0, 0, 0)
-width = 8.0
-default_color = Color(0.960784, 0.458824, 1, 1)
-end_cap_mode = 2
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_uksl7")
 autoplay = true

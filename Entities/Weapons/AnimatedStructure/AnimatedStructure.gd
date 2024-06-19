@@ -6,6 +6,7 @@ extends Node2D
 @onready var turret : Sprite2D = $CanvasGroup/Turret
 @onready var base : Sprite2D = $CanvasGroup/Base
 @onready var end_point : Node2D = $CanvasGroup/Turret/EndPoint
+@onready var weapon_attack_line2d : Line2D = $WeaponAttackLine
 
 var parent : Node2D = null
 
@@ -88,7 +89,21 @@ func _process(delta):
 	
 	if parent == null:
 		queue_free()
+	
+	# INSTANT ATTACK
+	weapon_attack_line2d.global_position = global_position
+	weapon_attack_line2d.points = [end_point.global_position - global_position, target_position - global_position]
 
 func _shoot_animation():
 	turret.scale.x = 0.8
 	turret.scale.y = 1.2
+	weapon_attack_line2d.visible = true
+	end_point.visible = true
+	draw_line2d()
+
+func draw_line2d():
+	get_tree().create_timer(0.1).timeout.connect(clear_weapon_attack_line2d)
+
+func clear_weapon_attack_line2d():
+	end_point.visible = false
+	weapon_attack_line2d.visible = false

@@ -6,7 +6,6 @@ signal signal_weapon_is_attacking(target_node)
 @onready var sound_player : AudioStreamPlayer2D = $AudioStreamPlayer2D
 @onready var shot_delay_timer : Timer = $ShotDelayTimer
 @onready var fire_projectile_delay_timer : Timer = $FireProjectileDelayTimer
-@onready var weapon_attack_line2d : Line2D = $WeaponAttackLine
 
 # Show collision shape
 @onready var weapon_range_indicator : Line2D = $WeaponRangeIndicator
@@ -210,18 +209,6 @@ func fire_instant_hit():
 	var _attack = Attack.new()
 	_attack.damage = weapon_data.attack_damage
 	current_target.attack(_attack)
-	# Draw the line
-	draw_line2d(current_target)
-
-func draw_line2d(target):
-	# Line 2D
-	var relative_position_of_hit : Vector2 = relative_target_position 
-	var relative_position_of_start : Vector2 = weapon_animation.end_point.global_position - weapon_animation.turret.global_position
-	weapon_attack_line2d.points = [Vector2.ZERO, relative_position_of_hit]
-	get_tree().create_timer(0.1).timeout.connect(clear_weapon_attack_line2d)
-
-func clear_weapon_attack_line2d():
-	weapon_attack_line2d.points = [Vector2.ZERO, Vector2.ZERO]
 
 func _create_landmine_explosion():
 	var explosion = explosion_scene.instantiate()
