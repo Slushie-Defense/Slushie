@@ -26,17 +26,17 @@ var turret_end_point : Vector2 = Vector2.ZERO
 var target_position : Vector2 = Vector2.ZERO
 var default_target_position : Vector2 = Vector2.ZERO
 
+var y_sort_offset : Vector2 = Vector2(0, 48)
+
 func _ready():
-	_change_weapon(weapon_class)
+	#_change_weapon(weapon_class)
 	default_target_position = Vector2(240, 0)
 	target_position = Vector2(global_position.x + 240, global_position.y - 240)
-	global_position -= canvas_group.position
+	canvas_group.position += y_sort_offset
 
 func _change_weapon(weapon):
 	# Baseline
 	downward_angle_limit = 15
-	turret.z_index = 1
-	base.z_index = 0
 	sprite_angle_shift = 90
 	turret_end_point = Vector2.ZERO
 	# BASELINE
@@ -62,32 +62,20 @@ func _change_weapon(weapon):
 		turret.texture = turret_siege
 		base.texture = base_siege
 		# Properties
-		base.z_index = 1
-		turret.z_index = 0
 		turret.position = Vector2(0,24)
 		turret.offset = Vector2(24,0)
 		downward_angle_limit = 15
 		sprite_angle_shift = 0
 		end_point.position = Vector2(48,4)
 		default_target_position = Vector2(48, -72)
+	
+	base.position -= y_sort_offset
+	turret.position -= y_sort_offset
 
 func _process(delta):
 	var turret_angle = global_position.angle_to_point(target_position)
 	
-	"""
-	var turret_deg = rad_to_deg(turret_angle)
-	var turret_clamped = turret_deg
-	if turret_deg > downward_angle_limit and turret_deg < 90:
-		turret_clamped = downward_angle_limit
-	if turret_deg > 90 and turret_deg < 180 - downward_angle_limit:
-		turret_clamped = 180 - downward_angle_limit
-	"""
-	
 	turret.rotation = turret_angle + deg_to_rad(sprite_angle_shift)
-	
-	var shoot = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-	if shoot:
-		_shoot_animation()
 
 	# Reset
 	turret.scale.x = lerpf(turret.scale.x, 1.0, 0.1)

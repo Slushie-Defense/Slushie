@@ -62,7 +62,9 @@ func add_animated_sprite():
 	if weapon_data.type == weapon_type.SIEGE or weapon_data.type == weapon_type.PROJECTILE or weapon_data.type == weapon_type.INSTANT:
 		var weapon_animation_scene = load("res://Entities/Weapons/AnimatedStructure/AnimatedStructure.tscn")
 		weapon_animation = weapon_animation_scene.instantiate()
-		add_child(weapon_animation)
+		var wavemanager = get_tree().get_nodes_in_group("wavemanager")
+		wavemanager[0].add_child(weapon_animation)
+		weapon_animation.global_position = global_position
 	
 	match weapon_data.type:
 		weapon_type.SIEGE:
@@ -230,6 +232,8 @@ func _create_landmine_explosion():
 
 func _self_destruct():
 	emit_signal("signal_weapon_destroyed")
+	if not weapon_animation == null:
+		weapon_animation.queue_free() # Destroy weapon if it exists
 	call_deferred("queue_free")
 
 func weapon_range_indicator_visible(set_visibility):

@@ -77,7 +77,7 @@ script = ExtResource("1_ftbg0")
 
 [node name="FMOD" parent="." instance=ExtResource("2_cq3rc")]
 
-[node name="WaveManager" parent="." instance=ExtResource("1_cqx0q")]
+[node name="WaveManager" parent="." groups=["wavemanager"] instance=ExtResource("1_cqx0q")]
 y_sort_enabled = true
 
 [node name="Camera" parent="WaveManager" instance=ExtResource("1_0xhkv")]
