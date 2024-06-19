@@ -65,6 +65,7 @@ func add_animated_sprite():
 		var wavemanager = get_tree().get_nodes_in_group("wavemanager")
 		wavemanager[0].add_child(weapon_animation)
 		weapon_animation.global_position = global_position
+		weapon_animation.parent = self
 	
 	match weapon_data.type:
 		weapon_type.SIEGE:
@@ -215,6 +216,7 @@ func fire_instant_hit():
 func draw_line2d(target):
 	# Line 2D
 	var relative_position_of_hit : Vector2 = relative_target_position 
+	var relative_position_of_start : Vector2 = weapon_animation.end_point.global_position - weapon_animation.turret.global_position
 	weapon_attack_line2d.points = [Vector2.ZERO, relative_position_of_hit]
 	get_tree().create_timer(0.1).timeout.connect(clear_weapon_attack_line2d)
 

@@ -7,6 +7,8 @@ extends Node2D
 @onready var base : Sprite2D = $CanvasGroup/Base
 @onready var end_point : Node2D = $CanvasGroup/Turret/EndPoint
 
+var parent : Node2D = null
+
 var turret_instant = load("res://Sprites/Structures/Instant/Slushie_Final_Turrets_Single_Base.png")
 var base_instant = load("res://Sprites/Structures/Instant/Slushie_Final_Turrets_Single_Leg.png")
 
@@ -83,6 +85,9 @@ func _process(delta):
 	
 	target_position.x = lerpf(target_position.x, global_position.x + default_target_position.x, 0.01)
 	target_position.y = lerpf(target_position.y, global_position.y + default_target_position.y, 0.01)
+	
+	if parent == null:
+		queue_free()
 
 func _shoot_animation():
 	turret.scale.x = 0.8
