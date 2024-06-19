@@ -30,13 +30,18 @@ var target_position : Vector2 = Vector2.ZERO
 var default_target_position : Vector2 = Vector2.ZERO
 
 var y_sort_offset : Vector2 = Vector2(0, 48)
+var weapon_instant : bool = false
+var weapon_siege : bool = false
 
 func _ready():
-	#_change_weapon(weapon_class)
 	default_target_position = Vector2(240, 0)
-	target_position = Vector2(global_position.x + 240, global_position.y - 240)
+	_update_default_target_position.call_deferred()
+	# This down shifts the graphic for correct y-sorting
 	canvas_group.position += y_sort_offset
 
+func _update_default_target_position():
+	target_position = global_position + Vector2(240, -240)
+	
 func _change_weapon(weapon):
 	# Baseline
 	downward_angle_limit = 15
@@ -49,9 +54,8 @@ func _change_weapon(weapon):
 		# Properties
 		turret.position =  Vector2(0,0)
 		turret.offset = Vector2(0,0)
-		sprite_angle_shift = 0
-		downward_angle_limit = 45
 		end_point.position = Vector2(48,-4)
+		weapon_instant = true
 	elif weapon == "Projectile":
 		turret.texture = turret_projectile
 		base.texture = base_projectile
@@ -59,18 +63,25 @@ func _change_weapon(weapon):
 		turret.position =  Vector2(-16,-20)
 		turret.offset = Vector2(16,20)
 		sprite_angle_shift = 0
-		downward_angle_limit = 45
 		end_point.position = Vector2(64,4)
 	elif weapon == "Siege":
+		# Change the base order
+		var clone_base = base.duplicate()
+		canvas_group.add_child(clone_base)
+		base.queue_free()
+		base = clone_base
+		
 		turret.texture = turret_siege
 		base.texture = base_siege
 		# Properties
 		turret.position = Vector2(0,24)
 		turret.offset = Vector2(24,0)
-		downward_angle_limit = 15
 		sprite_angle_shift = 0
 		end_point.position = Vector2(48,4)
-		default_target_position = Vector2(48, -72)
+		end_point.scale = Vector2(0.8, 0.8)
+		
+		weapon_siege = true
+		default_target_position = Vector2(32, -96)
 	
 	base.position -= y_sort_offset
 	turret.position -= y_sort_offset
@@ -78,7 +89,7 @@ func _change_weapon(weapon):
 func _process(delta):
 	var turret_angle = global_position.angle_to_point(target_position)
 	
-	turret.rotation = turret_angle + deg_to_rad(sprite_angle_shift)
+	turret.rotation = turret_angle
 
 	# Reset
 	turret.scale.x = lerpf(turret.scale.x, 1.0, 0.1)
@@ -97,7 +108,11 @@ func _process(delta):
 func _shoot_animation():
 	turret.scale.x = 0.8
 	turret.scale.y = 1.2
-	weapon_attack_line2d.visible = true
+	if weapon_instant:
+		weapon_attack_line2d.visible = true
+	elif weapon_siege:
+		target_position = global_position + Vector2(0, -72)
+	
 	end_point.visible = true
 	draw_line2d()
 

@@ -42,7 +42,7 @@ var weapon_animation : Node2D = null
 
 func _ready():
 	# Start firing immediately
-	shot_delay_timer.wait_time = weapon_data.delay_between_shots
+	shot_delay_timer.wait_time = weapon_data.delay_between_shots + 0.001
 	shot_delay_timer.start()
 	# Show weapon range indicator
 	weapon_range_indicator.default_color.a = 0.08
@@ -139,8 +139,6 @@ func fire_weapon():
 			# Set the delay before the attack
 			fire_projectile_delay_timer.wait_time = weapon_data.delay_before_fireweapon
 			fire_projectile_delay_timer.start()
-			weapon_animation.target_position = current_target.global_position
-			weapon_animation._shoot_animation()
 		# Fire the shot
 		weapon_type.INSTANT:
 			play_attack_sound()
@@ -152,7 +150,6 @@ func fire_weapon():
 			play_attack_sound()
 			fire_projectile_bullet()
 			weapon_animation.target_position = current_target.global_position 
-			weapon_animation._shoot_animation()
 		# Check landmine
 		weapon_type.LANDMINE:
 			play_attack_sound()
@@ -199,6 +196,8 @@ func fire_projectile_explosion():
 func fire_projectile_bullet():
 	var projectile = create_projectile(false)
 	projectile.attack_damage = weapon_data.attack_damage
+	weapon_animation.target_position = current_target.global_position 
+	weapon_animation._shoot_animation()
 
 func fire_landmine_explosion():
 	var mine_delay : float = weapon_data.delay_before_fireweapon
@@ -231,3 +230,4 @@ func weapon_range_indicator_visible(set_visibility):
 func _on_fire_projectile_delay_timer_timeout():
 	play_attack_sound()
 	fire_projectile_explosion()
+	weapon_animation._shoot_animation()
