@@ -115,7 +115,7 @@ func _game_ended():
 	get_tree().create_timer(4.0).timeout.connect(_go_to_death_scene)
 
 func _go_to_death_scene():
-	coins = 0
+	coins = 200
 	get_tree().change_scene_to_file("res://UserInterface/DeathScreen/DeathScreen.tscn")
 	# Play Main Theme
 	_play_theme_music()
