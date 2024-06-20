@@ -39,6 +39,7 @@ var relative_target_position : Vector2 = Vector2(0, 512)
 var weapon_offset = Vector2.ZERO
 
 var weapon_animation : Node2D = null
+var spitter : bool = false
 
 func _ready():
 	# Start firing immediately
@@ -53,7 +54,8 @@ func _ready():
 	_update_collsion_mask_layers()
 	weapon_shots_reload = weapon_data.shots_before_reload
 	# Add animated base
-	add_animated_sprite.call_deferred()
+	if not spitter:
+		add_animated_sprite.call_deferred()
 	
 
 func add_animated_sprite():
